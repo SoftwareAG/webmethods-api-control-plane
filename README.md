@@ -1,4 +1,4 @@
-# webmethods API Control Plane
+# webMethods API Control Plane
 
 APIs are everywhere. API Management is where APIs are. It’s all distributed and heterogenous. Management and administration becomes harder. API Management technology should blend in into the rest of the infrastructure and be managed from one place. API Control Plane is a single solution for understanding, managing and controlling the entire API Management landscape, regardless of where it is, on premises. Things in the control plane are organized across:
 
