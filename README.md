@@ -1,5 +1,14 @@
-# webmethods-api-control-plane
-webMethods API Control Plane enables centralized platform to manage API Mangement products. It offers functionalities to make decisions based on the performance metrics and patterns. Repository hosting tutorials, code samples, OpenAPI specification files and postman collections.
+# webMethods API Control Plane
+
+APIs are everywhere. API Management is where APIs are. It’s all distributed and heterogenous. Management and administration becomes harder. API Management technology should blend in into the rest of the infrastructure and be managed from one place. API Control Plane is a single solution for understanding, managing and controlling the entire API Management landscape, regardless of where it is, on premises. Things in the control plane are organized across:
+
+- Data planes - these are logical groupings of your gateways, portals and other runtimes dealing with APIs.
+- Runtimes - there are your API Gateways, developer portals etc.
+- APIs - that's self explanatory. These are APIs present in your landscape.
+
+![image](/attachments/apico_dashboard_page.png)
+
+This repository hosts assets documenting how to deploy and run webMethods API Control Plane, articles and tutorials, public API docs and Postman collections whoing who to use them and more.
 
 ------------------------------
 
