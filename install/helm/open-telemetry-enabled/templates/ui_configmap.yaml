@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.applications.ui.name }}-config
+data:
+  ENGINE_ENDPOINT: "http://{{ .Values.applications.engine.name }}-svc:8080"
+  ASSET_CATALOG_ENDPOINT: "http://{{ .Values.applications.assetcatalog.name }}-svc:8080"
+  SPRING_CODEC_MAX_IN_MEMORY_SIZE:  "{{ .Values.applications.ui.springCodecMaxMemorySize }}"  
+  LOGGING_LEVEL_COM_SOFTWAREAG_CONTROLPLANE: "{{ .Values.applications.ui.logLevel }}"
+  OTEL_JAVAAGENT_ENABLED: "true"
+  JAVA_OPTS: "-Dotel.exporter.otlp.endpoint=http://{{ .Values.applications.jaegertracing.name }}-svc:{{ .Values.applications.jaegertracing.port }} -Dotel.resource.attributes=service.name={{ .Values.applications.ui.name }}"
+---
