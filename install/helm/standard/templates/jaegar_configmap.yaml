@@ -1,3 +1,4 @@
+{{- if .Values.applications.jaegertracing.enabled }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -6,3 +7,4 @@ data:
   COLLECTOR_ZIPKIN_HOST_PORT: "9411"
   COLLECTOR_OTLP_ENABLED: "true"
 ---
+{{- end }}

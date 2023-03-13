@@ -3,10 +3,13 @@ kind: ConfigMap
 metadata:
   name: {{ .Values.applications.assetcatalog.name }}-config
 data:
-  ELASTICSEARCH_HOST: {{ .Values.applications.es.name }}-lb
-  ELASTICSEARCH_PORT: "9200"
-  ELASTICSEARCH_CERTPATH: ""
-  OTEL_JAVAAGENT_ENABLED: "true"
+  SERVICE_ELASTICSEARCH_HOST: {{ .Values.applications.es.name }}-lb
+  SERVICE_ELASTICSEARCH_PORT: "9200"
+  SERVICE_ELASTICSEARCH_CERTPATH: ""
+  OTEL_JAVAAGENT_ENABLED: "{{ .Values.applications.jaegertracing.enabled }}"
+  {{- if .Values.applications.jaegertracing.enabled }}
+  OTEL_METRICS_EXPORTER: "none"
   JAVA_OPTS: "-Dotel.exporter.otlp.endpoint=http://{{ .Values.applications.jaegertracing.name }}-svc:{{ .Values.applications.jaegertracing.port }} -Dotel.resource.attributes=service.name={{ .Values.applications.assetcatalog.name }}"
   LOGGING_LEVEL_COM_SOFTWAREAG_CONTROLPLANE: "{{ .Values.applications.assetcatalog.logLevel }}"
+  {{- end }}
 ---

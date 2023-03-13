@@ -108,6 +108,7 @@ applications:
         # -- Minimum Memory resource units
         memory: 2Gi
   jaegertracing:
+    enabled: false
     name: jaeger-tracing
     #--- Jaeger Tracer image name
     imageName: jaegertracing/all-in-one
@@ -118,7 +119,7 @@ applications:
     #--- Port to run Jaeger.
     port : 4317
     uiPort: 16686
-    extPort: 3007
+    extPort: 30007
     storage: 2Gi
     resources:
       # This is just an example. This should be a consious choice to the user.   
@@ -136,5 +137,14 @@ applications:
     volume:
       enabled: false
       className: ""
-      size: 3Gi    
+      size: 3Gi
+  gainsight:
+    enabled : false
+    tenant:
+      name: "ACME Inc"
+      cloudProvider: "Azure"
+      region: "US West Oregon"
+      plan: "Free"
+      stage: "Staging"
+      key: "AP-BCBBKBNAYWW6-2-2"
 domainName: localhost

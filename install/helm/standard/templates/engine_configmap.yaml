@@ -3,11 +3,15 @@ kind: ConfigMap
 metadata:
   name: {{ .Values.applications.engine.name }}-config
 data:
-  ASSETCATALOG_ENDPOINT: "http://{{ .Values.applications.assetcatalog.name }}-svc:8080"
+  ASSET_CATALOG_ENDPOINT: "http://{{ .Values.applications.assetcatalog.name }}-svc:8080"
+  APICP_ASSET_CATALOG_ENDPOINT: "http://{{ .Values.applications.assetcatalog.name }}-svc:8080"
   SERVICE_ELASTICSEARCH_HOST: {{ .Values.applications.es.name }}-lb
   SERVICE_ELASTICSEARCH_PORT: "9200"
   SERVICE_ELASTICSEARCH_CERTPATH: ""
   OTEL_JAVAAGENT_ENABLED: "true"
+  {{- if .Values.applications.jaegertracing.enabled }}
+  OTEL_METRICS_EXPORTER: "none"
   JAVA_OPTS: "-Dotel.exporter.otlp.endpoint=http://{{ .Values.applications.jaegertracing.name }}-svc:{{ .Values.applications.jaegertracing.port }} -Dotel.resource.attributes=service.name={{ .Values.applications.engine.name }}"
   LOGGING_LEVEL_COM_SOFTWAREAG_CONTROLPLANE: "{{ .Values.applications.engine.logLevel }}"
+  {{- end }}
 ---
