@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name:  {{ .Values.applications.es.name }}-config
+data:
+  ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+  cluster.initial_master_nodes: "{{ .Values.applications.es.cluster.initial_master_nodes }}"
+  discovery.seed_hosts: "{{ .Values.applications.es.name }}-headless"
+  cluster.name: {{ .Values.applications.es.name }}-cluster
+  network.host: "0.0.0.0"
+  xpack.ml.enabled: "false"
+  xpack.security.enabled: "false"
+---

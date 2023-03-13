@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.applications.ui.name }}-svc
+  namespace: {{ default "control-plane" .Release.Namespace }}
+spec:
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
+      name: http
+  selector:
+    app: {{ .Values.applications.ui.name }}
+  type: ClusterIP
+---

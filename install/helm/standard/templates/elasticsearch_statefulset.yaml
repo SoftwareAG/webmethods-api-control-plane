@@ -1,0 +1,92 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.applications.es.name }}
+  labels:
+    app: {{ .Values.applications.es.name }}
+spec:
+  serviceName: {{ .Values.applications.es.name }}-headless
+  podManagementPolicy: Parallel
+  replicas: {{ .Values.applications.es.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.applications.es.name }}
+  updateStrategy:
+    type: RollingUpdate
+  volumeClaimTemplates:
+    - metadata:
+        name: {{ .Values.applications.es.name }}-data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: {{ .Values.applications.es.storage }}
+  template:
+    metadata:
+      annotations:
+        sensor.falcon-system.crowdstrike.com/injection: disabled
+      labels:
+        app: {{ .Values.applications.es.name }}
+    spec:
+      securityContext:
+        fsGroup: 1000
+      initContainers:
+      - name: init-sysctl
+        image: iregistry.eur.ad.sag/ibit/alpine:3.16
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          privileged: true
+        command: ["sysctl", "-w", "vm.max_map_count=262144"]
+      volumes:
+        - name: logs
+          emptyDir: {}
+      containers:
+      - name: {{ .Values.applications.es.name }}
+        resources:
+          limits:
+            cpu: {{ .Values.applications.es.resources.limits.cpu }}
+            memory: {{ .Values.applications.es.resources.limits.memory }}
+          requests:
+            cpu: {{ .Values.applications.es.resources.requests.cpu }}
+            memory: {{ .Values.applications.es.resources.requests.memory }}
+        securityContext:
+          privileged: true
+          runAsUser: 1000
+          capabilities:
+            add:
+            - IPC_LOCK
+            - SYS_RESOURCE
+            - SYS_ADMIN
+            - DAC_OVERRIDE
+            - DAC_READ_SEARCH
+        image: {{ .Values.applications.es.imageName }}:{{ .Values.applications.es.imageTag }}
+        imagePullPolicy: "IfNotPresent"
+        envFrom:
+        - configMapRef:
+            name: {{ .Values.applications.es.name }}-config
+        env:
+        - name: node.name
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        readinessProbe:
+          httpGet:
+            scheme: HTTP
+            path: /_cluster/health?local=true
+            port: 9200
+          initialDelaySeconds: 20
+          periodSeconds: 20
+          successThreshold: 1
+          timeoutSeconds: 5
+          failureThreshold: 3
+        ports:
+        - containerPort: 9200
+          name: http
+        - containerPort: 9300
+          name: transport
+        volumeMounts:
+          - name: {{ .Values.applications.es.name }}-data
+            mountPath: /usr/share/elasticsearch/data
+          - name: logs
+            mountPath: /usr/share/elasticsearch/logs
