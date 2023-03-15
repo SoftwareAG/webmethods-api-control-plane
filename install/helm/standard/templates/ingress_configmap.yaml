@@ -3,20 +3,15 @@ kind: ConfigMap
 metadata:
   name: {{ .Values.applications.ingress.name }}-config
 data:
-  ENGINE_ENDPOINT: "http://{{ .Values.applications.engine.name }}-svc:8080"
-  ASSET_CATALOG_ENDPOINT: "http://{{ .Values.applications.assetcatalog.name }}-svc:8080"
-  UI_ENDPOINT: "http://{{ .Values.applications.ui.name }}-svc:8080"
   APICP_ENGINE_ENDPOINT: "http://{{ .Values.applications.engine.name }}-svc:8080"
   APICP_ASSET_CATALOG_ENDPOINT: "http://{{ .Values.applications.assetcatalog.name }}-svc:8080"
   APICP_UI_ENDPOINT: "http://{{ .Values.applications.ui.name }}-svc:8080"
+  APICP_TENANT_ID: "{{ .Values.applications.ingress.tenantId }}"
+  APICP_SAG_CLOUD_URL: ""
   SERVICE_ELASTICSEARCH_HOST: {{ .Values.applications.es.name }}-lb
   SERVICE_ELASTICSEARCH_PORT: "9200"
   MANAGEMENT_HEALTH_ELASTICSEARCH_ENABLED: "false"
-  CONTROL_PLANE_TENANTID: "{{ .Values.applications.ingress.tenantId }}"
-  APICP_TENANT_ID: "{{ .Values.applications.ingress.tenantId }}"
   com.softwareag.api.umc.loadbalancer.url: "http://{{ .Values.domainName }}"
-  SAGCLOUD_URL: ""
-  APICP_SAG_CLOUD_URL: ""
   com.softwareag.api.umc.oauth.active: ""
   com.softwareag.api.umc.oauth.providers: ""
   com.softwareag.api.umc.oauth.api.keys: ""
@@ -24,13 +19,13 @@ data:
   com.softwareag.api.umc.oauth.authorize.endpoint: ""
   com.softwareag.api.umc.oauth.access.endpoint: ""
   com.softwareag.api.umc.oauth.user.endpoint: ""
-  OTEL_JAVAAGENT_ENABLED: "true"
+  OTEL_JAVAAGENT_ENABLED: "{{- if .Values.applications.jaegertracing.enabled }}"
   {{- if .Values.applications.jaegertracing.enabled }}
   JAVA_OPTS: "-Dotel.exporter.otlp.endpoint=http://{{ .Values.applications.jaegertracing.name }}-svc:{{ .Values.applications.jaegertracing.port }} -Dotel.resource.attributes=service.name={{ .Values.applications.ingress.name }}"
   LOGGING_LEVEL_COM_SOFTWAREAG_CONTROLPLANE: "{{ .Values.applications.ingress.logLevel }}"
   OTEL_METRICS_EXPORTER: "none"
   {{- end }}
   {{- if .Values.applications.gainsight.enabled }}
-  INGRESS_SECURITYCONFIG_HEADERS_CONTENT_SECURITY_POLICY : "default-src 'self'; img-src * 'self' data: *.aptrinsic.com storage.googleapis.com; object-src 'none'; script-src 'self' *.aptrinsic.com; style-src 'self' 'unsafe-inline' *.aptrinsic.com 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; connect-src 'self' *.aptrinsic.com"
+  APICP_INGRESS_SECURITYCONFIG_HEADERS_CONTENT_SECURITY_POLICY : "default-src 'self'; img-src * 'self' data: *.aptrinsic.com storage.googleapis.com; object-src 'none'; script-src 'self' *.aptrinsic.com; style-src 'self' 'unsafe-inline' *.aptrinsic.com 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; connect-src 'self' *.aptrinsic.com"
   {{- end }}
 ---

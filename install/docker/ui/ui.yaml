@@ -1,0 +1,40 @@
+services:
+  ui: &ui-service
+    image: ${UI_IMAGE}
+    container_name: control-plane-ui
+    hostname: ui
+    depends_on:
+      engine:
+        condition: service_healthy
+      asset-catalog:
+        condition: service_healthy
+    deploy:
+      restart_policy:
+        condition: "no"
+    env_file:
+    - ui-config.env
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://ui:8080/controlplane/api/ui/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+    - softwareag-api-management
+  ui-debug:
+    <<: *ui-service
+    env_file:
+    - ui-config.env
+    - ui-config.debug.env
+    ports:
+    - ${UI_PUBLISH_PORT}:8080
+  ui-gainsight:
+    <<: *ui-service
+    env_file:
+    - ui-config.env
+    - ui-config.gainsight.env
+    ports:
+    - ${UI_PUBLISH_PORT}:8080
+  ui-secure-es:
+    <<: *ui-service
+    volumes:
+    - es-certs:/usr/share/elasticsearch/config/certs

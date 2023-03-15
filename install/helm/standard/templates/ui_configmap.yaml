@@ -3,8 +3,6 @@ kind: ConfigMap
 metadata:
   name: {{ .Values.applications.ui.name }}-config
 data:
-  ENGINE_ENDPOINT: "http://{{ .Values.applications.engine.name }}-svc:8080"
-  ASSET_CATALOG_ENDPOINT: "http://{{ .Values.applications.assetcatalog.name }}-svc:8080"
   APICP_ENGINE_ENDPOINT: "http://{{ .Values.applications.engine.name }}-svc:8080"
   APICP_ASSET_CATALOG_ENDPOINT: "http://{{ .Values.applications.assetcatalog.name }}-svc:8080"
   SPRING_CODEC_MAX_IN_MEMORY_SIZE:  "{{ .Values.applications.ui.springCodecMaxMemorySize }}"
