@@ -1,0 +1,45 @@
+version: '3.8'
+services:
+  nginx:
+    extends:
+      file: nginx/nginx.yaml
+      service: nginx
+  nginx_setup:
+    extends:
+      file: nginx/nginx.yaml
+      service: nginx_setup
+  ingress:
+    extends:
+      file: ingress/ingress.yaml
+      service: ingress-gainsight
+    environment:
+      - server.forward-headers-strategy=NATIVE
+  ui:
+    extends:
+      file: ui/ui.yaml
+      service: ui-gainsight
+  engine:
+    extends:
+      file: engine/engine.yaml
+      service: engine-debug
+  asset-catalog:
+    extends:
+      file: asset-catalog/asset-catalog.yaml
+      service: asset-catalog-debug
+  elasticsearch:
+    extends:
+      file: elasticsearch/elasticsearch.yaml
+      service: elasticsearch
+
+volumes:
+  es-data:
+    driver: local
+  nginx-certs:
+    driver: local
+  conf.d:
+    driver: local
+
+networks:
+  softwareag-api-management:
+    name: softwareag-api-management
+    driver: bridge
