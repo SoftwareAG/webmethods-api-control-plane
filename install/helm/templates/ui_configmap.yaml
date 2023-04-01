@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.applications.ui.name }}-config
+data:
+  APICP_ENGINE_ENDPOINT: "http://{{ .Values.applications.engine.name }}-svc:8080"
+  APICP_ASSET_CATALOG_ENDPOINT: "http://{{ .Values.applications.assetcatalog.name }}-svc:8080"
+  #SPRING_CODEC_MAX_IN_MEMORY_SIZE:  "{{ .Values.applications.ui.springCodecMaxMemorySize }}"
+  OTEL_JAVAAGENT_ENABLED: "{{ .Values.applications.jaegertracing.enabled }}"
+  {{- if .Values.applications.jaegertracing.enabled }}
+  LOGGING_LEVEL_COM_SOFTWAREAG_CONTROLPLANE: "{{ .Values.applications.ui.logLevel }}"
+  OTEL_METRICS_EXPORTER: "none"
+  JAVA_OPTS: "-Dotel.exporter.otlp.endpoint=http://{{ .Values.applications.jaegertracing.name }}-svc:{{ .Values.applications.jaegertracing.port }} -Dotel.resource.attributes=service.name={{ .Values.applications.ui.name }}"
+  {{- end }}
+  {{- if .Values.applications.gainsight.enabled }}
+  APICP_UI_TENANT_CLOUD_PROVIDER: "{{ .Values.applications.gainsight.tenant.cloudProvider }}"
+  APICP_UI_TENANT_REGION_NAME: "{{ .Values.applications.gainsight.tenant.region }}"
+  APICP_UI_TENANT_PLAN:  "{{ .Values.applications.gainsight.tenant.plan }}"
+  APICP_UI_TENANT_CUSTOMER_NAME: "{{ .Values.applications.gainsight.tenant.name }}"
+  APICP_UI_TENANT_COMPANY_NAME: "{{ .Values.applications.gainsight.tenant.name }}"
+  APICP_UI_TENANT_STAGE_NAME: "{{ .Values.applications.gainsight.tenant.stage }}"
+  APICP_UI_TENANT_GAINSIGHT_KEY: "{{ .Values.applications.gainsight.tenant.key }}"
+  {{- end }}
+---

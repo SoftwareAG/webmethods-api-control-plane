@@ -1,0 +1,30 @@
+services:
+  elasticsearch:
+    image: ${ELASTICSEARCH_IMAGE}
+    container_name: elasticsearch
+    hostname: ${ELASTICSEARCH_HOST}
+    deploy:
+      restart_policy:
+        condition: "unless-stopped"
+    ports:
+    - ${ELASTICSEARCH_PUBLISH_PORT}:9200
+    environment:
+    - xpack.security.enabled=false
+    - discovery.type=single-node
+    - node.name=softwareag
+    - cluster.name=softwareag
+    - bootstrap.memory_lock=true
+    mem_limit: 1073741824
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9200"]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+    volumes:
+    - es-data:/usr/share/elasticsearch/data
+    networks:
+    - softwareag-api-management

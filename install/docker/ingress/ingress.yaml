@@ -1,0 +1,41 @@
+services:
+  ingress: &ingress-service
+    image: ${INGRESS_IMAGE}
+    container_name: control-plane-ingress
+    hostname: ingress
+    depends_on:
+      engine:
+        condition: service_healthy
+      asset-catalog:
+        condition: service_healthy
+      ui:
+        condition: service_healthy
+    deploy:
+      restart_policy:
+        condition: "no"
+    env_file:
+    - ingress-config.env
+    - ../elasticsearch/es-config.env
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://ingress:8080/api/ingress/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+    - softwareag-api-management
+  ingress-debug:
+    <<: *ingress-service
+    env_file:
+    - ingress-config.env
+    - ingress-config.debug.env
+    - ../elasticsearch/es-config.env
+  ingress-gainsight:
+    <<: *ingress-service
+    env_file:
+    - ingress-config.env
+    - ingress-config.gainsight.env
+    - ../elasticsearch/es-config.env
+  ingress-secure-es:
+    <<: *ingress-service
+    volumes:
+    - es-certs:/usr/share/elasticsearch/config/certs

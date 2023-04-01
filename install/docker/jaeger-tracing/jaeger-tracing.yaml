@@ -1,0 +1,23 @@
+services:
+  jaeger-tracing:
+    image: ${JAEGER_TRACING_IMAGE}
+    profiles: ['observed']
+    container_name: jaeger-tracing
+    hostname: jaeger-tracing
+    deploy:
+      restart_policy:
+        condition: "no"
+    environment:
+    - COLLECTOR_ZIPKIN_HOST_PORT=9411
+    - COLLECTOR_OTLP_ENABLED=true
+    ports:
+    - ${JAEGER_UI_PORT}:16686
+    - ${JAEGER_COLLECTOR_PORT}:4317
+    - 4318:4318
+    healthcheck:
+      test: ["CMD", "wget", "-O -", "http://jaeger-tracing:14269"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+    networks:
+    - softwareag-api-management
