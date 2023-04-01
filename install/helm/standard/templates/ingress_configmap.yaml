@@ -19,7 +19,7 @@ data:
   com.softwareag.api.umc.oauth.authorize.endpoint: ""
   com.softwareag.api.umc.oauth.access.endpoint: ""
   com.softwareag.api.umc.oauth.user.endpoint: ""
-  OTEL_JAVAAGENT_ENABLED: "{{- if .Values.applications.jaegertracing.enabled }}"
+  OTEL_JAVAAGENT_ENABLED: "{{ .Values.applications.jaegertracing.enabled }}"
   {{- if .Values.applications.jaegertracing.enabled }}
   JAVA_OPTS: "-Dotel.exporter.otlp.endpoint=http://{{ .Values.applications.jaegertracing.name }}-svc:{{ .Values.applications.jaegertracing.port }} -Dotel.resource.attributes=service.name={{ .Values.applications.ingress.name }}"
   LOGGING_LEVEL_COM_SOFTWAREAG_CONTROLPLANE: "{{ .Values.applications.ingress.logLevel }}"

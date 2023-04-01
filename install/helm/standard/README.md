@@ -25,12 +25,10 @@ $ helm upgrade \
     --timeout 5m0s \
     control-plane \
     . \
-    --set ingressHost=control-plane
-	
 ```
 This creates a deployment in the namespace `control-plane`
 
-> **Note:** The `ingressHost` should be added to `/etc/hosts` (for linux) or `C:\Windows\System32\drivers\etc\hosts` (for windows)
+> **Note:** The `domainName` should be added to `/etc/hosts` (for linux) or `C:\Windows\System32\drivers\etc\hosts` (for windows)
 pointing to the VM where the k8s cluster is running to access the product from the developer machine.
 
 ## Enabling Open Telemetry using Jaeger
@@ -98,3 +96,12 @@ management team for the proper values and the key.
       stage: "Staging"
       key: "abracadabra"
 ```
+
+### Enabling Secure communication to ES
+
+To enable secure communication to ES , proper certificates needs to created as K8s secrets 
+and provided to the microservices
+Please refer to
+https://github.com/elastic/helm-charts/blob/main/elasticsearch/examples/security/values.yaml
+https://github.com/lisenet/kubernetes-homelab/tree/master/logging 
+to enable Elastic search over SSL.

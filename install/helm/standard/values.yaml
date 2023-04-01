@@ -3,7 +3,7 @@ applications:
     # -- Name of the application 
     name: assetcatalog
     # -- Image name of assetcatalog
-    imageName: asset-catalog
+    imageName: ghcr.io/softwareag/webmethods-api-control-plane/asset-catalog
     # -- Image tag of assetcatalog
     imageTag: latest
     # -- No. of assetcatalog Replicas 
@@ -23,7 +23,7 @@ applications:
   engine:
     name: engine
     # -- Image name of engine
-    imageName: control-plane-engine
+    imageName: ghcr.io/softwareag/webmethods-api-control-plane/engine
     # -- Image tag of engine
     imageTag: latest
     # -- No. of engine Replicas 
@@ -43,7 +43,7 @@ applications:
   ingress:
     name: ingress
     # -- Image name of ingress
-    imageName: control-plane-ingress
+    imageName: ghcr.io/softwareag/webmethods-api-control-plane/ingress
     # -- Image tag of ingress
     imageTag: latest
     # -- No. of ingress Replicas 
@@ -65,7 +65,7 @@ applications:
   ui:
     name: ui
     # -- Image name of ui
-    imageName: control-plane-ui
+    imageName: ghcr.io/softwareag/webmethods-api-control-plane/ui
     # -- Image tag of ui
     imageTag: latest
     # -- No. of ui Replicas 

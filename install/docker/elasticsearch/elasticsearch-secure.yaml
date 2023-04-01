@@ -16,6 +16,7 @@ services:
     - node.name=softwareag
     - cluster.name=softwareag
     - bootstrap.memory_lock=true
+    - ELASTIC_PASSWORD=${ELASTICSEARCH_PASSWORD}
     - xpack.security.enabled=true
     - xpack.security.http.ssl.enabled=true
     - xpack.security.http.ssl.key=certs/elasticsearch/elasticsearch.key
