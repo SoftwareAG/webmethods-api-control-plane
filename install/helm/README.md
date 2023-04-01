@@ -3,8 +3,10 @@
 This helm chart installs Control Plane product in a k8s cluster 
 Refer `values.yaml` for the configurable values that can be passed while running the helm installation command.
 
-## Standard deployment of API Control plane.
+## Standard deployment of API Control plane
 The standard deployment of API Control plane contains the following 5 microservices.
+
+![img.png](../attachments/img.png)
 
 2 replicas each of 
 1. Asset catalog microservice. - Assets(Runtimes,Data planes) processing of Control plane.
@@ -13,7 +15,34 @@ The standard deployment of API Control plane contains the following 5 microservi
 4. API Control plane UI microservice. - Angular based UI
    and 
 5. 1 replica of `Elastic search 8.1.1` which is the data store.
+## Pre-requisites
+### Connecting to GitHub registry to pull the API Control plane images
 
+The above microservices are available in the Github repo
+and the Helm chart is configured to pick them by default.
+To connect to Github Docker repo the following steps needs to 
+be performed as a pre-requisite.
+
+1. Get a Personal Access token (PAT) from SoftwareAG.
+2. Run the following command in your Kubernetes setup.
+```
+kubectl create secret \
+ docker-registry regcred \
+  --docker-server=ghcr.io \
+  --docker-username=<Your git username> \
+  --docker-password=<Your PAT>
+```
+3. The values.yaml has a property `imagePullSecretName` (in our example 'regcred'
+   that will be used by the scripts)
+
+### Configuring the Ingress controller
+The `domainName` in the values.yaml is the ingress domain name , that will be
+used by the nginx ingress controller.
+> **Note:** The `domainName` should be added to `/etc/hosts` (for linux) or `C:\Windows\System32\drivers\etc\hosts` (for windows)
+pointing to the VM where the k8s cluster is running to access the product from the developer machine.
+
+
+### Running the Helm charts to create API Control plane deployments
 You can run the below command to install the standard flavour of the  product.
 
 ```
@@ -27,9 +56,6 @@ $ helm upgrade \
     . \
 ```
 This creates a deployment in the namespace `control-plane`
-
-> **Note:** The `domainName` should be added to `/etc/hosts` (for linux) or `C:\Windows\System32\drivers\etc\hosts` (for windows)
-pointing to the VM where the k8s cluster is running to access the product from the developer machine.
 
 ## Enabling Open Telemetry using Jaeger
 API Control plane can be started in debug mode  

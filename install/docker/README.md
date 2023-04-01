@@ -6,6 +6,7 @@ compose command.
 
 ## Standard deployment of API Control plane.
 The standard deployment of API Control plane contains the following 5 microservices.
+![img.png](../attachments/img.png)
 
 1. Asset catalog microservice. - Assets(Runtimes,Data planes) processing of Control plane.
 2. Engine microservice. - Metrics processing and aggregation.

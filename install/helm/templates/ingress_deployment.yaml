@@ -61,4 +61,6 @@ spec:
           failureThreshold: 3
           timeoutSeconds: 5
       terminationGracePeriodSeconds: 30
+      imagePullSecrets:
+        - name: {{ .Values.imagePullSecretName }}
 ---

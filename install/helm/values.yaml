@@ -148,3 +148,4 @@ applications:
       stage: "Staging"
       key: "AP-BCBBKBNAYWW6-2-2"
 domainName: localhost
+imagePullSecretName: regcred

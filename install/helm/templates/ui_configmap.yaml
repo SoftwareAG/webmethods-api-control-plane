@@ -5,7 +5,7 @@ metadata:
 data:
   APICP_ENGINE_ENDPOINT: "http://{{ .Values.applications.engine.name }}-svc:8080"
   APICP_ASSET_CATALOG_ENDPOINT: "http://{{ .Values.applications.assetcatalog.name }}-svc:8080"
-  SPRING_CODEC_MAX_IN_MEMORY_SIZE:  "{{ .Values.applications.ui.springCodecMaxMemorySize }}"
+  #SPRING_CODEC_MAX_IN_MEMORY_SIZE:  "{{ .Values.applications.ui.springCodecMaxMemorySize }}"
   OTEL_JAVAAGENT_ENABLED: "{{ .Values.applications.jaegertracing.enabled }}"
   {{- if .Values.applications.jaegertracing.enabled }}
   LOGGING_LEVEL_COM_SOFTWAREAG_CONTROLPLANE: "{{ .Values.applications.ui.logLevel }}"
