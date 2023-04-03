@@ -15,16 +15,35 @@ The standard deployment of API Control plane contains the following 5 microservi
    and
 5. `Elastic search 8.1.1` which is the data store.
 
+## Pre-requisites
+### Connecting to GitHub registry to pull the API Control plane images
+
+The above microservices are available in the Github repo
+docker compose is configured to pick them by default.
+To connect to Github Docker repo the following steps needs to
+be performed as a pre-requisite.
+
+1. Get a Personal Access token (PAT) from SoftwareAG.
+2. Run the following command in your docker setup.
+```
+docker login ghcr.io \
+  -u <Your git username> \
+  -p <Your PAT>
+```
+### Configuring the Ingress controller
+The `NGINX_DOMAIN_NAME` in the .env is the ingress domain name , that will be
+used by the nginx.
+Edit the .env file and put the hostname of your machine as `NGINX_DOMAIN_NAME` and also
+make sure that this hostname is configured in /etc/hosts
+
+
+### Running the Docker compose to create API Control plane deployments
 You can run the below command to install the standard flavour of the  product.
 
 ```
 docker compose -f control-plane-beta.yaml up -d
 
 ```
-
-> **Note:** The `NGINX_DOMAIN_NAME` in the .env file should be added to `/etc/hosts` (for linux) or 
-> `C:\Windows\System32\drivers\etc\hosts` (for windows)
-pointing to the VM to access the product from the developer machine.
 
 ## Enabling Open Telemetry using Jaeger
 API Control plane can be started in debug mode  

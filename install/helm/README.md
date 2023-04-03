@@ -38,8 +38,8 @@ kubectl create secret \
 ### Configuring the Ingress controller
 The `domainName` in the values.yaml is the ingress domain name , that will be
 used by the nginx ingress controller.
-> **Note:** The `domainName` should be added to `/etc/hosts` (for linux) or `C:\Windows\System32\drivers\etc\hosts` (for windows)
-pointing to the VM where the k8s cluster is running to access the product from the developer machine.
+Edit the values.yaml file and put the hostname of your machine as domainName and also 
+make sure that this hostname is configured in /etc/hosts
 
 
 ### Running the Helm charts to create API Control plane deployments
@@ -131,3 +131,9 @@ Please refer to
 https://github.com/elastic/helm-charts/blob/main/elasticsearch/examples/security/values.yaml
 https://github.com/lisenet/kubernetes-homelab/tree/master/logging 
 to enable Elastic search over SSL.
+
+
+##TroubleShooting
+
+1. If your Kubernetes server's version is < 1.19 , Edit the `templates\nginx_ingress.yaml`
+   to change the `apiVersion` from networking.k8s.io/v1 to networking.k8s.io/v1beta1. 
