@@ -1,0 +1,9 @@
+---
+agentConfig:
+  enabled: true
+  runtimeConfig:
+    runtimeName: "demo"
+  controlPlaneConfig:
+    controlPlaneURL: "http://agent.stable.deployment"
+    username: ""
+    password: ""

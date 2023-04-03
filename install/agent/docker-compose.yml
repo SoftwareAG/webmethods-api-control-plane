@@ -1,0 +1,66 @@
+version: "3.5"
+
+services:
+   apigateway:
+    depends_on:
+      - elasticsearch-spectre
+    image: ${GATEWAY_IMAGE}
+    container_name: apigateway-cp
+    user: root
+    environment:
+      - apigw_elasticsearch_hosts=elasticsearch-spectre:9200
+      - apigw_elasticsearch_http_username=
+      - apigw_elasticsearch_http_password=
+      - apigw_cp_agentConfig_enabled=true
+      - apigw_cp_agentConfig_runtimeConfig_runtimeName=${RUNTIME_NAME}
+      - apigw_cp_agentConfig_runtimeConfig_description=Sample APIGateway runtime
+      - apigw_cp_agentConfig_runtimeConfig_tags=${RUNTIME_NAME},agent-Integration-test
+      - apigw_cp_agentConfig_runtimeConfig_location=US
+      - apigw_cp_agentConfig_runtimeConfig_region=California
+      - apigw_cp_agentConfig_runtimeConfig_host=http://${RUNTIME_NAME}:7072
+      - apigw_cp_agentConfig_controlPlaneConfig_controlPlaneURL=${CP_URL}
+      - apigw_cp_agentConfig_controlPlaneConfig_username=${CP_USERNAME}   
+      - apigw_cp_agentConfig_controlPlaneConfig_password=${CP_PASSWORD}
+      - apigw_cp_agentConfig_runtimeConfig_heartBeatIntervalInSeconds=60
+      - apigw_cp_agentConfig_runtimeConfig_metricsSynchIntervalInSeconds=30
+      - apigw_cp_agentConfig_runtimeConfig_assetSynchIntervalInSeconds=25
+      - apigw_cp_agentConfig_runtimeConfig_capacity_value=500
+      - apigw_cp_agentConfig_runtimeConfig_capacity_units=per hour
+    ports:
+      - 5555:5555
+      - 9072:9072
+    volumes:
+      - ./cp-agent.yml:/opt/softwareag/IntegrationServer/instances/default/packages/WmAPIGateway/resources/configuration/cp-agent.yml
+    networks:
+      - cp-gateway-spectre
+   
+   elasticsearch-spectre:
+    image: ${ELASTICSEARCH_IMAGE}
+    container_name: elasticsearch-spectre
+    environment:
+      - node.name=elasticsearch
+      - cluster.name=SAG_EventDataStore
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - xpack.ml.enabled=false
+      - xpack.security.enabled=false
+      - discovery.type=single-node
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 7240:9200
+      - 7340:9300
+    volumes:
+      - es-gateway-agent-downloads-data-spectre:/usr/share/elasticsearch/data
+    networks:
+      - cp-gateway-spectre
+        
+
+networks:
+  cp-gateway-spectre:  
+
+volumes:
+  es-gateway-agent-downloads-data-spectre:
+    driver: local
