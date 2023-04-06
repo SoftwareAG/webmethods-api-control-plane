@@ -1,79 +1,132 @@
-# API Control Plane docker compose 
+# API Control Plane docker compose
 
-The docker compose files in this folder installs Control Plane product 
-Refer `.env` for the configurable values that can be passed while running docker
-compose command.
+The docker compose files in this folder allow for deploying API Control Plane on docker.
 
-## Standard deployment of API Control plane.
+## Standard deployment of API Control plane
+
 The standard deployment of API Control plane contains the following 5 microservices.
 ![img.png](../attachments/img.png)
 
-1. Asset catalog microservice. - Assets(Runtimes,Data planes) processing of Control plane.
-2. Engine microservice. - Metrics processing and aggregation.
-3. Ingress microservice. - User management and security
-4. API Control plane UI microservice. - Angular based UI
-   and
-5. `Elastic search 8.1.1` which is the data store.
+1. Asset catalog - Assets(Runtimes,Data planes) processing of Control plane.
+2. Engine - Metrics processing and aggregation.
+3. Ingress - User management and security
+4. API Control Plane UI - user interface
+5. Elasticsearch - data persistence layer
 
 ## Pre-requisites
-### Connecting to GitHub registry to pull the API Control plane images
 
-The above microservices are available in the Github repo
-docker compose is configured to pick them by default.
-To connect to Github Docker repo the following steps needs to
-be performed as a pre-requisite.
+### 1. Connecting to GitHub registry to pull the API Control plane images
 
-1. Get a Personal Access token (PAT) from SoftwareAG.
-2. Run the following command in your docker setup.
-```
-docker login ghcr.io \
-  -u <Your git username> \
-  -p <Your PAT>
-```
-### Configuring the Ingress controller
-The `NGINX_DOMAIN_NAME` in the .env is the ingress domain name , that will be
-used by the nginx.
-Edit the .env file and put the hostname of your machine as `NGINX_DOMAIN_NAME` and also
-make sure that this hostname is configured in /etc/hosts
+We published docker images for all API Control Plane microservice to this GitHub reporotory. To be able to pull them or have docker compose pull them for you, you'll need:
 
+1. A Personal Access token (PAT) from Software AG.
 
-### Running the Docker compose to create API Control plane deployments
-You can run the below command to install the standard flavour of the  product.
+    Open an issue here in the repo or email your Software AG contact for API Control Plane BETA.
 
-```
-docker compose -f control-plane-beta.yaml up -d
+2. To run the following command in your docker environment:
 
-```
+    ```bash
+    docker login ghcr.io \
+      -u <Your git username> \
+      -p <Your PAT>
+    ```
 
-## Enabling Open Telemetry using Jaeger
-API Control plane can be started in debug mode  
-with Open telemetry enabled using Jaeger(https://www.jaegertracing.io/).
- 
-This example uses the 'jaegertracing/all-in-one' image.
-To start environment with debug mode 
-```
- docker compose -f control-plane-beta.yaml up -d
-```
-> **Note:** The Jaeger UI can be accessed via the `JAEGER_UI_PORT` which will configured
-> in the .env 
+### 2. Configuring the Ingress controller
 
-## Enabling Gainsight
-To enable Gainsight proper values needs to be provided in the 
-ui/ui-config.gainsight.env
-Please contact SoftwareAG product management team for the proper values and the key.
+The `.env` file (install/docker/.env) allows for configuring differenc aspects of API Control Plane deplpyment. To be able to access API Contol Plane after it's deployed, you need to edit this file and provide a value for `NGINX_DOMAIN_NAME` that matches the hostname of the machine you're deploying API Conrtol plane on. Make sure this hostname is accessible to whoever will be connecting to APi Control Plane.
 
-```
- docker compose -f control-plane-beta.gainsight.yaml up -d
-```
+## Deploying API Control Plane BETA
 
-## Enabling Secure Elastic communication
-The following properties needs to be set to enable secure es communication
-```
+To deploy the API Control Plane with default configuration:
+
+- change to install/docker directory:
+
+    ```bash
+      cd install/docker
+    ```
+
+- execute the deployment script
+
+    ```bash
+      docker compose -f control-plane-beta.yaml up -d
+    ```
+
+## Stopping API Control Plane BETA
+
+To stop and remove the API Control Plane default configuration:
+
+- change to install/docker directory:
+
+    ```bash
+      cd install/docker
+    ```
+
+- execute the deployment script
+
+    ```bash
+      docker compose -f control-plane-beta.yaml down
+    ```
+
+## Additional deployment flavors
+
+### 1. Enabling Open Telemetry using Jaeger
+
+API Control plane can be started in debug mode with Open telemetry enabled and exposed using [Jaeger UI](https://www.jaegertracing.io/). For this, the deployment needs additional image, namely `jaegertracing/all-in-one`.
+
+To start API Control Plane BETA in debug mode:
+
+- change to install/docker directory:
+
+    ```bash
+      cd install/docker
+    ```
+
+- execute the deployment script
+
+    ```bash
+      docker compose -f control-plane-beta.debug.yaml up -d
+    ```
+
+> **Note:** The Jaeger UI can be accessed via the `JAEGER_UI_PORT` which will configured in the `.env` file
+
+## 2. Enabling Gainsight integration
+
+If you want to see Gainsight powerd user engagemnets (work in progress) in API Control Plane like bots, articles, feature introduction etc., you can start it with additional configuration set up in `ui/ui-config.gainsight.env` file. Please contact your Software AG API Control Plane BEAT contact or ask us here for the proper confoguration values.
+
+To start API Control Plane BETA with Gainsight enabled:
+
+- change to install/docker directory:
+
+    ```bash
+      cd install/docker
+    ```
+
+- execute the deployment script
+
+    ```bash
+      docker compose -f control-plane-beta.gainsight.yaml up -d
+    ```
+
+## 3. Enabling Secure Elastic communication
+
+If you wuld like to run elasticsearch in secure mode, then the following properties needs to be set in the `.env` file to enable secure communication
+
+``` yaml
 ELASTICSEARCH_USERNAME=
 ELASTICSEARCH_PASSWORD=
 ELASTICSEARCH_CERTPATH=
 ```
-After setting these execute
-```
- docker compose -f control-plane-beta-secure-es.yaml up -d
-```
+
+To start API Control Plane BETA with secure elasticsearch connectovoty enabled:
+
+- change to install/docker directory:
+
+    ```bash
+      cd install/docker
+    ```
+
+- execute the deployment script
+
+    ```bash
+      docker compose -f control-plane-beta-secure-es.yaml up -d
+    ```
