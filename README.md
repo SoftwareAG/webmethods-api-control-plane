@@ -10,9 +10,9 @@ APIs are everywhere. API Management is where APIs are. It’s all distributed an
 
 This repository hosts assets documenting how to deploy and run webMethods API Control Plane, articles and tutorials, public API docs and Postman collections whoing who to use them and more.
 
-For deployment instructions using docker compose go [here](install/helm/README.md).
+For deployment instructions using docker compose go [here](install/docker/README.md).
 
-For deployment instructions using helm on kubernetes go [here](install/docker/README.md).
+For deployment instructions using helm on kubernetes go [here](install/helm/README.md).
 
 Once you have API Control Plane deployed, you will want to connect your API Gateway runtimes to it. For instructions how to do it do [here](install/agent/README.md).
 
