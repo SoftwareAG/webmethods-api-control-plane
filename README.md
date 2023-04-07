@@ -6,16 +6,26 @@ APIs are everywhere. API Management is where APIs are. It’s all distributed an
 - Runtimes - there are your API Gateways, developer portals etc.
 - APIs - that's self explanatory. These are APIs present in your landscape.
 
-![image](/attachments/apico_dashboard_page.png)
+![image](/attachments/apicp_dashboard_page.png)
 
 This repository hosts assets documenting how to deploy and run webMethods API Control Plane, articles and tutorials, public API docs and Postman collections whoing who to use them and more.
 
-For deployment instructions using docker compose go [here](install/docker/README.md).
+## Deployment
 
-For deployment instructions using helm on kubernetes go [here](install/helm/README.md).
+For deployment instructions using docker compose go [here](deployment/docker/README.md).
 
-Once you have API Control Plane deployed, you will want to connect your API Gateway runtimes to it. For instructions how to do it do [here](install/agent/README.md).
+For deployment instructions using helm on kubernetes go [here](deployment/helm/README.md).
 
-------------------------------
+Once you have API Control Plane deployed, you will want to connect your API Gateway runtimes to it. For instructions how to do it do [here](deployment/agent/README.md).
+
+## Public APIs
+
+API Control Plane exposes public APIs to interact with it. API docs as well as postman collection with sample usage can be found [here](apis/README.md).
+
+## Articles
+
+We also host various articles related to API Control Plane deployment, use, adminitration etc. [here](articles/README.md).
+
+***
 
 These tools are provided as-is and without warranty or support. They do not constitute part of the Software AG product suite. Users are free to use, fork and modify them, subject to the license agreement. While Software AG welcomes contributions, we cannot guarantee to include every contribution in the master project.
