@@ -16,7 +16,7 @@ For deployment instructions using docker compose go [here](deployment/docker/REA
 
 For deployment instructions using helm on kubernetes go [here](deployment/helm/README.md).
 
-Once you have API Control Plane deployed, you will want to connect your API Gateway runtimes to it. For instructions how to do it do [here](install/agent/README.md).
+Once you have API Control Plane deployed, you will want to connect your API Gateway runtimes to it. For instructions how to do it do [here](deployment/agent/README.md).
 
 ## Public APIs
 
