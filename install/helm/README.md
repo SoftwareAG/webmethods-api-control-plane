@@ -23,7 +23,7 @@ and the Helm chart is configured to pick them by default.
 To connect to Github Docker repo the following steps needs to 
 be performed as a pre-requisite.
 
-1. Get a Personal Access token (PAT) from SoftwareAG.
+1. Get a Personal Access token (PAT) from Software AG.
 2. Run the following command in your Kubernetes setup.
 ```
 kubectl create secret \
