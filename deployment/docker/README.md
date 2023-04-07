@@ -1,4 +1,4 @@
-# API Control Plane docker compose
+# API Control Plane deployment with docker compose
 
 The instructions for installing and running the API Control Plane on docker are below.
 If you have any questions or find issues, please use the [Issues](https://github.com/SoftwareAG/webmethods-api-control-plane/issues) or [Discussions](https://github.com/SoftwareAG/webmethods-api-control-plane/discussions) tabs in this repository.
@@ -87,7 +87,7 @@ Table of contents
     {"ID":"4b598e3e422c", "Status": "Up 2 minutes (healthy)", "Name":"elasticsearch"}
     ```
 
-###### [Back to Top](#webmethods-api-control-plane)
+###### [Back to Top](#api-control-plane-deployment-with-docker-compose)
 ***
 
 ## How to stop webMethods API Control Plane using docker compose?
@@ -121,7 +121,7 @@ If everything goes well, the outpus should be similar to this
 ⠿ Network softwareag-api-management      Removed                         0.3s
 ```
 
-###### [Back to Top](#webmethods-api-control-plane)
+###### [Back to Top](#api-control-plane-deployment-with-docker-compose)
 ***
 
 ## Additional deployment flavors
@@ -188,5 +188,5 @@ To start API Control Plane BETA with secure elasticsearch connectovoty enabled:
       docker compose -f control-plane-beta-secure-es.yaml up -d
     ```
 
-###### [Back to Top](#webmethods-api-control-plane)
+###### [Back to Top](#api-control-plane-deployment-with-docker-compose)
 ***
