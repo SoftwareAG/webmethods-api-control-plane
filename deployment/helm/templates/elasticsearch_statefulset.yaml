@@ -33,7 +33,7 @@ spec:
         fsGroup: 1000
       initContainers:
       - name: init-sysctl
-        image: iregistry.eur.ad.sag/ibit/alpine:3.16
+        image: public.ecr.aws/docker/library/busybox:latest
         imagePullPolicy: IfNotPresent
         securityContext:
           privileged: true
