@@ -12,11 +12,16 @@ The standard deployment of API Control plane contains the following 5 microservi
 4. API Control Plane UI - user interface
 5. Elasticsearch - data persistence layer
 
+***
+
 Table of contents
 
 1. [How to deploy webMethods API Control Plane using docker compose?](#how-to-deploy-webmethods-api-control-plane-using-docker-compose)
 2. [How to stop webMethods API Control Plane using docker compose?](#how-to-stop-webmethods-api-control-plane-using-docker-compose)
-3. [Additional deployment flavors](#additional-deployment-flavors)
+3. [How to access the newly deployed webMethods API Control Plane?](#how-to-access-the-newly-deployed-webmethods-api-control-plane)
+4. [Additional deployment flavors](#additional-deployment-flavors)
+
+***
 
 ## How to deploy webMethods API Control Plane using docker compose?
 
@@ -41,19 +46,19 @@ Table of contents
 
     To deploy the API Control Plane with default configuration:
 
-    - change to install/docker directory:
+    - change to deployment/docker directory:
 
         ```bash
-          cd deployment/docker
+        cd deployment/docker
         ```
 
     - execute the deployment script
 
         ```bash
-          docker compose -f control-plane-beta.yaml up -d
+        docker compose -f control-plane-beta.yaml up -d
         ```
 
-    If everything goes well, the outpus should be similar to this
+    If everything goes well, the output should be similar to this
 
     ```bash
     [przemek@somehost docker]$ docker compose -f control-plane-beta.yaml up -d
@@ -97,16 +102,16 @@ To stop and remove the API Control Plane default configuration:
 - change to deployment/docker directory:
 
     ```bash
-      cd deployment/docker
+    cd deployment/docker
     ```
 
 - execute the deployment script
 
     ```bash
-      docker compose -f control-plane-beta.yaml down
+    docker compose -f control-plane-beta.yaml down
     ```
 
-If everything goes well, the outpus should be similar to this
+If everything goes well, the output should be similar to this
 
 ```bash
 [przemek@somehost docker]$ docker compose -f control-plane-beta.yaml down
@@ -124,6 +129,14 @@ If everything goes well, the outpus should be similar to this
 ###### [Back to Top](#api-control-plane-deployment-with-docker-compose)
 ***
 
+## How to access the newly deployed webMethods API Control Plane?
+
+1. Open your browser and go to https://[the-host-you-configured]:443/
+2. You should see the login screen. Log in using Administrator usename and the default password.
+
+###### [Back to Top](#api-control-plane-deployment-with-docker-compose)
+***
+
 ## Additional deployment flavors
 
 ### 1. Enabling Open Telemetry using Jaeger
@@ -135,36 +148,36 @@ To start API Control Plane BETA in debug mode:
 - change to deployment/docker directory:
 
     ```bash
-      cd deployment/docker
+    cd deployment/docker
     ```
 
 - execute the deployment script
 
     ```bash
-      docker compose -f control-plane-beta.debug.yaml up -d
+    docker compose -f control-plane-beta.debug.yaml up -d
     ```
 
-:wave: The Jaeger UI can be accessed via the `JAEGER_UI_PORT` which will configured in the `.env` file
+:wave: The Jaeger UI can be accessed via the `JAEGER_UI_PORT` port configured in the `.env` file.
 
 ### 2. Enabling Gainsight integration
 
-If you want to see Gainsight powerd user engagemnets (work in progress) in API Control Plane like bots, articles, feature introduction etc., you can start it with additional configuration set up in `ui/ui-config.gainsight.env` file. Please contact your Software AG API Control Plane BEAT contact or ask us here for the proper confoguration values.
+If you want to see [Gainsight](https://www.gainsight.com/product-experience/) powered user engagemnets (work in progress) in API Control Plane like bots, articles, feature introduction etc., you can start it with additional configuration set up in `ui/ui-config.gainsight.env` file. Please contact your Software AG API Control Plane BETA contact or ask us here for the proper confoguration values.
 
 To start API Control Plane BETA with Gainsight enabled:
 
 - change to deployment/docker directory:
 
     ```bash
-      cd deployment/docker
+    cd deployment/docker
     ```
 
 - execute the deployment script
 
     ```bash
-      docker compose -f control-plane-beta.gainsight.yaml up -d
+    docker compose -f control-plane-beta.gainsight.yaml up -d
     ```
 
-### 3. Enabling Secure Elastic communication
+### 3. Enabling secure Elasticsearch communication
 
 If you wuld like to run elasticsearch in secure mode, then the following properties needs to be set in the `.env` file to enable secure communication
 
@@ -174,18 +187,20 @@ ELASTICSEARCH_PASSWORD=
 ELASTICSEARCH_CERTPATH=
 ```
 
+Please refer to https://www.elastic.co/guide/en/elasticsearch/reference/current/secure-cluster.html for more information.
+
 To start API Control Plane BETA with secure elasticsearch connectovoty enabled:
 
 - change to deployment/docker directory:
 
     ```bash
-      cd deployment/docker
+    cd deployment/docker
     ```
 
 - execute the deployment script
 
     ```bash
-      docker compose -f control-plane-beta-secure-es.yaml up -d
+    docker compose -f control-plane-beta-secure-es.yaml up -d
     ```
 
 ###### [Back to Top](#api-control-plane-deployment-with-docker-compose)
