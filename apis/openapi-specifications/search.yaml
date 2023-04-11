@@ -1,0 +1,963 @@
+openapi: 3.0.3
+info:
+  title: Search Service
+  version: "1.0.0"
+  description: |
+    The search API allows you to execute a search query or a count query in API Control Plane and return the search results that match the search query or return the count of objects matching the search query.
+    
+    Search can be performed on types such as **API, DATAPLANE, RUNTIME, AND AUDITEVENT**. Searches can be performed against only one type at a time.
+servers:
+ - url: "{protocol}://{hostname}:{port}/api"
+   description: This is the endpoint where the Asset-catalog API is accessible from the server.
+   variables:
+    protocol:
+      default: https
+      enum:
+      - http
+      - https
+      description: The protocol supported by the server - HTTP or HTTPS. Default is HTTPS.
+    hostname:
+      default: localhost
+      description: The domain name of the server where the API is hosted. The hostname must be resolvable by the DNS lookup.
+    port:
+      default: "443"
+      description: The port number where the REST API is running on the server. The default port for HTTPS is 443 and HTTP is 80 but it can also be any valid port.
+paths:
+  /assetcatalog/v1/search:
+    post:
+      description: |
+        The search API allows you to execute a search query in API Control Plane and return the search results that match the input query.
+        
+        
+        The following are the types of data on which search can be performed using this API by specifying query, conditions, and criteria.
+          1. **DATAPLANE**. This type is used to search dataplanes in API Control Plane.  
+          2. **RUNTIME**. This type is used to search runtimes in API Control Plane.
+          3. **API**. This type is used to search APIs in API Control Plane.
+          4. **AUDITEVENT**. This type is used to search audit events in API Control Plane.
+          
+          The input must be provided in the SearchContext format; see the schema for additional information.
+          
+          SearchContext consists of 
+          
+          1. **type**. The type of data that has to be searched.
+          2. **query**. Each query consists of a set of conditions connected by a logical connector. Only the same logical connector can be used between conditions; it can either be AND or OR, not both.
+          3. **conditions**. Each condition consists of a list of criterias connected by a logical connector. Only the same logical connector can be used between conditions; it can either be AND or OR, not both.
+          4. **criteria**. A criteria is the actual condition that applies to the field, providing the field's name, value, and any operators that may be applied to it, such as contains and equals. For a list of supported operations, see the Operation enum.
+          5. **from**. This indicates where record fetching is required to be performed from. For example, "from = 5" denotes the fifth object. Records in Elasticsearch starts from 0.  Default value of from is 0.
+          6. **size**. This indicates the number of records to be fetched. For example, for size=10, 10 records should be returned beginning with the **from** value. The default is 10000 (max_window_size of asset-catalog elastic search).
+          7. **response fields**. The list of fields that should be returned in the response. Only the mentioned fields are returned. To return all the fields give it as a *.
+          8. **sort fields**. It is an ordered map containing the field names on which sort has to be performed and their sort order. For example, {"name":"DESC","created":"DESC"}. The results is sorted in descending order by name first, followed by created date. 
+            If no sort fields are specified, results are sorted by lastModifiedDate in decreasing order.
+                    
+         **Examples:**
+        
+        1. Fetch first 10 runtimes with all fields containing runtime text as a substring in the name field.
+        
+        **Request payload:**
+        ```
+        {
+          "type": "RUNTIME",
+          "query": {
+          "conditions": [
+            {
+                "criterias": [
+                    {
+                        "field": "name",
+                        "value": "runtime",
+                        "operation": "contains"
+                    }
+                ]
+            }
+        ]
+                },
+        "responseFields": ["*"],
+        "from": 0,
+        "size": 10
+        }
+        ```
+        
+        2. Fetch runtimes with condition, from =11, size=20 which satisfies the condition, region="eu" and return only the fields name, description, location in the response, sorted by name in ascending order.
+          If from and size are specified it skips records before from and fetches the records starting, from to from+size. In this example, 
+          it will skip the first 10 records and fetch from 11th to 30th record.
+          
+        
+         **Request payload:**
+        ```
+          {
+            "type": "RUNTIME",
+            "query": {
+            "conditions": [
+            {
+                "criterias": [
+                    {
+                        "field": "region",
+                        "value": "eu",
+                        "operation": "equals"
+                    }
+                ]
+            }
+                ]
+          },
+          "responseFields": [
+          "name",
+          "description",
+          "location"],
+         "from": 11,
+         "size": 20,
+         "sortFields": {"name": "ASC"}
+         }
+        ``` 
+        3. Listing of runtimes. Fetch runtimes For page 1, with page size 20. 
+           In this case first 20 records will be sorted by lastModifiedDate in the descending order.
+        
+          **Request payload:**
+          ```
+          {
+           "type": "RUNTIME",
+           "responseFields": ["*"],
+           "from": 0,
+           "size": 20
+           }
+          ``` 
+          4. If size is given more than max_result_window size property of elasticsearch, search API will only return max_result_window size.
+             In the following example, even though size is given as 20000 only 10000 records will be returned, since elastic search can handle only the max_result_window size configured. For assets this would be 10000.
+        
+          **Request payload:**
+           ```
+          {
+           "type": "RUNTIME",
+           "responseFields": ["*"],
+           "from": 0,
+           "size": 20000
+           }
+          ```
+          5. If size is not given, then by default max_result_window size is returned. In the following example, size is not given, so by default 10000 records will be returned.
+        
+           **Request payload:**
+           ```
+          {
+           "type": "RUNTIME",
+           "responseFields": ["*"],
+           "from": 0
+           }
+          ```
+        
+         6. One condition must be maintained per field. For example, in the following request payload, name criterias must be given in one condition, apiDeployments.runtimeId criterias must be given in one condition,
+            and apiDeployments.apiStatus criterias must be given in one condition.
+        
+        
+        **Request payload:**
+         ```
+         {
+          "type": "API",
+          "query": {
+          "conditions": [
+             {
+                "criterias": [
+                    {
+                        "field": "name",
+                        "value": "Petstore API",
+                        "operation": "equals"
+                    },
+                    {
+                        "field": "name",
+                        "value": "Uber API",
+                        "operation": "equals"
+                    }
+                ],
+                "logicalConnector": "OR"
+            },
+            {
+                "criterias": [
+                    {
+                        "field": "apiDeployments.runtimeId",
+                        "value": "0225711b-4dd3-49d4-b79f-cf15e83b75cf",
+                        "operation": "equals"
+                    },
+                    {
+                        "field": "apiDeployments.runtimeId",
+                        "value": "c357f56a-3303-41bd-83d2-61bea2dc15b3",
+                        "operation": "equals"
+                    }
+                ],
+                "logicalConnector": "OR"
+            },
+            {
+                "criterias": [
+                    {
+                        "field": "apiDeployments.apiStatus",
+                        "value": "ACTIVE",
+                        "operation": "equals"
+                    },
+                     {
+                        "field": "apiDeployments.apiStatus",
+                        "value": "INACTIVE",
+                        "operation": "equals"
+                    }
+                ],
+                "logicalConnector": "OR"
+            }
+        ],
+        "logicalConnector": "AND"
+        },
+        "responseFields": [
+        "name",
+        "id",
+        "apiDeployments.apiStatus",
+        "apiDeployments.runtimeId"
+        ],
+        "from": 0,
+        "size": 100,
+        "sortFields": {"name": "DESC"}
+        }
+          ```
+        
+        7. If no sort fields are given, then by default, the search results will be sorted using the lastModifiedDate in descending order.
+        
+        **Request payload:**
+        ```
+        {
+           "type": "RUNTIME",
+           "responseFields": ["*"],
+           "from": 0,
+           "size":10
+        }
+        
+        ```
+        8. To sort based on createdDate or lastModifiedDate, give it as created or lastModified in input.
+
+         **Request payload:**
+        ```
+        {
+         "type": "RUNTIME",
+         "responseFields": ["*"],
+         "from": 0,
+         "size": 10,
+         "sortFields": {
+        "created": "ASC"
+        } 
+        }
+        ```
+
+        9. Sorting by array or multi-valued fields. If sorted by ascending order, then lowest value is picked for sorting from each document and based on those values documents will be sorted.
+           If sorted by descending order, then highest value is picked for sorting from each document and based on those values documents will be sorted.
+           Sort runtimes by tags in ascending order.
+           
+         **Request payload:**
+          ```
+          {  
+          "type": "RUNTIME",
+          "responseFields": ["*"],
+          "sortFields": {
+          "tags": "ASC"
+          } 
+          }
+          ```
+          **Response:**
+
+          ```
+          {
+             "searchResults": [
+                 { 
+                   "id": "4157f03d-177b-48c0-ba50-84fdb2ab9be5",
+                   "name": "runtime 15",
+                   "description": "runtime 15",
+                   "tags": [
+                      "ABC",
+                      "test"
+                   ],
+                   "createdDate": "2023-01-05 16:49:05.843 IST",
+                   "lastModifiedDate": "2023-01-05 16:49:05.843 IST",
+                   "region": "eu",
+                   "owner": {
+                       "name": "John",
+                       "id": null,
+                       "type": "USER"
+                    },
+                   "type": "WEBMETHODS_GATEWAY",
+                   "deploymentType": "SAG_SAAS"
+                  },
+                 {
+                   "id": "4f78eeda-2d08-4a76-bedb-4bd2fc54e67d",
+                   "name": "runtime 14",
+                   "description": "runtime 14",
+                   "tags": [
+                        "ABC"
+                    ],
+                   "createdDate": "2023-01-05 16:48:51.668 IST",
+                   "lastModifiedDate": "2023-01-05 16:48:51.668 IST",
+                   "region": "eu",
+                   "owner": {
+                       "name": "John",
+                       "id": null,
+                       "type": "USER"
+                      },
+                  "type": "WEBMETHODS_GATEWAY",
+                  "deploymentType": "SAG_SAAS"
+                 },
+                 {
+                  "id": "c49d3daf-eb80-4d9b-8cf2-a61bddaaacf5",
+                  "name": "runtime 16",
+                  "description": "runtime 16",
+                  "tags": [
+                      "Least",
+                      "Z"
+                  ],
+                  "createdDate": "2023-01-05 16:49:26.231 IST",
+                  "lastModifiedDate": "2023-01-05 16:49:26.231 IST",
+                  "region": "eu",
+                  "owner": {
+                      "name": "John",
+                      "id": null,
+                      "type": "USER"
+                     },
+                  "type": "WEBMETHODS_GATEWAY",
+                  "deploymentType": "SAG_SAAS"
+                 }
+        }
+        ```
+        Following are some examples with invalid fields:
+
+        10. Search runtimes with invalid field test="eu". Here field **test** doesn't exist in runtime and no error message will be returned and search 
+        returns empty results.
+
+        **Request payload:**
+        ```
+        {
+         "type": "RUNTIME",
+         "responseFields": ["*"],
+         "from": 0,
+         "size": 10,
+         "query": {
+            "conditions": [
+            {
+                "criterias": [
+                    {
+                        "field": "test",
+                        "value": "eu",
+                        "operation": "equals"
+                    }
+                ]
+            }
+                ]
+          },
+         "sortFields": {
+        "created": "ASC"
+        } 
+        }
+        ```
+
+        11. Search runtimes with condition, **test="eu" and name="runtime"**. Here field **test** doesn't exist in runtime, but **name** exist. 
+             No error message will be returned and returns empty results due to **AND** condition between test and name.
+
+        **Request payload:**
+        ```
+        {
+         "type": "RUNTIME",
+         "responseFields": ["*"],
+         "from": 0,
+         "size": 10,
+         "query": {
+            "conditions": [
+             {
+                "criterias": [
+                    {
+                        "field": "name",
+                        "value": "runtime",
+                        "operation": "equals"
+                    }
+                ]
+            },
+            {
+                "criterias": [
+                    {
+                        "field": "test",
+                        "value": "eu",
+                        "operation": "equals"
+                    }
+                ]
+            }
+                ],
+        "logicalConnector": "AND"
+                
+          },
+         "sortFields": {
+        "created": "ASC"
+        } 
+        }
+        ```
+        12. Search runtimes with condition, **test="eu" or name="runtime"**. Here field **test** doesn't exist in runtime, but **name** exist. 
+             No error message will be returned and search returns runtimes having name="runtime" due to **OR** condition between test and name.
+
+        **Request payload:**
+        ```
+        {
+         "type": "RUNTIME",
+         "responseFields": ["*"],
+         "from": 0,
+         "size": 10,
+         "query": {
+            "conditions": [
+             {
+                "criterias": [
+                    {
+                        "field": "name",
+                        "value": "runtime",
+                        "operation": "equals"
+                    }
+                ]
+            },
+            {
+                "criterias": [
+                    {
+                        "field": "test",
+                        "value": "eu",
+                        "operation": "equals"
+                    }
+                ]
+            }
+                ],
+        "logicalConnector": "OR"
+                
+          },
+         "sortFields": {
+        "created": "ASC"
+        } 
+        }
+        ```
+
+        13. Fetch first 10 runtimes with fields name, description, test containing runtime text as a substring in the name field. Here field **test** doesn't exist
+            in runtime and no error message will be returned and will be ignored.
+        
+        **Request payload:**
+        ```
+        {
+          "type": "RUNTIME",
+          "query": {
+          "conditions": [
+            {
+                "criterias": [
+                    {
+                        "field": "name",
+                        "value": "runtime",
+                        "operation": "contains"
+                    }
+                ]
+            }
+        ]
+                },
+        "responseFields": ["name","description","test"],
+        "from": 0,
+        "size": 10
+        }
+        ```
+
+        14. Fetch first 10 runtimes with all fields containing runtime text as a substring in the name field and sort them based on an invalid field **test**.
+            Search returns 400 Bad request in this case with an error message.
+      
+        **Request payload:**
+        ```
+        {
+          "type": "RUNTIME",
+          "query": {
+          "conditions": [
+            {
+                "criterias": [
+                    {
+                        "field": "name",
+                        "value": "runtime",
+                        "operation": "contains"
+                    }
+                ]
+            }
+        ]
+                },
+        "responseFields": ["*"],
+        "from": 0,
+        "size": 10,
+        "sortFields": {
+        "test": "DESC"
+          }
+        }
+        ```
+        **Response:**
+        ```
+        {
+           "errorDetails": [
+                "No mapping found for [test] in order to sort on"
+           ]
+        }
+        ```
+        15. Fetch first 10 runtimes with all fields containing runtime text as a substring in the name field and sort them based on an invalid field **test**.
+            Search returns 400 Bad request in this case with an error message.
+      
+        **Request payload:**
+        ```
+        {
+          "type": "RUNTIME",
+          "query": {
+          "conditions": [
+            {
+                "criterias": [
+                    {
+                        "field": "name",
+                        "value": "runtime",
+                        "operation": "contains"
+                    }
+                ]
+            }
+        ]
+                },
+        "responseFields": ["*"],
+        "from": 0,
+        "size": 10,
+        "sortFields": {
+        "test": "DESC"
+          }
+        }
+        ```
+        **Response:**
+        ```
+        {
+           "errorDetails": [
+                "No mapping found for [test] in order to sort on"
+           ]
+        }
+        ```
+
+
+        For each type, the fields that can be provided in the conditions, sort fields, and response fields are listed below. If invalid fields are given 
+        in criteria or response fields no error message will be returned. But giving invalid fields in sort will return error message.
+        Please see examples section for few examples.
+
+        1. type: **DATAPLANE**
+           1. **Fields allowed to be given in the criteria field:** 
+              1. id
+              2. name
+              3. description
+              4. tags
+              5. owner.name
+              6. owner.id
+              7. owner.type
+           2. **Fields allowed to be given in the sortFields:** 
+               1. id
+               2. name
+               3. description
+               4. created
+               5. lastModified
+               6. tags
+           3. **Fields allowed to be given in the responseFields:** 
+              1. id
+              2. name 
+              3. description 
+              4. tags
+              5. icon 
+              6. createdDate
+              7. lastModifiedDate
+              8. runtimesFilter.runtimeTypes
+              9. runtimesFilter.deploymentTypes
+              10. runtimesFilter.regions
+              11. runtimesFilter.locations
+              12. runtimesFilter.tags
+              13. runtimesFilter.runtimeNames
+              14. runtimesFilter.runtimeIds
+              15. runtimesFilter.logicalOperator
+              16. runtimesFilter.regions.region
+              17. runtimesFilter.regions.operator
+              18. runtimesFilter.locations.location
+              19. runtimesFilter.locations.operator
+              20. runtimesFilter.tags.tag
+              21. runtimesFilter.tags.operator
+              22. runtimesFilter.runtimeNames.name
+              23. runtimesFilter.runtimeNames.operator
+              24. owner.name
+              25. owner.id
+              26. owner.type
+        2. type: **RUNTIME**
+           1. **Fields allowed to be given in the criteria field:** 
+              1. id
+              2. name
+              3. description
+              4. tags
+              5. type
+              6. deploymentType
+              7. region 
+              8. location
+              9. host
+              10. owner.name
+              11. owner.id
+              12. owner.type
+           2. **Fields allowed to be given in the sortFields:** 
+              1. id
+              2. name
+              3. description
+              4. created
+              5. lastModified
+              6. type
+              7. deploymentType
+              8. region
+              9. location
+              10. host
+              11. tags
+           3. **Fields allowed to be given in the responseFields:** 
+              1. id
+              2. name 
+              3. description
+              4. tags
+              5. createdDate
+              6. lastModifiedDate
+              7. type
+              8. deploymentType
+              9. region
+              10. location
+              11. host
+              12. icon
+              13. owner.name
+              14. owner.id
+              15. owner.type
+        
+        3. type: API
+           1. **Fields allowed to be given in the criteria field:** 
+              1. id
+              2. name
+              3. apiType
+              4. apiDifferencesCount
+              5. apiDeployments.runtimeId 
+              6. apiDeployments.apiStatus
+              7. apiDeployments.displayVersion
+              8. apiDeployments.name,
+              9. apiDeployments.description
+             10. apiDeployments.tags
+           2. **Fields allowed to be given in the sortFields:** 
+              1. id
+              2. name
+              3. apiType
+              4. lastModified
+              5. apiDifferencesCount
+           3. **Fields allowed to be given in the responseFields:** 
+              1. id
+              2. name
+              3. apiType
+              4. apiDeployments
+              5. apiDifferencesCount
+              6. apiDeployments.runtimeId
+              7. apiDeployments.apiStatus
+              8. apiDeployments.displayVersion
+              9. apiDeployments.lastModifiedDate
+              10. apiDeployments.name
+              11. apiDeployments.description
+              12. apiDeployments.tags
+              13. apiDeployments.publishInfo
+              14. apiDeployments.noOfPolicies
+        4. type: AUDITEVENT
+           
+           1. **Fields allowed to be given in the criteria field:** 
+               1. id
+               2. objectType
+               3. actionType
+               4. objectId
+               5. status
+           2. **Fields allowed to be given in the sortFields:** 
+               1. id
+               2. objectType
+               3. actionType
+               4. objectId
+               5. status
+               6. created
+               7. lastModified
+           3. **Fields allowed to be given in the responseFields:** 
+               1. id
+               2. createdDate
+               3. lastModifiedDate
+               4. objectType
+               5. actionType
+               6. data
+               7. objectId
+               8. message
+               9. status
+      requestBody:
+        description: The SearchContext resource model.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchContext'
+            example:
+              type: RUNTIME
+              query:
+                conditions:
+                  - criterias:
+                      - field: name
+                        value: runtime
+                        operation: contains
+                      - field: name
+                        value: SAG
+                        operation: contains
+                    logicalConnector: OR
+                  - criterias:
+                      - field: description
+                        value: runtime
+                        operation: contains
+                      - field: description
+                        value: SAG
+                        operation: contains
+                    logicalConnector: OR
+                logicalConnector: AND
+              responseFields:
+                - "*"
+              from: 0
+              size: 5
+              sortFields:
+                name: ASC
+
+      responses:
+        '200':
+          description:  This status code indicates that the search is successful and returns a SearchResult object containing list of runtimes.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResult'
+              example:
+                searchResults:
+                  - id: 632c8f60-4a6e-4e23-b85f-154a59a01541
+                    name: runtime 1
+                    description: runtime 1
+                    location: denver
+                    tags:  
+                      - test
+                    createdDate: 2022-12-12 16:45:20:469 IST
+                    lastModifiedDate: 2022-12-10 16:45:20:469 IST
+                    region: us
+                    owner: 
+                      id: 486b23
+                      type: USER
+                    type: WEBMETHODS_GATEWAY
+                    deploymentType: SAG_SAAS
+                  - id: 486b8645-5851-4835-bbaf-4d3222fb60e9
+                    name: runtime 2
+                    description: runtime 2
+                    location: denver
+                    tags:  
+                      - Prod
+                    createdDate: 2022-12-10 16:45:20:469 IST
+                    lastModifiedDate: 2022-12-10 16:45:20:469 IST
+                    region: us
+                    owner: 
+                      id: 486b23
+                      type: USER
+                    type: WEBMETHODS_GATEWAY
+                    deploymentType: SAG_SAAS
+        '401':
+          description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to search.
+        '400':
+          $ref: '#/components/responses/4XX_bad_request_error'
+        '500':
+          $ref: '#/components/responses/internal_server_error'
+  /assetcatalog/v1/count:
+    post:
+      description: |
+                    This method retrieves the total number of documents that match the input type and the input query. If the query is not specified, it returns the total number of documents present for the input type.
+                     
+                     The request payload for both /search and /count is identical, with the exception that the from, size, response, and sort fields is not taken into consideration.
+      requestBody:
+        description: The SearchContext resource model.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchContext'
+            example:
+              type: RUNTIME
+              query:
+                conditions:
+                  - criterias:
+                      - field: name
+                        value: runtime
+                        operation: contains
+                      - field: name
+                        value: SAG
+                        operation: contains
+                    logicalConnector: OR
+                  - criterias:
+                      - field: description
+                        value: runtime
+                        operation: contains
+                      - field: description
+                        value: SAG
+                        operation: contains
+                    logicalConnector: OR
+                logicalConnector: AND
+              responseFields:
+                - "*"
+              from: 0
+              size: 5
+              sortFields:
+                name: ASC
+      responses:
+        '200':
+          description: This status code indicates that the count query is successful and returns a SearchResult object containing a count of the documents matching the input query.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchCount'
+              example:
+                totalHits: 10
+        '401':
+          description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to search.
+        '400':
+          $ref: '#/components/responses/4XX_bad_request_error'
+        '500':
+          $ref: '#/components/responses/internal_server_error'
+
+components:
+  schemas:
+    SearchContext:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - DATAPLANE
+            - RUNTIME
+            - API
+            - AUDITEVENT
+          description: The type of the document to be returned.
+          example: RUNTIME
+        query:
+          $ref : '#/components/schemas/Query'
+        from:
+          type: integer
+          description: Starting from which the document has to be fetched. Default value is 0. If the value specified is less than zero 
+                       then the default value is taken.
+          example: 2
+          minimum: 0
+          default: 0
+        size:
+          type: integer
+          description: Number of documents to be fetched. Default value is 10000. If the value specified is less than 1 or greater than 10000, 
+                      then the default value is taken.
+          example: 5
+          minimum: 1
+          maximum: 10000
+          default: 10000
+        responseFields:
+          type: array
+          items:
+            type: string
+          description: 'List of fields to be returned in the search result. To fetch all fields give as *'
+          example: ["name","description","location"]
+        sortFields:
+          type: object
+          additionalProperties:
+            type: string
+          description: |
+                        Map of field names as key and their sort order as value. Documents are sorted based on order the sort fields are mentioned.
+                        If no sort fields are given, the documents are sorted based on the last modified date in descending order.
+          example:
+            name: DESC,
+            description: ASC
+          enum:
+            - ASC
+            - DESC
+    Query:
+      type: object
+      properties:
+        conditions:
+          type: array
+          items:
+            $ref : '#/components/schemas/Condition'
+        logicalConnector:
+          type: string
+          enum:
+            - AND
+            - OR
+    Condition:
+      type: object
+      properties:
+          criterias:
+            type: array
+            items:
+              $ref : '#/components/schemas/Criteria'
+          logicalConnector:
+            type: string
+            enum:
+              - AND
+              - OR
+    Criteria:
+      type: object
+      required:
+       - field
+      properties:
+          field:
+            type: string
+            description: 'Field name on which the condition must be applied.'
+            example: name
+          value:
+            type: string
+            description: 'Value for the field. If value is not given this criteria will be ignored.'
+            nullable: true
+            minLength: 1
+            example: 'runtime'
+          operation:
+            type: string
+            description: 'Operation that must be applied on this field.'
+            example: contains
+            default: equals
+            enum:
+              - equals
+              - notEquals
+              - contains
+              - notContains
+              - startsWith
+              - notStartsWith
+              - endsWith
+    SearchResult:
+      type: object
+      properties:
+        searchResults:
+          type: array
+          items:
+            type: object
+          description: 'List of objects for the given type and matching input query.'
+    SearchCount:
+      type: object
+      properties:
+        totalHits:
+          type: integer
+          description: 'Total count of objects for the given type and matching input query.'
+    ErrorMessage:
+      description: Common Error Response across all APIs
+      required: [ "errorDetails" ]
+      type: object
+      properties:
+        errorDetails:
+          type: array
+          items:
+            type: string
+          example: This response indicates that the server encountered an error.
+  responses:
+   internal_server_error:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+              $ref: "#/components/schemas/ErrorMessage"
+          example:
+            errorDetails: 
+              - This response indicates that the server encountered an error.
+   4XX_bad_request_error:
+       description: This status code indicates that the request body is bad.
+       content:
+         application/json:
+           schema:
+              $ref: "#/components/schemas/ErrorMessage"
+           example:
+             errorDetails:
+               - Type is mandatory.
+  securitySchemes:
+    basic_authentication:
+      type: http
+      description: This is the Basic Authentication mechanism where the credentials are sent in a Base64 encoded format of the form <username>:<password> in the Authorization header.
+      scheme: basic
+security:
+- basic_authentication: []

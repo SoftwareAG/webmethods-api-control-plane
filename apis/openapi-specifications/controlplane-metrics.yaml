@@ -1,0 +1,241 @@
+openapi: '3.0.2'
+info:
+  title: API Control Plane metrics
+  version: '1.0.0'
+  description: API Control Plane is composed of different services like Asset Catalog, Engine, Ingress and UI. This spec defines
+    the endpoints for the metrics of individual services. The metrics are exposed in Prometheus format and these endpoints are
+    used by the Prometheus server for scraping the metrics periodically to be used for data visualization and creating alerts.
+servers:
+  - url: "{protocol}://{hostname}:{port}"
+    variables:
+      protocol:
+        default: https
+        enum:
+        - http
+        - https
+        description: The protocol supported by the server - HTTP or HTTPS. Default is HTTPS.
+      hostname:
+        default: localhost
+        description: The domain name of the server where the API is hosted. The hostname must be resolvable by the DNS lookup.
+      port:
+        default: "443"
+        description: The port number where the REST API is running on the server. The default port for HTTPS is 443 and HTTP is 80 but it can also be any valid port.
+paths:
+  /api/assetcatalog/metrics:
+    summary: Asset catalog service metrics
+    description: This resource is to be used for fetching metrics from Asset catalog service.
+    get:
+      description: Return the metrics for Asset catalog service
+      responses:
+        '200':
+          description: This status code indicates the successful retrieval of the metrics.
+          content:
+            text/plain:
+              schema:
+                type: string
+              example:                
+                sag_apicp_jvm_memory_max_bytes{area="heap",host="VM-ABC",id="G1 Old Gen",service="assetcatalog",tenant="default",} 8.489271296E9
+                sag_apicp_jvm_memory_max_bytes{area="nonheap",host="VM-ABC",id="CodeCache",service="assetcatalog",tenant="default",} 5.0331648E7
+                sag_apicp_jvm_memory_max_bytes{area="nonheap",host="VM-ABC",id="Compressed Class Space",service="assetcatalog",tenant="default",} 1.073741824E9
+                sag_apicp_jvm_memory_max_bytes{area="nonheap",host="VM-ABC",id="Metaspace",service="assetcatalog",tenant="default",} -1.0
+                sag_apicp_jvm_memory_max_bytes{area="heap",host="VM-ABC",id="G1 Eden Space",service="assetcatalog",tenant="default",} -1.0
+                sag_apicp_jvm_memory_max_bytes{area="heap",host="VM-ABC",id="G1 Survivor Space",service="assetcatalog",tenant="default",} -1.0
+                sag_apicp_jvm_threads_peak_threads{host="VM-ABC",service="assetcatalog",tenant="default",} 35.0
+                sag_apicp_jvm_threads_states_threads{host="VM-ABC",service="assetcatalog",state="new",tenant="default",} 0.0
+                sag_apicp_jvm_threads_states_threads{host="VM-ABC",service="assetcatalog",state="waiting",tenant="default",} 11.0
+                sag_apicp_jvm_threads_states_threads{host="VM-ABC",service="assetcatalog",state="runnable",tenant="default",} 21.0
+                sag_apicp_jvm_threads_states_threads{host="VM-ABC",service="assetcatalog",state="terminated",tenant="default",} 0.0
+                sag_apicp_jvm_threads_states_threads{host="VM-ABC",service="assetcatalog",state="blocked",tenant="default",} 0.0
+                sag_apicp_jvm_threads_states_threads{host="VM-ABC",service="assetcatalog",state="timed-waiting",tenant="default",} 3.0
+                sag_apicp_http_requests_latency_seconds_bucket{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="assetcatalog",status="200",tenant="default",uri="/metrics",le="0.025",} 0.0
+                sag_apicp_http_requests_latency_seconds_bucket{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="assetcatalog",status="200",tenant="default",uri="/metrics",le="0.05",} 0.0
+                sag_apicp_http_requests_latency_seconds_bucket{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="assetcatalog",status="200",tenant="default",uri="/metrics",le="0.1",} 1.0
+                sag_apicp_http_requests_latency_seconds_bucket{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="assetcatalog",status="200",tenant="default",uri="/metrics",le="0.5",} 1.0
+                sag_apicp_http_requests_latency_seconds_bucket{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="assetcatalog",status="200",tenant="default",uri="/metrics",le="1.0",} 1.0
+                sag_apicp_http_requests_latency_seconds_bucket{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="assetcatalog",status="200",tenant="default",uri="/metrics",le="5.0",} 1.0
+                sag_apicp_http_requests_latency_seconds_bucket{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="assetcatalog",status="200",tenant="default",uri="/metrics",le="+Inf",} 1.0
+                sag_apicp_http_requests_latency_seconds_count{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="assetcatalog",status="200",tenant="default",uri="/metrics",} 1.0
+                sag_apicp_http_requests_latency_seconds_sum{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="assetcatalog",status="200",tenant="default",uri="/metrics",} 0.0636699
+                sag_apicp_http_requests_latency_seconds_max{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="assetcatalog",status="200",tenant="default",uri="/metrics",} 0.0636699
+                sag_apicp_jvm_memory_used_bytes{area="heap",host="VM-ABC",id="G1 Old Gen",service="assetcatalog",tenant="default",} 1.8223104E7
+                sag_apicp_jvm_memory_used_bytes{area="nonheap",host="VM-ABC",id="CodeCache",service="assetcatalog",tenant="default",} 1.0752256E7
+                sag_apicp_jvm_memory_used_bytes{area="nonheap",host="VM-ABC",id="Compressed Class Space",service="assetcatalog",tenant="default",} 6503544.0
+                sag_apicp_jvm_memory_used_bytes{area="nonheap",host="VM-ABC",id="Metaspace",service="assetcatalog",tenant="default",} 4.6118416E7
+                sag_apicp_jvm_memory_used_bytes{area="heap",host="VM-ABC",id="G1 Eden Space",service="assetcatalog",tenant="default",} 2.9360128E7
+                sag_apicp_jvm_memory_used_bytes{area="heap",host="VM-ABC",id="G1 Survivor Space",service="assetcatalog",tenant="default",} 8027760.0
+                sag_apicp_http_requests_active_connections{host="VM-ABC",name="http-nio-8080",service="assetcatalog",tenant="default",} 3.0
+                sag_apicp_jvm_threads_live_threads{host="VM-ABC",service="assetcatalog",tenant="default",} 35.0
+        '500':
+          $ref: '#/components/responses/internal_server_error'
+  
+  /api/engine/metrics:
+    summary: Engine service metrics
+    description: This resource is to be used for fetching metrics from Engine service.
+    get:
+      description: Return the metrics for Engine service
+      responses:
+        '200':
+          description: This status code indicates the successful retrieval of the metrics.
+          content:
+            text/plain:
+              schema:
+                type: string
+              example:
+                sag_apicp_jvm_memory_max_bytes{area="heap",host="VM-ABC",id="G1 Old Gen",service="engine",tenant="default",} 8.489271296E9
+                sag_apicp_jvm_memory_max_bytes{area="nonheap",host="VM-ABC",id="CodeCache",service="engine",tenant="default",} 5.0331648E7
+                sag_apicp_jvm_memory_max_bytes{area="nonheap",host="VM-ABC",id="Compressed Class Space",service="engine",tenant="default",} 1.073741824E9
+                sag_apicp_jvm_memory_max_bytes{area="nonheap",host="VM-ABC",id="Metaspace",service="engine",tenant="default",} -1.0
+                sag_apicp_jvm_memory_max_bytes{area="heap",host="VM-ABC",id="G1 Eden Space",service="engine",tenant="default",} -1.0
+                sag_apicp_jvm_memory_max_bytes{area="heap",host="VM-ABC",id="G1 Survivor Space",service="engine",tenant="default",} -1.0
+                sag_apicp_jvm_threads_peak_threads{host="VM-ABC",service="engine",tenant="default",} 35.0
+                sag_apicp_jvm_threads_states_threads{host="VM-ABC",service="engine",state="new",tenant="default",} 0.0
+                sag_apicp_jvm_threads_states_threads{host="VM-ABC",service="engine",state="waiting",tenant="default",} 11.0
+                sag_apicp_jvm_threads_states_threads{host="VM-ABC",service="engine",state="runnable",tenant="default",} 21.0
+                sag_apicp_jvm_threads_states_threads{host="VM-ABC",service="engine",state="terminated",tenant="default",} 0.0
+                sag_apicp_jvm_threads_states_threads{host="VM-ABC",service="engine",state="blocked",tenant="default",} 0.0
+                sag_apicp_jvm_threads_states_threads{host="VM-ABC",service="engine",state="timed-waiting",tenant="default",} 3.0
+                sag_apicp_http_requests_latency_seconds_bucket{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="engine",status="200",tenant="default",uri="/metrics",le="0.025",} 0.0
+                sag_apicp_http_requests_latency_seconds_bucket{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="engine",status="200",tenant="default",uri="/metrics",le="0.05",} 0.0
+                sag_apicp_http_requests_latency_seconds_bucket{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="engine",status="200",tenant="default",uri="/metrics",le="0.1",} 1.0
+                sag_apicp_http_requests_latency_seconds_bucket{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="engine",status="200",tenant="default",uri="/metrics",le="0.5",} 1.0
+                sag_apicp_http_requests_latency_seconds_bucket{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="engine",status="200",tenant="default",uri="/metrics",le="1.0",} 1.0
+                sag_apicp_http_requests_latency_seconds_bucket{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="engine",status="200",tenant="default",uri="/metrics",le="5.0",} 1.0
+                sag_apicp_http_requests_latency_seconds_bucket{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="engine",status="200",tenant="default",uri="/metrics",le="+Inf",} 1.0
+                sag_apicp_http_requests_latency_seconds_count{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="engine",status="200",tenant="default",uri="/metrics",} 1.0
+                sag_apicp_http_requests_latency_seconds_sum{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="engine",status="200",tenant="default",uri="/metrics",} 0.0636699
+                sag_apicp_http_requests_latency_seconds_max{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="engine",status="200",tenant="default",uri="/metrics",} 0.0636699
+                sag_apicp_jvm_memory_used_bytes{area="heap",host="VM-ABC",id="G1 Old Gen",service="engine",tenant="default",} 1.8223104E7
+                sag_apicp_jvm_memory_used_bytes{area="nonheap",host="VM-ABC",id="CodeCache",service="engine",tenant="default",} 1.0752256E7
+                sag_apicp_jvm_memory_used_bytes{area="nonheap",host="VM-ABC",id="Compressed Class Space",service="engine",tenant="default",} 6503544.0
+                sag_apicp_jvm_memory_used_bytes{area="nonheap",host="VM-ABC",id="Metaspace",service="engine",tenant="default",} 4.6118416E7
+                sag_apicp_jvm_memory_used_bytes{area="heap",host="VM-ABC",id="G1 Eden Space",service="engine",tenant="default",} 2.9360128E7
+                sag_apicp_jvm_memory_used_bytes{area="heap",host="VM-ABC",id="G1 Survivor Space",service="engine",tenant="default",} 8027760.0
+                sag_apicp_http_requests_active_connections{host="VM-ABC",name="http-nio-8080",service="engine",tenant="default",} 3.0
+                sag_apicp_jvm_threads_live_threads{host="VM-ABC",service="engine",tenant="default",} 35.0
+        '500':
+          $ref: '#/components/responses/internal_server_error'
+
+  /api/ingress/metrics:
+    summary: Ingress service metrics
+    description: This resource is to be used for fetching metrics from Ingress service.
+    get:
+      description: Return the metrics for Ingress service
+      responses:
+        '200':
+          description: This status code indicates the successful retrieval of the metrics.
+          content:
+            text/plain:
+              schema:
+                type: string
+              example:
+                sag_apicp_jvm_memory_max_bytes{area="heap",host="VM-ABC",id="G1 Old Gen",service="ingress",tenant="default",} 8.489271296E9
+                sag_apicp_jvm_memory_max_bytes{area="nonheap",host="VM-ABC",id="CodeCache",service="ingress",tenant="default",} 5.0331648E7
+                sag_apicp_jvm_memory_max_bytes{area="nonheap",host="VM-ABC",id="Compressed Class Space",service="ingress",tenant="default",} 1.073741824E9
+                sag_apicp_jvm_memory_max_bytes{area="nonheap",host="VM-ABC",id="Metaspace",service="ingress",tenant="default",} -1.0
+                sag_apicp_jvm_memory_max_bytes{area="heap",host="VM-ABC",id="G1 Eden Space",service="ingress",tenant="default",} -1.0
+                sag_apicp_jvm_memory_max_bytes{area="heap",host="VM-ABC",id="G1 Survivor Space",service="ingress",tenant="default",} -1.0
+                sag_apicp_jvm_threads_peak_threads{host="VM-ABC",service="ingress",tenant="default",} 35.0
+                sag_apicp_jvm_threads_states_threads{host="VM-ABC",service="ingress",state="new",tenant="default",} 0.0
+                sag_apicp_jvm_threads_states_threads{host="VM-ABC",service="ingress",state="waiting",tenant="default",} 11.0
+                sag_apicp_jvm_threads_states_threads{host="VM-ABC",service="ingress",state="runnable",tenant="default",} 21.0
+                sag_apicp_jvm_threads_states_threads{host="VM-ABC",service="ingress",state="terminated",tenant="default",} 0.0
+                sag_apicp_jvm_threads_states_threads{host="VM-ABC",service="ingress",state="blocked",tenant="default",} 0.0
+                sag_apicp_jvm_threads_states_threads{host="VM-ABC",service="ingress",state="timed-waiting",tenant="default",} 3.0
+                sag_apicp_http_requests_latency_seconds_bucket{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="ingress",status="200",tenant="default",uri="/metrics",le="0.025",} 0.0
+                sag_apicp_http_requests_latency_seconds_bucket{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="ingress",status="200",tenant="default",uri="/metrics",le="0.05",} 0.0
+                sag_apicp_http_requests_latency_seconds_bucket{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="ingress",status="200",tenant="default",uri="/metrics",le="0.1",} 1.0
+                sag_apicp_http_requests_latency_seconds_bucket{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="ingress",status="200",tenant="default",uri="/metrics",le="0.5",} 1.0
+                sag_apicp_http_requests_latency_seconds_bucket{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="ingress",status="200",tenant="default",uri="/metrics",le="1.0",} 1.0
+                sag_apicp_http_requests_latency_seconds_bucket{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="ingress",status="200",tenant="default",uri="/metrics",le="5.0",} 1.0
+                sag_apicp_http_requests_latency_seconds_bucket{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="ingress",status="200",tenant="default",uri="/metrics",le="+Inf",} 1.0
+                sag_apicp_http_requests_latency_seconds_count{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="ingress",status="200",tenant="default",uri="/metrics",} 1.0
+                sag_apicp_http_requests_latency_seconds_sum{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="ingress",status="200",tenant="default",uri="/metrics",} 0.0636699
+                sag_apicp_http_requests_latency_seconds_max{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="ingress",status="200",tenant="default",uri="/metrics",} 0.0636699
+                sag_apicp_jvm_memory_used_bytes{area="heap",host="VM-ABC",id="G1 Old Gen",service="ingress",tenant="default",} 1.8223104E7
+                sag_apicp_jvm_memory_used_bytes{area="nonheap",host="VM-ABC",id="CodeCache",service="ingress",tenant="default",} 1.0752256E7
+                sag_apicp_jvm_memory_used_bytes{area="nonheap",host="VM-ABC",id="Compressed Class Space",service="ingress",tenant="default",} 6503544.0
+                sag_apicp_jvm_memory_used_bytes{area="nonheap",host="VM-ABC",id="Metaspace",service="ingress",tenant="default",} 4.6118416E7
+                sag_apicp_jvm_memory_used_bytes{area="heap",host="VM-ABC",id="G1 Eden Space",service="ingress",tenant="default",} 2.9360128E7
+                sag_apicp_jvm_memory_used_bytes{area="heap",host="VM-ABC",id="G1 Survivor Space",service="ingress",tenant="default",} 8027760.0
+                sag_apicp_http_requests_active_connections{host="VM-ABC",name="http-nio-8080",service="ingress",tenant="default",} 3.0
+                sag_apicp_jvm_threads_live_threads{host="VM-ABC",service="ingress",tenant="default",} 35.0
+        '500':
+          $ref: '#/components/responses/internal_server_error'
+
+  /controlplane/api/ui/metrics:
+    summary: UI service metrics
+    description: This resource is to be used for fetching metrics from UI service.
+    get:
+      description: Return the metrics for UI service
+      responses:
+        '200':
+          description: This status code indicates the successful retrieval of the metrics.
+          content:
+            text/plain:
+              schema:
+                type: string
+              example:
+                sag_apicp_jvm_memory_max_bytes{area="heap",host="VM-ABC",id="G1 Old Gen",service="ui",tenant="default",} 8.489271296E9
+                sag_apicp_jvm_memory_max_bytes{area="nonheap",host="VM-ABC",id="CodeCache",service="ui",tenant="default",} 5.0331648E7
+                sag_apicp_jvm_memory_max_bytes{area="nonheap",host="VM-ABC",id="Compressed Class Space",service="ui",tenant="default",} 1.073741824E9
+                sag_apicp_jvm_memory_max_bytes{area="nonheap",host="VM-ABC",id="Metaspace",service="ui",tenant="default",} -1.0
+                sag_apicp_jvm_memory_max_bytes{area="heap",host="VM-ABC",id="G1 Eden Space",service="ui",tenant="default",} -1.0
+                sag_apicp_jvm_memory_max_bytes{area="heap",host="VM-ABC",id="G1 Survivor Space",service="ui",tenant="default",} -1.0
+                sag_apicp_jvm_threads_peak_threads{host="VM-ABC",service="ui",tenant="default",} 35.0
+                sag_apicp_jvm_threads_states_threads{host="VM-ABC",service="ui",state="new",tenant="default",} 0.0
+                sag_apicp_jvm_threads_states_threads{host="VM-ABC",service="ui",state="waiting",tenant="default",} 11.0
+                sag_apicp_jvm_threads_states_threads{host="VM-ABC",service="ui",state="runnable",tenant="default",} 21.0
+                sag_apicp_jvm_threads_states_threads{host="VM-ABC",service="ui",state="terminated",tenant="default",} 0.0
+                sag_apicp_jvm_threads_states_threads{host="VM-ABC",service="ui",state="blocked",tenant="default",} 0.0
+                sag_apicp_jvm_threads_states_threads{host="VM-ABC",service="ui",state="timed-waiting",tenant="default",} 3.0
+                sag_apicp_http_requests_latency_seconds_bucket{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="ui",status="200",tenant="default",uri="/metrics",le="0.025",} 0.0
+                sag_apicp_http_requests_latency_seconds_bucket{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="ui",status="200",tenant="default",uri="/metrics",le="0.05",} 0.0
+                sag_apicp_http_requests_latency_seconds_bucket{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="ui",status="200",tenant="default",uri="/metrics",le="0.1",} 1.0
+                sag_apicp_http_requests_latency_seconds_bucket{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="ui",status="200",tenant="default",uri="/metrics",le="0.5",} 1.0
+                sag_apicp_http_requests_latency_seconds_bucket{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="ui",status="200",tenant="default",uri="/metrics",le="1.0",} 1.0
+                sag_apicp_http_requests_latency_seconds_bucket{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="ui",status="200",tenant="default",uri="/metrics",le="5.0",} 1.0
+                sag_apicp_http_requests_latency_seconds_bucket{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="ui",status="200",tenant="default",uri="/metrics",le="+Inf",} 1.0
+                sag_apicp_http_requests_latency_seconds_count{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="ui",status="200",tenant="default",uri="/metrics",} 1.0
+                sag_apicp_http_requests_latency_seconds_sum{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="ui",status="200",tenant="default",uri="/metrics",} 0.0636699
+                sag_apicp_http_requests_latency_seconds_max{exception="None",host="VM-ABC",method="GET",outcome="SUCCESS",service="ui",status="200",tenant="default",uri="/metrics",} 0.0636699
+                sag_apicp_jvm_memory_used_bytes{area="heap",host="VM-ABC",id="G1 Old Gen",service="ui",tenant="default",} 1.8223104E7
+                sag_apicp_jvm_memory_used_bytes{area="nonheap",host="VM-ABC",id="CodeCache",service="ui",tenant="default",} 1.0752256E7
+                sag_apicp_jvm_memory_used_bytes{area="nonheap",host="VM-ABC",id="Compressed Class Space",service="ui",tenant="default",} 6503544.0
+                sag_apicp_jvm_memory_used_bytes{area="nonheap",host="VM-ABC",id="Metaspace",service="ui",tenant="default",} 4.6118416E7
+                sag_apicp_jvm_memory_used_bytes{area="heap",host="VM-ABC",id="G1 Eden Space",service="ui",tenant="default",} 2.9360128E7
+                sag_apicp_jvm_memory_used_bytes{area="heap",host="VM-ABC",id="G1 Survivor Space",service="ui",tenant="default",} 8027760.0
+                sag_apicp_http_requests_active_connections{host="VM-ABC",name="http-nio-8080",service="ui",tenant="default",} 3.0
+                sag_apicp_jvm_threads_live_threads{host="VM-ABC",service="ui",tenant="default",} 35.0
+        '500':
+          $ref: '#/components/responses/internal_server_error'
+
+components:
+  schemas:
+    ErrorMessage:
+      description: Common error response across all APIs
+      required: [ "errorDetails" ]
+      type: object
+      properties:
+        errorDetails:
+          type: array
+          items:
+            type: string
+          example: This response indicates that the server encountered an error.
+  responses:
+   internal_server_error:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+              $ref: "#/components/schemas/ErrorMessage"
+          example:
+            errorDetails: 
+              - This response indicates that the server encountered an error.
+
+  securitySchemes:
+    basic_authentication:
+      type: http
+      description: This is the Basic Authentication mechanism where the credentials are sent in a Base64 encoded format of the form <username>:<password> in the Authorization header.
+      scheme: basic
+security:
+- basic_authentication: []

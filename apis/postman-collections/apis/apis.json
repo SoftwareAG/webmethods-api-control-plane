@@ -1,0 +1,1179 @@
+{
+	"info": {
+		"_postman_id": "7ae7574f-408b-499d-870f-dc7227718ea7",
+		"name": "API Control Plane Postman Collections",
+		"description": "This postman collection includes all the REST APIs available in API Control Plane.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20781985"
+	},
+	"item": [
+		{
+			"name": "v1",
+			"item": [
+				{
+					"name": "API",
+					"item": [
+						{
+							"name": "Get all APIs",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/assetcatalog/v1/apis",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"assetcatalog",
+										"v1",
+										"apis"
+									]
+								},
+								"description": "This REST call retrieves a list of APIs. If you don't specify the size query parameter, this call can retrieve up to 20 APIs."
+							},
+							"response": []
+						},
+						{
+							"name": "Get apis based on size, page and sort query parameters",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/assetcatalog/v1/apis?size=10&page=1&sort=name,desc&sort=created,asc",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"assetcatalog",
+										"v1",
+										"apis"
+									],
+									"query": [
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "sort",
+											"value": "name,desc"
+										},
+										{
+											"key": "sort",
+											"value": "created,asc"
+										}
+									]
+								},
+								"description": "This REST call retrieves a list of APIs based on size, page, and sort query parameters.\n\n**size** - The number of APIs that should appear on a page. If size is 0, by default, the maximum number of APIs returned will be 20. A Maximum of 500 records can be retrieved using this query.\n\ntype: integer. minimum: 1  \nmaximum: 500\n\n**page** - Retrieves the list of APIs in the specified page number.\n\ntype: integer. minimum: 1  \nmaximum: 500\n\n For example: Assume we have 32 APIs. If size = 10 and page=3 then we will have APIs 0 to 10 on the first page, 11 to 20 in second page, 21 to 30 in third page, and 31 and 32 in fourth page.Since we have specified the page number as 3, APIs from 21 to 30 that appear on the page 3 will be returned.\n\n**sort** - A list of properties and how they should be sorted. Property and order are given in the format \\\"property,order\\\".\n\nProperty is any property defined in the API model like ID, name, description, etc. The supported values for order are \"ASC\\\", \\\"asc\\\", \\\"DESC\\\" and \\\"desc\\\". \\\"ASC\\\" or \\\"asc\\\" is used for ascending order and \\\"DESC\\\" or \\\"desc\\\" is used for descending order.\n\nIf we want to sort based on 2 fields then we need to add sort query param two times as shown in the example below,\n\nEg: {{baseURL}}/api/assetcatalog/v1/apis?size=10&page=1&sort=name,asc&sort=description,desc\n\nIf we want to sort based on date fields like createdDate, lastModifiedDate we need to use the property name as created, lastModified instead of createdDate, lastModifiedDate.\n\nEg: {{baseURL}}/api/assetcatalog/v1/apis?size=10&page=1&sort=name,asc&sort=created,desc"
+							},
+							"response": []
+						},
+						{
+							"name": "Get all APIs associated with a runtime",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/assetcatalog/v1/runtimes/{{runtimeId}}/apis",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"assetcatalog",
+										"v1",
+										"runtimes",
+										"{{runtimeId}}",
+										"apis"
+									]
+								},
+								"description": "This REST call is used to retrieve all the APIs in the specified runtime."
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve an API based on apiId and runtimeId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/assetcatalog/v1/runtimes/{{runtimeId}}/apis/{{apiId}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"assetcatalog",
+										"v1",
+										"runtimes",
+										"{{runtimeId}}",
+										"apis",
+										"{{apiId}}"
+									]
+								},
+								"description": "This REST call is used to retrieve a specific API in the specified runtime."
+							},
+							"response": []
+						},
+						{
+							"name": "Register API",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"ac379195-32cf-5198-8e7b-38fe21120309\",\r\n    \"name\": \"API Gateway Transaction data service\",\r\n    \"tags\": [],\r\n    \"displayVersion\": \"v1.0.1\",\r\n    \"systemVersion\": 1,\r\n    \"apiType\": \"SOAP\",\r\n    \"apiStatus\": \"INACTIVE\",\r\n    \"publishInfo\": [],\r\n    \"noOfPolicies\": 5\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/assetcatalog/v1/runtimes/{{runtimeId}}/apis",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"assetcatalog",
+										"v1",
+										"runtimes",
+										"{{runtimeId}}",
+										"apis"
+									]
+								},
+								"description": "This REST call is used to register an API in the specified runtime."
+							},
+							"response": []
+						},
+						{
+							"name": "Update an API",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"ac379195-32cf-5198-8e7b-38fe21120309\",\r\n    \"name\": \"API Gateway Transaction data Service Updated\",\r\n    \"tags\": [],\r\n    \"displayVersion\": \"v1.0.1\",\r\n    \"systemVersion\": 1,\r\n    \"apiType\": \"SOAP\",\r\n    \"apiStatus\": \"INACTIVE\",\r\n    \"publishInfo\": [],\r\n    \"noOfPolicies\": 6\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/assetcatalog/v1/runtimes/{{runtimeId}}/apis/{{apiId}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"assetcatalog",
+										"v1",
+										"runtimes",
+										"{{runtimeId}}",
+										"apis",
+										"{{apiId}}"
+									]
+								},
+								"description": "This REST call is used to update a specific API in the specified runtime."
+							},
+							"response": []
+						},
+						{
+							"name": "Delete an API",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/assetcatalog/v1/runtimes/{{runtimeId}}/apis/{{apiId}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"assetcatalog",
+										"v1",
+										"runtimes",
+										"{{runtimeId}}",
+										"apis",
+										"{{apiId}}"
+									]
+								},
+								"description": "This REST call is used to delete a specific API in the specified runtime."
+							},
+							"response": []
+						}
+					],
+					"description": "This folder contains all the REST APIs exposed to create,read,update, and delete API."
+				},
+				{
+					"name": "Dataplanes",
+					"item": [
+						{
+							"name": "Get all dataplanes",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/assetcatalog/v1/dataplanes",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"assetcatalog",
+										"v1",
+										"dataplanes"
+									]
+								},
+								"description": "This REST call retrieves a list of data planes. If you don't specify the size query parameter, this call can retrieve up to 20 data planes."
+							},
+							"response": []
+						},
+						{
+							"name": "Get dataplanes based on size, page and sort query parameters",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/assetcatalog/v1/dataplanes?size=10&page=2&sort=name,asc&sort=created,desc",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"assetcatalog",
+										"v1",
+										"dataplanes"
+									],
+									"query": [
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "page",
+											"value": "2"
+										},
+										{
+											"key": "sort",
+											"value": "name,asc"
+										},
+										{
+											"key": "sort",
+											"value": "created,desc"
+										}
+									]
+								},
+								"description": "This REST call retrieves a list of data planes based on size, page, and sort query parameters.\n\n**size** - The number of data planes that should appear on a page. If size is 0, by default, the maximum number of data planes returned will be 20. A Maximum of 10000 records can be retrieved using this query.\n\ntype: integer. minimum: 1  \nmaximum: 10000\n\n**page** - Retrieves the list of data planes in the specified page number.\n\ntype: integer.\n\n For example: Assume we have 32 data planes. If size = 10 and page=3 then we will have data planes 0 to 10 on the first page, 11 to 20 on second page, 21 to 30 on third page, and 31 and 32 on fourth page.Since we have specified the page number as 3, data planes from 21 to 30 that appear on the page 3 will be returned.\n\n**sort** - A list of properties and how they should be sorted. Property and order are given in the format \\\"property,order\\\".\n\nProperty is any property defined in the data plane model like ID, name, description, etc. The supported values for order are \"ASC\\\", \\\"asc\\\", \\\"DESC\\\" and \\\"desc\\\". \\\"ASC\\\" or \\\"asc\\\" is used for ascending order and \\\"DESC\\\" or \\\"desc\\\" is used for descending order.\n\nIf we want to sort based on 2 fields then we need to add sort query param two times as shown in the example below,\n\nEg: {{baseURL}}/api/assetcatalog/v1/dataplanes?size=10&page=1&sort=name,asc&sort=description,desc\n\nIf we want to sort based on date fields like createdDate, lastModifiedDate we need to use the property name as created, lastModified instead of createdDate, lastModifiedDate.\n\nEg: {{baseURL}}/api/assetcatalog/v1/dataplanes?size=10&page=1&sort=name,asc&sort=created,desc"
+							},
+							"response": []
+						},
+						{
+							"name": "Get dataplane dy ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/assetcatalog/v1/dataplanes/{{dataplaneId}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"assetcatalog",
+										"v1",
+										"dataplanes",
+										"{{dataplaneId}}"
+									]
+								},
+								"description": "This REST call is used to retrieve the dataplane for the specified ID."
+							},
+							"response": []
+						},
+						{
+							"name": "Get all runtimes associated with a dataplane",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/assetcatalog/v1/dataplanes/{{dataplaneId}}/runtimes",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"assetcatalog",
+										"v1",
+										"dataplanes",
+										"{{dataplaneId}}",
+										"runtimes"
+									]
+								},
+								"description": "This REST call retrieves a list of runtimes associated with the specified data plane ID."
+							},
+							"response": []
+						},
+						{
+							"name": "Create dataplane",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"EU region dataplane\",\r\n    \"description\": \"This dataplane is used to monitor all the runtimes present in EU region\",\r\n    \"tags\": [\"EU\"],\r\n    \"icon\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABRCAIAAAARlBx9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPmSURBVHhe7dhNctswDEBhXqe7Lnvv3qK3iOP/uDdox4UEGqIeJQqWZTpVi/nWBt4oM5EdfvbmUnBRrvkY86GG51xwVpxTQdp2KXO3sSe1aBtjwNv2/Icmcy54pO1SEMNcbexJLfrQZBiTOt3aLmXPD5M5F8x4aNp2KXOHybAnVfmhTbc9Nex6+pZDmJj30CbaFg9DxpipMBnGpDSs1LZIGI7264WxjTEQ205DbbFqVhhOfMSDD22g7Z4qmSVjcveGCQvrtTkfF9Y/WyyKwxJIw2RiW6EKy+qLXVkJxLCu7RgGHxc+/eWQkcvDbm3Z/Pr+BZ/+coiBfpiMtg2NtH3CPIEkNRg20fZX5I2FTbd98rxCmKvt0+aVw0Te1rxeoE3h01+uHCasrffqhCqDT3+52JVVKWnrVSkkpfDpL4ee1N1tAp/+Wr9/fEWSmdMmsKAy6UkhyQy0yfdIlAzCvqdCDCBJHdEWvyD72gQuWBCuL0OVkLCmzXoat0FDAW6aDefeJa9qHLUtGwSU4Uon3PeIwbDj8RBiTX9wvQdOz+GgBfXC2io12HbG3U7VYgCPa7DtbHC0H7bWkVcpaeuSDC72w9Y6BsPEOtpYpf63uWFrHUgyXVv8EbeFi/2wtQ4kmdAlJYOL/bC1DiSpQ9M2NLjYD1vryKtae7TF31hwsR+21pFXHQ4NaYs9KVzsh6115FXracur1JJtWFkNksw/0xZ/zVxNm/VE7eBoJ6ysBkkmxJreHHG0E1ZWgySjbfE7ucHRTlhZDZL2jZ2QNoYJHO2EldXkVY39Wtq6pLZKraENSWYVbVmVim3dT0UtHO2EldUgyYTYEye+UONoJ6ysBkkmWE8KRzthZTVIMqts2+5aK2uLVWtq6yU1do01tCHJNG23L+RmL3C3B1ZWgyQTtMReyVI4fRJWVoMkE9ADuL4MK6tBkploEwgowMpqkHTzPt0m0DAGK6tBkti2ptvaL0WuPKysRnssybCt9/Uutd+hJIeV1SBpu40CG1T3n57Qk8LKapBkAk73QJLBymqQZOa0CVQprHweNIyZ2SavcAgTuGBBY391IzbK2bYdeB/N8nDQI2LM/T2pvK3JGCzpJP9PlmrrYu7oEewR7zeBd0OSMWZeWy9muZ5U0pYd7edpY4zg0WXsEYhpvHcCrpwtb2OJ4LmTGCMYo5Ik80hbfNPJX3Y6vHUSSxRLVBbT9+Zvm8pQvNWDJYoligHwlsrbuqfxnBLBDMMSxQDo9ZhN2+ZoELzvLmwwzDAMyDFGSZIJbBC8bAY2GDakeH2OJSrt6WykjWfNwIAUA1I8PccMwxKz6YTrWud6/QMDnAYz3wg70wAAAABJRU5ErkJggg==\",\r\n    \"runtimesFilter\": {\r\n    \"runtimeTypes\": [\"WEBMETHODS_GATEWAY\"],\r\n    \"deploymentTypes\": [\"ON_PREMISE\", \"SAG_SAAS\"],\r\n    \"regions\": [\r\n        {\r\n          \"region\": \"EU\",\r\n          \"operator\": \"equals\"\r\n        }\r\n      ],\r\n    \"locations\": [\r\n        {\r\n          \"location\": \"Boston\",\r\n          \"operator\": \"equals\"\r\n        }\r\n      ], \r\n    \"runtimeNames\": [\r\n        {\r\n            \"name\": \"EU\",\r\n            \"operator\": \"contains\"\r\n        }\r\n      ],\r\n    \"tags\": [\r\n        {\r\n          \"tag\": \"govern\",\r\n          \"operator\": \"contains\"\r\n        },\r\n        {\r\n          \"tag\": \"state\",\r\n          \"operator\": \"contains\"\r\n        }\r\n      ],\r\n    \"runtimeIds\": [\"9e19-415d-99f8-b555a17a2744-512f725f\", \"415d-99f8-b555a17a2744-512f725f-9e19\"],\r\n    \"logicalOperator\": \"OR\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/assetcatalog/v1/dataplanes",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"assetcatalog",
+										"v1",
+										"dataplanes"
+									]
+								},
+								"description": "This REST call is used to create a new data plane."
+							},
+							"response": []
+						},
+						{
+							"name": "Update dataplane by ID",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"EU region dataplane Updated\",\r\n    \"description\": \"This dataplane is used to monitor all the runtimes present in EU region\",\r\n    \"tags\": [\"EU\"],\r\n    \"icon\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABRCAIAAAARlBx9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPmSURBVHhe7dhNctswDEBhXqe7Lnvv3qK3iOP/uDdox4UEGqIeJQqWZTpVi/nWBt4oM5EdfvbmUnBRrvkY86GG51xwVpxTQdp2KXO3sSe1aBtjwNv2/Icmcy54pO1SEMNcbexJLfrQZBiTOt3aLmXPD5M5F8x4aNp2KXOHybAnVfmhTbc9Nex6+pZDmJj30CbaFg9DxpipMBnGpDSs1LZIGI7264WxjTEQ205DbbFqVhhOfMSDD22g7Z4qmSVjcveGCQvrtTkfF9Y/WyyKwxJIw2RiW6EKy+qLXVkJxLCu7RgGHxc+/eWQkcvDbm3Z/Pr+BZ/+coiBfpiMtg2NtH3CPIEkNRg20fZX5I2FTbd98rxCmKvt0+aVw0Te1rxeoE3h01+uHCasrffqhCqDT3+52JVVKWnrVSkkpfDpL4ee1N1tAp/+Wr9/fEWSmdMmsKAy6UkhyQy0yfdIlAzCvqdCDCBJHdEWvyD72gQuWBCuL0OVkLCmzXoat0FDAW6aDefeJa9qHLUtGwSU4Uon3PeIwbDj8RBiTX9wvQdOz+GgBfXC2io12HbG3U7VYgCPa7DtbHC0H7bWkVcpaeuSDC72w9Y6BsPEOtpYpf63uWFrHUgyXVv8EbeFi/2wtQ4kmdAlJYOL/bC1DiSpQ9M2NLjYD1vryKtae7TF31hwsR+21pFXHQ4NaYs9KVzsh6115FXracur1JJtWFkNksw/0xZ/zVxNm/VE7eBoJ6ysBkkmxJreHHG0E1ZWgySjbfE7ucHRTlhZDZL2jZ2QNoYJHO2EldXkVY39Wtq6pLZKraENSWYVbVmVim3dT0UtHO2EldUgyYTYEye+UONoJ6ysBkkmWE8KRzthZTVIMqts2+5aK2uLVWtq6yU1do01tCHJNG23L+RmL3C3B1ZWgyQTtMReyVI4fRJWVoMkE9ADuL4MK6tBkploEwgowMpqkHTzPt0m0DAGK6tBkti2ptvaL0WuPKysRnssybCt9/Uutd+hJIeV1SBpu40CG1T3n57Qk8LKapBkAk73QJLBymqQZOa0CVQprHweNIyZ2SavcAgTuGBBY391IzbK2bYdeB/N8nDQI2LM/T2pvK3JGCzpJP9PlmrrYu7oEewR7zeBd0OSMWZeWy9muZ5U0pYd7edpY4zg0WXsEYhpvHcCrpwtb2OJ4LmTGCMYo5Ik80hbfNPJX3Y6vHUSSxRLVBbT9+Zvm8pQvNWDJYoligHwlsrbuqfxnBLBDMMSxQDo9ZhN2+ZoELzvLmwwzDAMyDFGSZIJbBC8bAY2GDakeH2OJSrt6WykjWfNwIAUA1I8PccMwxKz6YTrWud6/QMDnAYz3wg70wAAAABJRU5ErkJggg==\",\r\n    \"runtimesFilter\": {\r\n    \"runtimeTypes\": [\"WEBMETHODS_GATEWAY\"],\r\n    \"deploymentTypes\": [\"ON_PREMISE\", \"SAG_SAAS\"],\r\n    \"regions\": [\r\n        {\r\n          \"region\": \"EU\",\r\n          \"operator\": \"equals\"\r\n        }\r\n      ],\r\n    \"locations\": [\r\n        {\r\n          \"location\": \"Boston\",\r\n          \"operator\": \"equals\"\r\n        }\r\n      ], \r\n    \"runtimeNames\": [\r\n        {\r\n            \"name\": \"EU\",\r\n            \"operator\": \"contains\"\r\n        }\r\n      ],\r\n    \"tags\": [\r\n        {\r\n          \"tag\": \"govern\",\r\n          \"operator\": \"contains\"\r\n        },\r\n        {\r\n          \"tag\": \"state\",\r\n          \"operator\": \"contains\"\r\n        }\r\n      ],\r\n    \"runtimeIds\": [\"9e19-415d-99f8-b555a17a2744-512f725f\", \"415d-99f8-b555a17a2744-512f725f-9e19\"],\r\n    \"logicalOperator\": \"OR\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/assetcatalog/v1/dataplanes/{{dataplaneId}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"assetcatalog",
+										"v1",
+										"dataplanes",
+										"{{dataplaneId}}"
+									]
+								},
+								"description": "This REST call is used to update a specific dataplane."
+							},
+							"response": []
+						},
+						{
+							"name": "Delete dataplane by ID",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/assetcatalog/v1/dataplanes/{{dataplaneId}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"assetcatalog",
+										"v1",
+										"dataplanes",
+										"{{dataplaneId}}"
+									]
+								},
+								"description": "This REST call is used to delete a specific data plane."
+							},
+							"response": []
+						}
+					],
+					"description": "Data plane is a collection of runtimes (such as API Gateway, Developer Portal, and so on), running in different landscapes.\n\nThis folder contains all the available REST APIs pertaining to data plane."
+				},
+				{
+					"name": "Runtimes",
+					"item": [
+						{
+							"name": "Get all runtimes",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/assetcatalog/v1/runtimes",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"assetcatalog",
+										"v1",
+										"runtimes"
+									]
+								},
+								"description": "This REST call retrieves a list of runtimes. If you don't specify the size query parameter, this call can retrieve up to 20 runtimes."
+							},
+							"response": []
+						},
+						{
+							"name": "Get runtimes  based on size, page and sort query parameters",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/assetcatalog/v1/runtimes?size=10&page=1&sort=name,asc&sort=created,desc",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"assetcatalog",
+										"v1",
+										"runtimes"
+									],
+									"query": [
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "sort",
+											"value": "name,asc"
+										},
+										{
+											"key": "sort",
+											"value": "created,desc"
+										}
+									]
+								},
+								"description": "This REST call retrieves a list of runtimes based on size, page, and sort query parameters.\n\n**size** - The number of runtimes that should appear on a page. If size is 0, by default, the maximum number of runtimes returned will be 20. A Maximum of 10000 records can be retrieved using this query.\n\ntype: integer. minimum: 1  \nmaximum: 10000\n\n**page** - Retrieves the list of runtimes in the specified page number.\n\ntype: integer.\n\n For example: Assume we have 32 runtimes. If size = 10 and page=3 then we will have runtimes 0 to 10 on the first page, 11 to 20 on second page, 21 to 30 on third page, and 31 and 32 on fourth page. Since we have specified the page number as 3, runtimes from 21 to 30 that appear on the page 3 will be returned.\n\n**sort** - A list of properties and how they should be sorted. Property and order are given in the format \\\"property,order\\\".\n\nProperty is any property defined in the runtime model like ID, name, description, etc. The supported values for order are \"ASC\\\", \\\"asc\\\", \\\"DESC\\\" and \\\"desc\\\". \\\"ASC\\\" or \\\"asc\\\" is used for ascending order and \\\"DESC\\\" or \\\"desc\\\" is used for descending order.\n\nIf we want to sort based on 2 fields then we need to add sort query param two times as shown in the example below,\n\nEg: {{baseURL}}/api/assetcatalog/v1/runtimes?size=10&page=1&sort=name,asc&sort=description,desc\n\nIf we want to sort based on date fields like createdDate, lastModifiedDate we need to use the property name as created, lastModified instead of createdDate, lastModifiedDate.\n\nEg: {{baseURL}}/api/assetcatalog/v1/runtimes?size=10&page=1&sort=name,asc&sort=created,desc"
+							},
+							"response": []
+						},
+						{
+							"name": "Get runtime by ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/assetcatalog/v1/runtimes/{{runtimeId}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"assetcatalog",
+										"v1",
+										"runtimes",
+										"{{runtimeId}}"
+									]
+								},
+								"description": "This REST call is used to retrieve the specific runtime."
+							},
+							"response": []
+						},
+						{
+							"name": "Create runtime",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"East EU region runtime Updated\",\n    \"description\": \"East EU region API Gateway\",\n    \"heartBeatSynchInterval\": 6000,\n    \"tags\": [\"east-eu\"],\n    \"type\": \"WEBMETHODS_GATEWAY\",\n    \"deploymentType\": \"ON_PREMISE\",\n    \"icon\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABRCAIAAAARlBx9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPmSURBVHhe7dhNctswDEBhXqe7Lnvv3qK3iOP/uDdox4UEGqIeJQqWZTpVi/nWBt4oM5EdfvbmUnBRrvkY86GG51xwVpxTQdp2KXO3sSe1aBtjwNv2/Icmcy54pO1SEMNcbexJLfrQZBiTOt3aLmXPD5M5F8x4aNp2KXOHybAnVfmhTbc9Nex6+pZDmJj30CbaFg9DxpipMBnGpDSs1LZIGI7264WxjTEQ205DbbFqVhhOfMSDD22g7Z4qmSVjcveGCQvrtTkfF9Y/WyyKwxJIw2RiW6EKy+qLXVkJxLCu7RgGHxc+/eWQkcvDbm3Z/Pr+BZ/+coiBfpiMtg2NtH3CPIEkNRg20fZX5I2FTbd98rxCmKvt0+aVw0Te1rxeoE3h01+uHCasrffqhCqDT3+52JVVKWnrVSkkpfDpL4ee1N1tAp/+Wr9/fEWSmdMmsKAy6UkhyQy0yfdIlAzCvqdCDCBJHdEWvyD72gQuWBCuL0OVkLCmzXoat0FDAW6aDefeJa9qHLUtGwSU4Uon3PeIwbDj8RBiTX9wvQdOz+GgBfXC2io12HbG3U7VYgCPa7DtbHC0H7bWkVcpaeuSDC72w9Y6BsPEOtpYpf63uWFrHUgyXVv8EbeFi/2wtQ4kmdAlJYOL/bC1DiSpQ9M2NLjYD1vryKtae7TF31hwsR+21pFXHQ4NaYs9KVzsh6115FXracur1JJtWFkNksw/0xZ/zVxNm/VE7eBoJ6ysBkkmxJreHHG0E1ZWgySjbfE7ucHRTlhZDZL2jZ2QNoYJHO2EldXkVY39Wtq6pLZKraENSWYVbVmVim3dT0UtHO2EldUgyYTYEye+UONoJ6ysBkkmWE8KRzthZTVIMqts2+5aK2uLVWtq6yU1do01tCHJNG23L+RmL3C3B1ZWgyQTtMReyVI4fRJWVoMkE9ADuL4MK6tBkploEwgowMpqkHTzPt0m0DAGK6tBkti2ptvaL0WuPKysRnssybCt9/Uutd+hJIeV1SBpu40CG1T3n57Qk8LKapBkAk73QJLBymqQZOa0CVQprHweNIyZ2SavcAgTuGBBY391IzbK2bYdeB/N8nDQI2LM/T2pvK3JGCzpJP9PlmrrYu7oEewR7zeBd0OSMWZeWy9muZ5U0pYd7edpY4zg0WXsEYhpvHcCrpwtb2OJ4LmTGCMYo5Ik80hbfNPJX3Y6vHUSSxRLVBbT9+Zvm8pQvNWDJYoligHwlsrbuqfxnBLBDMMSxQDo9ZhN2+ZoELzvLmwwzDAMyDFGSZIJbBC8bAY2GDakeH2OJSrt6WykjWfNwIAUA1I8PccMwxKz6YTrWud6/QMDnAYz3wg70wAAAABJRU5ErkJggg==\",\n    \"region\": \"east-eu\",\n    \"location\": \"EU\",\n    \"host\": \"API\",\n    \"capacity\" : {\n        \"value\" : \"50\",\n            \"unit\" : \"per minute\"\n    }   \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/assetcatalog/v1/runtimes",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"assetcatalog",
+										"v1",
+										"runtimes"
+									]
+								},
+								"description": "This REST call is used to create a new runtime in API Control Plane."
+							},
+							"response": []
+						},
+						{
+							"name": "Update runtime by ID",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"East EU region runtime Updated\",\n    \"description\": \"East EU region API Gateway\",\n    \"heartBeatSynchInterval\": 6000,\n    \"tags\": [\"east-eu\"],\n    \"type\": \"WEBMETHODS_GATEWAY\",\n    \"deploymentType\": \"ON_PREMISE\",\n    \"icon\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABRCAIAAAARlBx9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPmSURBVHhe7dhNctswDEBhXqe7Lnvv3qK3iOP/uDdox4UEGqIeJQqWZTpVi/nWBt4oM5EdfvbmUnBRrvkY86GG51xwVpxTQdp2KXO3sSe1aBtjwNv2/Icmcy54pO1SEMNcbexJLfrQZBiTOt3aLmXPD5M5F8x4aNp2KXOHybAnVfmhTbc9Nex6+pZDmJj30CbaFg9DxpipMBnGpDSs1LZIGI7264WxjTEQ205DbbFqVhhOfMSDD22g7Z4qmSVjcveGCQvrtTkfF9Y/WyyKwxJIw2RiW6EKy+qLXVkJxLCu7RgGHxc+/eWQkcvDbm3Z/Pr+BZ/+coiBfpiMtg2NtH3CPIEkNRg20fZX5I2FTbd98rxCmKvt0+aVw0Te1rxeoE3h01+uHCasrffqhCqDT3+52JVVKWnrVSkkpfDpL4ee1N1tAp/+Wr9/fEWSmdMmsKAy6UkhyQy0yfdIlAzCvqdCDCBJHdEWvyD72gQuWBCuL0OVkLCmzXoat0FDAW6aDefeJa9qHLUtGwSU4Uon3PeIwbDj8RBiTX9wvQdOz+GgBfXC2io12HbG3U7VYgCPa7DtbHC0H7bWkVcpaeuSDC72w9Y6BsPEOtpYpf63uWFrHUgyXVv8EbeFi/2wtQ4kmdAlJYOL/bC1DiSpQ9M2NLjYD1vryKtae7TF31hwsR+21pFXHQ4NaYs9KVzsh6115FXracur1JJtWFkNksw/0xZ/zVxNm/VE7eBoJ6ysBkkmxJreHHG0E1ZWgySjbfE7ucHRTlhZDZL2jZ2QNoYJHO2EldXkVY39Wtq6pLZKraENSWYVbVmVim3dT0UtHO2EldUgyYTYEye+UONoJ6ysBkkmWE8KRzthZTVIMqts2+5aK2uLVWtq6yU1do01tCHJNG23L+RmL3C3B1ZWgyQTtMReyVI4fRJWVoMkE9ADuL4MK6tBkploEwgowMpqkHTzPt0m0DAGK6tBkti2ptvaL0WuPKysRnssybCt9/Uutd+hJIeV1SBpu40CG1T3n57Qk8LKapBkAk73QJLBymqQZOa0CVQprHweNIyZ2SavcAgTuGBBY391IzbK2bYdeB/N8nDQI2LM/T2pvK3JGCzpJP9PlmrrYu7oEewR7zeBd0OSMWZeWy9muZ5U0pYd7edpY4zg0WXsEYhpvHcCrpwtb2OJ4LmTGCMYo5Ik80hbfNPJX3Y6vHUSSxRLVBbT9+Zvm8pQvNWDJYoligHwlsrbuqfxnBLBDMMSxQDo9ZhN2+ZoELzvLmwwzDAMyDFGSZIJbBC8bAY2GDakeH2OJSrt6WykjWfNwIAUA1I8PccMwxKz6YTrWud6/QMDnAYz3wg70wAAAABJRU5ErkJggg==\",\n    \"region\": \"east-eu\",\n    \"location\": \"EU\",\n    \"host\": \"API\",\n    \"capacity\" : {\n        \"value\" : \"50\",\n            \"unit\" : \"per minute\"\n    }   \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/assetcatalog/v1/runtimes/{{runtimeId}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"assetcatalog",
+										"v1",
+										"runtimes",
+										"{{runtimeId}}"
+									]
+								},
+								"description": "This REST call is used to update the specific runtime."
+							},
+							"response": []
+						},
+						{
+							"name": "Delete runtime by ID",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/assetcatalog/v1/runtimes/{{runtimeId}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"assetcatalog",
+										"v1",
+										"runtimes",
+										"{{runtimeId}}"
+									]
+								},
+								"description": "This REST call is used to delete the specific runtime."
+							},
+							"response": []
+						}
+					],
+					"description": "API Control Plane allows you to create and manage multiple runtimes (such as API Gateway, Developer Portal, and so on), running in different landscapes.\n\nThis folder contains all the available REST APIs pertaining to runtime."
+				},
+				{
+					"name": "Search",
+					"item": [
+						{
+							"name": "Search",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n          \"type\": \"API\",\r\n          \"query\": {\r\n          \"conditions\": [\r\n             {\r\n                \"criterias\": [\r\n                    {\r\n                        \"field\": \"name\",\r\n                        \"value\": \"Petstore API\",\r\n                        \"operation\": \"equals\"\r\n                    },\r\n                    {\r\n                        \"field\": \"name\",\r\n                        \"value\": \"Uber API\",\r\n                        \"operation\": \"equals\"\r\n                    }\r\n                ],\r\n                \"logicalConnector\": \"OR\"\r\n            },\r\n            {\r\n                \"criterias\": [\r\n                    {\r\n                        \"field\": \"apiDeployments.runtimeId\",\r\n                        \"value\": \"0225711b-4dd3-49d4-b79f-cf15e83b75cf\",\r\n                        \"operation\": \"equals\"\r\n                    },\r\n                    {\r\n                        \"field\": \"apiDeployments.runtimeId\",\r\n                        \"value\": \"c357f56a-3303-41bd-83d2-61bea2dc15b3\",\r\n                        \"operation\": \"equals\"\r\n                    }\r\n                ],\r\n                \"logicalConnector\": \"OR\"\r\n            },\r\n            {\r\n                \"criterias\": [\r\n                    {\r\n                        \"field\": \"apiDeployments.apiStatus\",\r\n                        \"value\": \"ACTIVE\",\r\n                        \"operation\": \"equals\"\r\n                    },\r\n                     {\r\n                        \"field\": \"apiDeployments.apiStatus\",\r\n                        \"value\": \"INACTIVE\",\r\n                        \"operation\": \"equals\"\r\n                    }\r\n                ],\r\n                \"logicalConnector\": \"OR\"\r\n            }\r\n        ],\r\n        \"logicalConnector\": \"AND\"\r\n        },\r\n        \"responseFields\": [\r\n        \"name\",\r\n        \"id\",\r\n        \"apiDeployments.apiStatus\",\r\n        \"apiDeployments.runtimeId\"\r\n        ],\r\n        \"from\": 0,\r\n        \"size\": 100,\r\n        \"sortFields\": {\"name\": \"DESC\"}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/assetcatalog/v1/search",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"assetcatalog",
+										"v1",
+										"search"
+									]
+								},
+								"description": "The search API allows you to execute a search query in API Control Plane and return the search results that match the input query.  \nThe following are the types of data on which search can be performed using this API by specifying query, conditions, and criteria.\n\n1. **DATAPLANE**. This type is used to search dataplanes in API Control Plane.\n2. **RUNTIME**. This type is used to search runtimes in API Control Plane.\n3. **API**. This type is used to search APIs in API Control Plane.\n4. **AUDITEVENT**. This type is used to search audit events in API Control Plane.\n    \n\nThe payload for this query must be provided in the SearchContext format; see the schema for additional information.  \nSearchContext consists of  \n**1\\. type**. The type of data that has to be searched.  \n**2\\. query**. Each query consists of a set of conditions connected by a logical connector. Only the same logical connector can be used between conditions; it can either be AND or OR, not both.  \n**3\\. conditions**. Each condition consists of a list of criterias connected by a logical connector.  \nOnly the same logical connector can be used between conditions; it can either be AND or OR, not both.  \n**4\\. criteria**. A criteria is the actual condition that applies to the field, providing the field's name, value, and any operators that may be applied to it, such as contains and equals. For a list of supported operations, see the Operation enum.  \n**5\\. from**. This indicates where record fetching is required to be performed from. For example, \"from = 5\" denotes the fifth object. Records in Elasticsearch starts from 0. Default value of from is 0.  \n**6\\. size**. This indicates the number of records to be fetched. For example, for size=10, 10 records should be retured beginning with the from value.  \nThe default is 10000 (max_window_size of asset-catalog elastic search).  \n**7\\. response fields**. The list of fields that should be returned in the response.Only the mentioned fields are returned. To return all the fields give it as a \\*.  \n**8\\. sort fields**. It is an ordered map containing the field names on which sort has to be performed and their sort order. For example, {\"name\":\"DESC\",\"created\":\"DESC\"}. The results will be sorted in descending order by name first, followed by created. By default, results are sorted by lastModifiedDate in decreasing order if no sort fields are provided. If we want to sort based on date fields like createdDate, lastModifiedDate we need to use the property name as created, lastModified instead of createdDate, lastModifiedDate.\n\nExamples:\n\n1. Fetch first 10 runtimes with all fields containing runtime text as a substring in the name field.\n    \n\n``` json\nRequest payload:\n  {\n          \"type\": \"RUNTIME\",\n          \"query\": {\n          \"conditions\": [\n            {\n                \"criterias\": [\n                    {\n                        \"field\": \"name\",\n                        \"value\": \"runtime\",\n                        \"operation\": \"contains\"\n                    }\n                ]\n            }\n        ]\n                },\n        \"responseFields\": [\"*\"],\n        \"from\": 0,\n        \"size\": 10\n  }\n\n```\n\n2\\. If from and size are specified it skips records before from and fetches the records starting, from to from+size. In this example, it will skip the first 10 records and fetch from 11th to 30th record.\n\n``` json\n{\n           \"type\": \"RUNTIME\",\n            \"query\": {\n            \"conditions\": [\n            {\n                \"criterias\": [\n                    {\n                        \"field\": \"region\",\n                        \"value\": \"eu\",\n                        \"operation\": \"equals\"\n                    }\n                ]\n            }\n                ]\n          },\n          \"responseFields\": [\n          \"name\",\n          \"description\",\n          \"location\"],\n         \"from\": 11,\n         \"size\": 20,\n         \"sortFields\": {\"name\": \"ASC\"}\n}\n\n```\n\n3\\. In this case first 20 records will be sorted by lastModifiedDate in the descending order.\n\n``` json\n{\n    \"type\": \"RUNTIME\",\n    \"responseFields\": [\"*\"],\n    \"from\": 0,\n    \"size\": 20\n}\n\n```\n\n4\\. In the following example, even though size is given as 20000 only 10000 records will be returned, since elastic search can handle only the max_result_window size configured. For assets this would be 10000.\n\n``` json\n {\n     \"type\": \"RUNTIME\",\n     \"responseFields\": [\"*\"],\n     \"from\": 0,\n      \"size\": 20000\n }\n\n```\n\n5\\. If size is not given, then by default max_result_window size is returned. In the following example, size is not given, so by default 10000 records will be returned.\n\n``` json\n{\n   \"type\": \"RUNTIME\",\n   \"responseFields\": [\"*\"],\n   \"from\": 0\n}\n\n```\n\n6\\. One condition must be maintained per field. For example, in the following request payload, name criterias must be given in one condition, apiDeployments.runtimeId criterias must be given in one condition, and apiDeployments.apiStatus criterias must be given in one condition.\n\n``` json\n {\n          \"type\": \"API\",\n          \"query\": {\n          \"conditions\": [\n             {\n                \"criterias\": [\n                    {\n                        \"field\": \"name\",\n                        \"value\": \"Petstore API\",\n                        \"operation\": \"equals\"\n                    },\n                    {\n                        \"field\": \"name\",\n                        \"value\": \"Uber API\",\n                        \"operation\": \"equals\"\n                    }\n                ],\n                \"logicalConnector\": \"OR\"\n            },\n            {\n                \"criterias\": [\n                    {\n                        \"field\": \"apiDeployments.runtimeId\",\n                        \"value\": \"0225711b-4dd3-49d4-b79f-cf15e83b75cf\",\n                        \"operation\": \"equals\"\n                    },\n                    {\n                        \"field\": \"apiDeployments.runtimeId\",\n                        \"value\": \"c357f56a-3303-41bd-83d2-61bea2dc15b3\",\n                        \"operation\": \"equals\"\n                    }\n                ],\n                \"logicalConnector\": \"OR\"\n            },\n            {\n                \"criterias\": [\n                    {\n                        \"field\": \"apiDeployments.apiStatus\",\n                        \"value\": \"ACTIVE\",\n                        \"operation\": \"equals\"\n                    },\n                     {\n                        \"field\": \"apiDeployments.apiStatus\",\n                        \"value\": \"INACTIVE\",\n                        \"operation\": \"equals\"\n                    }\n                ],\n                \"logicalConnector\": \"OR\"\n            }\n        ],\n        \"logicalConnector\": \"AND\"\n        },\n        \"responseFields\": [\n        \"name\",\n        \"id\",\n        \"apiDeployments.apiStatus\",\n        \"apiDeployments.runtimeId\"\n        ],\n        \"from\": 0,\n        \"size\": 100,\n        \"sortFields\": {\"name\": \"DESC\"}\n        }\n\n```\n\n7\\. If no sort fields are given, then by default, the search results will be sorted using the lastModifiedDate in descending order.\n\n``` json\n{\n     \"type\": \"RUNTIME\",\n     \"responseFields\": [\"*\"],\n     \"from\": 0,\n     \"size\":10\n}\n\n```\n\n8\\. To sort based on createdDate or lastModifiedDate, give it as created or lastModified in input.\n\n``` json\n{\n         \"type\": \"RUNTIME\",\n         \"responseFields\": [\"*\"],\n         \"from\": 0,\n         \"size\": 10,\n         \"sortFields\": {\n        \"created\": \"ASC\"\n        } \n}\n\n```\n\nFor each type, the fields that can be provided in the conditions, sort fields, and response fields are listed below:\n\n1. type: **DATAPLANE**  \n    1\\. **Fields allowed to be given in the criteria field:**  \n    a. id  \n    b. name  \n    c. description  \n    d. tags  \n    2\\. **Fields allowed to be given in the sortFields:**  \n    a. id  \n    b. name  \n    c. description  \n    d. created  \n    e. lastModified  \n    3\\. **Fields allowed to be given in the responseFields:**  \n    a. id  \n    b. name  \n    c. description  \n    d. tags  \n    e. icon  \n    f. createdDate  \n    g. lastModifiedDate  \n    h. runtimesFilter.runtimeTypes  \n    i. runtimesFilter.deploymentTypes  \n    j. runtimesFilter.regions  \n    k. runtimesFilter.locations  \n    l. runtimesFilter.tags  \n    m. runtimesFilter.runtimeNames  \n    n. runtimesFilter.runtimeIds  \n    o. runtimesFilter.logicalOperator  \n    p. runtimesFilter.regions.region  \n    q. runtimesFilter.regions.operator  \n    r. runtimesFilter.locations.location  \n    s. runtimesFilter.locations.operator  \n    t. runtimesFilter.tags.tag  \n    u. runtimesFilter.tags.operator  \n    v. runtimesFilter.runtimeNames.name  \n    w. runtimesFilter.runtimeNames.operator\n2. type: **RUNTIME**  \n    1\\. **Fields allowed to be given in the criteria field:**  \n    a. id  \n    b. name  \n    c. description  \n    d. tags  \n    e. type  \n    f. deploymentType  \n    g. region  \n    h. location  \n    i. host  \n    2\\. **Fields allowed to be given in the sortFields:**  \n    a. id  \n    b. name  \n    c. description  \n    d. created  \n    e. lastModified  \n    f. type  \n    g. deploymentType  \n    h. region  \n    i. location  \n    j. host  \n    3\\. **Fields allowed to be given in the responseFields:**  \n    a. id  \n    b. name  \n    c. description  \n    d. tags  \n    e. createdDate  \n    f. lastModifiedDate  \n    g. type  \n    h. deploymentType  \n    i. region  \n    j. location  \n    k. host  \n    l. icon\n3. type: API  \n    1\\. **Fields allowed to be given in the criteria field:**  \n    a. id  \n    b. name  \n    c. apiType  \n    d. apiDifferencesCount  \n    e. apiDeployments.runtimeId  \n    f. apiDeployments.apiStatus  \n    g. apiDeployments.displayVersion  \n    h. apiDeployments.name,  \n    i. apiDeployments.description  \n    j. apiDeployments.tags  \n    2\\. **Fields allowed to be given in the sortFields:**  \n    a. id  \n    b. name  \n    c. apiType  \n    d. lastModified  \n    e. apiDifferencesCount  \n    3\\. **Fields allowed to be given in the responseFields:**  \n    a. id  \n    b. name  \n    c. apiType  \n    d. apiDeployments  \n    e. apiDifferencesCount  \n    f. apiDeployments.runtimeId  \n    g. apiDeployments.apiStatus  \n    h. apiDeployments.displayVersion  \n    i. apiDeployments.lastModifiedDate  \n    j. apiDeployments.name  \n    k. apiDeployments.description  \n    l. apiDeployments.tags  \n    m. apiDeployments.publishInfo  \n    n. apiDeployments.noOfPolicies\n4. type: AUDITEVENT  \n    1\\. **Fields allowed to be given in the criteria field:**  \n    a. id  \n    b. objectType  \n    c. actionType  \n    d. objectId  \n    e. status  \n    2\\. **Fields allowed to be given in the sortFields:**  \n    a. id  \n    b. objectType  \n    c. actionType  \n    d. objectId  \n    e. status  \n    f. created  \n    g. lastModified  \n    3\\. **Fields allowed to be given in the responseFields:**  \n    a. id  \n    b. createdDate  \n    c. lastModifiedDate  \n    d. objectType  \n    e. actionType  \n    f. data  \n    g. objectId  \n    h. message  \n    i. status"
+							},
+							"response": []
+						},
+						{
+							"name": "Count",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"type\": \"RUNTIME\",\r\n    \"query\": {\r\n        \"conditions\": [\r\n            {\r\n                \"criterias\": [\r\n                    {\r\n                        \"field\": \"name\",\r\n                        \"value\": \"EU\",\r\n                        \"operation\": \"contains\"\r\n                    }\r\n                ]\r\n            }\r\n        ]\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/assetcatalog/v1/count",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"assetcatalog",
+										"v1",
+										"count"
+									]
+								},
+								"description": "This REST call is used to retrieve total number of documents that match the input type and the input query. If the query is not specified, it returns the total number of documents present for the input type.  \nThe request payload for both /search and /count is identical, with the exception that the from, size, response, and sort fields will not be taken into consideration."
+							},
+							"response": []
+						}
+					],
+					"description": "The search API allows you to execute a search query or a count query in API Control Plane and return the search results that match the search query or return the count of objects matching the search query.  \nSearch can be performed on types such as **API, DATAPLANE, RUNTIME, AND AUDITEVENT**. Searches can be performed against only one type at a time.\n\nThis folder contains the REST APIs exposed to perform Search and Count operation."
+				},
+				{
+					"name": "UserManagement",
+					"item": [
+						{
+							"name": "Get all users",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/ingress/v1/users",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"ingress",
+										"v1",
+										"users"
+									]
+								},
+								"description": "This REST call retrieves a list of users. If you don't specify the size query parameter, this call can retrieve up to 20 users."
+							},
+							"response": []
+						},
+						{
+							"name": "Get users based on size and page query parameters",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/ingress/v1/users?size=2&page=1",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"ingress",
+										"v1",
+										"users"
+									],
+									"query": [
+										{
+											"key": "size",
+											"value": "2"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								},
+								"description": "This REST call retrieves the list of users based on size and page query parameters.  \n**size** \\- The number of users that should appear on a page. If size is 0, by default, the maximum number of users returned will be 20.\n**page** - Retrieves the list of users in the specified page number."
+							},
+							"response": []
+						},
+						{
+							"name": "Get logged in user details",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/ingress/v1/users/self",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"ingress",
+										"v1",
+										"users",
+										"self"
+									]
+								},
+								"description": "This REST call is used to get the logged-in user details"
+							},
+							"response": []
+						},
+						{
+							"name": "Get user by ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/ingress/v1/users/{{userId}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"ingress",
+										"v1",
+										"users",
+										"{{userId}}"
+									]
+								},
+								"description": "This REST call is used to retrieve the specific user details."
+							},
+							"response": []
+						},
+						{
+							"name": "Get logged in user details with additional information",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/ingress/v1/users/self/extended",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"ingress",
+										"v1",
+										"users",
+										"self",
+										"extended"
+									]
+								},
+								"description": "This REST call is used to get the logged-in user details with additional information."
+							},
+							"response": []
+						},
+						{
+							"name": "Create user",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"joeroot\",\r\n    \"firstname\": \"Joe\",\r\n    \"lastname\": \"Root\",\r\n    \"description\": \"Admin officer for SAG\",\r\n    \"email\": \"joeroot@sag.com\",\r\n    \"password\": \"My@123#Password\",\r\n    \"preferredlocale\": \"en_US\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/ingress/v1/users",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"ingress",
+										"v1",
+										"users"
+									]
+								},
+								"description": "This REST call is used to create a new user."
+							},
+							"response": []
+						},
+						{
+							"name": "Update user",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"joeroot\",\r\n    \"firstname\": \"Joey\",\r\n    \"lastname\": \"Root\",\r\n    \"description\": \"Admin officer for SAG\",\r\n    \"email\": \"joeyroot@sag.com\",\r\n    \"password\": \"My@123#Password\",\r\n    \"preferredlocale\": \"en_US\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/ingress/v1/users/{{userId}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"ingress",
+										"v1",
+										"users",
+										"{{userId}}"
+									]
+								},
+								"description": "This REST call is used to update the specific user."
+							},
+							"response": []
+						},
+						{
+							"name": "Delete user",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/ingress/v1/users/{{userId}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"ingress",
+										"v1",
+										"users",
+										"{{userId}}"
+									]
+								},
+								"description": "This REST call is used to delete the specific user."
+							},
+							"response": []
+						},
+						{
+							"name": "Add list of groups to a user",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n    \"b2af1c37-7e49-3336-9627-1c6843c68b57\",\r\n    \"0dae3872-4825-3148-b14b-76983a73ed2c\"\r\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/ingress/v1/users/{{userId}}/groups",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"ingress",
+										"v1",
+										"users",
+										"{{userId}}",
+										"groups"
+									]
+								},
+								"description": "This REST call adds one or more groups to a specific user. A list of groupIds need to be passed as input to this query."
+							},
+							"response": []
+						},
+						{
+							"name": "Get all groups",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/ingress/v1/groups",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"ingress",
+										"v1",
+										"groups"
+									]
+								},
+								"description": "This REST call retrieves a list of groups. If you don't specify the size query parameter, this call can retrieve up to 20 groups."
+							},
+							"response": []
+						},
+						{
+							"name": "Get groups based on size and page query parameters",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/ingress/v1/groups?size=3&page=1",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"ingress",
+										"v1",
+										"groups"
+									],
+									"query": [
+										{
+											"key": "size",
+											"value": "3"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								},
+								"description": "This REST call retrieves a list of groups based on size and page query parameters.  \n**size** - The number of groups that should appear on a page. If size is 0, by default, the maximum number of groups returned will be 20. \n**page** - Retrieves the list of groups in the specified page number."
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of groups assigned to a user",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/ingress/v1/users/{{userId}}/groups",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"ingress",
+										"v1",
+										"users",
+										"{{userId}}",
+										"groups"
+									]
+								},
+								"description": "This REST call retrieves the list of groups assigned to a specific user."
+							},
+							"response": []
+						},
+						{
+							"name": "Add list of users to a group",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n    \"d88e28d1-e2c4-3f68-850c-d26c51db3bf6\",\r\n    \"b2af1c37-7e49-3336-9627-1c6843c68b57\"\r\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/ingress/v1/groups/{{groupId}}/users",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"ingress",
+										"v1",
+										"groups",
+										"{{groupId}}",
+										"users"
+									]
+								},
+								"description": "This REST call adds one or more users to a specific group. A list of userIds need to be passed as input to this query."
+							},
+							"response": []
+						}
+					],
+					"description": "This folder contains all the REST APIs pertaining to User Management."
+				}
+			]
+		},
+		{
+			"name": "Get microservice build version and API controlplane product version",
+			"item": [
+				{
+					"name": "Get ui microservice version information",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/controlplane/api/ui/info",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"controlplane",
+								"api",
+								"ui",
+								"info"
+							]
+						},
+						"description": "This REST call is used to retrieve UI microservice build version and API controlplane product version."
+					},
+					"response": []
+				},
+				{
+					"name": "Get ingress microservice version information",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/ingress/info",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"ingress",
+								"info"
+							]
+						},
+						"description": "This REST call is used to retrieve Ingress microservice build version and API controlplane product version."
+					},
+					"response": []
+				},
+				{
+					"name": "Get assetcatalog microservice version information",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/assetcatalog/info",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"assetcatalog",
+								"info"
+							]
+						},
+						"description": "This REST call is used to retrieve Assetcatalog microservice build version and API controlplane product version."
+					},
+					"response": []
+				},
+				{
+					"name": "Get engine microservice version information",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/engine/info",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"engine",
+								"info"
+							]
+						},
+						"description": "This REST call is used to retrieve Engine microservice build version and API controlplane product version."
+					},
+					"response": []
+				},
+				{
+					"name": "Get version information of all the microservices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/info",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"info"
+							]
+						},
+						"description": "This REST call is used to retrieve version information of all the microservices and API controlplane product version."
+					},
+					"response": []
+				}
+			],
+			"description": "This folder contains REST APIs used to retrieve build version of each microservice and API controlplane product version."
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{password}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{username}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "username",
+			"value": "administrator",
+			"type": "string"
+		},
+		{
+			"key": "password",
+			"value": "manage",
+			"type": "string"
+		},
+		{
+			"key": "baseURL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "runtimeId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "apiId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "dataplaneId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "userId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "groupId",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

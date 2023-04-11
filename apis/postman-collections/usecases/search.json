@@ -1,0 +1,331 @@
+{
+	"info": {
+		"_postman_id": "d0309ce2-d29c-428c-aa56-7134fcafe14d",
+		"name": "SearchAPI related usecases",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20781985"
+	},
+	"item": [
+		{
+			"name": "Search by type",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"type\": \"RUNTIME\",\r\n  \"responseFields\": [\r\n    \"*\"\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/assetcatalog/v1/search",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"assetcatalog",
+						"v1",
+						"search"
+					]
+				},
+				"description": "This REST call searches the asset based on its type. Search can be performed on the following asset types such as **API, DATAPLANE, RUNTIME, AND AUDITEVENT**. You can search only one asset type at a time."
+			},
+			"response": []
+		},
+		{
+			"name": "Count by type",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"type\": \"RUNTIME\",\r\n  \"responseFields\": [\r\n    \"*\"\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/assetcatalog/v1/count",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"assetcatalog",
+						"v1",
+						"count"
+					]
+				},
+				"description": "This REST call displays the count of records based on the specified asset type. The following are the different asset types **API, DATAPLANE, RUNTIME, AND AUDITEVENT**. You can retrieve the count of only one asset type at a time."
+			},
+			"response": []
+		},
+		{
+			"name": "Search based on one criteria",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n          \"type\": \"RUNTIME\",\r\n          \"query\": {\r\n          \"conditions\": [\r\n            {\r\n                \"criterias\": [\r\n                    {\r\n                        \"field\": \"name\",\r\n                        \"value\": \"runtime\",\r\n                        \"operation\": \"contains\"\r\n                    }\r\n                ]\r\n            }\r\n        ]\r\n                },\r\n        \"responseFields\": [\"*\"],\r\n        \"from\": 0,\r\n        \"size\": 10\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/assetcatalog/v1/search",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"assetcatalog",
+						"v1",
+						"search"
+					]
+				},
+				"description": "This REST call searches a particular asset type based on the specified criteria. In this sample query we are searching for the Runtime records that have \"runtime\" string in runtime name."
+			},
+			"response": []
+		},
+		{
+			"name": "Count based on one criteria",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"RUNTIME\",\r\n    \"query\": {\r\n    \"conditions\": [\r\n        {\r\n           \"criterias\": [\r\n            {\r\n               \"field\": \"name\",\r\n               \"value\": \"runtime\",\r\n               \"operation\": \"contains\"\r\n            }\r\n            ]\r\n        }\r\n    ]\r\n    }\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/assetcatalog/v1/count",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"assetcatalog",
+						"v1",
+						"count"
+					]
+				},
+				"description": "This REST call retrieves the count of an asset type that matches with the specified criteria. In this sample query we are counting the number of records that have \"runtime\" string in runtime name."
+			},
+			"response": []
+		},
+		{
+			"name": "Search with selected response field(s)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"type\": \"RUNTIME\",\r\n  \"responseFields\": [\r\n    \"id\",\r\n    \"name\",\r\n    \"description\",\r\n    \"region\"\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/assetcatalog/v1/search",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"assetcatalog",
+						"v1",
+						"search"
+					]
+				},
+				"description": "This REST call retrieves the specified fields from the search result."
+			},
+			"response": []
+		},
+		{
+			"name": "Search based on multiple conditions",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"type\": \"API\",\r\n  \"query\": {\r\n    \"conditions\": [\r\n      {\r\n        \"criterias\": [\r\n          {\r\n            \"field\": \"name\",\r\n            \"value\": \"Petstore API\",\r\n            \"operation\": \"equals\"\r\n          },\r\n          {\r\n            \"field\": \"name\",\r\n            \"value\": \"Uber API\",\r\n            \"operation\": \"equals\"\r\n          }\r\n        ],\r\n        \"logicalConnector\": \"OR\"\r\n      },\r\n      {\r\n        \"criterias\": [\r\n          {\r\n            \"field\": \"apiDeployments.runtimeId\",\r\n            \"value\": \"0225711b-4dd3-49d4-b79f-cf15e83b75cf\",\r\n            \"operation\": \"equals\"\r\n          },\r\n          {\r\n            \"field\": \"apiDeployments.runtimeId\",\r\n            \"value\": \"c357f56a-3303-41bd-83d2-61bea2dc15b3\",\r\n            \"operation\": \"equals\"\r\n          }\r\n        ],\r\n        \"logicalConnector\": \"OR\"\r\n      }\r\n    ],\r\n    \"logicalConnector\": \"AND\"\r\n  },\r\n  \"responseFields\": [\r\n    \"name\",\r\n    \"id\",\r\n    \"apiDeployments.apiStatus\",\r\n    \"apiDeployments.runtimeId\"\r\n  ],\r\n  \"from\": 0,\r\n  \"size\": 100,\r\n  \"sortFields\": {\r\n    \"name\": \"DESC\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/assetcatalog/v1/search",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"assetcatalog",
+						"v1",
+						"search"
+					]
+				},
+				"description": "This REST call searches any one of the asset type that match with one or more conditions. One condition must be maintained per field. For example, in the following request payload, name criteria  is specified as one condition and apiDeployments.runtimeId criteria is specified as another condition."
+			},
+			"response": []
+		},
+		{
+			"name": "Return first 20 records of search result",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"type\": \"RUNTIME\",\r\n  \"responseFields\": [\r\n    \"*\"\r\n  ],\r\n  \"from\": 0,\r\n  \"size\": 20\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/assetcatalog/v1/search",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"assetcatalog",
+						"v1",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Return search results in given range",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"type\": \"RUNTIME\",\r\n  \"responseFields\": [\r\n    \"*\"\r\n  ],\r\n  \"from\": 26,\r\n  \"size\": 30\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/assetcatalog/v1/search",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"assetcatalog",
+						"v1",
+						"search"
+					]
+				},
+				"description": "This is a sample REST call returns 26th to 55th records from search result. In this example, the from is given as 26 and size is given as 30, it will skip the first 25 records and fetch from 26th to 55th record as the last record will be from+size-1."
+			},
+			"response": []
+		},
+		{
+			"name": "Sort search result based on given field",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"type\": \"RUNTIME\",\r\n  \"responseFields\": [\r\n    \"*\"\r\n  ],\r\n  \"sortFields\": {\"name\": \"DESC\"}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/assetcatalog/v1/search",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"assetcatalog",
+						"v1",
+						"search"
+					]
+				},
+				"description": "This REST call sorts the search result based on the specified field."
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{password}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{username}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "username",
+			"value": "administrator",
+			"type": "string"
+		},
+		{
+			"key": "password",
+			"value": "manage",
+			"type": "string"
+		},
+		{
+			"key": "baseURL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

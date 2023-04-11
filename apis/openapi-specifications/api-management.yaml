@@ -1,0 +1,600 @@
+openapi: '3.0.2'
+info:
+  title: API Management Service
+  version: '1.0.0'
+  description : API Control Plane allows you to view the APIs, view multiple versions of an API as a separate API, and view the API specification file. API Control Plane exposes REST APIs to help you create, read, update, and delete (CRUD) APIs.
+servers:
+ - url: "{protocol}://{hostname}:{port}/api/assetcatalog/v1"
+   description: This is the endpoint where the Asset-catalog API is accessible from the server.
+   variables:
+    protocol:
+      default: https
+      enum:
+      - http
+      - https
+      description: The protocol supported by the server - HTTP or HTTPS. Default is HTTPS.
+    hostname:
+      default: localhost
+      description: The domain name of the server where the API is hosted. The hostname must be resolvable by the DNS lookup.
+    port:
+      default: "443"
+      description: The port number where the REST API is running on the server. The default port for HTTPS is 443 and HTTP is 80 but it can also be any valid port.
+paths:
+  /apis:
+    get:
+      description: This method retrieves all the APIs in API Control Plane.
+      parameters:
+        - name: page
+          in: query
+          description: Page number of the APIs list. A successful GET call returns the default page number, that is 1, and any invalid value, such as ["five," -345], is ignored.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 500
+        - name: size
+          in: query
+          description: Number of APIs in a page. By default, if the pagination value is passed as 0, the maximum number of objects returned is 20. This property can be customized with service.maximum.assets=20 in the application.properties file. A successful GET call returns the default page number, that is 20, and any invalid value, such as ["five," -345], is ignored.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 500
+        - name: sort
+          in: query
+          description: List of property and the order to sort. Property and order are given in the format "property,order". The supported values for order are "ASC", "asc", "DESC", and "desc". "ASC" or "asc" is used for ascending order and "DESC" or "desc" is used for descending order. LastModified and created values are used for sorting date fields.
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: This status code indicates the successful retrieval of a list of available APIs.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/APILandscape'
+              example:
+                - id: ea488aed-2588-4988-990d-8342d0bca78
+                  name: Ola for runtime3
+                  apiType: REST
+                  owner:
+                    name: John
+                    id: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
+                    type: USER
+                  apiDeployments:
+                    - name: PetStoreAPI
+                      description: Description for PetStoreAPI
+                      tags:
+                        - Dev
+                      lastModifiedDate: 2022-10-13 15:08:27:139 IST
+                      runtimeId: d3841d21-ef31-4b95-a82a-ed08f10a20e5
+                      runtimeName: ' runtime 1'
+                      region: eu
+                      apiStatus: ACTIVE
+                      displayVersion: v2.0
+                      noOfPolicies : 3
+                      owner:
+                        name: John
+                        id: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
+                        type: USER
+                      publishInfo:
+                        - webMethods Developer Portal
+        '401':
+          description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to retrieve the API list.
+        '500':
+          $ref: '#/components/responses/internal_server_error'
+
+  /runtimes/{runtimeId}/apis:
+    get:
+      description: This method retrieves all the APIs in the specified runtime.
+      parameters:
+        - name: runtimeId
+          in: path
+          description: Runtime UUID.
+          required: true
+          schema:
+            type: string
+          example: d3841d21-ef31-4b95-a82a-ed08f10a20e5
+        - name: page
+          in: query
+          description: Page number of the APIs list. A successful GET call returns the default page number, that is 1, and any invalid value, such as ["five," -345], is ignored.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 500
+        - name: size
+          in: query
+          description: Number of APIs in a page. By default, if the pagination value is passed as 0, the maximum number of objects returned is 20. This property can be customized with service.maximum.assets=20 in the application.properties file. A successful GET call returns the default page number, that is 20, and any invalid value, such as ["five," -345], is ignored.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 500
+        - name: sort
+          in: query
+          description: List of properties with the sort order. Property and order are given in the format "property,order".  The supported values for order are "ASC", "asc", "DESC" and "desc". "ASC" or "asc" is used for ascending order and "DESC" or "desc" is used for descending order.
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: This status code indicates the successful retrieval of APIs for the specified runtime.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/APIDocument'
+              example:
+                - id: ea488aed-2588-4988-990d-8342d0bca78
+                  name: PetStoreAPI
+                  description: Description for PetStoreAPI
+                  tags:
+                    - Dev
+                  displayVersion: v2.0
+                  systemVersion: 1
+                  apiType: REST
+                  apiStatus: ACTIVE
+                  noOfPolicies : 3
+                  publishInfo:
+                    - webMethods Developer Portal
+        '401':
+          description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to retrieve the API list for the specified runtime.
+        '500':
+          $ref: '#/components/responses/internal_server_error'
+    post:
+      description: This method creates an API in the specified runtime.
+      parameters:
+        - name: runtimeId
+          in: path
+          description: Runtime UUID.
+          required: true
+          schema:
+            type: string
+          example: d3841d21-ef31-4b95-a82a-ed08f10a20e5
+      requestBody:
+        description: The APIDocument resource model.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/APIDocument'
+            example:
+              name: PetStoreAPI
+              description: Description for PetStoreAPI
+              id: ea488aed-2588-4988-990d-8342d0bca78
+              apiType: REST
+              displayVersion: v2.0
+              apiStatus: ACTIVE
+              tags:
+                - Dev
+              noOfPolicies : 3
+              publishInfo:
+                - webMethods Developer Portal
+      responses:
+        '201':
+          description: This status code indicates the successful creation of an API.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API'
+              example:
+                id: 5743beab-51c4-4b49-910f-282067db563d
+                createdDate: 2022-10-13 15:04:06:433 IST
+                lastModifiedDate: 2022-10-13 15:04:06:433 IST
+                apiId: ea488aed-2588-4988-990d-8342d0bca78
+                runtimeId: d3841d21-ef31-4b95-a82a-ed08f10a20e5
+                owner:
+                  name: John
+                  id: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
+                  type: USER
+                apiDocument:
+                  id: ea488aed-2588-4988-990d-8342d0bca78
+                  name: PetStoreAPI
+                  description: Description for PetStoreAPI
+                  tags:
+                    - Dev
+                  displayVersion: v2.0
+                  systemVersion: 1
+                  apiType: REST
+                  apiStatus: ACTIVE
+                  noOfPolicies : 3
+                  publishInfo:
+                    - webMethods Developer Portal
+        '401':
+          description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to create an API.
+        '400':
+          $ref: '#/components/responses/4XX_bad_request_error'
+        '500':
+          $ref: '#/components/responses/internal_server_error'
+  /runtimes/{runtimeId}/apis/{apiId}:
+    get:
+      description: This method retrieves a specific API in the specified runtime.
+      parameters:
+        - name: runtimeId
+          in: path
+          description: Runtime UUID.
+          required: true
+          schema:
+            type: string
+          example: d3841d21-ef31-4b95-a82a-ed08f10a20e5
+        - name: apiId
+          in: path
+          description: API UUID.
+          required: true
+          schema:
+            type: string
+          example: ea488aed-2588-4988-990d-8342d0bca78
+      responses:
+        '200':
+          description: This status code indicates the successful retrieval of the API from the specified runtime.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API'
+              example:
+                id: 5743beab-51c4-4b49-910f-282067db563d
+                createdDate: 2022-10-13 15:04:06:433 IST
+                lastModifiedDate: 2022-10-13 15:08:27:139 IST
+                apiId: ea488aed-2588-4988-990d-8342d0bca78
+                runtimeId: d3841d21-ef31-4b95-a82a-ed08f10a20e5
+                owner:
+                  name: John
+                  id: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
+                  type: USER
+                apiDocument:
+                  id: ea488aed-2588-4988-990d-8342d0bca78
+                  name: PetStoreAPI
+                  description: Description for PetStoreAPI
+                  tags:
+                    - Dev
+                  displayVersion: v2.0
+                  systemVersion: 1
+                  apiType: REST
+                  apiStatus: ACTIVE
+                  noOfPolicies : 3
+                  publishInfo:
+                    - webMethods Developer Portal
+        '401':
+          description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to view the API.
+        '500':
+          $ref: '#/components/responses/internal_server_error'
+    put:
+      description: This method updates a specific API in the specified runtime.
+      parameters:
+        - name: runtimeId
+          in: path
+          description: Runtime UUID.
+          required: true
+          schema:
+            type: string
+          example: d3841d21-ef31-4b95-a82a-ed08f10a20e5
+        - name: apiId
+          in: path
+          description: API UUID.
+          required: true
+          schema:
+            type: string
+          example: ea488aed-2588-4988-990d-8342d0bca78
+      requestBody:
+        description: The APIDocument resource model.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/APIDocument'
+            example:
+              name: PetStoreAPI
+              description: Description for PetStoreAPI
+              id: ea488aed-2588-4988-990d-8342d0bca78
+              apiType: REST
+              displayVersion: v2.0
+              apiStatus: ACTIVE
+              tags:
+                - Dev
+              noOfPolicies : 3
+              publishInfo:
+                - webMethods Developer Portal
+      responses:
+        '200':
+          description: This status code indicates the successful updation of an API in the specified runtime.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/API'
+              example:
+                id: 5743beab-51c4-4b49-910f-282067db563d
+                createdDate: 2022-10-13 15:04:06:433 IST
+                lastModifiedDate: 2022-10-13 15:08:27:139 IST
+                apiId: ea488aed-2588-4988-990d-8342d0bca78
+                runtimeId: d3841d21-ef31-4b95-a82a-ed08f10a20e5
+                owner:
+                  name: John
+                  id: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
+                  type: USER
+                apiDocument:
+                  id: ea488aed-2588-4988-990d-8342d0bca78
+                  name: PetStoreAPI
+                  description: Description for PetStoreAPI
+                  tags:
+                    - Dev
+                  displayVersion: v2.0
+                  systemVersion: 1
+                  apiType: REST
+                  apiStatus: ACTIVE
+                  noOfPolicies : 3
+                  publishInfo:
+                    - INTEGRATION_SERVER
+
+        '401':
+          description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to update an API.
+        '400':
+          $ref: '#/components/responses/4XX_bad_request_error'
+        '500':
+          $ref: '#/components/responses/internal_server_error'
+    delete:
+      description: This method deletes a specific API in the specified runtime.
+      parameters:
+        - name: runtimeId
+          in: path
+          description: Runtime UUID.
+          required: true
+          schema:
+            type: string
+          example: d3841d21-ef31-4b95-a82a-ed08f10a20e5
+        - name: apiId
+          in: path
+          description: API UUID.
+          required: true
+          schema:
+            type: string
+          example: ea488aed-2588-4988-990d-8342d0bca78
+      responses:
+        '200':
+          description: This status code indicates the successful deletion of an API in the specified runtime.
+        '401':
+          description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to delete an API.
+        '500':
+          $ref: '#/components/responses/internal_server_error'
+components:
+  schemas:
+    API:
+      type: object
+      properties:
+        id:
+          type: string
+          description: UUID of the object.
+          example: 5743beab-51c4-4b49-910f-282067db563d
+        createdDate:
+          type: string
+          description: The time the asset was created.
+          example: 2022-10-13 15:04:06:433 IST
+        lastModifiedDate:
+          type: string
+          description: The time the asset was last modified.
+          example: 2022-10-13 15:04:06:433 IST
+        apiId:
+          type: string
+          description: UUID of the API.
+          example: ea488aed-2588-4988-990d-8342d0bca78
+        runtimeId:
+          type: string
+          description: UUID of the runtime.
+          example: d3841d21-ef31-4b95-a82a-ed08f10a20e5
+        owner:
+          $ref : '#/components/schemas/Owner'
+        apiDocument:
+          $ref : '#/components/schemas/APIDocument'
+    APIDocument:
+      type: object
+      required:
+        - name
+        - apiType
+      properties:
+        id:
+          type: string
+          description: UUID of the API.
+          example: ea488aed-2588-4988-990d-8342d0bca78
+        name:
+          type: string
+          description: Name of the API.
+          minLength: 1
+          maxLength: 1024
+          pattern: "[\\\\()_+@\\!\\#$%^&{}\\-\\=,.~'`\\p{L}\\p{M}{0-9}\\s]{0,1024}"
+          example: PetStoreAPI
+        description:
+          type: string
+          description: Short description of the API.
+          minLength: 0
+          maxLength: 8191
+          example: Description for PetStoreAPI
+        tags:
+          type: array
+          items:
+            type: string
+            maxLength: 8191
+          example: ["Dev"]
+        apiType:
+          type: string
+          description: Type of the API.
+          enum:
+            - REST
+            - SOAP
+            - ODATA
+            - WEBSOCKET
+            - GRAPHQL
+          example: REST
+        apiStatus:
+          type: string
+          description: API status in the runtime.
+          enum:
+            - ACTIVE
+            - INACTIVE
+          example: ACTIVE
+        displayVersion:
+          type: string
+          description: Display version of the API.
+          example: v2.0
+        systemVersion :
+          type: integer
+          readOnly: true
+          nullable: true
+          description: System version of the API.
+          example: 1
+        previousVersion:
+          type: string
+          readOnly: true
+          nullable: true
+          description: Previous version of the API.
+          example: v1.0
+        nextVersion:
+          type: string
+          readOnly: true
+          nullable: true
+          description: Next version of the API.
+          example: v3.0
+        publishInfo:
+            type: array
+            items:
+              type: string
+            example: ["WEBMETHODS_PORTAL","SERVICE_REGISTRY","INTEGRATION_SERVER"]
+        noOfPolicies :
+          type : integer
+          example : 3
+    Owner:
+      description: Owner information.
+      type: object
+      readOnly: true
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the owner.
+          example: John
+        id:
+          type: string
+          description: Id of the owner.
+          example: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
+        type:
+          type: string
+          description: Type of the owner.
+          example: USER
+    APILandscape:
+      type: object
+      properties:
+        id:
+          type: string
+          description: UUID of the API.
+          example: ea488aed-2588-4988-990d-8342d0bca78
+        name:
+          type: string
+          description: Name of the API.
+          example: PetStoreAPI
+        apiType:
+          type: string
+          description: Type of the API.
+          example: REST
+          enum:
+            - REST
+            - SOAP
+            - ODATA
+            - WEBSOCKET
+            - GRAPHQL
+        owner:
+          $ref : '#/components/schemas/Owner'
+        apiDeployments :
+          $ref : '#/components/schemas/APIDeployment'
+        apiDifferencesCount :
+          type: integer
+          description: The difference count when comparing APIs across various runtimes. For instance, the DifferencesCount is 1 when an API that is available in three runtimes is compared, assuming that the API Name changes in each of the three runtimes.
+          example: 20
+    APIDeployment :
+      type: array
+      items:
+        type: object
+        properties:
+          runtimeId:
+            type: string
+            description: UUID of the runtime.
+            example: d3841d21-ef31-4b95-a82a-ed08f10a20e5
+          runtimeName:
+            type: string
+            description: Name of the runtime.
+            example: runtime 1
+          region:
+            type: string
+            description: Region of the runtime.
+            example: eu
+          apiStatus:
+            type: string
+            description: API status in the runtime.
+            example: ACTIVE
+          displayVersion:
+            type: string
+            description: Display version of the API in the runtime.
+            example: v2.0
+          lastModifiedDate:
+            type: string
+            description: Last updated date of the API.
+            example: 2022-10-13 15:08:27:139 IST
+          name:
+            type: string
+            description: Name of the API.
+            minLength: 1
+            maxLength: 1024
+            example: PetStoreAPI
+          description:
+            type: string
+            description: Short description of the API.
+            minLength: 0
+            maxLength: 8191
+            example: PetStoreAPI
+          tags:
+            type: array
+            items:
+              type: string
+            example: ["Dev"]
+          publishInfo:
+            type: array
+            items:
+              type: string
+            example: ["WEBMETHODS_PORTAL","SERVICE_REGISTRY","INTEGRATION_SERVER"]
+          noOfPolicies :
+            type : integer
+            example : 3
+    ErrorMessage:
+      description: Common Error Response across all APIs
+      required: [ "errorDetails" ]
+      type: object
+      properties:
+        errorDetails:
+          type: array
+          items:
+            type: string
+          example: This response indicates that the server encountered an error.
+  responses:
+   internal_server_error:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+              $ref: "#/components/schemas/ErrorMessage"
+          example:
+            errorDetails:
+              - This response indicates that the server encountered an error.
+   4XX_bad_request_error:
+       description: This status code indicates that the request body is bad.
+       content:
+         application/json:
+           schema:
+              $ref: "#/components/schemas/ErrorMessage"
+           example:
+             errorDetails:
+                - "apiType: API Type is mandatory."
+  securitySchemes:
+    basic_authentication:
+      type: http
+      description: This is the Basic Authentication mechanism where the credentials are sent in a Base64 encoded format of the form <username>:<password> in the Authorization header.
+      scheme: basic
+security:
+- basic_authentication: []
