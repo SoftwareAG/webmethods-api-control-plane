@@ -30,18 +30,17 @@ We will have a self-hosted Elasticsearch clusters with 3 nodes (Reused by Asset 
 **CPU:** 1
 **Volume:** 300 GB (100KB * 1(per minute) * 60(per hour) * 24(per day) * 20(20 API GW pods) * 2(replicas)) - for retaining 45 days of data - comes to ~260GB.
 
-The application level configuration for different microservices are available [here](deployment/docker/README.md).
 
 ### Health, monitoring, metrics and actions
-Please refer this link for a detailed explanation [here](deployment/docker/README.md).
+Please refer this link for a detailed explanation [here](https://documentation.softwareag.com/webmethods/api_control_plane/wco10-15/webhelp/wco-webhelp/index.html#page/wco-webhelp%2F_api_cp_webhelp.1.23.html%23).
 ### High Availability
-Please refer this link for a detailed explanation [here](deployment/docker/README.md).
+Please refer this link for a detailed explanation [here](https://documentation.softwareag.com/webmethods/api_control_plane/wco10-15/webhelp/wco-webhelp/index.html#page/wco-webhelp%2Fco-deployment.html%23).
 ### logging and tracing
 - The logs are printed to the standard output by the containers/pods, the log information can be read through this.
 - To perform debugging, API Control plane can be started in debug mode with Open telemetry enabled. Instructions to set up is available [here](deployment/docker/README.md#1-enabling-open-telemetry-using-jaeger).
 
 ### Data management and housekeeping
-Please refer this link for a detailed explanation [here](deployment/docker/README.md).
+Please refer this link for a detailed explanation [here](https://documentation.softwareag.com/webmethods/api_control_plane/wco10-15/webhelp/wco-webhelp/index.html#page/wco-webhelp%2F_api_cp_webhelp.1.19.html%23).
 
 ## Using API Control Plane
 ### Control Plane setup
@@ -52,15 +51,15 @@ Please refer this link for a detailed explanation [here](deployment/docker/READM
 - For deployment instructions using helm on kubernetes go [here](deployment/helm/README.md).
 
 ### Preparing API Gateway for connectivity
-For instructions on how to configure API Gateway Agent connectivity with API Control Plane refer  [here](deployment/docker/README.md).
+For instructions on how to configure API Gateway Agent connectivity with API Control Plane refer  [here](https://documentation.softwareag.com/webmethods/api_control_plane/wco10-15/webhelp/wco-webhelp/index.html#page/wco-webhelp%2Fco-agent.html%23).
 
 ### Setting up Control plane
-- Data planes are the logical groupings of the runtimes in the landscape. You can create data planes by grouping the runtimes based on the selection criteria. For creating data planes go [here](deployment/docker/README.md).
+- Data planes are the logical groupings of the runtimes in the landscape. You can create data planes by grouping the runtimes based on the selection criteria. For creating data planes go [here](https://documentation.softwareag.com/webmethods/api_control_plane/wco10-15/webhelp/wco-webhelp/index.html#page/wco-webhelp%2F_api_cp_webhelp.1.46.html%23).
 
 ### Seeing the APIs and monitoring data in control plane
-- To manage the list of API's using API Control Plane refer [here](deployment/docker/README.md).
-- To manage the list of runtimes using API Control Plane refer [here](deployment/docker/README.md).
-- To monitor different metrics using API Control Plane refer [here](deployment/docker/README.md).
+- To manage the list of API's using API Control Plane refer [here](https://documentation.softwareag.com/webmethods/api_control_plane/wco10-15/webhelp/wco-webhelp/index.html#page/wco-webhelp%2F_api_cp_webhelp.1.50.html%23).
+- To manage the list of runtimes using API Control Plane refer [here](https://documentation.softwareag.com/webmethods/api_control_plane/wco10-15/webhelp/wco-webhelp/index.html#page/wco-webhelp%2F_api_cp_webhelp.1.37.html%23).
+- To monitor different metrics using API Control Plane refer [here](https://documentation.softwareag.com/webmethods/api_control_plane/wco10-15/webhelp/wco-webhelp/index.html#page/wco-webhelp%2F_api_cp_webhelp.1.52.html%23).
 ## Public APIs
 
 API Control Plane exposes public APIs to interact with it. API docs as well as postman collection with sample usage can be found [here](apis/README.md).
