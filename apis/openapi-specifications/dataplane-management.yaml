@@ -1,0 +1,769 @@
+openapi: "3.0.2"
+info:
+  title: Data plane Management Service
+  version: "1.0.0"
+  description : Data plane in API Control Plane is a collection of runtimes like API Gateway, Developer Portal running in different landscapes.
+
+    API Control Plane exposes REST APIs to help you create, read, update, and delete (CRUD) data planes.
+servers:
+ - url: "{protocol}://{hostname}:{port}/api/assetcatalog/v1"
+   description: This is the endpoint where the Asset-catalog API is accessible from the server.
+   variables:
+    protocol:
+      default: https
+      enum:
+      - http
+      - https
+      description: The protocol supported by the server - HTTP or HTTPS. Default is HTTPS.
+    hostname:
+      default: localhost
+      description: The domain name of the server where the API is hosted. The hostname must be resolvable by the DNS lookup.
+    port:
+      default: "443"
+      description: The port number where the REST API is running on the server. The default port for HTTPS is 443 and HTTP is 80 but it can also be any valid port.
+paths:
+  /dataplanes:
+    post:
+      description: This method creates a new data plane.
+      requestBody:
+        description: The data plane resource model.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Dataplane"
+            example:
+              name: EastUS_Dataplane
+              description: This data plane helps you to visualize the data planes running in us-east-1 region.
+              tags:
+                - east-us
+              icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABRCAIAAAARlBx9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPmSURBVHhe7dhNctswDEBhXqe7Lnvv3qK3iOP/uDdox4UEGqIeJQqWZTpVi/nWBt4oM5EdfvbmUnBRrvkY86GG51xwVpxTQdp2KXO3sSe1aBtjwNv2/Icmcy54pO1SEMNcbexJLfrQZBiTOt3aLmXPD5M5F8x4aNp2KXOHybAnVfmhTbc9Nex6+pZDmJj30CbaFg9DxpipMBnGpDSs1LZIGI7264WxjTEQ205DbbFqVhhOfMSDD22g7Z4qmSVjcveGCQvrtTkfF9Y/WyyKwxJIw2RiW6EKy+qLXVkJxLCu7RgGHxc+/eWQkcvDbm3Z/Pr+BZ/+coiBfpiMtg2NtH3CPIEkNRg20fZX5I2FTbd98rxCmKvt0+aVw0Te1rxeoE3h01+uHCasrffqhCqDT3+52JVVKWnrVSkkpfDpL4ee1N1tAp/+Wr9/fEWSmdMmsKAy6UkhyQy0yfdIlAzCvqdCDCBJHdEWvyD72gQuWBCuL0OVkLCmzXoat0FDAW6aDefeJa9qHLUtGwSU4Uon3PeIwbDj8RBiTX9wvQdOz+GgBfXC2io12HbG3U7VYgCPa7DtbHC0H7bWkVcpaeuSDC72w9Y6BsPEOtpYpf63uWFrHUgyXVv8EbeFi/2wtQ4kmdAlJYOL/bC1DiSpQ9M2NLjYD1vryKtae7TF31hwsR+21pFXHQ4NaYs9KVzsh6115FXracur1JJtWFkNksw/0xZ/zVxNm/VE7eBoJ6ysBkkmxJreHHG0E1ZWgySjbfE7ucHRTlhZDZL2jZ2QNoYJHO2EldXkVY39Wtq6pLZKraENSWYVbVmVim3dT0UtHO2EldUgyYTYEye+UONoJ6ysBkkmWE8KRzthZTVIMqts2+5aK2uLVWtq6yU1do01tCHJNG23L+RmL3C3B1ZWgyQTtMReyVI4fRJWVoMkE9ADuL4MK6tBkploEwgowMpqkHTzPt0m0DAGK6tBkti2ptvaL0WuPKysRnssybCt9/Uutd+hJIeV1SBpu40CG1T3n57Qk8LKapBkAk73QJLBymqQZOa0CVQprHweNIyZ2SavcAgTuGBBY391IzbK2bYdeB/N8nDQI2LM/T2pvK3JGCzpJP9PlmrrYu7oEewR7zeBd0OSMWZeWy9muZ5U0pYd7edpY4zg0WXsEYhpvHcCrpwtb2OJ4LmTGCMYo5Ik80hbfNPJX3Y6vHUSSxRLVBbT9+Zvm8pQvNWDJYoligHwlsrbuqfxnBLBDMMSxQDo9ZhN2+ZoELzvLmwwzDAMyDFGSZIJbBC8bAY2GDakeH2OJSrt6WykjWfNwIAUA1I8PccMwxKz6YTrWud6/QMDnAYz3wg70wAAAABJRU5ErkJggg==
+              runtimesFilter:
+                runtimeTypes:
+                  - WEBMETHODS_GATEWAY
+                deploymentTypes:
+                  - ON_PREMISE
+                  - SAG_SAAS
+                regions:
+                  - region: east-us
+                    operator: equals
+                locations:
+                  - location: Boston
+                    operator: equals
+                tags:
+                  - tag: govern
+                    operator: contains
+                  - tag: state
+                    operator: contains
+                runtimeNames:
+                  - name: lot
+                    operator: startsWith
+                runtimeIds:
+                  - 9e19-415d-99f8-b555a17a2744-512f725f
+                  - 415d-99f8-b555a17a2744-512f725f-9e19
+                logicalOperator: OR
+      responses:
+        "201":
+          description: This status code indicates the successful creation of a new data plane.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dataplane"
+              example:
+                id: 89967ad8-76c1-4a6c-952e-a42b624cd59b
+                name: EastUS_Dataplane
+                description: This data plane helps you to visualize the data planes running in us-east-1 region.
+                owner:
+                  name: Alice
+                  id: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
+                  type: USER
+                tags:
+                  - east-us
+                icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABRCAIAAAARlBx9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPmSURBVHhe7dhNctswDEBhXqe7Lnvv3qK3iOP/uDdox4UEGqIeJQqWZTpVi/nWBt4oM5EdfvbmUnBRrvkY86GG51xwVpxTQdp2KXO3sSe1aBtjwNv2/Icmcy54pO1SEMNcbexJLfrQZBiTOt3aLmXPD5M5F8x4aNp2KXOHybAnVfmhTbc9Nex6+pZDmJj30CbaFg9DxpipMBnGpDSs1LZIGI7264WxjTEQ205DbbFqVhhOfMSDD22g7Z4qmSVjcveGCQvrtTkfF9Y/WyyKwxJIw2RiW6EKy+qLXVkJxLCu7RgGHxc+/eWQkcvDbm3Z/Pr+BZ/+coiBfpiMtg2NtH3CPIEkNRg20fZX5I2FTbd98rxCmKvt0+aVw0Te1rxeoE3h01+uHCasrffqhCqDT3+52JVVKWnrVSkkpfDpL4ee1N1tAp/+Wr9/fEWSmdMmsKAy6UkhyQy0yfdIlAzCvqdCDCBJHdEWvyD72gQuWBCuL0OVkLCmzXoat0FDAW6aDefeJa9qHLUtGwSU4Uon3PeIwbDj8RBiTX9wvQdOz+GgBfXC2io12HbG3U7VYgCPa7DtbHC0H7bWkVcpaeuSDC72w9Y6BsPEOtpYpf63uWFrHUgyXVv8EbeFi/2wtQ4kmdAlJYOL/bC1DiSpQ9M2NLjYD1vryKtae7TF31hwsR+21pFXHQ4NaYs9KVzsh6115FXracur1JJtWFkNksw/0xZ/zVxNm/VE7eBoJ6ysBkkmxJreHHG0E1ZWgySjbfE7ucHRTlhZDZL2jZ2QNoYJHO2EldXkVY39Wtq6pLZKraENSWYVbVmVim3dT0UtHO2EldUgyYTYEye+UONoJ6ysBkkmWE8KRzthZTVIMqts2+5aK2uLVWtq6yU1do01tCHJNG23L+RmL3C3B1ZWgyQTtMReyVI4fRJWVoMkE9ADuL4MK6tBkploEwgowMpqkHTzPt0m0DAGK6tBkti2ptvaL0WuPKysRnssybCt9/Uutd+hJIeV1SBpu40CG1T3n57Qk8LKapBkAk73QJLBymqQZOa0CVQprHweNIyZ2SavcAgTuGBBY391IzbK2bYdeB/N8nDQI2LM/T2pvK3JGCzpJP9PlmrrYu7oEewR7zeBd0OSMWZeWy9muZ5U0pYd7edpY4zg0WXsEYhpvHcCrpwtb2OJ4LmTGCMYo5Ik80hbfNPJX3Y6vHUSSxRLVBbT9+Zvm8pQvNWDJYoligHwlsrbuqfxnBLBDMMSxQDo9ZhN2+ZoELzvLmwwzDAMyDFGSZIJbBC8bAY2GDakeH2OJSrt6WykjWfNwIAUA1I8PccMwxKz6YTrWud6/QMDnAYz3wg70wAAAABJRU5ErkJggg==
+                runtimesFilter:
+                  runtimeTypes:
+                    - WEBMETHODS_GATEWAY
+                  deploymentTypes:
+                    - ON_PREMISE
+                    - SAG_SAAS
+                  regions:
+                    - region: east-us
+                      operator: equals
+                  locations:
+                    - location: Boston
+                      operator: equals
+                  tags:
+                    - tag: govern
+                      operator: contains
+                    - tag: state
+                      operator: contains
+                  runtimeNames:
+                    - name: lot
+                      operator: startsWith
+                  runtimeIds:
+                    - 9e19-415d-99f8-b555a17a2744-512f725f
+                    - 415d-99f8-b555a17a2744-512f725f-9e19
+                  logicalOperator: OR
+                createdDate: 2022-06-03 10:44:41:478 GMT
+                lastModifiedDate: 2022-06-03 10:44:41:478 GMT
+        "401":
+          description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to create a data plane.
+        "400":
+          $ref: '#/components/responses/4XX_bad_request_error'
+        "500":
+          $ref: '#/components/responses/internal_server_error'
+    get:
+      description: This method retrieves all the available data planes.
+      parameters:
+        - name: page
+          in: query
+          description: Page number of the data planes list.
+          schema:
+            type: integer
+        - name: size
+          in: query
+          description: Number of data planes in a page.
+          schema:
+            type: integer
+        - name: sort
+          in: query
+          description: List of properties with the sort order. Property and order are given in the format "property,order". Property is any property defined in the data plane model like id, name, description, so on. The supported values for order are "ASC", "asc", "DESC", and "desc". "ASC" or "asc" is used for ascending order and "DESC" or "desc" is used for descending order.
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        "200":
+          description: This status code indicates the successful retrieval of the available data planes.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Dataplane"
+              example:
+                - id: 89967ad8-76c1-4a6c-952e-a42b624cd59b
+                  name: EastUS_Dataplane
+                  description: This data plane helps you to visualize the data planes running in us-east-1 region.
+                  owner:
+                    name: Alice
+                    id: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
+                    type: USER
+                  tags:
+                    - east-us
+                  icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABRCAIAAAARlBx9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPmSURBVHhe7dhNctswDEBhXqe7Lnvv3qK3iOP/uDdox4UEGqIeJQqWZTpVi/nWBt4oM5EdfvbmUnBRrvkY86GG51xwVpxTQdp2KXO3sSe1aBtjwNv2/Icmcy54pO1SEMNcbexJLfrQZBiTOt3aLmXPD5M5F8x4aNp2KXOHybAnVfmhTbc9Nex6+pZDmJj30CbaFg9DxpipMBnGpDSs1LZIGI7264WxjTEQ205DbbFqVhhOfMSDD22g7Z4qmSVjcveGCQvrtTkfF9Y/WyyKwxJIw2RiW6EKy+qLXVkJxLCu7RgGHxc+/eWQkcvDbm3Z/Pr+BZ/+coiBfpiMtg2NtH3CPIEkNRg20fZX5I2FTbd98rxCmKvt0+aVw0Te1rxeoE3h01+uHCasrffqhCqDT3+52JVVKWnrVSkkpfDpL4ee1N1tAp/+Wr9/fEWSmdMmsKAy6UkhyQy0yfdIlAzCvqdCDCBJHdEWvyD72gQuWBCuL0OVkLCmzXoat0FDAW6aDefeJa9qHLUtGwSU4Uon3PeIwbDj8RBiTX9wvQdOz+GgBfXC2io12HbG3U7VYgCPa7DtbHC0H7bWkVcpaeuSDC72w9Y6BsPEOtpYpf63uWFrHUgyXVv8EbeFi/2wtQ4kmdAlJYOL/bC1DiSpQ9M2NLjYD1vryKtae7TF31hwsR+21pFXHQ4NaYs9KVzsh6115FXracur1JJtWFkNksw/0xZ/zVxNm/VE7eBoJ6ysBkkmxJreHHG0E1ZWgySjbfE7ucHRTlhZDZL2jZ2QNoYJHO2EldXkVY39Wtq6pLZKraENSWYVbVmVim3dT0UtHO2EldUgyYTYEye+UONoJ6ysBkkmWE8KRzthZTVIMqts2+5aK2uLVWtq6yU1do01tCHJNG23L+RmL3C3B1ZWgyQTtMReyVI4fRJWVoMkE9ADuL4MK6tBkploEwgowMpqkHTzPt0m0DAGK6tBkti2ptvaL0WuPKysRnssybCt9/Uutd+hJIeV1SBpu40CG1T3n57Qk8LKapBkAk73QJLBymqQZOa0CVQprHweNIyZ2SavcAgTuGBBY391IzbK2bYdeB/N8nDQI2LM/T2pvK3JGCzpJP9PlmrrYu7oEewR7zeBd0OSMWZeWy9muZ5U0pYd7edpY4zg0WXsEYhpvHcCrpwtb2OJ4LmTGCMYo5Ik80hbfNPJX3Y6vHUSSxRLVBbT9+Zvm8pQvNWDJYoligHwlsrbuqfxnBLBDMMSxQDo9ZhN2+ZoELzvLmwwzDAMyDFGSZIJbBC8bAY2GDakeH2OJSrt6WykjWfNwIAUA1I8PccMwxKz6YTrWud6/QMDnAYz3wg70wAAAABJRU5ErkJggg==
+                  runtimesFilter:
+                    runtimeTypes:
+                      - WEBMETHODS_GATEWAY
+                    deploymentTypes:
+                      - ON_PREMISE
+                      - SAG_SAAS
+                    regions:
+                      - region: east-us
+                        operator: equals
+                    locations:
+                      - location: Boston
+                        operator: equals
+                    tags:
+                      - tag: govern
+                        operator: contains
+                      - tag: state
+                        operator: contains
+                    runtimeNames:
+                      - name: lot
+                        operator: startsWith
+                    runtimeIds:
+                      - 9e19-415d-99f8-b555a17a2744-512f725f
+                      - 415d-99f8-b555a17a2744-512f725f-9e19
+                    logicalOperator: OR
+                  createdDate: 2022-06-03 10:44:41:478 GMT
+                  lastModifiedDate: 2022-06-03 10:44:41:478 GMT
+        "401":
+          description:  This status code indicates that either the user did not provide any user credentials or the user does not have access rights to retrieve data planes list.
+        "500":
+          $ref: '#/components/responses/internal_server_error'
+  /dataplanes/{id}:
+    get:
+      description:  This method retrieves the data plane with the specified ID.
+      parameters:
+        - name: id
+          in: path
+          description: Data plane UUID.
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 50
+          example: 512f725f-9e19-415d-99f8-b555a17a2744
+      responses:
+        "200":
+          description: This status code indicates the successful retrieval of the data plane with the specified ID.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dataplane"
+              example:
+                id: 89967ad8-76c1-4a6c-952e-a42b624cd59b
+                name: EastUS_Dataplane
+                description: This data plane helps you to visualize the data planes running in us-east-1 region.
+                owner:
+                  name: Alice
+                  id: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
+                  type: USER
+                tags:
+                  - east-us
+                icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABRCAIAAAARlBx9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPmSURBVHhe7dhNctswDEBhXqe7Lnvv3qK3iOP/uDdox4UEGqIeJQqWZTpVi/nWBt4oM5EdfvbmUnBRrvkY86GG51xwVpxTQdp2KXO3sSe1aBtjwNv2/Icmcy54pO1SEMNcbexJLfrQZBiTOt3aLmXPD5M5F8x4aNp2KXOHybAnVfmhTbc9Nex6+pZDmJj30CbaFg9DxpipMBnGpDSs1LZIGI7264WxjTEQ205DbbFqVhhOfMSDD22g7Z4qmSVjcveGCQvrtTkfF9Y/WyyKwxJIw2RiW6EKy+qLXVkJxLCu7RgGHxc+/eWQkcvDbm3Z/Pr+BZ/+coiBfpiMtg2NtH3CPIEkNRg20fZX5I2FTbd98rxCmKvt0+aVw0Te1rxeoE3h01+uHCasrffqhCqDT3+52JVVKWnrVSkkpfDpL4ee1N1tAp/+Wr9/fEWSmdMmsKAy6UkhyQy0yfdIlAzCvqdCDCBJHdEWvyD72gQuWBCuL0OVkLCmzXoat0FDAW6aDefeJa9qHLUtGwSU4Uon3PeIwbDj8RBiTX9wvQdOz+GgBfXC2io12HbG3U7VYgCPa7DtbHC0H7bWkVcpaeuSDC72w9Y6BsPEOtpYpf63uWFrHUgyXVv8EbeFi/2wtQ4kmdAlJYOL/bC1DiSpQ9M2NLjYD1vryKtae7TF31hwsR+21pFXHQ4NaYs9KVzsh6115FXracur1JJtWFkNksw/0xZ/zVxNm/VE7eBoJ6ysBkkmxJreHHG0E1ZWgySjbfE7ucHRTlhZDZL2jZ2QNoYJHO2EldXkVY39Wtq6pLZKraENSWYVbVmVim3dT0UtHO2EldUgyYTYEye+UONoJ6ysBkkmWE8KRzthZTVIMqts2+5aK2uLVWtq6yU1do01tCHJNG23L+RmL3C3B1ZWgyQTtMReyVI4fRJWVoMkE9ADuL4MK6tBkploEwgowMpqkHTzPt0m0DAGK6tBkti2ptvaL0WuPKysRnssybCt9/Uutd+hJIeV1SBpu40CG1T3n57Qk8LKapBkAk73QJLBymqQZOa0CVQprHweNIyZ2SavcAgTuGBBY391IzbK2bYdeB/N8nDQI2LM/T2pvK3JGCzpJP9PlmrrYu7oEewR7zeBd0OSMWZeWy9muZ5U0pYd7edpY4zg0WXsEYhpvHcCrpwtb2OJ4LmTGCMYo5Ik80hbfNPJX3Y6vHUSSxRLVBbT9+Zvm8pQvNWDJYoligHwlsrbuqfxnBLBDMMSxQDo9ZhN2+ZoELzvLmwwzDAMyDFGSZIJbBC8bAY2GDakeH2OJSrt6WykjWfNwIAUA1I8PccMwxKz6YTrWud6/QMDnAYz3wg70wAAAABJRU5ErkJggg==
+                runtimesFilter:
+                  runtimeTypes:
+                    - WEBMETHODS_GATEWAY
+                  deploymentTypes:
+                    - ON_PREMISE
+                    - SAG_SAAS
+                  regions:
+                    - region: east-us
+                      operator: equals
+                  locations:
+                    - location: Boston
+                      operator: equals
+                  tags:
+                    - tag: govern
+                      operator: contains
+                    - tag: state
+                      operator: contains
+                  runtimeNames:
+                    - name: lot
+                      operator: startsWith
+                  runtimeIds:
+                    - 9e19-415d-99f8-b555a17a2744-512f725f
+                    - 415d-99f8-b555a17a2744-512f725f-9e19
+                  logicalOperator: OR
+                createdDate: 2022-06-03 10:44:41:478 GMT
+                lastModifiedDate: 2022-06-03 10:44:41:478 GMT
+        "401":
+          description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to retrieve the specified data plane.
+        "500":
+          $ref: '#/components/responses/internal_server_error'
+    put:
+      description: This method updates the data plane with the specified ID.
+      parameters:
+        - name: id
+          in: path
+          description: Data plane UUID.
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 50
+          example: 512f725f-9e19-415d-99f8-b555a17a2744
+      requestBody:
+        description: The data plane resource model.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Dataplane"
+            example:
+              id: 89967ad8-76c1-4a6c-952e-a42b624cd59b
+              name: EastUS_Dataplane
+              description: This data plane helps you to visualize the runtimes running in us-east-1 region.
+              tags:
+                - east-us
+              icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABRCAIAAAARlBx9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPmSURBVHhe7dhNctswDEBhXqe7Lnvv3qK3iOP/uDdox4UEGqIeJQqWZTpVi/nWBt4oM5EdfvbmUnBRrvkY86GG51xwVpxTQdp2KXO3sSe1aBtjwNv2/Icmcy54pO1SEMNcbexJLfrQZBiTOt3aLmXPD5M5F8x4aNp2KXOHybAnVfmhTbc9Nex6+pZDmJj30CbaFg9DxpipMBnGpDSs1LZIGI7264WxjTEQ205DbbFqVhhOfMSDD22g7Z4qmSVjcveGCQvrtTkfF9Y/WyyKwxJIw2RiW6EKy+qLXVkJxLCu7RgGHxc+/eWQkcvDbm3Z/Pr+BZ/+coiBfpiMtg2NtH3CPIEkNRg20fZX5I2FTbd98rxCmKvt0+aVw0Te1rxeoE3h01+uHCasrffqhCqDT3+52JVVKWnrVSkkpfDpL4ee1N1tAp/+Wr9/fEWSmdMmsKAy6UkhyQy0yfdIlAzCvqdCDCBJHdEWvyD72gQuWBCuL0OVkLCmzXoat0FDAW6aDefeJa9qHLUtGwSU4Uon3PeIwbDj8RBiTX9wvQdOz+GgBfXC2io12HbG3U7VYgCPa7DtbHC0H7bWkVcpaeuSDC72w9Y6BsPEOtpYpf63uWFrHUgyXVv8EbeFi/2wtQ4kmdAlJYOL/bC1DiSpQ9M2NLjYD1vryKtae7TF31hwsR+21pFXHQ4NaYs9KVzsh6115FXracur1JJtWFkNksw/0xZ/zVxNm/VE7eBoJ6ysBkkmxJreHHG0E1ZWgySjbfE7ucHRTlhZDZL2jZ2QNoYJHO2EldXkVY39Wtq6pLZKraENSWYVbVmVim3dT0UtHO2EldUgyYTYEye+UONoJ6ysBkkmWE8KRzthZTVIMqts2+5aK2uLVWtq6yU1do01tCHJNG23L+RmL3C3B1ZWgyQTtMReyVI4fRJWVoMkE9ADuL4MK6tBkploEwgowMpqkHTzPt0m0DAGK6tBkti2ptvaL0WuPKysRnssybCt9/Uutd+hJIeV1SBpu40CG1T3n57Qk8LKapBkAk73QJLBymqQZOa0CVQprHweNIyZ2SavcAgTuGBBY391IzbK2bYdeB/N8nDQI2LM/T2pvK3JGCzpJP9PlmrrYu7oEewR7zeBd0OSMWZeWy9muZ5U0pYd7edpY4zg0WXsEYhpvHcCrpwtb2OJ4LmTGCMYo5Ik80hbfNPJX3Y6vHUSSxRLVBbT9+Zvm8pQvNWDJYoligHwlsrbuqfxnBLBDMMSxQDo9ZhN2+ZoELzvLmwwzDAMyDFGSZIJbBC8bAY2GDakeH2OJSrt6WykjWfNwIAUA1I8PccMwxKz6YTrWud6/QMDnAYz3wg70wAAAABJRU5ErkJggg==
+              runtimesFilter:
+                runtimeTypes:
+                  - WEBMETHODS_GATEWAY
+                deploymentTypes:
+                  - ON_PREMISE
+                  - SAG_SAAS
+                regions:
+                  - region: east-us
+                    operator: equals
+                locations:
+                  - location: Boston
+                    operator: equals
+                tags:
+                  - tag: govern
+                    operator: contains
+                  - tag: state
+                    operator: contains
+                runtimeNames:
+                  - name: lot
+                    operator: startsWith
+                runtimeIds:
+                  - 9e19-415d-99f8-b555a17a2744-512f725f
+                  - 415d-99f8-b555a17a2744-512f725f-9e19
+                logicalOperator: OR
+              createdDate: 2022-06-03 10:44:41:478 GMT
+              lastModifiedDate: 2022-06-03 10:44:41:478 GMT
+      responses:
+        "200":
+          description: This status code indicates the successful updation of the data plane with the specified ID.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dataplane"
+              example:
+                id: 89967ad8-76c1-4a6c-952e-a42b624cd59b
+                name: EastUS_Dataplane
+                description: This data plane helps to visualize the runtimes running in us-east-1 region.
+                owner:
+                  name: Alice
+                  id: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
+                  type: USER
+                tags:
+                  - east-us
+                icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABRCAIAAAARlBx9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPmSURBVHhe7dhNctswDEBhXqe7Lnvv3qK3iOP/uDdox4UEGqIeJQqWZTpVi/nWBt4oM5EdfvbmUnBRrvkY86GG51xwVpxTQdp2KXO3sSe1aBtjwNv2/Icmcy54pO1SEMNcbexJLfrQZBiTOt3aLmXPD5M5F8x4aNp2KXOHybAnVfmhTbc9Nex6+pZDmJj30CbaFg9DxpipMBnGpDSs1LZIGI7264WxjTEQ205DbbFqVhhOfMSDD22g7Z4qmSVjcveGCQvrtTkfF9Y/WyyKwxJIw2RiW6EKy+qLXVkJxLCu7RgGHxc+/eWQkcvDbm3Z/Pr+BZ/+coiBfpiMtg2NtH3CPIEkNRg20fZX5I2FTbd98rxCmKvt0+aVw0Te1rxeoE3h01+uHCasrffqhCqDT3+52JVVKWnrVSkkpfDpL4ee1N1tAp/+Wr9/fEWSmdMmsKAy6UkhyQy0yfdIlAzCvqdCDCBJHdEWvyD72gQuWBCuL0OVkLCmzXoat0FDAW6aDefeJa9qHLUtGwSU4Uon3PeIwbDj8RBiTX9wvQdOz+GgBfXC2io12HbG3U7VYgCPa7DtbHC0H7bWkVcpaeuSDC72w9Y6BsPEOtpYpf63uWFrHUgyXVv8EbeFi/2wtQ4kmdAlJYOL/bC1DiSpQ9M2NLjYD1vryKtae7TF31hwsR+21pFXHQ4NaYs9KVzsh6115FXracur1JJtWFkNksw/0xZ/zVxNm/VE7eBoJ6ysBkkmxJreHHG0E1ZWgySjbfE7ucHRTlhZDZL2jZ2QNoYJHO2EldXkVY39Wtq6pLZKraENSWYVbVmVim3dT0UtHO2EldUgyYTYEye+UONoJ6ysBkkmWE8KRzthZTVIMqts2+5aK2uLVWtq6yU1do01tCHJNG23L+RmL3C3B1ZWgyQTtMReyVI4fRJWVoMkE9ADuL4MK6tBkploEwgowMpqkHTzPt0m0DAGK6tBkti2ptvaL0WuPKysRnssybCt9/Uutd+hJIeV1SBpu40CG1T3n57Qk8LKapBkAk73QJLBymqQZOa0CVQprHweNIyZ2SavcAgTuGBBY391IzbK2bYdeB/N8nDQI2LM/T2pvK3JGCzpJP9PlmrrYu7oEewR7zeBd0OSMWZeWy9muZ5U0pYd7edpY4zg0WXsEYhpvHcCrpwtb2OJ4LmTGCMYo5Ik80hbfNPJX3Y6vHUSSxRLVBbT9+Zvm8pQvNWDJYoligHwlsrbuqfxnBLBDMMSxQDo9ZhN2+ZoELzvLmwwzDAMyDFGSZIJbBC8bAY2GDakeH2OJSrt6WykjWfNwIAUA1I8PccMwxKz6YTrWud6/QMDnAYz3wg70wAAAABJRU5ErkJggg==
+                runtimesFilter:
+                  runtimeTypes:
+                    - WEBMETHODS_GATEWAY
+                  deploymentTypes:
+                    - ON_PREMISE
+                    - SAG_SAAS
+                  regions:
+                    - region: east-us
+                      operator: equals
+                  locations:
+                    - location: Boston
+                      operator: equals
+                  tags:
+                    - tag: govern
+                      operator: contains
+                    - tag: state
+                      operator: contains
+                  runtimeNames:
+                    - name: lot
+                      operator: startsWith
+                  runtimeIds:
+                    - 9e19-415d-99f8-b555a17a2744-512f725f
+                    - 415d-99f8-b555a17a2744-512f725f-9e19
+                  logicalOperator: OR
+                createdDate: 2022-06-03 10:44:41:478 GMT
+                lastModifiedDate: 2022-06-03 10:44:41:478 GMT
+        "401":
+          description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to update the specified data plane.
+        "400":
+          $ref: '#/components/responses/4XX_bad_request_error'
+        "500":
+          $ref: '#/components/responses/internal_server_error'
+    delete:
+      description: This method deletes the data plane with the specified ID.
+      parameters:
+        - name: id
+          in: path
+          description: Data plane UUID.
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 50
+          example: 512f725f-9e19-415d-99f8-b555a17a2744
+      responses:
+        "200":
+          description: This status code indicates the successful deletion of the data plane with the specified ID.
+        "401":
+          description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to delete the specified data plane.
+        "500":
+          $ref: '#/components/responses/internal_server_error'
+  /dataplanes/{id}/runtimes:
+    get:
+      description:  This method retrieves the runtimes in the specified data plane.
+      parameters:
+        - name: id
+          in: path
+          description: Data plane UUID.
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 50
+          example: 512f725f-9e19-415d-99f8-b555a17a2744
+        - name: responseFields
+          in: query
+          description: Response Fields to be returned. This need not be specified if all fields to be returned.
+          required: false
+          schema:
+           type: string
+          example: name,id
+        - name: page
+          in: query
+          description: Page number of the runtimes list.
+          schema:
+            type: integer
+        - name: size
+          in: query
+          description: Number of runtimes in a page.
+          schema:
+            type: integer
+        - name: sort
+          in: query
+          description: List of properties with the sort order. Property and order are given in the format "property,order". Property is any property defined in the runtime model like id, name, description, so on. The supported values for order are "ASC", "asc", "DESC", and "desc". "ASC" or "asc" is used for ascending order and "DESC" or "desc" is used for descending order.
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        "200":
+          description: This status code indicates the successful retrieval of the runtimes in the specified data plane.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Runtime"
+              example:
+                - id: 512f725f-9e19-415d-99f8-b555a17a2744
+                  name: abc
+                  description: Description for abc data plane.
+                  owner:
+                    name: Alice
+                    id: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
+                    type: USER
+                  tags:
+                    - east-us
+                  type: WEBMETHODS_GATEWAY
+                  deploymenType: ON_PREMISE
+                  region: east-us
+                  location: Boston
+                  host: API_G11
+                  icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABRCAIAAAARlBx9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPmSURBVHhe7dhNctswDEBhXqe7Lnvv3qK3iOP/uDdox4UEGqIeJQqWZTpVi/nWBt4oM5EdfvbmUnBRrvkY86GG51xwVpxTQdp2KXO3sSe1aBtjwNv2/Icmcy54pO1SEMNcbexJLfrQZBiTOt3aLmXPD5M5F8x4aNp2KXOHybAnVfmhTbc9Nex6+pZDmJj30CbaFg9DxpipMBnGpDSs1LZIGI7264WxjTEQ205DbbFqVhhOfMSDD22g7Z4qmSVjcveGCQvrtTkfF9Y/WyyKwxJIw2RiW6EKy+qLXVkJxLCu7RgGHxc+/eWQkcvDbm3Z/Pr+BZ/+coiBfpiMtg2NtH3CPIEkNRg20fZX5I2FTbd98rxCmKvt0+aVw0Te1rxeoE3h01+uHCasrffqhCqDT3+52JVVKWnrVSkkpfDpL4ee1N1tAp/+Wr9/fEWSmdMmsKAy6UkhyQy0yfdIlAzCvqdCDCBJHdEWvyD72gQuWBCuL0OVkLCmzXoat0FDAW6aDefeJa9qHLUtGwSU4Uon3PeIwbDj8RBiTX9wvQdOz+GgBfXC2io12HbG3U7VYgCPa7DtbHC0H7bWkVcpaeuSDC72w9Y6BsPEOtpYpf63uWFrHUgyXVv8EbeFi/2wtQ4kmdAlJYOL/bC1DiSpQ9M2NLjYD1vryKtae7TF31hwsR+21pFXHQ4NaYs9KVzsh6115FXracur1JJtWFkNksw/0xZ/zVxNm/VE7eBoJ6ysBkkmxJreHHG0E1ZWgySjbfE7ucHRTlhZDZL2jZ2QNoYJHO2EldXkVY39Wtq6pLZKraENSWYVbVmVim3dT0UtHO2EldUgyYTYEye+UONoJ6ysBkkmWE8KRzthZTVIMqts2+5aK2uLVWtq6yU1do01tCHJNG23L+RmL3C3B1ZWgyQTtMReyVI4fRJWVoMkE9ADuL4MK6tBkploEwgowMpqkHTzPt0m0DAGK6tBkti2ptvaL0WuPKysRnssybCt9/Uutd+hJIeV1SBpu40CG1T3n57Qk8LKapBkAk73QJLBymqQZOa0CVQprHweNIyZ2SavcAgTuGBBY391IzbK2bYdeB/N8nDQI2LM/T2pvK3JGCzpJP9PlmrrYu7oEewR7zeBd0OSMWZeWy9muZ5U0pYd7edpY4zg0WXsEYhpvHcCrpwtb2OJ4LmTGCMYo5Ik80hbfNPJX3Y6vHUSSxRLVBbT9+Zvm8pQvNWDJYoligHwlsrbuqfxnBLBDMMSxQDo9ZhN2+ZoELzvLmwwzDAMyDFGSZIJbBC8bAY2GDakeH2OJSrt6WykjWfNwIAUA1I8PccMwxKz6YTrWud6/QMDnAYz3wg70wAAAABJRU5ErkJggg==
+                  createdDate: 2022-06-03 10:44:41:478 GMT
+                  lastModifiedDate: 2022-06-03 10:44:41:478 GMT
+                - id: 512f725f-9e19-415d-99f8-b555a17a2743
+                  name: xyz
+                  description: xyz
+                  owner:
+                    name: Alice
+                    id: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
+                    type: USER
+                  tags:
+                    - name: west-us
+                      description: aws region
+                  type: API_GATEWAY
+                  deploymenType: ON_PREMISE
+                  region: west-us
+                  location: Boston
+                  host: API_G12
+                  icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABRCAIAAAARlBx9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPmSURBVHhe7dhNctswDEBhXqe7Lnvv3qK3iOP/uDdox4UEGqIeJQqWZTpVi/nWBt4oM5EdfvbmUnBRrvkY86GG51xwVpxTQdp2KXO3sSe1aBtjwNv2/Icmcy54pO1SEMNcbexJLfrQZBiTOt3aLmXPD5M5F8x4aNp2KXOHybAnVfmhTbc9Nex6+pZDmJj30CbaFg9DxpipMBnGpDSs1LZIGI7264WxjTEQ205DbbFqVhhOfMSDD22g7Z4qmSVjcveGCQvrtTkfF9Y/WyyKwxJIw2RiW6EKy+qLXVkJxLCu7RgGHxc+/eWQkcvDbm3Z/Pr+BZ/+coiBfpiMtg2NtH3CPIEkNRg20fZX5I2FTbd98rxCmKvt0+aVw0Te1rxeoE3h01+uHCasrffqhCqDT3+52JVVKWnrVSkkpfDpL4ee1N1tAp/+Wr9/fEWSmdMmsKAy6UkhyQy0yfdIlAzCvqdCDCBJHdEWvyD72gQuWBCuL0OVkLCmzXoat0FDAW6aDefeJa9qHLUtGwSU4Uon3PeIwbDj8RBiTX9wvQdOz+GgBfXC2io12HbG3U7VYgCPa7DtbHC0H7bWkVcpaeuSDC72w9Y6BsPEOtpYpf63uWFrHUgyXVv8EbeFi/2wtQ4kmdAlJYOL/bC1DiSpQ9M2NLjYD1vryKtae7TF31hwsR+21pFXHQ4NaYs9KVzsh6115FXracur1JJtWFkNksw/0xZ/zVxNm/VE7eBoJ6ysBkkmxJreHHG0E1ZWgySjbfE7ucHRTlhZDZL2jZ2QNoYJHO2EldXkVY39Wtq6pLZKraENSWYVbVmVim3dT0UtHO2EldUgyYTYEye+UONoJ6ysBkkmWE8KRzthZTVIMqts2+5aK2uLVWtq6yU1do01tCHJNG23L+RmL3C3B1ZWgyQTtMReyVI4fRJWVoMkE9ADuL4MK6tBkploEwgowMpqkHTzPt0m0DAGK6tBkti2ptvaL0WuPKysRnssybCt9/Uutd+hJIeV1SBpu40CG1T3n57Qk8LKapBkAk73QJLBymqQZOa0CVQprHweNIyZ2SavcAgTuGBBY391IzbK2bYdeB/N8nDQI2LM/T2pvK3JGCzpJP9PlmrrYu7oEewR7zeBd0OSMWZeWy9muZ5U0pYd7edpY4zg0WXsEYhpvHcCrpwtb2OJ4LmTGCMYo5Ik80hbfNPJX3Y6vHUSSxRLVBbT9+Zvm8pQvNWDJYoligHwlsrbuqfxnBLBDMMSxQDo9ZhN2+ZoELzvLmwwzDAMyDFGSZIJbBC8bAY2GDakeH2OJSrt6WykjWfNwIAUA1I8PccMwxKz6YTrWud6/QMDnAYz3wg70wAAAABJRU5ErkJggg==
+                  createdDate: 2022-06-03 10:44:41:478 GMT
+                  lastModifiedDate: 2022-06-03 10:44:41:478 GMT
+        "401":
+           description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to retrieve the runtimes in the specified data plane.
+        "500":
+          $ref: '#/components/responses/internal_server_error'
+components:
+  schemas:
+    Dataplane:
+      type: object
+      description: This is a data plane model.
+      required:
+        - name
+      properties:
+        id:
+          type: string
+          description: The UUID of the object.
+        name:
+          type: string
+          description: The name of the data plane.
+          minLength: 1
+          maxLength: 50
+          pattern: "[\\\\()_+@\\!\\#$%^&{}\\-\\=,.~'`\\p{L}\\p{M}{0-9}\\s]{0,1024}"
+          example: abc
+        description:
+          type: string
+          description: A short description of the data plane.
+          minLength: 0
+          maxLength: 300
+          pattern: "[\\\\()_+@\\!\\#$%^&{}\\-\\=,.~'`\\p{L}\\p{M}{0-9}\\s]{0,1024}"
+          example: Description for abc data plane.
+        tags:
+          type: array
+          description: A list of tags which logically refers to the data plane.
+          items:
+            type: string
+            minLength: 0
+            maxLength: 50
+            pattern: '^\S*$'
+            example: ["Dev"]
+        owner:
+          $ref: "#/components/schemas/Owner"
+        icon:
+          type: string
+          description: The icon image file content in string format.
+        createdDate:
+          type: string
+          description: The time the asset was created.
+        lastModifiedDate:
+          type: string
+          description: The time the asset was last modified.
+        runtimesFilter:
+          $ref: "#/components/schemas/RuntimesFilter"
+
+    RuntimesFilter:
+      type: object
+      description: This object defines the filter configurations for filtering runtime objects for a data plane.
+      properties:
+        runtimeTypes:
+          type: array
+          description: List of runtime types.
+          items:
+            type: string
+            description: The type of the runtime.
+            enum:
+              - WEBMETHODS_GATEWAY
+            example: ["WEBMETHODS_GATEWAY"]
+        deploymentTypes:
+          type: array
+          description: List of deployment types.
+          items:
+            type: string
+            description: The type of deployment.
+            enum:
+              - ON_PREMISE
+              - SAG_SAAS
+              - PRIVATE_CLOUD
+            example: ["ON_PREMISE"]
+        regions:
+          type: array
+          description: List of filter configurations for runtime regions.
+          items:
+            $ref: "#/components/schemas/RegionFilterConfig"
+        locations:
+          type: array
+          description: List of filter configurations for runtime locations.
+          items:
+            $ref: "#/components/schemas/LocationFilterConfig"
+        tags:
+          type: array
+          description: List of filter configurations for runtime tags.
+          items:
+            $ref: "#/components/schemas/TagFilterConfig"
+        runtimeNames:
+          type: array
+          description: List of filter configurations for runtime names.
+          items:
+            $ref: "#/components/schemas/NameFilterConfig"
+        runtimeIds:
+          type: array
+          description: List of runtime ids.
+          items:
+            type: string
+            description: Runtime ID.
+            minLength: 1
+            maxLength: 50
+        logicalOperator:
+          type: string
+          description: Logical operator AND or OR. If AND is specified all the filtering conditions must match for selecting the runtime whereas for OR any one of the condition must be met.
+          enum:
+            - AND
+            - OR
+
+    RegionFilterConfig:
+      type: object
+      description: This contains the filter configuration for the runtime region.
+      properties:
+        region:
+          type: string
+          description: This is the runtime region value to be evaluated for filtering.
+          minLength: 0
+          maxLength: 50
+        operator:
+          type: string
+          description: Operator to define the criteria for evaluating the runtime region value.
+          enum:
+            - equals
+            - notEquals
+            - contains
+            - notContains
+            - startsWith
+            - notStartsWith
+            - endsWith
+
+    LocationFilterConfig:
+      type: object
+      description: This contains the filter configuration for the runtime location.
+      properties:
+        location:
+          type: string
+          description: This is the runtime location value that must be evaluated for filtering.
+          minLength: 0
+          maxLength: 50
+        operator:
+          type: string
+          description: Operator to define the criteria for evaluating the runtime location value.
+          enum:
+            - equals
+            - notEquals
+            - contains
+            - notContains
+            - startsWith
+            - notStartsWith
+            - endsWith
+
+    TagFilterConfig:
+      type: object
+      description: This contains the filter configuration for runtime tags.
+      properties:
+        tag:
+          type: string
+          description: This is the runtime tag value that must be evaluated for filtering.
+          minLength: 0
+          maxLength: 50
+        operator:
+          type: string
+          description: Operator to define the criteria for evaluating the runtime tag value.
+          enum:
+            - equals
+            - notEquals
+            - contains
+            - notContains
+            - startsWith
+            - notStartsWith
+            - endsWith
+
+    NameFilterConfig:
+      type: object
+      description: This contains the filter configuration for runtime name.
+      properties:
+        name:
+          type: string
+          description: This is the runtime name value that must be evaluated for filtering.
+          minLength: 1
+          maxLength: 50
+          pattern: "[\\\\()_+@\\!\\#$%^&{}\\-\\=\\]\\[,.~'`\\p{L}\\p{M}{0-9}\\s]{0,50}"
+        operator:
+          type: string
+          description: Operator to define the criteria for evaluating the runtime name value.
+          enum:
+            - equals
+            - notEquals
+            - contains
+            - notContains
+            - startsWith
+            - notStartsWith
+            - endsWith
+
+    Runtime:
+      type: object
+      required:
+        - name
+        - type
+        - deploymentType
+      properties:
+        id:
+          type: string
+          description: UUID of the object
+        name:
+          type: string
+          description: Name of the runtime.
+          minLength: 1
+          maxLength: 50
+          pattern: "[\\\\()_+@\\!\\#$%^&{}\\-\\=\\]\\[,.~'`\\p{L}\\p{M}{0-9}\\s]{0,50}"
+          example: PRIVATE_CLOUD_APIGW_Op
+        description:
+          type: string
+          description: Short description of the runtime.
+          minLength: 0
+          maxLength: 300
+          pattern: "[\\\\()_+@\\!\\#$%^&{}\\-\\=\\]\\[,.~'`\\p{L}\\p{M}{0-9}\\s]{0,300}"
+          example: This is a Private Cloud APIGateway Runtime.
+        tags:
+          type: array
+          items:
+            type: string
+            minLength: 0
+            maxLength: 50
+            pattern: '^\S*$'
+            example: ["Dev"]
+        createdDate:
+          type: string
+          description: The time the asset was created.
+        lastModifiedDate:
+          type: string
+          description: The time the asset was last modified.
+        owner:
+          $ref: '#/components/schemas/Owner'
+        type:
+          type: string
+          description: The type of the runtime.
+          enum:
+            - WEBMETHODS_GATEWAY
+          example: WEBMETHODS_GATEWAY
+        deploymentType:
+          type: string
+          description: The type of deployment.
+          enum:
+            - ON_PREMISE
+            - SAG_SAAS
+            - PRIVATE_CLOUD
+          example: ON_PREMISE
+        region:
+          type: string
+          description: Cloud provider region
+          minLength: 0
+          maxLength: 50
+        location:
+          type: string
+          description: Cloud provider location
+        host:
+          type: string
+          description: The hostname or IP address of the runtime pattern below is the ipv4 pattern
+          pattern: '((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)(\.(?!$)|$)){4}'  
+        icon:
+          type: string
+          description: The icon image file content in string format.
+
+    Owner:
+      type: object
+      readOnly: true
+      description: The user or team who creates the runtime.
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the owner
+          example: John
+        id:
+          type: string
+          description: Id of the owner.
+          example: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
+        type:
+          type: string
+          description: Type of the owner.
+          example: USER
+    ErrorMessage:
+      description: Common Error Response across all APIs
+      required: [ "errorDetails" ]
+      type: object
+      properties:
+        errorDetails:
+          type: array
+          items:
+            type: string
+          example: This response indicates that the server encountered an error.
+  responses:
+   internal_server_error:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+              $ref: "#/components/schemas/ErrorMessage"
+          example:
+            errorDetails: 
+              - This response indicates that the server encountered an error.
+   4XX_bad_request_error:
+       description: This status code indicates that the request body is bad.
+       content:
+         application/json:
+           schema:
+              $ref: "#/components/schemas/ErrorMessage"
+           example:
+             errorDetails:
+                - 'name : Valid name should meet below conditions : 1. Name is mandatory. Cannot be empty or null 2. Maximum character allowed is 50 3. Name given isn''t a safe text '
+  securitySchemes:
+    basic_authentication:
+      type: http
+      description: This is the Basic Authentication mechanism where the credentials are sent in a Base64 encoded format of the form <username>:<password> in the Authorization header.
+      scheme: basic
+security:
+- basic_authentication: []

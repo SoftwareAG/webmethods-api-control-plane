@@ -1,0 +1,189 @@
+{
+	"info": {
+		"_postman_id": "b0789b4a-f09d-4715-a448-4dc1b42ffc29",
+		"name": "Create an Administrator",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20781985"
+	},
+	"item": [
+		{
+			"name": "Create a user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"    let responseData=pm.response.json();\r",
+							"    pm.collectionVariables.set(\"uuid\", responseData.id);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"joeroot\",\r\n    \"firstname\": \"Joe\",\r\n    \"lastname\": \"Root\",\r\n    \"description\": \"Admin officer for SAG\",\r\n    \"email\": \"joeroot@sag.com\",\r\n    \"password\": \"My@123#Password\",\r\n    \"preferredlocale\": \"en_US\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/ingress/v1/users",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"ingress",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add  Administrator role to the user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    \"d88e28d1-e2c4-3f68-850c-d26c51db3bf6\"\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/ingress/v1/users/{{uuid}}/groups",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"ingress",
+						"v1",
+						"users",
+						"{{uuid}}",
+						"groups"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check if new user is created",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/api/ingress/v1/users/{{uuid}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"ingress",
+						"v1",
+						"users",
+						"{{uuid}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{password}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{username}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "username",
+			"value": "administrator",
+			"type": "string"
+		},
+		{
+			"key": "password",
+			"value": "manage",
+			"type": "string"
+		},
+		{
+			"key": "baseURL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "uuid",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

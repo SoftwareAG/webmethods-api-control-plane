@@ -1,0 +1,450 @@
+openapi: '3.0.2'
+info:
+  title: Runtime Management Service
+  version: '1.0.0'
+  "description" : API Control Plane allows you to create, read, update, and delete (CRUD) runtimes and manage multiple runtimes like API Gateway, Developer Portal running in different landscapes.
+
+    API Control Plane provides you the overall visibility of all the runtimes in a landscape.
+
+
+    Irrespective of the number of runtimes, Control Plane provides you a holistic view of all the runtimes and the associated assets.
+
+
+    The runtimes can be deployed in different landscapes like
+
+    - different geographies like US, EU, and APJ regions.
+
+    - hybrid environments such as SaaS, private cloud, and on-premises
+
+    - federated and heterogenous systems such as multivendor third-party gateways , Microgateways, Service Mesh.
+servers:
+ - url: "{protocol}://{hostname}:{port}/api/assetcatalog/v1"
+   description: This is the endpoint where the Asset-catalog API is accessible from the server.
+   variables:
+    protocol:
+      default: https
+      enum:
+      - http
+      - https
+      description: The protocol supported by the server - HTTP or HTTPS. Default is HTTPS.
+    hostname:
+      default: localhost
+      description: The domain name of the server where the API is hosted. The hostname must be resolvable by the DNS lookup.
+    port:
+      default: "443"
+      description: The port number where the REST API is running on the server. The default port for HTTPS is 443 and HTTP is 80 but it can also be any valid port.
+paths:
+  /runtimes:
+    post:
+      description: This method creates a new runtime in API Control Plane.
+      requestBody:
+        description: The runtime resource model.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Runtime'
+            example:
+              name: PRIVATE_CLOUD_APIGW_Op
+              description: This is a private cloud API Gateway runtime.
+              tags:
+                - Dev
+              region: us
+              location: Denver
+              host: 192.168.24.25
+              icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABRCAIAAAARlBx9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPmSURBVHhe7dhNctswDEBhXqe7Lnvv3qK3iOP/uDdox4UEGqIeJQqWZTpVi/nWBt4oM5EdfvbmUnBRrvkY86GG51xwVpxTQdp2KXO3sSe1aBtjwNv2/Icmcy54pO1SEMNcbexJLfrQZBiTOt3aLmXPD5M5F8x4aNp2KXOHybAnVfmhTbc9Nex6+pZDmJj30CbaFg9DxpipMBnGpDSs1LZIGI7264WxjTEQ205DbbFqVhhOfMSDD22g7Z4qmSVjcveGCQvrtTkfF9Y/WyyKwxJIw2RiW6EKy+qLXVkJxLCu7RgGHxc+/eWQkcvDbm3Z/Pr+BZ/+coiBfpiMtg2NtH3CPIEkNRg20fZX5I2FTbd98rxCmKvt0+aVw0Te1rxeoE3h01+uHCasrffqhCqDT3+52JVVKWnrVSkkpfDpL4ee1N1tAp/+Wr9/fEWSmdMmsKAy6UkhyQy0yfdIlAzCvqdCDCBJHdEWvyD72gQuWBCuL0OVkLCmzXoat0FDAW6aDefeJa9qHLUtGwSU4Uon3PeIwbDj8RBiTX9wvQdOz+GgBfXC2io12HbG3U7VYgCPa7DtbHC0H7bWkVcpaeuSDC72w9Y6BsPEOtpYpf63uWFrHUgyXVv8EbeFi/2wtQ4kmdAlJYOL/bC1DiSpQ9M2NLjYD1vryKtae7TF31hwsR+21pFXHQ4NaYs9KVzsh6115FXracur1JJtWFkNksw/0xZ/zVxNm/VE7eBoJ6ysBkkmxJreHHG0E1ZWgySjbfE7ucHRTlhZDZL2jZ2QNoYJHO2EldXkVY39Wtq6pLZKraENSWYVbVmVim3dT0UtHO2EldUgyYTYEye+UONoJ6ysBkkmWE8KRzthZTVIMqts2+5aK2uLVWtq6yU1do01tCHJNG23L+RmL3C3B1ZWgyQTtMReyVI4fRJWVoMkE9ADuL4MK6tBkploEwgowMpqkHTzPt0m0DAGK6tBkti2ptvaL0WuPKysRnssybCt9/Uutd+hJIeV1SBpu40CG1T3n57Qk8LKapBkAk73QJLBymqQZOa0CVQprHweNIyZ2SavcAgTuGBBY391IzbK2bYdeB/N8nDQI2LM/T2pvK3JGCzpJP9PlmrrYu7oEewR7zeBd0OSMWZeWy9muZ5U0pYd7edpY4zg0WXsEYhpvHcCrpwtb2OJ4LmTGCMYo5Ik80hbfNPJX3Y6vHUSSxRLVBbT9+Zvm8pQvNWDJYoligHwlsrbuqfxnBLBDMMSxQDo9ZhN2+ZoELzvLmwwzDAMyDFGSZIJbBC8bAY2GDakeH2OJSrt6WykjWfNwIAUA1I8PccMwxKz6YTrWud6/QMDnAYz3wg70wAAAABJRU5ErkJggg==
+              type: WEBMETHODS_GATEWAY
+              deploymentType: PRIVATE_CLOUD
+              heartBeatSynchInterval: 6000
+
+        required : true
+      responses:
+        '201':
+          description: This status code indicates the successful creation of a runtime.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Runtime'
+              example:
+                id: e04348a7-7d94-4730-b2c6-e3ea605e5027
+                name: PRIVATE_CLOUD_APIGW_Op
+                description: This is a private cloud API Gateway runtime.
+                tags:
+                  - Dev
+                createdDate: 2022-06-1016:50:37:064IST
+                lastModifiedDate: 2022-06-1016:50:37:064IST
+                region: us
+                location: Denver
+                host: 192.168.24.25
+                icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABRCAIAAAARlBx9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPmSURBVHhe7dhNctswDEBhXqe7Lnvv3qK3iOP/uDdox4UEGqIeJQqWZTpVi/nWBt4oM5EdfvbmUnBRrvkY86GG51xwVpxTQdp2KXO3sSe1aBtjwNv2/Icmcy54pO1SEMNcbexJLfrQZBiTOt3aLmXPD5M5F8x4aNp2KXOHybAnVfmhTbc9Nex6+pZDmJj30CbaFg9DxpipMBnGpDSs1LZIGI7264WxjTEQ205DbbFqVhhOfMSDD22g7Z4qmSVjcveGCQvrtTkfF9Y/WyyKwxJIw2RiW6EKy+qLXVkJxLCu7RgGHxc+/eWQkcvDbm3Z/Pr+BZ/+coiBfpiMtg2NtH3CPIEkNRg20fZX5I2FTbd98rxCmKvt0+aVw0Te1rxeoE3h01+uHCasrffqhCqDT3+52JVVKWnrVSkkpfDpL4ee1N1tAp/+Wr9/fEWSmdMmsKAy6UkhyQy0yfdIlAzCvqdCDCBJHdEWvyD72gQuWBCuL0OVkLCmzXoat0FDAW6aDefeJa9qHLUtGwSU4Uon3PeIwbDj8RBiTX9wvQdOz+GgBfXC2io12HbG3U7VYgCPa7DtbHC0H7bWkVcpaeuSDC72w9Y6BsPEOtpYpf63uWFrHUgyXVv8EbeFi/2wtQ4kmdAlJYOL/bC1DiSpQ9M2NLjYD1vryKtae7TF31hwsR+21pFXHQ4NaYs9KVzsh6115FXracur1JJtWFkNksw/0xZ/zVxNm/VE7eBoJ6ysBkkmxJreHHG0E1ZWgySjbfE7ucHRTlhZDZL2jZ2QNoYJHO2EldXkVY39Wtq6pLZKraENSWYVbVmVim3dT0UtHO2EldUgyYTYEye+UONoJ6ysBkkmWE8KRzthZTVIMqts2+5aK2uLVWtq6yU1do01tCHJNG23L+RmL3C3B1ZWgyQTtMReyVI4fRJWVoMkE9ADuL4MK6tBkploEwgowMpqkHTzPt0m0DAGK6tBkti2ptvaL0WuPKysRnssybCt9/Uutd+hJIeV1SBpu40CG1T3n57Qk8LKapBkAk73QJLBymqQZOa0CVQprHweNIyZ2SavcAgTuGBBY391IzbK2bYdeB/N8nDQI2LM/T2pvK3JGCzpJP9PlmrrYu7oEewR7zeBd0OSMWZeWy9muZ5U0pYd7edpY4zg0WXsEYhpvHcCrpwtb2OJ4LmTGCMYo5Ik80hbfNPJX3Y6vHUSSxRLVBbT9+Zvm8pQvNWDJYoligHwlsrbuqfxnBLBDMMSxQDo9ZhN2+ZoELzvLmwwzDAMyDFGSZIJbBC8bAY2GDakeH2OJSrt6WykjWfNwIAUA1I8PccMwxKz6YTrWud6/QMDnAYz3wg70wAAAABJRU5ErkJggg==
+                owner:
+                  name: smith
+                  id: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
+                  type: USER
+                type: WEBMETHODS_GATEWAY
+                deploymentType: PRIVATE_CLOUD
+                heartBeatSynchInterval: 6000
+
+        '401':
+          description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to create runtime.
+        '400':
+          $ref: '#/components/responses/4XX_bad_request_error'
+        '500':
+          $ref: '#/components/responses/internal_server_error'
+    get:
+      description: This method retrieves the list of available runtimes in API Control Plane.
+      parameters:
+        - name: page
+          in: query
+          description: The page number of the runtimes list. A successful GET call returns the default page number, that is 1, and any invalid value, such as ["five," -345], is ignored.
+          schema:
+            type: integer
+        - name: size
+          in: query
+          description: Number of runtimes in a page. If pagination value size is passed as 0, by default maximum number of objects returned is 20. This property can be customized with service.maximum.assets=20 in application,properties. A successful GET call returns the default page number, that is 20, and any invalid value, such as ["five," -345], is ignored.
+          schema:
+            type: integer
+        - name: sort
+          in: query
+          description: List of property and order to sort. Property and order are given in the format "property,order". Property is any property defined in the runtime model like id, name, description, and so on. The supported values for order are "ASC", "asc", "DESC" and "desc". "ASC" or "asc" is used for ascending order and "DESC" or "desc" is used for descending order. For sorting using date fields, lastModified and created are used.
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: This status code indicates the successful retrieval of a list of available runtimes.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Runtime'
+              example:
+                - id: 88c93a79-4c6d-4c8c-9590-f4c896baaaf6
+                  name: PRIVATE_CLOUD_APIGW_Op
+                  description: This is a private cloud API Gateway runtime.
+                  tags:
+                    - Dev
+                  createdDate: 2022-06-1610:04:28:916IST
+                  lastModifiedDate: 2022-06-1610:04:28:916IST
+                  region: us
+                  location: Denver
+                  host: 192.168.24.25
+                  icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABRCAIAAAARlBx9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPmSURBVHhe7dhNctswDEBhXqe7Lnvv3qK3iOP/uDdox4UEGqIeJQqWZTpVi/nWBt4oM5EdfvbmUnBRrvkY86GG51xwVpxTQdp2KXO3sSe1aBtjwNv2/Icmcy54pO1SEMNcbexJLfrQZBiTOt3aLmXPD5M5F8x4aNp2KXOHybAnVfmhTbc9Nex6+pZDmJj30CbaFg9DxpipMBnGpDSs1LZIGI7264WxjTEQ205DbbFqVhhOfMSDD22g7Z4qmSVjcveGCQvrtTkfF9Y/WyyKwxJIw2RiW6EKy+qLXVkJxLCu7RgGHxc+/eWQkcvDbm3Z/Pr+BZ/+coiBfpiMtg2NtH3CPIEkNRg20fZX5I2FTbd98rxCmKvt0+aVw0Te1rxeoE3h01+uHCasrffqhCqDT3+52JVVKWnrVSkkpfDpL4ee1N1tAp/+Wr9/fEWSmdMmsKAy6UkhyQy0yfdIlAzCvqdCDCBJHdEWvyD72gQuWBCuL0OVkLCmzXoat0FDAW6aDefeJa9qHLUtGwSU4Uon3PeIwbDj8RBiTX9wvQdOz+GgBfXC2io12HbG3U7VYgCPa7DtbHC0H7bWkVcpaeuSDC72w9Y6BsPEOtpYpf63uWFrHUgyXVv8EbeFi/2wtQ4kmdAlJYOL/bC1DiSpQ9M2NLjYD1vryKtae7TF31hwsR+21pFXHQ4NaYs9KVzsh6115FXracur1JJtWFkNksw/0xZ/zVxNm/VE7eBoJ6ysBkkmxJreHHG0E1ZWgySjbfE7ucHRTlhZDZL2jZ2QNoYJHO2EldXkVY39Wtq6pLZKraENSWYVbVmVim3dT0UtHO2EldUgyYTYEye+UONoJ6ysBkkmWE8KRzthZTVIMqts2+5aK2uLVWtq6yU1do01tCHJNG23L+RmL3C3B1ZWgyQTtMReyVI4fRJWVoMkE9ADuL4MK6tBkploEwgowMpqkHTzPt0m0DAGK6tBkti2ptvaL0WuPKysRnssybCt9/Uutd+hJIeV1SBpu40CG1T3n57Qk8LKapBkAk73QJLBymqQZOa0CVQprHweNIyZ2SavcAgTuGBBY391IzbK2bYdeB/N8nDQI2LM/T2pvK3JGCzpJP9PlmrrYu7oEewR7zeBd0OSMWZeWy9muZ5U0pYd7edpY4zg0WXsEYhpvHcCrpwtb2OJ4LmTGCMYo5Ik80hbfNPJX3Y6vHUSSxRLVBbT9+Zvm8pQvNWDJYoligHwlsrbuqfxnBLBDMMSxQDo9ZhN2+ZoELzvLmwwzDAMyDFGSZIJbBC8bAY2GDakeH2OJSrt6WykjWfNwIAUA1I8PccMwxKz6YTrWud6/QMDnAYz3wg70wAAAABJRU5ErkJggg==
+                  owner:
+                    name: smith
+                    id: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
+                    type: USER
+                  type: WEBMETHODS_GATEWAY
+                  deploymentType: PRIVATE_CLOUD
+                  heartBeatSynchInterval: 6000
+                - id: 5ceafc7d-7a85-4886-ae86-2e18212b52bf
+                  name: TEST_PRIVATE_CLOUD_APIGW
+                  description: This is a private cloud API Gateway runtime.
+                  tags:
+                    - Test
+                  createdDate: 2022-06-1610:05:13:290IST
+                  lastModifiedDate: 2022-06-1610:05:13:290IST
+                  region: us
+                  location: Denver
+                  host: 192.168.24.25
+                  icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABRCAIAAAARlBx9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPmSURBVHhe7dhNctswDEBhXqe7Lnvv3qK3iOP/uDdox4UEGqIeJQqWZTpVi/nWBt4oM5EdfvbmUnBRrvkY86GG51xwVpxTQdp2KXO3sSe1aBtjwNv2/Icmcy54pO1SEMNcbexJLfrQZBiTOt3aLmXPD5M5F8x4aNp2KXOHybAnVfmhTbc9Nex6+pZDmJj30CbaFg9DxpipMBnGpDSs1LZIGI7264WxjTEQ205DbbFqVhhOfMSDD22g7Z4qmSVjcveGCQvrtTkfF9Y/WyyKwxJIw2RiW6EKy+qLXVkJxLCu7RgGHxc+/eWQkcvDbm3Z/Pr+BZ/+coiBfpiMtg2NtH3CPIEkNRg20fZX5I2FTbd98rxCmKvt0+aVw0Te1rxeoE3h01+uHCasrffqhCqDT3+52JVVKWnrVSkkpfDpL4ee1N1tAp/+Wr9/fEWSmdMmsKAy6UkhyQy0yfdIlAzCvqdCDCBJHdEWvyD72gQuWBCuL0OVkLCmzXoat0FDAW6aDefeJa9qHLUtGwSU4Uon3PeIwbDj8RBiTX9wvQdOz+GgBfXC2io12HbG3U7VYgCPa7DtbHC0H7bWkVcpaeuSDC72w9Y6BsPEOtpYpf63uWFrHUgyXVv8EbeFi/2wtQ4kmdAlJYOL/bC1DiSpQ9M2NLjYD1vryKtae7TF31hwsR+21pFXHQ4NaYs9KVzsh6115FXracur1JJtWFkNksw/0xZ/zVxNm/VE7eBoJ6ysBkkmxJreHHG0E1ZWgySjbfE7ucHRTlhZDZL2jZ2QNoYJHO2EldXkVY39Wtq6pLZKraENSWYVbVmVim3dT0UtHO2EldUgyYTYEye+UONoJ6ysBkkmWE8KRzthZTVIMqts2+5aK2uLVWtq6yU1do01tCHJNG23L+RmL3C3B1ZWgyQTtMReyVI4fRJWVoMkE9ADuL4MK6tBkploEwgowMpqkHTzPt0m0DAGK6tBkti2ptvaL0WuPKysRnssybCt9/Uutd+hJIeV1SBpu40CG1T3n57Qk8LKapBkAk73QJLBymqQZOa0CVQprHweNIyZ2SavcAgTuGBBY391IzbK2bYdeB/N8nDQI2LM/T2pvK3JGCzpJP9PlmrrYu7oEewR7zeBd0OSMWZeWy9muZ5U0pYd7edpY4zg0WXsEYhpvHcCrpwtb2OJ4LmTGCMYo5Ik80hbfNPJX3Y6vHUSSxRLVBbT9+Zvm8pQvNWDJYoligHwlsrbuqfxnBLBDMMSxQDo9ZhN2+ZoELzvLmwwzDAMyDFGSZIJbBC8bAY2GDakeH2OJSrt6WykjWfNwIAUA1I8PccMwxKz6YTrWud6/QMDnAYz3wg70wAAAABJRU5ErkJggg==
+                  owner:
+                    name: smith
+                    id: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
+                    type: USER
+                  type: WEBMETHODS_GATEWAY
+                  deploymentType: PRIVATE_CLOUD
+                  heartBeatSynchInterval: 6000
+        '401':
+          description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to retrieve the runtimes list.
+        '500':
+          $ref: '#/components/responses/internal_server_error'
+  /runtimes/{id}:
+    get:
+      description: This method retrieves the details of the specified runtime in API Control Plane.
+      parameters:
+        - name: id
+          in: path
+          description: Runtime UUID
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 50
+          example: 512f725f-9e19-415d-99f8-b555a17a2744
+      responses:
+        '200':
+          description: This status code indicates the successful retrieval of the specified runtime.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Runtime'
+              example:
+                id: e04348a7-7d94-4730-b2c6-e3ea605e5027
+                name: PRIVATE_CLOUD_APIGW_Op
+                description: This is a private cloud API Gateway runtime.
+                tags:
+                  - Dev
+                createdDate: 2022-06-1016:50:37:064IST
+                lastModifiedDate: 2022-06-1016:50:37:064IST
+                region: us
+                location: Denver
+                host: 192.168.24.25
+                icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABRCAIAAAARlBx9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPmSURBVHhe7dhNctswDEBhXqe7Lnvv3qK3iOP/uDdox4UEGqIeJQqWZTpVi/nWBt4oM5EdfvbmUnBRrvkY86GG51xwVpxTQdp2KXO3sSe1aBtjwNv2/Icmcy54pO1SEMNcbexJLfrQZBiTOt3aLmXPD5M5F8x4aNp2KXOHybAnVfmhTbc9Nex6+pZDmJj30CbaFg9DxpipMBnGpDSs1LZIGI7264WxjTEQ205DbbFqVhhOfMSDD22g7Z4qmSVjcveGCQvrtTkfF9Y/WyyKwxJIw2RiW6EKy+qLXVkJxLCu7RgGHxc+/eWQkcvDbm3Z/Pr+BZ/+coiBfpiMtg2NtH3CPIEkNRg20fZX5I2FTbd98rxCmKvt0+aVw0Te1rxeoE3h01+uHCasrffqhCqDT3+52JVVKWnrVSkkpfDpL4ee1N1tAp/+Wr9/fEWSmdMmsKAy6UkhyQy0yfdIlAzCvqdCDCBJHdEWvyD72gQuWBCuL0OVkLCmzXoat0FDAW6aDefeJa9qHLUtGwSU4Uon3PeIwbDj8RBiTX9wvQdOz+GgBfXC2io12HbG3U7VYgCPa7DtbHC0H7bWkVcpaeuSDC72w9Y6BsPEOtpYpf63uWFrHUgyXVv8EbeFi/2wtQ4kmdAlJYOL/bC1DiSpQ9M2NLjYD1vryKtae7TF31hwsR+21pFXHQ4NaYs9KVzsh6115FXracur1JJtWFkNksw/0xZ/zVxNm/VE7eBoJ6ysBkkmxJreHHG0E1ZWgySjbfE7ucHRTlhZDZL2jZ2QNoYJHO2EldXkVY39Wtq6pLZKraENSWYVbVmVim3dT0UtHO2EldUgyYTYEye+UONoJ6ysBkkmWE8KRzthZTVIMqts2+5aK2uLVWtq6yU1do01tCHJNG23L+RmL3C3B1ZWgyQTtMReyVI4fRJWVoMkE9ADuL4MK6tBkploEwgowMpqkHTzPt0m0DAGK6tBkti2ptvaL0WuPKysRnssybCt9/Uutd+hJIeV1SBpu40CG1T3n57Qk8LKapBkAk73QJLBymqQZOa0CVQprHweNIyZ2SavcAgTuGBBY391IzbK2bYdeB/N8nDQI2LM/T2pvK3JGCzpJP9PlmrrYu7oEewR7zeBd0OSMWZeWy9muZ5U0pYd7edpY4zg0WXsEYhpvHcCrpwtb2OJ4LmTGCMYo5Ik80hbfNPJX3Y6vHUSSxRLVBbT9+Zvm8pQvNWDJYoligHwlsrbuqfxnBLBDMMSxQDo9ZhN2+ZoELzvLmwwzDAMyDFGSZIJbBC8bAY2GDakeH2OJSrt6WykjWfNwIAUA1I8PccMwxKz6YTrWud6/QMDnAYz3wg70wAAAABJRU5ErkJggg==
+                owner:
+                  name: smith
+                  id: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
+                  type: USER
+                type: WEBMETHODS_GATEWAY
+                deploymentType: PRIVATE_CLOUD
+                heartBeatSynchInterval: 6000
+        '401':
+          description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to retrieve the specified runtime.
+        '500':
+          $ref: '#/components/responses/internal_server_error'
+    put:
+      description: This method updates the specified runtime in API Control Plane.
+      parameters:
+        - name: id
+          in: path
+          description: Runtime UUID
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 50
+          example: 512f725f-9e19-415d-99f8-b555a17a2744
+      requestBody:
+        description: The runtime model.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Runtime'
+            example:
+              name: PRIVATE_CLOUD_APIGW_Op
+              description: This is a private cloud API Gateway runtime.
+              tags:
+                - Dev
+              region: us
+              location: Denver
+              host: 192.168.24.25
+              icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABRCAIAAAARlBx9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPmSURBVHhe7dhNctswDEBhXqe7Lnvv3qK3iOP/uDdox4UEGqIeJQqWZTpVi/nWBt4oM5EdfvbmUnBRrvkY86GG51xwVpxTQdp2KXO3sSe1aBtjwNv2/Icmcy54pO1SEMNcbexJLfrQZBiTOt3aLmXPD5M5F8x4aNp2KXOHybAnVfmhTbc9Nex6+pZDmJj30CbaFg9DxpipMBnGpDSs1LZIGI7264WxjTEQ205DbbFqVhhOfMSDD22g7Z4qmSVjcveGCQvrtTkfF9Y/WyyKwxJIw2RiW6EKy+qLXVkJxLCu7RgGHxc+/eWQkcvDbm3Z/Pr+BZ/+coiBfpiMtg2NtH3CPIEkNRg20fZX5I2FTbd98rxCmKvt0+aVw0Te1rxeoE3h01+uHCasrffqhCqDT3+52JVVKWnrVSkkpfDpL4ee1N1tAp/+Wr9/fEWSmdMmsKAy6UkhyQy0yfdIlAzCvqdCDCBJHdEWvyD72gQuWBCuL0OVkLCmzXoat0FDAW6aDefeJa9qHLUtGwSU4Uon3PeIwbDj8RBiTX9wvQdOz+GgBfXC2io12HbG3U7VYgCPa7DtbHC0H7bWkVcpaeuSDC72w9Y6BsPEOtpYpf63uWFrHUgyXVv8EbeFi/2wtQ4kmdAlJYOL/bC1DiSpQ9M2NLjYD1vryKtae7TF31hwsR+21pFXHQ4NaYs9KVzsh6115FXracur1JJtWFkNksw/0xZ/zVxNm/VE7eBoJ6ysBkkmxJreHHG0E1ZWgySjbfE7ucHRTlhZDZL2jZ2QNoYJHO2EldXkVY39Wtq6pLZKraENSWYVbVmVim3dT0UtHO2EldUgyYTYEye+UONoJ6ysBkkmWE8KRzthZTVIMqts2+5aK2uLVWtq6yU1do01tCHJNG23L+RmL3C3B1ZWgyQTtMReyVI4fRJWVoMkE9ADuL4MK6tBkploEwgowMpqkHTzPt0m0DAGK6tBkti2ptvaL0WuPKysRnssybCt9/Uutd+hJIeV1SBpu40CG1T3n57Qk8LKapBkAk73QJLBymqQZOa0CVQprHweNIyZ2SavcAgTuGBBY391IzbK2bYdeB/N8nDQI2LM/T2pvK3JGCzpJP9PlmrrYu7oEewR7zeBd0OSMWZeWy9muZ5U0pYd7edpY4zg0WXsEYhpvHcCrpwtb2OJ4LmTGCMYo5Ik80hbfNPJX3Y6vHUSSxRLVBbT9+Zvm8pQvNWDJYoligHwlsrbuqfxnBLBDMMSxQDo9ZhN2+ZoELzvLmwwzDAMyDFGSZIJbBC8bAY2GDakeH2OJSrt6WykjWfNwIAUA1I8PccMwxKz6YTrWud6/QMDnAYz3wg70wAAAABJRU5ErkJggg==
+              type: WEBMETHODS_GATEWAY
+              deploymentType: PRIVATE_CLOUD
+              heartBeatSynchInterval: 6000
+        required : true
+      responses:
+        '200':
+          description: This status code indicates the successful updation of the specified runtime.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Runtime'
+              example:
+                id: e04348a7-7d94-4730-b2c6-e3ea605e5027
+                name: PRIVATE_CLOUD_APIGW_Op
+                description: This is a private cloud API Gateway runtime.
+                tags:
+                  - Dev
+                createdDate: 2022-06-1016:50:37:064IST
+                lastModifiedDate: 2022-06-1016:50:37:064IST
+                region: us
+                location: Denver
+                host: 192.168.24.25
+                icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABRCAIAAAARlBx9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPmSURBVHhe7dhNctswDEBhXqe7Lnvv3qK3iOP/uDdox4UEGqIeJQqWZTpVi/nWBt4oM5EdfvbmUnBRrvkY86GG51xwVpxTQdp2KXO3sSe1aBtjwNv2/Icmcy54pO1SEMNcbexJLfrQZBiTOt3aLmXPD5M5F8x4aNp2KXOHybAnVfmhTbc9Nex6+pZDmJj30CbaFg9DxpipMBnGpDSs1LZIGI7264WxjTEQ205DbbFqVhhOfMSDD22g7Z4qmSVjcveGCQvrtTkfF9Y/WyyKwxJIw2RiW6EKy+qLXVkJxLCu7RgGHxc+/eWQkcvDbm3Z/Pr+BZ/+coiBfpiMtg2NtH3CPIEkNRg20fZX5I2FTbd98rxCmKvt0+aVw0Te1rxeoE3h01+uHCasrffqhCqDT3+52JVVKWnrVSkkpfDpL4ee1N1tAp/+Wr9/fEWSmdMmsKAy6UkhyQy0yfdIlAzCvqdCDCBJHdEWvyD72gQuWBCuL0OVkLCmzXoat0FDAW6aDefeJa9qHLUtGwSU4Uon3PeIwbDj8RBiTX9wvQdOz+GgBfXC2io12HbG3U7VYgCPa7DtbHC0H7bWkVcpaeuSDC72w9Y6BsPEOtpYpf63uWFrHUgyXVv8EbeFi/2wtQ4kmdAlJYOL/bC1DiSpQ9M2NLjYD1vryKtae7TF31hwsR+21pFXHQ4NaYs9KVzsh6115FXracur1JJtWFkNksw/0xZ/zVxNm/VE7eBoJ6ysBkkmxJreHHG0E1ZWgySjbfE7ucHRTlhZDZL2jZ2QNoYJHO2EldXkVY39Wtq6pLZKraENSWYVbVmVim3dT0UtHO2EldUgyYTYEye+UONoJ6ysBkkmWE8KRzthZTVIMqts2+5aK2uLVWtq6yU1do01tCHJNG23L+RmL3C3B1ZWgyQTtMReyVI4fRJWVoMkE9ADuL4MK6tBkploEwgowMpqkHTzPt0m0DAGK6tBkti2ptvaL0WuPKysRnssybCt9/Uutd+hJIeV1SBpu40CG1T3n57Qk8LKapBkAk73QJLBymqQZOa0CVQprHweNIyZ2SavcAgTuGBBY391IzbK2bYdeB/N8nDQI2LM/T2pvK3JGCzpJP9PlmrrYu7oEewR7zeBd0OSMWZeWy9muZ5U0pYd7edpY4zg0WXsEYhpvHcCrpwtb2OJ4LmTGCMYo5Ik80hbfNPJX3Y6vHUSSxRLVBbT9+Zvm8pQvNWDJYoligHwlsrbuqfxnBLBDMMSxQDo9ZhN2+ZoELzvLmwwzDAMyDFGSZIJbBC8bAY2GDakeH2OJSrt6WykjWfNwIAUA1I8PccMwxKz6YTrWud6/QMDnAYz3wg70wAAAABJRU5ErkJggg==
+                owner:
+                  name: smith
+                  id: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
+                  type: USER
+                type: WEBMETHODS_GATEWAY
+                deploymentType: PRIVATE_CLOUD
+                heartBeatSynchInterval: 6000
+        '401':
+          description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to update the specified runtime.
+        '400':
+          $ref: '#/components/responses/4XX_bad_request_error'
+        '500':
+          $ref: '#/components/responses/internal_server_error'
+    delete:
+      description: This method deletes the specified runtime and its associated APIs in API Control Plane.
+      parameters:
+        - name: id
+          in: path
+          description: Runtime UUID
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 50
+          example: 512f725f-9e19-415d-99f8-b555a17a2744
+      responses:
+        '200':
+          description: This status code indicates the successful deletion of the specified runtime.
+        '401':
+          description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to delete the specified runtime.
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                errorDetails:
+                  - This response indicates that the server encountered an error.
+components:
+  schemas:
+    Runtime:
+      type: object
+      required:
+        - name
+        - type
+        - deploymentType
+      properties:
+        id:
+          type: string
+          description: UUID of the object.
+          example: 512f725f-9e19-415d-99f8-b555a17a2744
+        name:
+          type: string
+          description: Name of the runtime.
+          minLength: 1
+          maxLength: 50
+          pattern: "[\\\\()_+@\\!\\#$%^&{}\\-\\=,.~'`\\p{L}\\p{M}{0-9}\\s]{0,1024}"
+          example: PRIVATE_CLOUD_APIGW_Op
+        description:
+          type: string
+          description: Short description of the runtime.
+          minLength: 0
+          maxLength: 300
+          pattern: "[\\\\()_+@\\!\\#$%^&{}\\-\\=,.~'`\\p{L}\\p{M}{0-9}\\s]{0,1024}"
+          example: This is a private cloud API Gateway runtime.
+        tags:
+          type: array
+          items:
+            type: string
+            pattern: '^\S*$'
+            minLength: 0
+            maxLength: 50
+            example: ["Dev"]
+        createdDate:
+          type: string
+          description: The time the asset was created.
+          example: 2022-06-1016:50:37:064IST
+        lastModifiedDate:
+          type: string
+          description: The time the asset was last modified.
+          example: 2022-06-1016:50:37:064IST
+        owner:
+          $ref: '#/components/schemas/Owner'
+        type:
+          type: string
+          description: The type of the runtime.
+          enum:
+            - WEBMETHODS_GATEWAY
+        heartBeatSynchInterval:
+           type: integer
+           description: The heartbeat synch interval of the runtime.
+           example: 6000
+        deploymentType:
+          type: string
+          description: The type of deployment.
+          enum:
+            - ON_PREMISE
+            - SAG_SAAS
+            - PRIVATE_CLOUD
+          example: ON_PREMISE
+        region:
+          type: string
+          description: Cloud provider region.
+          minLength: 0
+          maxLength: 50
+          example: us-west
+        location:
+          type: string
+          description: Cloud provider location.
+          example: denver
+        host:
+          type: string
+          description: The hostname or IP address of the runtime
+          pattern: '((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)(\.(?!$)|$)){4}'
+          example: softwareag.com
+        icon:
+          type: string
+          description: The icon of the runtime.
+        capacity:
+          $ref: '#/components/schemas/Capacity'
+
+    Capacity:
+      type: object
+      description: The capacity of the runtime.
+      properties:
+        value:
+          type: string
+          description: The value of the runtime capacity.
+        unit:
+          type: string
+          description: The unit of the capacity.
+          enum:
+            - per second
+            - per minute
+            - per hour
+            - per day
+            - per week
+            - per month
+            - per year
+          example: per year
+    Owner:
+      type: object
+      readOnly: true
+      description: The user or team who creates the runtime.
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the owner.
+          example: John
+        id:
+          type: string
+          description: Id of the owner.
+          example: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
+        type:
+          type: string
+          description: Type of the owner.
+          example: USER
+    ErrorMessage:
+      description: Common Error Response across all APIs
+      required: [ "errorDetails" ]
+      type: object
+      properties:
+        errorDetails:
+          type: array
+          items:
+            type: string
+          example: This response indicates that the server encountered an error.
+  responses:
+   internal_server_error:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+              $ref: "#/components/schemas/ErrorMessage"
+          example:
+            errorDetails: 
+              - This response indicates that the server encountered an error.
+   4XX_bad_request_error:
+       description: This status code indicates that the request body is bad.
+       content:
+         application/json:
+           schema:
+              $ref: "#/components/schemas/ErrorMessage"
+           example:
+             errorDetails:
+                - 'name : Valid name should meet below conditions : 1. Name is mandatory. Cannot be empty or null 2. Maximum character allowed is 50 3. Name given isn''t a safe text '
+  securitySchemes:
+    basic_authentication:
+      type: http
+      description: This is the Basic Authentication mechanism where the credentials are sent in a Base64 encoded format of the form <username>:<password> in the Authorization header.
+      scheme: basic
+security:
+- basic_authentication: []
+

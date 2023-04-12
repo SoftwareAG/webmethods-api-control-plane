@@ -1,0 +1,126 @@
+openapi: '3.0.2'
+info:
+  title: API Control Plane health status
+  version: '1.0.0'
+  description: This specification contains a health resource for API Control Plane which returns the health status of overall
+    API Control Plane and its individual services. This would be prodominantly used by Software AG CAS probe for querying the service
+    availability of API Control Plane SAAS at regular intervals. This also can be used by customers who choose self-hosted
+    deployment of API Control Plane for checking its service availability.
+servers:
+  - url: "{protocol}://{hostname}:{port}"
+    description: For cloud deployment the port is optional. For a self-hosted deployment without ingress controller in place, this referes to the port exposed by the Ingress service.
+    variables:
+      protocol:
+        default: https
+        enum:
+        - http
+        - https
+        description: The protocol supported by the server - HTTP or HTTPS. Default is HTTPS.
+      hostname:
+        default: localhost
+        description: The domain name of the server where the API is hosted. The hostname must be resolvable by the DNS lookup.
+      port:
+        default: "443"
+        description: The port number where the REST API is running on the server. The default port for HTTPS is 443 and HTTP is 80 but it can also be any valid port.
+paths:
+  /api/health:
+    summary: API Control Plane status
+    get:
+      description: This returns API Control Plane health status by default. It also conditionaly aggregates and returns the health status of all the services.
+      parameters:
+        - name: includeAll
+          in: query
+          description: Flag to specify whether to include individual services' health status.
+          schema:
+            type: boolean
+            example: true
+      responses:
+        '200':
+          description: Return 200 status code if the status is UP or Accept header is text/plain.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ControlPlaneHealth'
+              examples:
+                default:
+                  description: Default response or when includeAll query parameter is set as false.
+                  value:
+                    status: UP
+                includeAll:
+                  description: Response when includeAll query parameter is set as true. 
+                  value:
+                    status: UP
+                    servicesHealth:
+                      - name: assetcatalog
+                        status: UP
+                      - name: engine
+                        status: UP
+                      - name: ingress
+                        status: UP
+                      - name: ui
+                        status: UP
+            text/plain:
+              schema:
+                type: string
+              example:
+                sag_apicp_health{assetcatalog=up,engine=up,ingress=up,ui=up,tenant=default} 0
+        '503':
+          description: Return 503 status code if the status is DOWN for Accept header application/json.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ControlPlaneHealth'
+              examples:
+                default:
+                  description: Default response or when includeAll query parameter is set as false.
+                  value:
+                    status: DOWN
+                includeAll:
+                  description: Response when includeAll query parameter is set as true. 
+                  value:
+                    status: DOWN
+                    servicesHealth:
+                      - name: assetcatalog
+                        status: DOWN
+                      - name: engine
+                        status: UP
+                      - name: ingress
+                        status: UP
+                      - name: ui
+                        status: UP
+components:
+  schemas:
+    ControlPlaneHealth:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - UP
+            - DOWN
+          description: Status of API Control Plane either UP or DOWN.
+        servicesHealth:
+          type: array
+          items:
+            $ref: "#/components/schemas/ServiceHealth"
+
+    ServiceHealth:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the service.
+        status:
+          type: string
+          enum:
+            - UP
+            - DOWN
+          description: Status of the service either UP or DOWN.
+          
+  securitySchemes:
+    basic_authentication:
+      type: http
+      description: This is the Basic Authentication mechanism where the credentials are sent in a Base64 encoded format of the form <username>:<password> in the Authorization header.
+      scheme: basic
+security:
+- basic_authentication: []
