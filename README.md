@@ -68,11 +68,11 @@ For instructions to configure API Gateway Agent connectivity with API Control Pl
 - For instructions to monitor different metrics using API Control Plane refer [here](https://documentation.softwareag.com/webmethods/api_control_plane/wco10-15/webhelp/wco-webhelp/index.html#page/wco-webhelp%2F_api_cp_webhelp.1.52.html%23).
 ## Public APIs
 
-API Control Plane exposes public APIs to interact with it. API docs as well as postman collection with sample usage can be found [here](apis/README.md).
+API Control Plane exposes public APIs to interact with it. API docs as well as postman collection with sample usage can be found [here](apis).
 
 ## Articles
 
-We also host various articles related to API Control Plane deployment, use, administration etc. [here](articles/README.md).
+We also host various articles related to API Control Plane deployment, use, administration etc. [here](articles).
 
 ***
 
