@@ -19,15 +19,15 @@ API Control Plane consists of the following microservices.
 - UI
 
 As a standard tier, we will have two pods per microservice. Each microservice pod will have the following configurations.
- - **Max RAM:** 512 MB
  - **Min RAM:** 512 MB
+ - **Max RAM:** 512 MB
  - **CPU:** 0.5
 
 ##### **Elasticsearch configuration**
 We will have a 3 node self-hosted Elasticsearch cluster which is Reused by Asset Catalog, Ingress (UMC) & Engine. 
 Each ES node will have the following configuration.
- - **Max RAM:** 2 GB
  - **Min RAM:** 2 GB
+ - **Max RAM:** 2 GB
  - **CPU:** 1
  - **Volume:** 300 GB for retaining 45 days of data - [100KB * 1(per minute) * 60(per hour) * 24(per day) * 20(20 API GW pods) * 2(replicas) - comes to ~260GB]
 
@@ -59,6 +59,7 @@ For instructions to configure API Gateway Agent connectivity with API Control Pl
 
 ### Setting up Control plane
 - Data planes are the logical groupings of the runtimes in the landscape. You can create data planes by grouping the runtimes based on the selection criteria. 
+  
   For the documentation to create and manage the Data Planes please refer [here](https://documentation.softwareag.com/webmethods/api_control_plane/wco10-15/webhelp/wco-webhelp/index.html#page/wco-webhelp%2F_api_cp_webhelp.1.46.html%23).
 
 ### Seeing the APIs and monitoring data in control plane
