@@ -14,4 +14,11 @@ Below are the list of swagger files for each of the components available in API 
 * API Control Plane health
 * API Control Plane metrics
 
+Update the authorize variables as per your requirement.</br>
+
+| Variable | Description                       |
+| -------- | --------------------------------- |
+| username | username for basic authentication |
+| password | password for basic authentication |
+
 ######
