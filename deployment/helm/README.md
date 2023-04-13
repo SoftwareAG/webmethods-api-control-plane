@@ -4,7 +4,7 @@ The instructions for installing and running the API Control Plane on kubernetes 
 If you have any questions or find issues, please use the [Issues](https://github.com/SoftwareAG/webmethods-api-control-plane/issues) or [Discussions](https://github.com/SoftwareAG/webmethods-api-control-plane/discussions) tabs in this repository.
 
 The standard deployment of API Control plane contains the following 5 microservices.
-![img.png](../attachments/img.png)
+![img.png](../../attachments/apicp_logical_architecture.png)
 
 1. Asset catalog - Assets(Runtimes,Data planes) processing of Control plane.
 2. Engine - Metrics processing and aggregation.
