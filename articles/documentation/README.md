@@ -37,7 +37,7 @@ If you're interested in high availability architecture topics, go [here](https:/
 
 API Control Plane logs are sent to the standard output (stdout) of the containers/pods and can be accessed with stardard docker / kubernetes tooling.
 
-For debugging purposes, API Control Plane can be started in debug mode with open telemetry enabled. Instructions to set it up are available [here](deployment/docker/README.md#1-enabling-open-telemetry-using-jaeger).
+For debugging purposes, API Control Plane can be started in debug mode with open telemetry enabled. Instructions to set it up are available [here](../../deployment/docker/README.md#1-enabling-open-telemetry-using-jaeger).
 
 ###### [Back to Top](#product-documentation)
 ***
@@ -52,7 +52,9 @@ Please go [here](https://documentation.softwareag.com/webmethods/api_control_pla
 
 ### Configuring API Gateway to connect to API Control Plane
 
-For instructions to configure API Gateway Agent connectivity with API Control Plane go [here](https://documentation.softwareag.com/webmethods/api_control_plane/wco10-15/webhelp/wco-webhelp/index.html#page/wco-webhelp%2Fco-agent.html%23).
+> **Note:** To configure webMethods API Gateway to connect to API Control Plane, API Gateway must be in version **10.15 Fix 4 or higher**. 
+
+The instructions to configure API Gateway connectivity with API Control Plane can be found in this article [here](../../deployment/agent/webmethods-api-gateway/README.md) and in the product documentation [here](https://documentation.softwareag.com/webmethods/api_control_plane/wco10-15/webhelp/wco-webhelp/index.html#page/wco-webhelp%2Fco-agent.html%23).
 
 ###### [Back to Top](#product-documentation)
 ***

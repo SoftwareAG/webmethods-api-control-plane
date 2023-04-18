@@ -1,5 +1,7 @@
 # Connecting API Gateway to API control plane
 
+> **Note:** To configure webMethods API Gateway to connect to API Control Plane, API Gateway must be in version **10.15 Fix 4 or higher**. 
+
 In API Control Plane, each API Gateway deployment is referred as
 runtime. The runtimes get auto populated in API Control Plane when
 the connectivity is established between API Gateway and API Control Plane.
@@ -64,17 +66,19 @@ services:
 
 ```
 
-#Control Plane Agent Configuration using YAML file
-In API Gateway, create an external file called cp-agent.yaml in the \IntegrationServer\instances\default\packages\WmAPIGateway\resources\configuration.
+# Control Plane Agent Configuration using YAML file
+In API Gateway, create an external file called *cp-agent.yaml* in the *\<SAGInstallDir\>/IntegrationServer/instances/\<instance_name\>/packages/WmAPIGateway/resources/configuration*. Place the below content in the file and make sure to change the configurations appropriately.
+
+> **Note:** It is important to name the file ONLY as *cp-agent.yaml*.
 
 ```
 ---
 agentConfig:
 enabled: true
 runtimeConfig:
-runtimeName: "API_Gateway_CHN"
+runtimeName: "API_Gateway_Development"
 deploymentType: "SAG_SAAS"
-description: "A demo deployment of SAG API Gateway"
+description: "A development environment of SAG API Gateway"
 heartBeatIntervalInSeconds: 30
 metricsSynchIntervalInSeconds: 30
 assetSynchIntervalInSeconds: 30
@@ -82,13 +86,15 @@ region: "Chennai"
 location: "New Delhi"
 host: "<valid API Gateway URL>"
 tags:
-- mki
-- local
+- saas_gateway
+- dev_stage
 capacity:
-value:
-units:
+value: 1000
+units: "per second"
 controlPlaneConfig:
 controlPlaneURL: "<valid API Control Plane URL>"
 username: "<user name>"
 password: "<password>"
 ```
+
+> **Note:** The password provided in the YAML file will be read by the API Gateway on application startup and it will be removed thereafter and placed in the password store for future reference. As file will be updated to remove the password, ensure that the file has write permissions.
