@@ -1,3 +1,5 @@
+## ⚠️ Please note that due to issues in API Gateway 10.15 Fix 5, the connectivity between API Control Plane and API Gateway is impacted. Please do not upgrade API Gateway to 10.15 Fix 5 if you want to connect with API Control Plane. 10.15 Fix 4 is still compatible for the API Gateway and API Control Plane connectivity. </span>
+
 # webMethods API Control Plane
 
 APIs are everywhere. API Management is where APIs are. It’s all distributed and heterogenous. Management and administration becomes harder. API Management technology should blend in into the rest of the infrastructure and be managed from one place. API Control Plane is a single solution for understanding, managing and controlling the entire API Management landscape, regardless of where it is, on premises. Things in the API Control Plane are organized across:
