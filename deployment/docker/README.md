@@ -42,6 +42,8 @@ Table of contents
 
     The `.env` file in [deployment/docker/.env](deployment/docker/.env) allows for configuring different aspects of API Control Plane deplpyment. To be able to access API Contol Plane after it's deployed, you need to edit this file and provide a value for `NGINX_DOMAIN_NAME` that matches the hostname of the machine you're deploying API Conrtol plane on. Make sure this hostname is accessible to whoever will be connecting to API Control Plane.
 
+    Also, make sure the update the `.env` file for appropriate verions of the docker imaga you want to use for ingress, ui, engine and asset catalog applications. Go [here](https://github.com/orgs/SoftwareAG/packages?repo_name=webmethods-api-control-plane) so see what's available.
+
 5. Execute the deployment sccripts
 
     To deploy the API Control Plane with default configuration:

@@ -62,7 +62,9 @@ Table of contents
 
 5. Configure your deployment
 
-    The values.yaml file in [deployment/helm/values.yaml](deployment/helm/values.yaml) allows for configuring different aspects of API Control Plane deplpyment. To be able to access API Contol Plane after it's deployed, you need to edit this file and provide a value for `domainName` that matches the hostname of the machine you're deploying API Conrtol plane on. Make sure this hostname is accessible to whoever will be connecting to API Control Plane.
+    The `values.yaml` file in [deployment/helm/values.yaml](deployment/helm/values.yaml) allows for configuring different aspects of API Control Plane deplpyment. To be able to access API Contol Plane after it's deployed, you need to edit this file and provide a value for `domainName` that matches the hostname of the machine you're deploying API Conrtol plane on. Make sure this hostname is accessible to whoever will be connecting to API Control Plane.
+
+    Also, make sure the update the `values.yaml` file for appropriate verions of the docker image you want to use for INGRESS_IMAGE, UI_IMAGE, ENGINE_IMAGE and ASSETCATALOG_IMAGE deployments. Go [here](https://github.com/orgs/SoftwareAG/packages?repo_name=webmethods-api-control-plane) so see what's available.
 
     Default configuration is set up to deploy 2 replicas of API Control Plane containers and 1 replica for others. Edit the values.yaml file to change that as needed.
 
