@@ -80,18 +80,19 @@ Table of contents
     It will take a couple of minutes to start. You can monitor that with solutions like Portainer or Docker Dashboard etc. or simply user Docker CLI like this
 
     ```bash
-    docker ps --format '{"ID":"{{ .ID }}", "Status": "{{ .Status }}", "Name":"{{ .Names }}"}'
+    docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
     ```
 
     The output, when everything starts should look similar to this
 
-    ```json
-    {"ID":"9b791d1dfa4b", "Status": "Up 2 minutes (healthy)", "Name":"nginx"}
-    {"ID":"7504f5e94ecd", "Status": "Up 2 minutes (healthy)", "Name":"control-plane-ingress"}
-    {"ID":"88573a9436ff", "Status": "Up 2 minutes (healthy)", "Name":"control-plane-ui"}
-    {"ID":"e9c1def23279", "Status": "Up 2 minutes (healthy)", "Name":"control-plane-engine"}
-    {"ID":"d1e89d3227de", "Status": "Up 2 minutes (healthy)", "Name":"control-plane-asset-catalog"}
-    {"ID":"4b598e3e422c", "Status": "Up 2 minutes (healthy)", "Name":"elasticsearch"}
+    ```bash
+    NAMES                         STATUS                        PORTS
+    control-plane-ingress         Up About a minute (healthy)   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp
+    control-plane-ui              Up About a minute (healthy)   8080/tcp
+    control-plane-engine          Up About a minute (healthy)   8080/tcp
+    control-plane-asset-catalog   Up About a minute (healthy)   8080/tcp
+    nginx                         Up About a minute (healthy)   0.0.0.0:81->80/tcp, :::81->80/tcp, 0.0.0.0:444->443/tcp, :::444->443/tcp
+    elasticsearch                 Up About a minute (healthy)   0.0.0.0:9200->9200/tcp, :::9200->9200/tcp, 9300/tcp
     ```
 
 ###### [Back to Top](#api-control-plane-deployment-with-docker-compose)
@@ -133,7 +134,7 @@ If everything goes well, the output should be similar to this
 
 ## How to access the newly deployed webMethods API Control Plane?
 
-1. Open your browser and go to https://[the-host-you-configured]:443/
+1. Open your browser and go to https://[the-host-you-configured]:444/ or http://[the-host-you-configured]:81/
 2. You should see the login screen. Log in using Administrator usename and the default password.
 
 ###### [Back to Top](#api-control-plane-deployment-with-docker-compose)
