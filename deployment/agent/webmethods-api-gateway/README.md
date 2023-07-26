@@ -110,7 +110,7 @@ services:
 # Control Plane Agent Configuration using YAML file
 In API Gateway, create an external file called *cp-agent.yaml* in the *\<SAGInstallDir\>/IntegrationServer/instances/\<instance_name\>/packages/WmAPIGateway/resources/configuration*. Place the below content in the file and make sure to change the configurations appropriately.
 
-> **Note:** It is important to name the file ONLY as *cp-agent.yaml*.
+> **Note:** It is important to name the file ONLY as *cp-agent.yml*.
 
 ```yaml
 ---
@@ -131,10 +131,10 @@ agentConfig:
     capacity:
       value: <numerical_value_of_the_expected_transactional_volume>
       units: "<time_units_of_the_capacity>"
-    controlPlaneConfig:
-      controlPlaneURL: "<protocol://host:port-of-your-api-control-plane-instance>"
-      username: "<user-account-of-api-control-plane-in-all-three-groups>"
-      password: "<user-password>"
+  controlPlaneConfig:
+    controlPlaneURL: "<protocol://host:port-of-your-api-control-plane-instance>"
+    username: "<user-account-of-api-control-plane-in-all-three-groups>"
+    password: "<user-password>"
 ```
 
 A sample YAML file with configured values will look like below:
@@ -159,10 +159,10 @@ agentConfig:
     capacity:
       value: 1000
       units: "per second"
-    controlPlaneConfig:
-      controlPlaneURL: "https://control-plane-host:8443"
-      username: "my_admin_user"
-      password: "MyAdminP@$$w0rd"
+  controlPlaneConfig:
+    controlPlaneURL: "https://control-plane-host:8443"
+    username: "my_admin_user"
+    password: "MyAdminP@$$w0rd"
 ```
 
 > **Note:** The password provided in the YAML file will be read by the API Gateway on application startup and it will be removed thereafter and placed in the password store for future reference. As the file will be updated to remove the password, ensure that the file has write permissions.
