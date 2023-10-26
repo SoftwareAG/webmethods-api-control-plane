@@ -3,9 +3,9 @@ applications:
     # -- Name of the application 
     name: assetcatalog
     # -- Image name of assetcatalog
-    imageName: ghcr.io/softwareag/webmethods-api-control-plane/asset-catalog
+    imageName: sagcr.azurecr.io/controlplane-assetcatalog
     # -- Image tag of assetcatalog
-    imageTag: latest
+    imageTag: 10.16
     # -- No. of assetcatalog Replicas 
     replicas: 2
     resources:
@@ -23,9 +23,9 @@ applications:
   engine:
     name: engine
     # -- Image name of engine
-    imageName: ghcr.io/softwareag/webmethods-api-control-plane/engine
+    imageName: sagcr.azurecr.io/controlplane-engine
     # -- Image tag of engine
-    imageTag: latest
+    imageTag: 10.16
     # -- No. of engine Replicas 
     replicas: 2
     resources:
@@ -43,13 +43,14 @@ applications:
   ingress:
     name: ingress
     # -- Image name of ingress
-    imageName: ghcr.io/softwareag/webmethods-api-control-plane/ingress
+    imageName: sagcr.azurecr.io/controlplane-ingress
     # -- Image tag of ingress
-    imageTag: latest
+    imageTag: 10.16
     # -- No. of ingress Replicas 
     replicas: 2
     # -- Tenant ID - The name of the tenant for the deployment
     tenantId: default
+    sslEnabled: true
     resources:
       limits:
         # -- Maximum CPU resource units(1 CPU unit is equivalent to 1 physical CPU core, or 1 virtual core)
@@ -65,9 +66,9 @@ applications:
   ui:
     name: ui
     # -- Image name of ui
-    imageName: ghcr.io/softwareag/webmethods-api-control-plane/ui
+    imageName: sagcr.azurecr.io/controlplane-ui
     # -- Image tag of ui
-    imageTag: latest
+    imageTag: 10.16
     # -- No. of ui Replicas 
     replicas: 2
     resources:

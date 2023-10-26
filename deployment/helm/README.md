@@ -28,7 +28,7 @@ Table of contents
 1. Clone this repository
 2. Get a Personal Access Token (PAT)
 
-    We published docker images for all API Control Plane microservice to this GitHub repository. To be able to pull them or have docker compose pull them for you, you'll need a Personal Access token (PAT). Go to 'settings' in your GitHub profile, then to 'Developer settings' on the bottom of left side navigation bar and finally to 'Personal access tokens' to generate one. Please use classic token type and make sure to select read privilege for 'packages'.
+    We published docker images for all API Control Plane microservice to this GitHub reporotory. To be able to pull them or have docker compose pull them for you, you'll need a Personal Access token (PAT). Go to 'settings' in your GitHub profile, then to 'Developer settings' on the bottom of left side navigation bar and finally to 'Personal access tokens' to generate one. Please use classic token type and make sure to select read privilege for 'packages'.
 
 3. Create a kubernetes namespace for your deployment
 
@@ -50,13 +50,13 @@ Table of contents
     Execute the following command
 
     ```bash
-    kubectl create secret docker-registry regcred -n control-plane --docker-server=ghcr.io --docker-username=[Your git username] --docker-password=[Your PAT]
+    kubectl create secret docker-registry regcred -n control-plane --docker-server=sagcr.azurecr.io --docker-username=[Your git username] --docker-password=[Your PAT]
     ```
 
     If everything goes well the output should be similar to
 
     ```bash
-    [przemek@somehost helm]$ kubectl create secret docker-registry regcred -n control-plane --docker-server=ghcr.io --docker-username=przemekuliok --docker-password=*secret*
+    [przemek@somehost helm]$ kubectl create secret docker-registry regcred -n control-plane --docker-server=sagcr.azurecr.io --docker-username=przemekuliok --docker-password=*secret*
     secret/regcred created created
     ```
 

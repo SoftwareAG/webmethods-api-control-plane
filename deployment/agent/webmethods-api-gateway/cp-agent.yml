@@ -3,7 +3,10 @@ agentConfig:
   enabled: true
   runtimeConfig:
     runtimeName: "demo"
+    heartBeatIntervalInSeconds: 1
+    metricsSynchIntervalInSeconds: 60
+    assetSynchIntervalInSeconds: 60
   controlPlaneConfig:
     controlPlaneURL: "http://agent.stable.deployment"
-    username: ""
-    password: ""
+    username: "administrator"
+    password: "manage"

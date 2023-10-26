@@ -43,11 +43,12 @@ paths:
           2. **query**. Each query consists of a set of conditions connected by a logical connector. Only the same logical connector can be used between conditions; it can either be AND or OR, not both.
           3. **conditions**. Each condition consists of a list of criterias connected by a logical connector. Only the same logical connector can be used between conditions; it can either be AND or OR, not both.
           4. **criteria**. A criteria is the actual condition that applies to the field, providing the field's name, value, and any operators that may be applied to it, such as contains and equals. For a list of supported operations, see the Operation enum.
-          5. **from**. This indicates where record fetching is required to be performed from. For example, "from = 5" denotes the fifth object. Records in Elasticsearch starts from 0.  Default value of from is 0.
+          5. **from**. The "from" parameter indicates the starting point from which record fetching should be performed. For instance, "from = 5" indicates that the sixth object is the starting point.  
+            In Elasticsearch, record indexing starts from 0, meaning the first object has an index of 0. By default, the "from" parameter is set to 0. If the value of the "from" parameter exceeds the total number of records available in Elasticsearch, the search will not return any results.
           6. **size**. This indicates the number of records to be fetched. For example, for size=10, 10 records should be returned beginning with the **from** value. The default is 10000 (max_window_size of asset-catalog elastic search).
           7. **response fields**. The list of fields that should be returned in the response. Only the mentioned fields are returned. To return all the fields give it as a *.
           8. **sort fields**. It is an ordered map containing the field names on which sort has to be performed and their sort order. For example, {"name":"DESC","created":"DESC"}. The results is sorted in descending order by name first, followed by created date. 
-            If no sort fields are specified, results are sorted by lastModifiedDate in decreasing order.
+            If no sort fields are specified, results are sorted by lastModified in decreasing order.
                     
          **Examples:**
         
@@ -108,7 +109,7 @@ paths:
          }
         ``` 
         3. Listing of runtimes. Fetch runtimes For page 1, with page size 20. 
-           In this case first 20 records will be sorted by lastModifiedDate in the descending order.
+           In this case first 20 records will be sorted by lastModified in the descending order.
         
           **Request payload:**
           ```
@@ -212,7 +213,7 @@ paths:
         }
           ```
         
-        7. If no sort fields are given, then by default, the search results will be sorted using the lastModifiedDate in descending order.
+        7. If no sort fields are given, then by default, the search results will be sorted using the lastModified in descending order.
         
         **Request payload:**
         ```
@@ -224,7 +225,7 @@ paths:
         }
         
         ```
-        8. To sort based on createdDate or lastModifiedDate, give it as created or lastModified in input.
+        8. To sort based on created or lastModified, give it as created or lastModified in input.
 
          **Request payload:**
         ```
@@ -266,8 +267,8 @@ paths:
                       "ABC",
                       "test"
                    ],
-                   "createdDate": "2023-01-05 16:49:05.843 IST",
-                   "lastModifiedDate": "2023-01-05 16:49:05.843 IST",
+                   "created": 1672917545000,
+                   "lastModified": 1672917545000,
                    "region": "eu",
                    "owner": {
                        "name": "John",
@@ -284,8 +285,8 @@ paths:
                    "tags": [
                         "ABC"
                     ],
-                   "createdDate": "2023-01-05 16:48:51.668 IST",
-                   "lastModifiedDate": "2023-01-05 16:48:51.668 IST",
+                   "created": 1672917531000,
+                   "lastModified": 1672917531000,
                    "region": "eu",
                    "owner": {
                        "name": "John",
@@ -303,8 +304,8 @@ paths:
                       "Least",
                       "Z"
                   ],
-                  "createdDate": "2023-01-05 16:49:26.231 IST",
-                  "lastModifiedDate": "2023-01-05 16:49:26.231 IST",
+                  "created": 1672917566000,
+                  "lastModified": 1672917566000,
                   "region": "eu",
                   "owner": {
                       "name": "John",
@@ -524,6 +525,68 @@ paths:
            ]
         }
         ```
+        16. exist or notExist operator can be used to check if field exist or not. If value is not provided, then it will check for exist or notExist operation.
+            exist is default operation.
+
+        **Request payload:**
+        ```
+        {
+          "type": "API",
+          "query": {
+          "conditions": [
+            {
+                "criterias": [
+                    {
+                        "field": "apiDeployments.publishInfo",
+                        "operation": "exist"
+                    }
+                ]
+            }
+        ]
+                },
+        "responseFields": ["*"],
+        "from": 0,
+        "size": 10,
+        "sortFields": {
+        "test": "DESC"
+          }
+        }
+        ```
+        **Response:**
+        ```
+        {
+              "searchResults": [
+                            {
+            "id": "14587913-3c9f-4sf2-88q2-14ce84we4135",
+            "name": "API 4",
+            "lastModified": "2023-04-24 08:39:16.905 GMT",
+            "owner": {
+                "name": "administrator",
+                "id": "200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4",
+                "type": "USER"
+            },
+            "apiType": "REST",
+            "apiDeployments": [
+                {
+                    "name": "API 4",
+                    "tags": [
+                        "test"
+                    ],
+                    "lastModified": "2023-04-24 08:39:16.905 GMT",
+                    "runtimeId": "aa3332ea-c192-49aa-8174-eafb1af61f30",
+                    "apiStatus": "ACTIVE",
+                    "displayVersion": "2",
+                    "publishInfo": [
+                        "SERVICE_REGISTRY"
+                    ],
+                    "noOfPolicies": 0
+                }
+            ],
+            "apiDifferencesCount": 0
+           }
+          ]
+        }
+        ```
 
 
         For each type, the fields that can be provided in the conditions, sort fields, and response fields are listed below. If invalid fields are given 
@@ -552,8 +615,8 @@ paths:
               3. description 
               4. tags
               5. icon 
-              6. createdDate
-              7. lastModifiedDate
+              6. created
+              7. lastModified
               8. runtimesFilter.runtimeTypes
               9. runtimesFilter.deploymentTypes
               10. runtimesFilter.regions
@@ -604,8 +667,8 @@ paths:
               2. name 
               3. description
               4. tags
-              5. createdDate
-              6. lastModifiedDate
+              5. created
+              6. lastModified
               7. type
               8. deploymentType
               9. region
@@ -643,7 +706,7 @@ paths:
               6. apiDeployments.runtimeId
               7. apiDeployments.apiStatus
               8. apiDeployments.displayVersion
-              9. apiDeployments.lastModifiedDate
+              9. apiDeployments.lastModified
               10. apiDeployments.name
               11. apiDeployments.description
               12. apiDeployments.tags
@@ -667,8 +730,8 @@ paths:
                7. lastModified
            3. **Fields allowed to be given in the responseFields:** 
                1. id
-               2. createdDate
-               3. lastModifiedDate
+               2. created
+               3. lastModified
                4. objectType
                5. actionType
                6. data
@@ -724,8 +787,8 @@ paths:
                     location: denver
                     tags:  
                       - test
-                    createdDate: 2022-12-12 16:45:20:469 IST
-                    lastModifiedDate: 2022-12-10 16:45:20:469 IST
+                    created: 1670843720000
+                    lastModified: 1670670920000
                     region: us
                     owner: 
                       id: 486b23
@@ -738,8 +801,8 @@ paths:
                     location: denver
                     tags:  
                       - Prod
-                    createdDate: 2022-12-10 16:45:20:469 IST
-                    lastModifiedDate: 2022-12-10 16:45:20:469 IST
+                    created: 1670670920000
+                    lastModified: 1670670920000
                     region: us
                     owner: 
                       id: 486b23
@@ -911,6 +974,8 @@ components:
               - startsWith
               - notStartsWith
               - endsWith
+              - exist
+              - notExist
     SearchResult:
       type: object
       properties:

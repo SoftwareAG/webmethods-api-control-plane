@@ -70,8 +70,8 @@ paths:
                 description: This is a private cloud API Gateway runtime.
                 tags:
                   - Dev
-                createdDate: 2022-06-1016:50:37:064IST
-                lastModifiedDate: 2022-06-1016:50:37:064IST
+                created: 1654860037000
+                lastModified: 1654860037000
                 region: us
                 location: Denver
                 host: 192.168.24.25
@@ -125,8 +125,8 @@ paths:
                   description: This is a private cloud API Gateway runtime.
                   tags:
                     - Dev
-                  createdDate: 2022-06-1610:04:28:916IST
-                  lastModifiedDate: 2022-06-1610:04:28:916IST
+                  created: 1655354068000
+                  lastModified: 1655354068000
                   region: us
                   location: Denver
                   host: 192.168.24.25
@@ -143,8 +143,8 @@ paths:
                   description: This is a private cloud API Gateway runtime.
                   tags:
                     - Test
-                  createdDate: 2022-06-1610:05:13:290IST
-                  lastModifiedDate: 2022-06-1610:05:13:290IST
+                  created: 1655354113000
+                  lastModified: 1655354113000
                   region: us
                   location: Denver
                   host: 192.168.24.25
@@ -186,8 +186,8 @@ paths:
                 description: This is a private cloud API Gateway runtime.
                 tags:
                   - Dev
-                createdDate: 2022-06-1016:50:37:064IST
-                lastModifiedDate: 2022-06-1016:50:37:064IST
+                created: 1654860037000
+                lastModified: 1654860037000
                 region: us
                 location: Denver
                 host: 192.168.24.25
@@ -247,8 +247,8 @@ paths:
                 description: This is a private cloud API Gateway runtime.
                 tags:
                   - Dev
-                createdDate: 2022-06-1016:50:37:064IST
-                lastModifiedDate: 2022-06-1016:50:37:064IST
+                created: 1654860037000
+                lastModified: 1654860037000
                 region: us
                 location: Denver
                 host: 192.168.24.25
@@ -325,14 +325,14 @@ components:
             minLength: 0
             maxLength: 50
             example: ["Dev"]
-        createdDate:
-          type: string
+        created:
+          type: number
           description: The time the asset was created.
-          example: 2022-06-1016:50:37:064IST
-        lastModifiedDate:
-          type: string
+          example: 1654860037000
+        lastModified:
+          type: number
           description: The time the asset was last modified.
-          example: 2022-06-1016:50:37:064IST
+          example: 1654860037000
         owner:
           $ref: '#/components/schemas/Owner'
         type:

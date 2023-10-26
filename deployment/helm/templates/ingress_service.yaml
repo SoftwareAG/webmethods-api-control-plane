@@ -5,10 +5,14 @@ metadata:
   namespace: {{ default "control-plane" .Release.Namespace }}
 spec:
   ports:
-    - port: 8080
+    - name: http
+      port: 8080
       protocol: TCP
+      {{ if eq .Values.applications.ingress.sslEnabled true }}
+      targetPort: 8443
+      {{ else }}
       targetPort: 8080
-      name: http
+      {{ end }}
   selector:
     app: {{ .Values.applications.ingress.name }}
   type: ClusterIP
