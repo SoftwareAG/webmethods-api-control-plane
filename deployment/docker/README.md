@@ -56,13 +56,13 @@ Table of contents
     - execute the deployment script
 
         ```bash
-        docker compose -f control-plane.yaml up -d
+        docker-compose -f control-plane.yaml up -d
         ```
 
     If everything goes well, the output should be similar to this
 
     ```bash
-    [przemek@somehost docker]$ docker compose -f control-plane.yaml up -d
+    [przemek@somehost docker]$ docker-compose -f control-plane.yaml up -d
     [+] Running 8/8
     ⠿ Network softwareag-api-management      Created                         0.2s
     ⠿ Container elasticsearch                Healthy                        22.6s
@@ -110,13 +110,13 @@ To stop and remove the API Control Plane default configuration:
 - execute the deployment script
 
     ```bash
-    docker compose -f control-plane.yaml down
+    docker-compose -f control-plane.yaml down
     ```
 
 If everything goes well, the output should be similar to this
 
 ```bash
-[przemek@somehost docker]$ docker compose -f control-plane.yaml down
+[przemek@somehost docker]$ docker-compose -f control-plane.yaml down
 [+] Running 8/8
 ⠿ Container nginx_setup                  Removed                         0.0s
 ⠿ Container nginx                        Removed                         0.3s
@@ -156,7 +156,7 @@ To start API Control Plane BETA in debug mode:
 - execute the deployment script
 
     ```bash
-    docker compose -f control-plane.debug.yaml up -d
+    docker-compose -f control-plane.debug.yaml up -d
     ```
 
 :wave: The Jaeger UI can be accessed via the `JAEGER_UI_PORT` port configured in the `.env` file.
@@ -176,7 +176,7 @@ To start API Control Plane BETA with Gainsight enabled:
 - execute the deployment script
 
     ```bash
-    docker compose -f control-plane.gainsight.yaml up -d
+    docker-compose -f control-plane.gainsight.yaml up -d
     ```
 
 ### 3. Enabling secure Elasticsearch communication
@@ -202,7 +202,7 @@ To start API Control Plane BETA with secure elasticsearch connectovoty enabled:
 - execute the deployment script
 
     ```bash
-    docker compose -f control-plane-secure-es.yaml up -d
+    docker-compose -f control-plane-secure-es.yaml up -d
     ```
 
 ###### [Back to Top](#api-control-plane-deployment-with-docker-compose)
