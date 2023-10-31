@@ -1,4 +1,4 @@
-## ⚠️ Please note that due to issues in API Gateway 10.15 Fix 5, the connectivity between API Control Plane and API Gateway is impacted. Please do not use API Gateway to 10.15 Fix 5 if you want to connect with API Control Plane. Use 10.15 Fix 4 or Fix 6 for the API Gateway and API Control Plane connectivity. </span>
+## ⚠️ Please note that API Control Plane is compatible with API Gateway 10.15 Fix 8 and higher versions. </span>
 
 # webMethods API Control Plane
 
