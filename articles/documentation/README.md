@@ -1,20 +1,24 @@
 # Product documentation
 
-Links provided here will take you to a :construction: work-in-progress :construction: product documentation.
+Links provided here will take you to a section of [API Control Plane documentation page](https://documentation.softwareag.com/wco/10.16.0/en/webhelp/wco-webhelp/).
 
 ***
 
 Table of contents
 
-1. [Health, monitoring, metrics and actions](#health-monitoring-metrics-and-actions)
-2. [High Availability](#high-availability)
-3. [Logging and tracing](#logging-and-tracing)
-4. [Data management and housekeeping](#data-management-and-housekeeping)
-5. [Configuring API Gateway to connect to API Control Plane](#configuring-api-gateway-to-connect-to-api-control-plane)
-6. [Data planes in API Control Plane](#data-planes-in-api-control-plane)
-7. [API Catalog in API Control Plane](#api-catalog-in-api-control-plane)
-8. [Runtimes in API Control Plane](#runtimes-in-api-control-plane)
-9. [Analytical dashboard](#analytical-dashboard)
+1. Administration of the API Control Plane
+   - [Health, monitoring, metrics and actions](#health-monitoring-metrics-and-actions)
+   - [High Availability](#high-availability)
+   - [Logging and tracing](#logging-and-tracing)
+   - [Data management and housekeeping](#data-management-and-housekeeping)
+2. Configuration of the API Control Plane
+   - [Deploying API Control Plane Application](#deploying-api-control-plane) 
+   - [Configuring API Gateway to connect to API Control Plane](#configuring-api-gateway-to-connect-to-api-control-plane)
+3. Using API Control Plane Application.
+   - [Data planes in API Control Plane](#data-planes-in-api-control-plane)
+   - [API Catalog in API Control Plane](#api-catalog-in-api-control-plane)
+   - [Runtimes in API Control Plane](#runtimes-in-api-control-plane)
+   - [Analytical dashboard](#analytical-dashboard)
 
 ***
 
@@ -50,11 +54,19 @@ Please go [here](https://documentation.softwareag.com/wco/10.16.0/en/webhelp/wco
 ###### [Back to Top](#product-documentation)
 ***
 
+### Deploying API Control Plane
+
+Refer [here](../../README.md#deploying-api-control-plane) to deploy the API Control Plane application.
+
+###### [Back to Top](#product-documentation)
+***
+
+
 ### Configuring API Gateway to connect to API Control Plane
 
 > **Note:** To configure webMethods API Gateway to connect to API Control Plane, API Gateway must be in version **10.15 Fix 8 and above**. 
 
-The instructions to configure API Gateway connectivity with API Control Plane can be found in this article [here](../../deployment/agent/webmethods-api-gateway/README.md) and in the product documentation [here](https://documentation.softwareag.com/webmethods/api_control_plane/wco10-15/webhelp/wco-webhelp/index.html#page/wco-webhelp%2Fco-agent.html%23).
+The instructions to configure API Gateway connectivity with API Control Plane can be found [here](../../deployment/agent/webmethods-api-gateway/README.md).
 
 You can also refer  [here](https://documentation.softwareag.com/wco/10.16.0/en/webhelp/wco-webhelp/#page/wco-webhelp%2Fco-agent.html%23) for a detailed document on connecting API Gateway to API Control Plane.
 

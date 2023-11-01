@@ -2,12 +2,10 @@
 
 > **Note:** To configure webMethods API Gateway to connect to API Control Plane, API Gateway must be in version **10.15 Fix 4 or higher**. 
 
-In API Control Plane, each API Gateway deployment is referred as
-runtime. The runtimes get auto populated in API Control Plane when
-the connectivity is established between API Gateway and API Control Plane.
+In API Control Plane, each API Gateway deployment is referred as runtime. The runtimes get auto populated in API Control Plane when the connectivity is established between API Gateway and API Control Plane.
 The connectivity is established by externalizing the control plane agent configuration through a set of properties.
-When you enable this configuration and start up the runtime (API Gateway),
-the runtime reads the control plane agent configuration, registers the runtime in API Control Plane, starts the schedulers, and sends the health check status, asset, and runtime metrics (such as transaction count, error rate, average latency, and average response time at API level) to API Control Plane at regular intervals.
+
+When you enable this configuration and start up the runtime (API Gateway), the runtime reads the control plane agent configuration, registers the runtime in API Control Plane, starts the schedulers, and sends the health check status, asset, and runtime metrics (such as transaction count, error rate, average latency, and average response time at API level) to API Control Plane at regular intervals.
 
 # Control Plane Agent Properties
 The following set of properties are used to establish the 
