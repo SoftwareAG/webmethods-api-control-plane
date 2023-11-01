@@ -28,7 +28,7 @@ The sample docker compose scripts are configure to use 1 replica per microservic
 
 ## Data storage
 
-API Control Plane also uses elasticsearch for data storage. The sample helm deployment scripts and docker compose deployment scipts are configured to have 1 elasticsearch instance. This instance is used by Asset Catalog, Ingress & Engine.
+API Control Plane also uses elasticsearch for data storage. The sample helm deployment scripts and docker compose deployment scripts are configured to have 1 elasticsearch instance. This instance is used by Asset Catalog, Ingress & Engine.
 
 Each elasticsearch node will have the following configuration.
 

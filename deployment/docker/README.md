@@ -41,9 +41,9 @@ Table of contents
 
 4. Configure your deployment
 
-    The `.env` file in [deployment/docker/.env](deployment/docker/.env) allows for configuring different aspects of API Control Plane deplpyment. To be able to access API Contol Plane after it's deployed, you need to edit this file and provide a value for `NGINX_DOMAIN_NAME` that matches the hostname of the machine you're deploying API Conrtol plane on. Make sure this hostname is accessible to whoever will be connecting to API Control Plane.
+    The `.env` file in [deployment/docker/.env](deployment/docker/.env) allows for configuring different aspects of API Control Plane deployment. To be able to access API Control Plane after it's deployed, you need to edit this file and provide a value for `NGINX_DOMAIN_NAME` that matches the hostname of the machine you're deploying API Control plane on. Make sure this hostname is accessible to whoever will be connecting to API Control Plane.
 
-5. Execute the deployment sccripts
+5. Execute the deployment scripts
 
     To deploy the API Control Plane with default configuration:
 
@@ -74,7 +74,7 @@ Table of contents
     ⠿ Container nginx                        Started                       151.2s
     ```
 
-6. Verify it's atarted
+6. Verify it's started
 
     It will take a couple of minutes to start. You can monitor that with solutions like Portainer or Docker Dashboard etc. or simply user Docker CLI like this
 
@@ -134,7 +134,7 @@ If everything goes well, the output should be similar to this
 ## How to access the newly deployed webMethods API Control Plane?
 
 1. Open your browser and go to `https://[the-host-you-configured]:444/` or `http://[the-host-you-configured]:8080/`
-2. You should see the login screen. Log in using Administrator usename and the default password.
+2. You should see the login screen. Log in using Administrator username and the default password.
 
 ###### [Back to Top](#api-control-plane-deployment-with-docker-compose)
 ***
@@ -145,7 +145,7 @@ If everything goes well, the output should be similar to this
 
 API Control plane can be started in debug mode with Open telemetry enabled and exposed using [Jaeger UI](https://www.jaegertracing.io/). For this, the deployment needs additional image, namely `jaegertracing/all-in-one`.
 
-To start API Control Plane BETA in debug mode:
+To start API Control Plane in debug mode:
 
 - change to deployment/docker directory:
 
@@ -163,9 +163,9 @@ To start API Control Plane BETA in debug mode:
 
 ### 2. Enabling Gainsight integration
 
-If you want to see [Gainsight](https://www.gainsight.com/product-experience/) powered user engagemnets (work in progress) in API Control Plane like bots, articles, feature introduction etc., you can start it with additional configuration set up in `ui/ui-config.gainsight.env` file. Please contact your Software AG API Control Plane BETA contact or ask us here for the proper confoguration values.
+If you want to see [Gainsight](https://www.gainsight.com/product-experience/) powered user engagements (work in progress) in API Control Plane like bots, articles, feature introduction etc., you can start it with additional configuration set up in `ui/ui-config.gainsight.env` file. Please contact your Software AG API Control Plane contact or ask us here for the proper configuration values.
 
-To start API Control Plane BETA with Gainsight enabled:
+To start API Control Plane with Gainsight enabled:
 
 - change to deployment/docker directory:
 
@@ -181,7 +181,7 @@ To start API Control Plane BETA with Gainsight enabled:
 
 ### 3. Enabling secure Elasticsearch communication
 
-If you wuld like to run elasticsearch in secure mode, then the following properties needs to be set in the `.env` file to enable secure communication
+If you would like to run elasticsearch in secure mode, then the following properties needs to be set in the `.env` file to enable secure communication
 
 ``` yaml
 ELASTICSEARCH_USERNAME=
@@ -191,7 +191,7 @@ ELASTICSEARCH_CERTPATH=
 
 Please refer to https://www.elastic.co/guide/en/elasticsearch/reference/current/secure-cluster.html for more information.
 
-To start API Control Plane BETA with secure elasticsearch connectovoty enabled:
+To start API Control Plane with secure elasticsearch connectivity enabled:
 
 - change to deployment/docker directory:
 

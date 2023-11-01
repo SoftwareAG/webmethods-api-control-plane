@@ -35,7 +35,7 @@ If you're interested in high availability architecture topics, go [here](https:/
 
 ### Logging and tracing
 
-API Control Plane logs are sent to the standard output (stdout) of the containers/pods and can be accessed with stardard docker / kubernetes tooling.
+API Control Plane logs are sent to the standard output (stdout) of the containers/pods and can be accessed with standard docker / kubernetes tooling.
 
 For debugging purposes, API Control Plane can be started in debug mode with open telemetry enabled. Instructions to set it up are available [here](../../deployment/docker/README.md#1-enabling-open-telemetry-using-jaeger).
 
@@ -61,7 +61,7 @@ The instructions to configure API Gateway connectivity with API Control Plane ca
 
 ### Data planes in API Control Plane
 
-Data planes are the logical groupings of runtimes in the API Management landscape. You can create data planes by grouping runtimes based on the variosu criteria.
+Data planes are the logical groupings of runtimes in the API Management landscape. You can create data planes by grouping runtimes based on the various criteria.
   
 For the documentation to create and manage the Data planes please go [here](https://documentation.softwareag.com/webmethods/api_control_plane/wco10-15/webhelp/wco-webhelp/index.html#page/wco-webhelp%2F_api_cp_webhelp.1.46.html%23).
 
@@ -70,7 +70,7 @@ For the documentation to create and manage the Data planes please go [here](http
 
 ### API Catalog in API Control Plane
 
-API Control Plane provides a single catalog for all APIs deployed acroos runtimes in the entire API Management landscape. For instructions for how to manage the list of APIs using API Control Plane go [here](https://documentation.softwareag.com/webmethods/api_control_plane/wco10-15/webhelp/wco-webhelp/index.html#page/wco-webhelp%2F_api_cp_webhelp.1.50.html%23).
+API Control Plane provides a single catalog for all APIs deployed across runtimes in the entire API Management landscape. For instructions for how to manage the list of APIs using API Control Plane go [here](https://documentation.softwareag.com/webmethods/api_control_plane/wco10-15/webhelp/wco-webhelp/index.html#page/wco-webhelp%2F_api_cp_webhelp.1.50.html%23).
 
 ###### [Back to Top](#product-documentation)
 ***
