@@ -56,12 +56,12 @@ applications:
         # -- Maximum CPU resource units(1 CPU unit is equivalent to 1 physical CPU core, or 1 virtual core)
         cpu: 500m
         # -- Maximum Memory resource units
-        memory: 512Mi
+        memory: 1024Mi
       requests:
         # -- Minimum CPU resource units(1 CPU unit is equivalent to 1 physical CPU core, or 1 virtual core)
         cpu: 500m
         # -- Minimum Memory resource units
-        memory: 512Mi
+        memory: 1024Mi
     logLevel: TRACE    
   ui:
     name: ui
@@ -82,8 +82,6 @@ applications:
         cpu: 500m
         # -- Minimum Memory resource units
         memory: 512Mi
-    # -- SPRING_CODEC_MAX_IN_MEMORY_SIZE for ui in bytes
-    springCodecMaxMemorySize: 5242880
     logLevel: TRACE
   es:
     name: elasticsearch

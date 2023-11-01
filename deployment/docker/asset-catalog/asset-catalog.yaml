@@ -4,6 +4,13 @@ services:
     container_name: control-plane-asset-catalog
     hostname: asset-catalog
     depends_on:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.5'
+        reservations:
+          memory: 512M
+          cpus: '0.5'
       elasticsearch:
         condition: service_healthy
     deploy:

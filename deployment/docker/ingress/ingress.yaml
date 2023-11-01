@@ -11,6 +11,13 @@ services:
       ui:
         condition: service_healthy
     deploy:
+      resources:
+        limits:
+          memory: 1024M
+          cpus: '0.5'
+        reservations:
+          memory: 1024M
+          cpus: '0.5'
       restart_policy:
         condition: "no"
     env_file:
