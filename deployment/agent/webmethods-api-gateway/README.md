@@ -1,6 +1,6 @@
 # Connecting API Gateway to API control plane
 
-> **Note:** To configure webMethods API Gateway to connect to API Control Plane, API Gateway must be in version **10.15 Fix 4 or higher**. 
+> **Note:** To configure webMethods API Gateway to connect to API Control Plane, API Gateway must be in version **10.15 Fix 8 or higher**. 
 
 In API Control Plane, each API Gateway deployment is referred as runtime. The runtimes get auto populated in API Control Plane when the connectivity is established between API Gateway and API Control Plane.
 The connectivity is established by externalizing the control plane agent configuration through a set of properties.
