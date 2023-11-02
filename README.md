@@ -1,16 +1,16 @@
-## ⚠️ Please note that due to issues in API Gateway 10.15 Fix 5, the connectivity between API Control Plane and API Gateway is impacted. Please do not use API Gateway to 10.15 Fix 5 if you want to connect with API Control Plane. Use 10.15 Fix 4 or Fix 6 for the API Gateway and API Control Plane connectivity. </span>
+## ⚠️ Please note that API Control Plane is compatible with API Gateway version 10.15 fix 8 and above.</span>
 
 # webMethods API Control Plane
 
-APIs are everywhere. API Management is where APIs are. It’s all distributed and heterogenous. Management and administration becomes harder. API Management technology should blend in into the rest of the infrastructure and be managed from one place. API Control Plane is a single solution for understanding, managing and controlling the entire API Management landscape, regardless of where it is, on premises or in the cloud. Things in the API Control Plane are organized across:
+APIs are everywhere. API Management is where APIs are. It’s all distributed and heterogeneous. Management and administration becomes harder. API Management technology should blend in into the rest of the infrastructure and be managed from one place. API Control Plane is a single solution for understanding, managing and controlling the entire API Management landscape, regardless of where it is, on premises or in the cloud. Things in the API Control Plane are organized across:
 
 - Data planes - these are logical groupings of your gateways, portals and other runtimes dealing with APIs.
 - Runtimes - there are your API Gateways, developer portals etc.
-- APIs - that's self explanatory. These are APIs present in your landscape.
+- APIs - that's self-explanatory. These are APIs present in your landscape.
 
 ![image](/attachments/apicp_dashboard_page.png)
 
-This repository hosts assets documenting how to deploy and run webMethods API Control Plane, articles and tutorials, public API docs and Postman collections whoing who to use them and more.
+This repository hosts assets documenting how to deploy and run webMethods API Control Plane, articles and tutorials, public API docs and Postman collections wooing who to use them and more.
 
 ## Deploying API Control Plane
 

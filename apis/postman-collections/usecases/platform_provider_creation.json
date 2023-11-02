@@ -37,7 +37,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"joeroot\",\r\n    \"firstname\": \"Joe\",\r\n    \"lastname\": \"Root\",\r\n    \"description\": \"Admin officer for SAG\",\r\n    \"email\": \"joeroot@sag.com\",\r\n    \"password\": \"My@123#Password\",\r\n    \"preferredlocale\": \"en_US\"\r\n}",
+					"raw": "{\r\n    \"username\": \"joeroot\",\r\n    \"firstname\": \"Joe\",\r\n    \"lastname\": \"Root\",\r\n    \"description\": \"Admin officer for SAG\",\r\n    \"email\": \"joeroot@sag.com\",\r\n    \"password\": \"\",\r\n    \"preferredlocale\": \"en_US\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -181,7 +181,7 @@
 		},
 		{
 			"key": "password",
-			"value": "manage",
+			"value": "*****",
 			"type": "string"
 		},
 		{

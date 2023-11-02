@@ -37,15 +37,24 @@ spec:
           requests:
             cpu: {{ .Values.applications.ingress.resources.requests.cpu }}
             memory: {{ .Values.applications.ingress.resources.requests.memory }}
+#  should be enabled if the certificate from host system is being mounted
+#        volumeMounts:
+#          - name: hostpath-volume
+#            mountPath: /opt/softwareag/certs/softwareag_not_for_production.jks
         ports:
           - containerPort: 8080
             name: http
         readinessProbe:
           httpGet:
             path: /api/ingress/health/readiness
+            {{ if eq .Values.applications.ingress.sslEnabled true }}
+            port: 8443
+            scheme: HTTPS
+            {{ else }}
             port: 8080
             scheme: HTTP
-          initialDelaySeconds: 60
+            {{ end }}
+          initialDelaySeconds: 100
           periodSeconds: 20
           successThreshold: 1
           failureThreshold: 3
@@ -53,13 +62,24 @@ spec:
         livenessProbe:
           httpGet:
             path: /api/ingress/health/liveness
+            {{ if eq .Values.applications.ingress.sslEnabled true }}
+            port: 8443
+            scheme: HTTPS
+            {{ else }}
             port: 8080
             scheme: HTTP
-          initialDelaySeconds: 60
+            {{ end }}
+          initialDelaySeconds: 100
           periodSeconds: 20
           successThreshold: 1
           failureThreshold: 3
           timeoutSeconds: 5
+#      should be enabled if the certificate from host system is being mounted
+#      volumes:
+#        - name: hostpath-volume
+#          hostPath:
+#            path: /mnt/path/in/your/host/softwareag_test.jks
+#            type: File
       terminationGracePeriodSeconds: 30
       imagePullSecrets:
         - name: {{ .Values.imagePullSecretName }}

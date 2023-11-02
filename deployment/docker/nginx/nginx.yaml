@@ -40,7 +40,7 @@ services:
              server_name ${NGINX_DOMAIN_NAME};
              listen 80 ;
              location / {
-                 proxy_pass http://ingress:8080;
+                 proxy_pass https://ingress:8443;
                  proxy_set_header X-Forwarded-Proto http;
                  proxy_set_header Host ${NGINX_DOMAIN_NAME};
                  proxy_set_header X-Forwarded-Port ${NGINX_HTTP_PORT};
@@ -55,7 +55,7 @@ services:
              ssl_certificate /etc/nginx/certs/${NGINX_DOMAIN_NAME}.crt;
              ssl_certificate_key /etc/nginx/certs/${NGINX_DOMAIN_NAME}.key;
              location / {
-                 proxy_pass http://ingress:8080;
+                 proxy_pass https://ingress:8443;
                  proxy_set_header X-Forwarded-Proto https;
                  proxy_set_header Host ${NGINX_DOMAIN_NAME};
                  proxy_set_header X-Forwarded-Port ${NGINX_HTTPS_PORT};

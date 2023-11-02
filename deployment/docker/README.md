@@ -25,26 +25,25 @@ Table of contents
 
 ## How to deploy webMethods API Control Plane using docker compose?
 
-1. Clone this repository
+1. Login to https://containers.softwareag.com/
+
 2. Get a Personal Access Token (PAT)
 
-    We published docker images for all API Control Plane microservice to this GitHub reporotory. To be able to pull them or have docker compose pull them for you, you'll need a Personal Access token (PAT). Go to 'settings' in your GitHub profile, then to 'Developer settings' on the bottom of left side navigation bar and finally to 'Personal access tokens' to generate one. Please use classic token type and make sure to select read privilege for 'packages'.
+   We published docker images for all API Control Plane microservice to https://containers.softwareag.com/ repository. To be able to pull them or have docker compose pull them for you, you'll need a Personal Access token (PAT). Goto Userprofile > Settings > Generate password. Store Token Password securely.
 
-3. Log in to ghcr.io docker repository
+3. Log in to sagcr.azurecr.io docker repository
 
     Run the following command in your docker environment:
 
     ```bash
-    docker login ghcr.io -u [Your git username] -p [Your PAT]
+    docker login -u [Your git username] -p [Your PAT] sagcr.azurecr.io 
     ```
 
 4. Configure your deployment
 
-    The `.env` file in [deployment/docker/.env](deployment/docker/.env) allows for configuring different aspects of API Control Plane deplpyment. To be able to access API Contol Plane after it's deployed, you need to edit this file and provide a value for `NGINX_DOMAIN_NAME` that matches the hostname of the machine you're deploying API Conrtol plane on. Make sure this hostname is accessible to whoever will be connecting to API Control Plane.
+    The `.env` file in [deployment/docker/.env](deployment/docker/.env) allows for configuring different aspects of API Control Plane deployment. To be able to access API Control Plane after it's deployed, you need to edit this file and provide a value for `NGINX_DOMAIN_NAME` that matches the hostname of the machine you're deploying API Control plane on. Make sure this hostname is accessible to whoever will be connecting to API Control Plane.
 
-    If you don't want to use the `latest` version and prefere a specific one, make sure the update the `.env` file for appropriate verions of the docker image you want to use for INGRESS_IMAGE, UI_IMAGE, ENGINE_IMAGE and ASSETCATALOG_IMAGE deployments. Go [here](https://github.com/orgs/SoftwareAG/packages?repo_name=webmethods-api-control-plane) so see what's available.
-
-5. Execute the deployment sccripts
+5. Execute the deployment scripts
 
     To deploy the API Control Plane with default configuration:
 
@@ -57,13 +56,13 @@ Table of contents
     - execute the deployment script
 
         ```bash
-        docker compose -f control-plane-beta.yaml up -d
+        docker-compose -f control-plane.yaml up -d
         ```
 
     If everything goes well, the output should be similar to this
 
     ```bash
-    [przemek@somehost docker]$ docker compose -f control-plane-beta.yaml up -d
+    [przemek@somehost docker]$ docker-compose -f control-plane.yaml up -d
     [+] Running 8/8
     ⠿ Network softwareag-api-management      Created                         0.2s
     ⠿ Container elasticsearch                Healthy                        22.6s
@@ -75,7 +74,7 @@ Table of contents
     ⠿ Container nginx                        Started                       151.2s
     ```
 
-6. Verify it's atarted
+6. Verify it's started
 
     It will take a couple of minutes to start. You can monitor that with solutions like Portainer or Docker Dashboard etc. or simply user Docker CLI like this
 
@@ -111,13 +110,13 @@ To stop and remove the API Control Plane default configuration:
 - execute the deployment script
 
     ```bash
-    docker compose -f control-plane-beta.yaml down
+    docker-compose -f control-plane.yaml down
     ```
 
 If everything goes well, the output should be similar to this
 
 ```bash
-[przemek@somehost docker]$ docker compose -f control-plane-beta.yaml down
+[przemek@somehost docker]$ docker-compose -f control-plane.yaml down
 [+] Running 8/8
 ⠿ Container nginx_setup                  Removed                         0.0s
 ⠿ Container nginx                        Removed                         0.3s
@@ -134,8 +133,8 @@ If everything goes well, the output should be similar to this
 
 ## How to access the newly deployed webMethods API Control Plane?
 
-1. Open your browser and go to `https://[the-host-you-configured]:444/` or `http://[the-host-you-configured]:81/`
-2. You should see the login screen. Log in using Administrator usename and the default password.
+1. Open your browser and go to `https://[the-host-you-configured]:444/` or `http://[the-host-you-configured]:8080/`
+2. You should see the login screen. Log in using Administrator username and the default password.
 
 ###### [Back to Top](#api-control-plane-deployment-with-docker-compose)
 ***
@@ -146,7 +145,7 @@ If everything goes well, the output should be similar to this
 
 API Control plane can be started in debug mode with Open telemetry enabled and exposed using [Jaeger UI](https://www.jaegertracing.io/). For this, the deployment needs additional image, namely `jaegertracing/all-in-one`.
 
-To start API Control Plane BETA in debug mode:
+To start API Control Plane in debug mode:
 
 - change to deployment/docker directory:
 
@@ -157,16 +156,16 @@ To start API Control Plane BETA in debug mode:
 - execute the deployment script
 
     ```bash
-    docker compose -f control-plane-beta.debug.yaml up -d
+    docker-compose -f control-plane.debug.yaml up -d
     ```
 
 :wave: The Jaeger UI can be accessed via the `JAEGER_UI_PORT` port configured in the `.env` file.
 
 ### 2. Enabling Gainsight integration
 
-If you want to see [Gainsight](https://www.gainsight.com/product-experience/) powered user engagemnets (work in progress) in API Control Plane like bots, articles, feature introduction etc., you can start it with additional configuration set up in `ui/ui-config.gainsight.env` file. Please contact your Software AG API Control Plane BETA contact or ask us here for the proper confoguration values.
+If you want to see [Gainsight](https://www.gainsight.com/product-experience/) powered user engagements (work in progress) in API Control Plane like bots, articles, feature introduction etc., you can start it with additional configuration set up in `ui/ui-config.gainsight.env` file. Please contact your Software AG API Control Plane contact or ask us here for the proper configuration values.
 
-To start API Control Plane BETA with Gainsight enabled:
+To start API Control Plane with Gainsight enabled:
 
 - change to deployment/docker directory:
 
@@ -177,12 +176,12 @@ To start API Control Plane BETA with Gainsight enabled:
 - execute the deployment script
 
     ```bash
-    docker compose -f control-plane-beta.gainsight.yaml up -d
+    docker-compose -f control-plane.gainsight.yaml up -d
     ```
 
 ### 3. Enabling secure Elasticsearch communication
 
-If you wuld like to run elasticsearch in secure mode, then the following properties needs to be set in the `.env` file to enable secure communication
+If you would like to run elasticsearch in secure mode, then the following properties needs to be set in the `.env` file to enable secure communication
 
 ``` yaml
 ELASTICSEARCH_USERNAME=
@@ -192,7 +191,7 @@ ELASTICSEARCH_CERTPATH=
 
 Please refer to https://www.elastic.co/guide/en/elasticsearch/reference/current/secure-cluster.html for more information.
 
-To start API Control Plane BETA with secure elasticsearch connectovoty enabled:
+To start API Control Plane with secure elasticsearch connectivity enabled:
 
 - change to deployment/docker directory:
 
@@ -203,7 +202,7 @@ To start API Control Plane BETA with secure elasticsearch connectovoty enabled:
 - execute the deployment script
 
     ```bash
-    docker compose -f control-plane-beta-secure-es.yaml up -d
+    docker-compose -f control-plane-secure-es.yaml up -d
     ```
 
 ###### [Back to Top](#api-control-plane-deployment-with-docker-compose)

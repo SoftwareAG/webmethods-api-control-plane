@@ -104,8 +104,8 @@ paths:
                     - 9e19-415d-99f8-b555a17a2744-512f725f
                     - 415d-99f8-b555a17a2744-512f725f-9e19
                   logicalOperator: OR
-                createdDate: 2022-06-03 10:44:41:478 GMT
-                lastModifiedDate: 2022-06-03 10:44:41:478 GMT
+                created: 1654253081000
+                lastModified: 1654253081000
         "401":
           description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to create a data plane.
         "400":
@@ -176,8 +176,8 @@ paths:
                       - 9e19-415d-99f8-b555a17a2744-512f725f
                       - 415d-99f8-b555a17a2744-512f725f-9e19
                     logicalOperator: OR
-                  createdDate: 2022-06-03 10:44:41:478 GMT
-                  lastModifiedDate: 2022-06-03 10:44:41:478 GMT
+                  created: 1654253081000
+                  lastModified: 1654253081000
         "401":
           description:  This status code indicates that either the user did not provide any user credentials or the user does not have access rights to retrieve data planes list.
         "500":
@@ -237,8 +237,8 @@ paths:
                     - 9e19-415d-99f8-b555a17a2744-512f725f
                     - 415d-99f8-b555a17a2744-512f725f-9e19
                   logicalOperator: OR
-                createdDate: 2022-06-03 10:44:41:478 GMT
-                lastModifiedDate: 2022-06-03 10:44:41:478 GMT
+                created: 1654253081000
+                lastModified: 1654253081000
         "401":
           description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to retrieve the specified data plane.
         "500":
@@ -293,8 +293,8 @@ paths:
                   - 9e19-415d-99f8-b555a17a2744-512f725f
                   - 415d-99f8-b555a17a2744-512f725f-9e19
                 logicalOperator: OR
-              createdDate: 2022-06-03 10:44:41:478 GMT
-              lastModifiedDate: 2022-06-03 10:44:41:478 GMT
+              created: 1654253081000
+              lastModified: 1654253081000
       responses:
         "200":
           description: This status code indicates the successful updation of the data plane with the specified ID.
@@ -337,8 +337,8 @@ paths:
                     - 9e19-415d-99f8-b555a17a2744-512f725f
                     - 415d-99f8-b555a17a2744-512f725f-9e19
                   logicalOperator: OR
-                createdDate: 2022-06-03 10:44:41:478 GMT
-                lastModifiedDate: 2022-06-03 10:44:41:478 GMT
+                created: 1654253081000
+                lastModified: 1654253081000
         "401":
           description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to update the specified data plane.
         "400":
@@ -426,8 +426,8 @@ paths:
                   location: Boston
                   host: API_G11
                   icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABRCAIAAAARlBx9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPmSURBVHhe7dhNctswDEBhXqe7Lnvv3qK3iOP/uDdox4UEGqIeJQqWZTpVi/nWBt4oM5EdfvbmUnBRrvkY86GG51xwVpxTQdp2KXO3sSe1aBtjwNv2/Icmcy54pO1SEMNcbexJLfrQZBiTOt3aLmXPD5M5F8x4aNp2KXOHybAnVfmhTbc9Nex6+pZDmJj30CbaFg9DxpipMBnGpDSs1LZIGI7264WxjTEQ205DbbFqVhhOfMSDD22g7Z4qmSVjcveGCQvrtTkfF9Y/WyyKwxJIw2RiW6EKy+qLXVkJxLCu7RgGHxc+/eWQkcvDbm3Z/Pr+BZ/+coiBfpiMtg2NtH3CPIEkNRg20fZX5I2FTbd98rxCmKvt0+aVw0Te1rxeoE3h01+uHCasrffqhCqDT3+52JVVKWnrVSkkpfDpL4ee1N1tAp/+Wr9/fEWSmdMmsKAy6UkhyQy0yfdIlAzCvqdCDCBJHdEWvyD72gQuWBCuL0OVkLCmzXoat0FDAW6aDefeJa9qHLUtGwSU4Uon3PeIwbDj8RBiTX9wvQdOz+GgBfXC2io12HbG3U7VYgCPa7DtbHC0H7bWkVcpaeuSDC72w9Y6BsPEOtpYpf63uWFrHUgyXVv8EbeFi/2wtQ4kmdAlJYOL/bC1DiSpQ9M2NLjYD1vryKtae7TF31hwsR+21pFXHQ4NaYs9KVzsh6115FXracur1JJtWFkNksw/0xZ/zVxNm/VE7eBoJ6ysBkkmxJreHHG0E1ZWgySjbfE7ucHRTlhZDZL2jZ2QNoYJHO2EldXkVY39Wtq6pLZKraENSWYVbVmVim3dT0UtHO2EldUgyYTYEye+UONoJ6ysBkkmWE8KRzthZTVIMqts2+5aK2uLVWtq6yU1do01tCHJNG23L+RmL3C3B1ZWgyQTtMReyVI4fRJWVoMkE9ADuL4MK6tBkploEwgowMpqkHTzPt0m0DAGK6tBkti2ptvaL0WuPKysRnssybCt9/Uutd+hJIeV1SBpu40CG1T3n57Qk8LKapBkAk73QJLBymqQZOa0CVQprHweNIyZ2SavcAgTuGBBY391IzbK2bYdeB/N8nDQI2LM/T2pvK3JGCzpJP9PlmrrYu7oEewR7zeBd0OSMWZeWy9muZ5U0pYd7edpY4zg0WXsEYhpvHcCrpwtb2OJ4LmTGCMYo5Ik80hbfNPJX3Y6vHUSSxRLVBbT9+Zvm8pQvNWDJYoligHwlsrbuqfxnBLBDMMSxQDo9ZhN2+ZoELzvLmwwzDAMyDFGSZIJbBC8bAY2GDakeH2OJSrt6WykjWfNwIAUA1I8PccMwxKz6YTrWud6/QMDnAYz3wg70wAAAABJRU5ErkJggg==
-                  createdDate: 2022-06-03 10:44:41:478 GMT
-                  lastModifiedDate: 2022-06-03 10:44:41:478 GMT
+                  created: 1654253081000
+                  lastModified: 1654253081000
                 - id: 512f725f-9e19-415d-99f8-b555a17a2743
                   name: xyz
                   description: xyz
@@ -444,8 +444,8 @@ paths:
                   location: Boston
                   host: API_G12
                   icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABRCAIAAAARlBx9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPmSURBVHhe7dhNctswDEBhXqe7Lnvv3qK3iOP/uDdox4UEGqIeJQqWZTpVi/nWBt4oM5EdfvbmUnBRrvkY86GG51xwVpxTQdp2KXO3sSe1aBtjwNv2/Icmcy54pO1SEMNcbexJLfrQZBiTOt3aLmXPD5M5F8x4aNp2KXOHybAnVfmhTbc9Nex6+pZDmJj30CbaFg9DxpipMBnGpDSs1LZIGI7264WxjTEQ205DbbFqVhhOfMSDD22g7Z4qmSVjcveGCQvrtTkfF9Y/WyyKwxJIw2RiW6EKy+qLXVkJxLCu7RgGHxc+/eWQkcvDbm3Z/Pr+BZ/+coiBfpiMtg2NtH3CPIEkNRg20fZX5I2FTbd98rxCmKvt0+aVw0Te1rxeoE3h01+uHCasrffqhCqDT3+52JVVKWnrVSkkpfDpL4ee1N1tAp/+Wr9/fEWSmdMmsKAy6UkhyQy0yfdIlAzCvqdCDCBJHdEWvyD72gQuWBCuL0OVkLCmzXoat0FDAW6aDefeJa9qHLUtGwSU4Uon3PeIwbDj8RBiTX9wvQdOz+GgBfXC2io12HbG3U7VYgCPa7DtbHC0H7bWkVcpaeuSDC72w9Y6BsPEOtpYpf63uWFrHUgyXVv8EbeFi/2wtQ4kmdAlJYOL/bC1DiSpQ9M2NLjYD1vryKtae7TF31hwsR+21pFXHQ4NaYs9KVzsh6115FXracur1JJtWFkNksw/0xZ/zVxNm/VE7eBoJ6ysBkkmxJreHHG0E1ZWgySjbfE7ucHRTlhZDZL2jZ2QNoYJHO2EldXkVY39Wtq6pLZKraENSWYVbVmVim3dT0UtHO2EldUgyYTYEye+UONoJ6ysBkkmWE8KRzthZTVIMqts2+5aK2uLVWtq6yU1do01tCHJNG23L+RmL3C3B1ZWgyQTtMReyVI4fRJWVoMkE9ADuL4MK6tBkploEwgowMpqkHTzPt0m0DAGK6tBkti2ptvaL0WuPKysRnssybCt9/Uutd+hJIeV1SBpu40CG1T3n57Qk8LKapBkAk73QJLBymqQZOa0CVQprHweNIyZ2SavcAgTuGBBY391IzbK2bYdeB/N8nDQI2LM/T2pvK3JGCzpJP9PlmrrYu7oEewR7zeBd0OSMWZeWy9muZ5U0pYd7edpY4zg0WXsEYhpvHcCrpwtb2OJ4LmTGCMYo5Ik80hbfNPJX3Y6vHUSSxRLVBbT9+Zvm8pQvNWDJYoligHwlsrbuqfxnBLBDMMSxQDo9ZhN2+ZoELzvLmwwzDAMyDFGSZIJbBC8bAY2GDakeH2OJSrt6WykjWfNwIAUA1I8PccMwxKz6YTrWud6/QMDnAYz3wg70wAAAABJRU5ErkJggg==
-                  createdDate: 2022-06-03 10:44:41:478 GMT
-                  lastModifiedDate: 2022-06-03 10:44:41:478 GMT
+                  created: 1654253081000
+                  lastModified: 1654253081000
         "401":
            description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to retrieve the runtimes in the specified data plane.
         "500":
@@ -489,11 +489,11 @@ components:
         icon:
           type: string
           description: The icon image file content in string format.
-        createdDate:
-          type: string
+        created:
+          type: number
           description: The time the asset was created.
-        lastModifiedDate:
-          type: string
+        lastModified:
+          type: number
           description: The time the asset was last modified.
         runtimesFilter:
           $ref: "#/components/schemas/RuntimesFilter"
@@ -674,11 +674,11 @@ components:
             maxLength: 50
             pattern: '^\S*$'
             example: ["Dev"]
-        createdDate:
-          type: string
+        created:
+          type: number
           description: The time the asset was created.
-        lastModifiedDate:
-          type: string
+        lastModified:
+          type: number
           description: The time the asset was last modified.
         owner:
           $ref: '#/components/schemas/Owner'

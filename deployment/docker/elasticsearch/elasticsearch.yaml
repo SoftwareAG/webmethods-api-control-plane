@@ -4,6 +4,13 @@ services:
     container_name: elasticsearch
     hostname: ${ELASTICSEARCH_HOST}
     deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: '1'
+        reservations:
+          memory: 2G
+          cpus: '1'
       restart_policy:
         condition: "unless-stopped"
     ports:

@@ -50,21 +50,21 @@ Table of contents
     Execute the following command
 
     ```bash
-    kubectl create secret docker-registry regcred -n control-plane --docker-server=ghcr.io --docker-username=[Your git username] --docker-password=[Your PAT]
+    kubectl create secret docker-registry regcred -n control-plane --docker-server=sagcr.azurecr.io --docker-username=[Your git username] --docker-password=[Your PAT]
     ```
 
     If everything goes well the output should be similar to
 
     ```bash
-    [przemek@somehost helm]$ kubectl create secret docker-registry regcred -n control-plane --docker-server=ghcr.io --docker-username=przemekuliok --docker-password=*secret*
+    [przemek@somehost helm]$ kubectl create secret docker-registry regcred -n control-plane --docker-server=sagcr.azurecr.io --docker-username=przemekuliok --docker-password=*secret*
     secret/regcred created created
     ```
 
 5. Configure your deployment
 
-    The `values.yaml` file in [deployment/helm/values.yaml](deployment/helm/values.yaml) allows for configuring different aspects of API Control Plane deplpyment. To be able to access API Contol Plane after it's deployed, you need to edit this file and provide a value for `domainName` that matches the hostname of the machine you're deploying API Conrtol plane on. Make sure this hostname is accessible to whoever will be connecting to API Control Plane.
+    The `values.yaml` file in [deployment/helm/values.yaml](deployment/helm/values.yaml) allows for configuring different aspects of API Control Plane deployment. To be able to access API Control Plane after it's deployed, you need to edit this file and provide a value for `domainName` that matches the hostname of the machine you're deploying API Control plane on. Make sure this hostname is accessible to whoever will be connecting to API Control Plane.
 
-    If you don't want to use the `latest` version and prefere a specific one, make sure the update the `values.yaml` file for appropriate verions of the docker image you want to use for ingress, ui, engine and asset catalog applications. Go [here](https://github.com/orgs/SoftwareAG/packages?repo_name=webmethods-api-control-plane) so see what's available.
+    If you don't want to use the `latest` version and prefer a specific one, make sure the update the `values.yaml` file for appropriate versions of the docker image you want to use for ingress, ui, engine and asset catalog applications. Go [here](https://github.com/orgs/SoftwareAG/packages?repo_name=webmethods-api-control-plane) so see what's available.
 
     Default configuration is set up to deploy 2 replicas of API Control Plane containers and 1 replica for others. Edit the values.yaml file to change that as needed.
 
@@ -170,7 +170,7 @@ release "control-plane" uninstalled
 ## How to access the newly deployed webMethods API Control Plane?
 
 1. Open your browser and go to `https://[the-host-you-configured]:444/` or `http://[the-host-you-configured]:81/`
-2. You should see the login screen. Log in using Administrator usename and the default password.
+2. You should see the login screen. Log in using Administrator username and the default password.
 
 ###### [Back to Top](#api-control-plane-deployment-with-helm)
 ***
@@ -219,11 +219,11 @@ To enable it set the property `applications.jaegertracing.enabled` to `true` in 
 
 :wave: The Jaeger UI can be accessed via the `applications.jaegertracing.extPort` port (NodePort type) configured in the `values.ymal` file.
 
-:wave: The Jaeger deplpoyment here is a stateless deployment. Please refer to https://github.com/hansehe/jaeger-all-in-one/tree/master/helm for the complete production level deployment of Jaeger.
+:wave: The Jaeger deployment here is a stateless deployment. Please refer to https://github.com/hansehe/jaeger-all-in-one/tree/master/helm for the complete production level deployment of Jaeger.
 
 ### 2. Enabling Gainsight integration
 
-If you want to see [Gainsight](https://www.gainsight.com/product-experience/) powered user engagemnets (work in progress) in API Control Plane like bots, articles, feature introduction etc., you need to provide additional configuration set up in `values.yaml` file. Please contact your Software AG API Control Plane BETA contact or ask us here for the proper confoguration values.
+If you want to see [Gainsight](https://www.gainsight.com/product-experience/) powered user engagements (work in progress) in API Control Plane like bots, articles, feature introduction etc., you need to provide additional configuration set up in `values.yaml` file. Please contact your Software AG API Control Plane contact or ask us here for the proper configuration values.
 
 To enable Gainsight integration set `applications.gainsight.enabled` to `true` in `values.yaml` file (line 142). Values for the remaining attributes will be provided to you by Software AG.
 
@@ -241,7 +241,7 @@ To enable Gainsight integration set `applications.gainsight.enabled` to `true` i
 
 ### 3. Enabling secure Elasticsearch communication
 
-To enable secure communication to Elastic, proper certificates needs to created as kuberentes secrets and provided to the microservices.
+To enable secure communication to Elastic, proper certificates needs to created as kubernetes secrets and provided to the microservices.
 Please refer to
 https://github.com/elastic/helm-charts/blob/main/elasticsearch/examples/security/values.yaml
 https://github.com/lisenet/kubernetes-homelab/tree/master/logging 

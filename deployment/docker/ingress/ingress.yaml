@@ -11,13 +11,22 @@ services:
       ui:
         condition: service_healthy
     deploy:
+      resources:
+        limits:
+          memory: 1024M
+          cpus: '0.5'
+        reservations:
+          memory: 1024M
+          cpus: '0.5'
       restart_policy:
         condition: "no"
     env_file:
     - ingress-config.env
     - ../elasticsearch/es-config.env
+    ports:
+      - ${INGRESS_PUBLISH_PORT}:8443
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://ingress:8080/api/ingress/health"]
+      test: ["CMD", "curl", "-fk", "https://ingress:8443/api/ingress/health"]
       interval: 30s
       timeout: 10s
       retries: 5

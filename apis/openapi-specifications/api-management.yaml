@@ -67,7 +67,7 @@ paths:
                       description: Description for PetStoreAPI
                       tags:
                         - Dev
-                      lastModifiedDate: 2022-10-13 15:08:27:139 IST
+                      lastModified: 1665653907000
                       runtimeId: d3841d21-ef31-4b95-a82a-ed08f10a20e5
                       runtimeName: ' runtime 1'
                       region: eu
@@ -79,7 +79,7 @@ paths:
                         id: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
                         type: USER
                       publishInfo:
-                        - webMethods Developer Portal
+                        - INTEGRATION_SERVER
         '401':
           description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to retrieve the API list.
         '500':
@@ -138,7 +138,7 @@ paths:
                   apiStatus: ACTIVE
                   noOfPolicies : 3
                   publishInfo:
-                    - webMethods Developer Portal
+                    - INTEGRATION_SERVER
         '401':
           description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to retrieve the API list for the specified runtime.
         '500':
@@ -170,7 +170,7 @@ paths:
                 - Dev
               noOfPolicies : 3
               publishInfo:
-                - webMethods Developer Portal
+                - INTEGRATION_SERVER
       responses:
         '201':
           description: This status code indicates the successful creation of an API.
@@ -180,8 +180,8 @@ paths:
                 $ref: '#/components/schemas/API'
               example:
                 id: 5743beab-51c4-4b49-910f-282067db563d
-                createdDate: 2022-10-13 15:04:06:433 IST
-                lastModifiedDate: 2022-10-13 15:04:06:433 IST
+                created: 1665653646000
+                lastModified: 1665653646000
                 apiId: ea488aed-2588-4988-990d-8342d0bca78
                 runtimeId: d3841d21-ef31-4b95-a82a-ed08f10a20e5
                 owner:
@@ -200,7 +200,7 @@ paths:
                   apiStatus: ACTIVE
                   noOfPolicies : 3
                   publishInfo:
-                    - webMethods Developer Portal
+                    - INTEGRATION_SERVER
         '401':
           description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to create an API.
         '400':
@@ -234,8 +234,8 @@ paths:
                 $ref: '#/components/schemas/API'
               example:
                 id: 5743beab-51c4-4b49-910f-282067db563d
-                createdDate: 2022-10-13 15:04:06:433 IST
-                lastModifiedDate: 2022-10-13 15:08:27:139 IST
+                created: 1665653646000
+                lastModified: 1665653907000
                 apiId: ea488aed-2588-4988-990d-8342d0bca78
                 runtimeId: d3841d21-ef31-4b95-a82a-ed08f10a20e5
                 owner:
@@ -254,7 +254,7 @@ paths:
                   apiStatus: ACTIVE
                   noOfPolicies : 3
                   publishInfo:
-                    - webMethods Developer Portal
+                    - INTEGRATION_SERVER
         '401':
           description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to view the API.
         '500':
@@ -293,7 +293,7 @@ paths:
                 - Dev
               noOfPolicies : 3
               publishInfo:
-                - webMethods Developer Portal
+                - INTEGRATION_SERVER
       responses:
         '200':
           description: This status code indicates the successful updation of an API in the specified runtime.
@@ -303,8 +303,8 @@ paths:
                 $ref: '#/components/schemas/API'
               example:
                 id: 5743beab-51c4-4b49-910f-282067db563d
-                createdDate: 2022-10-13 15:04:06:433 IST
-                lastModifiedDate: 2022-10-13 15:08:27:139 IST
+                created: 1665653646000
+                lastModified: 1665653907000
                 apiId: ea488aed-2588-4988-990d-8342d0bca78
                 runtimeId: d3841d21-ef31-4b95-a82a-ed08f10a20e5
                 owner:
@@ -364,14 +364,14 @@ components:
           type: string
           description: UUID of the object.
           example: 5743beab-51c4-4b49-910f-282067db563d
-        createdDate:
-          type: string
+        created:
+          type: number
           description: The time the asset was created.
-          example: 2022-10-13 15:04:06:433 IST
-        lastModifiedDate:
-          type: string
+          example: 1665653646000
+        lastModified:
+          type: number
           description: The time the asset was last modified.
-          example: 2022-10-13 15:04:06:433 IST
+          example: 1665653646000
         apiId:
           type: string
           description: UUID of the API.
@@ -456,6 +456,10 @@ components:
             type: array
             items:
               type: string
+              enum:
+                - WEBMETHODS_PORTAL
+                - SERVICE_REGISTRY
+                - INTEGRATION_SERVER
             example: ["WEBMETHODS_PORTAL","SERVICE_REGISTRY","INTEGRATION_SERVER"]
         noOfPolicies :
           type : integer
@@ -533,10 +537,10 @@ components:
             type: string
             description: Display version of the API in the runtime.
             example: v2.0
-          lastModifiedDate:
-            type: string
+          lastModified:
+            type: number
             description: Last updated date of the API.
-            example: 2022-10-13 15:08:27:139 IST
+            example: 1665653907000
           name:
             type: string
             description: Name of the API.

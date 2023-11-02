@@ -319,7 +319,7 @@
 		},
 		{
 			"key": "password",
-			"value": "manage",
+			"value": "*****",
 			"type": "string"
 		},
 		{
