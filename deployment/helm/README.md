@@ -169,7 +169,7 @@ release "control-plane" uninstalled
 
 ## How to access the newly deployed webMethods API Control Plane?
 
-1. Open your browser and go to `https://[the-host-you-configured]:444/` or `http://[the-host-you-configured]:81/`
+1. Open your browser and go to `https://[the-host-you-configured]/`
 2. You should see the login screen. Log in using Administrator username and the default password.
 
 ###### [Back to Top](#api-control-plane-deployment-with-helm)
