@@ -238,7 +238,7 @@ sag_apigw_api_tx_count{code="3xx",api_name="JSONFormat",api_version="1.0",env="d
 
 Each Prometheus metric would be in the below format,
 
-<metric name>{<comma separate list of labels>} <value> <timestamp>
+\<metric name>{\<comma separate list of labels>} \<value> \<timestamp>
 
 The metrics are categorized into 2 types, API-level and Server-level.
 
