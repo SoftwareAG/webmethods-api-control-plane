@@ -1,9 +1,9 @@
-# Writing Runtime agent for connecting to API Control Plane
+# Developing Runtime agent for connecting to API Control Plane
 This article describes the details about writing an agent for connecting an API runtime to API Control Plane.
 
 ## Introduction
 
-The article explains the details about writing an agent for API runtimes to connect to API Control Plane using the REST APIs provided by Control Plane. 
+The article explains the details about writing/developing an agent for API runtimes to connect to API Control Plane using the REST APIs provided by Control Plane. 
 
 > **Note:** The existing Control Plane REST APIs and data models are closed coupled with webMethods API Gateway. In future releases, they will be made more generic such that it will seamless for the other API runtimes to connect to API Control Plane in a standardized way.
 
