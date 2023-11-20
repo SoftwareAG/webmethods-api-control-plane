@@ -5,7 +5,7 @@ This article describes the details about writing an agent for connecting an API 
 
 The article explains the details about writing/developing an agent for API runtimes to connect to API Control Plane using the REST APIs provided by Control Plane. 
 
-> **Note:** The existing Control Plane REST APIs and data models are closely coupled with webMethods API Gateway. In future releases, they will be made more generic such that it will seamless for the other API runtimes to connect to API Control Plane in a standardized way.
+> **Note:** The existing Control Plane REST APIs and data models are closely coupled with webMethods API Gateway. In future releases, they will be made more generic such that it will be seamless for the other API runtimes to connect to API Control Plane in a standardized way.
 
 ## Required agent functionalities
 
