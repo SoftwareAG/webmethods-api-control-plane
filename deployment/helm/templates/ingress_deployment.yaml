@@ -4,6 +4,7 @@ metadata:
   name: {{ .Values.applications.ingress.name }}
   namespace: {{ default "control-plane" .Release.Namespace }}
 spec:
+  revisionHistoryLimit: 0
   replicas: {{ .Values.applications.ingress.replicas }}
   selector:
     matchLabels:

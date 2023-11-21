@@ -64,7 +64,7 @@ Refer [here](../../README.md#deploying-api-control-plane) to deploy the API Cont
 
 ### Configuring API Gateway to connect to API Control Plane
 
-> **Note:** To configure webMethods API Gateway to connect to API Control Plane, API Gateway must be in version **10.15 Fix 8 and above**. 
+> **Note:** To configure webMethods API Gateway to connect to API Control Plane, API Gateway must be in version **10.15.0.8 and above**. 
 
 The instructions to configure API Gateway connectivity with API Control Plane can be found [here](../../deployment/agent/webmethods-api-gateway/README.md).
 

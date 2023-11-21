@@ -16,10 +16,20 @@ The standard deployment of API Control plane contains the following 5 microservi
 
 Table of contents
 
-1. [How to deploy webMethods API Control Plane using helm?](#how-to-deploy-webmethods-api-control-plane-using-helm)
-2. [How to stop webMethods API Control Plane using helm?](#how-to-stop-webmethods-api-control-plane-using-helm)
-3. [How to access the newly deployed webMethods API Control Plane?](#how-to-access-the-newly-deployed-webmethods-api-control-plane)
-4. [Additional deployment flavors](#additional-deployment-flavors)
+1. [Prerequisite](#Prerequisite)
+2. [How to deploy webMethods API Control Plane using helm?](#how-to-deploy-webmethods-api-control-plane-using-helm)
+3. [How to stop webMethods API Control Plane using helm?](#how-to-stop-webmethods-api-control-plane-using-helm)
+4. [How to access the newly deployed webMethods API Control Plane?](#how-to-access-the-newly-deployed-webmethods-api-control-plane)
+5. [Additional deployment flavors](#additional-deployment-flavors)
+
+***
+## Prerequisite
+The machine needs following to install the control plane through helm.
+1. kubernetes
+2. helm
+3. nginx Ingress Controller
+
+   Refer [here](#nginx installation) for the installation of nginx ingress
 
 ***
 
@@ -41,7 +51,7 @@ Table of contents
     If everything goes well the output should be similar to
 
     ```bash
-    [przemek@somehost helm]$ kubectl create namespace control-plane
+    [user@somehost]$ kubectl create namespace control-plane
     namespace/control-plane created
     ```
 
@@ -56,15 +66,15 @@ Table of contents
     If everything goes well the output should be similar to
 
     ```bash
-    [przemek@somehost helm]$ kubectl create secret docker-registry regcred -n control-plane --docker-server=sagcr.azurecr.io --docker-username=przemekuliok --docker-password=*secret*
+    [user@somehost]$ kubectl create secret docker-registry regcred -n control-plane --docker-server=sagcr.azurecr.io --docker-username=przemekuliok --docker-password=*secret*
     secret/regcred created created
     ```
 
 5. Configure your deployment
 
-    The `values.yaml` file in [deployment/helm/values.yaml](deployment/helm/values.yaml) allows for configuring different aspects of API Control Plane deployment. To be able to access API Control Plane after it's deployed, you need to edit this file and provide a value for `domainName` that matches the hostname of the machine you're deploying API Control plane on. Make sure this hostname is accessible to whoever will be connecting to API Control Plane.
+    The [values.yaml](values.yaml) file allows to configure different aspects of API Control Plane deployment. To be able to access API Control Plane after it's deployed, you need to edit this file and provide a value for `domainName` that matches the hostname of the machine you're deploying API Control plane on. Make sure this hostname is accessible to whoever will be connecting to API Control Plane.
 
-    If you don't want to use the `latest` version and prefer a specific one, make sure the update the `values.yaml` file for appropriate versions of the docker image you want to use for ingress, ui, engine and asset catalog applications. Go [here](https://github.com/orgs/SoftwareAG/packages?repo_name=webmethods-api-control-plane) so see what's available.
+    If you don't want to use the `latest` version and prefer a specific one, make sure to update the [values.yaml](values.yaml) file for appropriate versions of the docker image you want to use for ingress, ui, engine and asset catalog applications. Go [here](https://github.com/orgs/SoftwareAG/packages?repo_name=webmethods-api-control-plane) so see what's available.
 
     Default configuration is set up to deploy 2 replicas of API Control Plane containers and 1 replica for others. Edit the values.yaml file to change that as needed.
 
@@ -87,7 +97,7 @@ Table of contents
     If everything goes well, the output should be similar to this
 
     ```bash
-    [przemek@somehost helm]$ helm upgrade --install --create-namespace --namespace control-plane --wait --timeout 5m0s control-plane .
+    [user@somehost]$ helm upgrade --install --create-namespace --namespace control-plane --wait --timeout 5m0s control-plane .
     Release "control-plane" does not exist. Installing it now.
     NAME: control-plane
     LAST DEPLOYED: Fri Apr  7 11:37:53 2023
@@ -102,7 +112,7 @@ Table of contents
     It will take a couple of minutes to start. You can monitor that with solutions like Portainer or Docker\Kubernetes Dashboard etc. or simply user Docker\Kubernetes CLI like this
 
     ```bash
-    [przemek@somehost helm]$ kubectl get all -n control-plane
+    [user@somehost]$ kubectl get all -n control-plane
     NAME                               READY   STATUS    RESTARTS   AGE
     pod/assetcatalog-75d94cff5-7bmkk   1/1     Running   0          5m43s
     pod/assetcatalog-75d94cff5-vrsxm   1/1     Running   0          5m43s
@@ -141,6 +151,15 @@ Table of contents
 ###### [Back to Top](#api-control-plane-deployment-with-helm)
 ***
 
+## How to access the newly deployed webMethods API Control Plane?
+
+1. Open your browser and go to `https://[the-host-you-configured]:444/` or `http://[the-host-you-configured]:81/`
+2. You should see the login screen. Log in using Administrator username and the default password.
+
+###### [Back to Top](#api-control-plane-deployment-with-helm)
+
+***
+
 ## How to stop webMethods API Control Plane using helm?
 
 To stop and remove the API Control Plane default configuration:
@@ -160,17 +179,9 @@ To stop and remove the API Control Plane default configuration:
 If everything goes well, the output should be similar to this
 
 ```bash
-[przemek@somehost helm]$ sudo /usr/local/bin/helm uninstall control-plane -n control-plane
+[user@somehost]$ sudo /usr/local/bin/helm uninstall control-plane -n control-plane
 release "control-plane" uninstalled
 ```
-
-###### [Back to Top](#api-control-plane-deployment-with-helm)
-***
-
-## How to access the newly deployed webMethods API Control Plane?
-
-1. Open your browser and go to `https://[the-host-you-configured]/`
-2. You should see the login screen. Log in using Administrator username and the default password.
 
 ###### [Back to Top](#api-control-plane-deployment-with-helm)
 ***
@@ -248,6 +259,30 @@ https://github.com/lisenet/kubernetes-homelab/tree/master/logging
 to enable Elasticsearch over SSL.
 
 ###### [Back to Top](#api-control-plane-deployment-with-helm)
+***
+
+## nginx installation
+Follow the below steps to install the nginx Ingress Controller. Also refer [here](https://docs.nginx.com/nginx-ingress-controller/installation/installing-nic/installation-with-helm/) or [here](https://gcore.com/docs/cloud/kubernetes/networking/install-and-set-up-the-nginx-ingress-controller) for more details.
+```
+1. kubectl create namespace ingress-nginx
+2. helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+3. helm repo update
+4. helm install ingress-nginx ingress-nginx/ingress-nginx --namespace ingress-nginx --set controller.ingressClassResource.name=nginx
+```
+
+You can see an output as shown below.
+```
+NAME: ingress-nginx
+LAST DEPLOYED: Wed Nov 22 01:30:51 2023
+NAMESPACE: ingress-nginx
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+The ingress-nginx controller has been installed.
+It may take a few minutes for the LoadBalancer IP to be available.
+You can watch the status by running 'kubectl --namespace ingress-nginx get services -o wide -w ingress-nginx-controller'
+```
 ***
 
 ## Known issues

@@ -37,6 +37,7 @@ spec:
         imagePullPolicy: IfNotPresent
         securityContext:
           privileged: true
+          runAsUser: 0
         command: ["sysctl", "-w", "vm.max_map_count=262144"]
       volumes:
         - name: logs

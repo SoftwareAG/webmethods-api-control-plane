@@ -76,7 +76,7 @@ Table of contents
     ⠿ Container nginx                        Started                       151.2s
     ```
 
-8. Verify it's started
+7. Verify it's started
 
     It will take a couple of minutes to start. You can monitor that with solutions like Portainer or Docker Dashboard etc. or simply user Docker CLI like this
 
@@ -135,7 +135,7 @@ If everything goes well, the output should be similar to this
 
 ## How to access the newly deployed webMethods API Control Plane?
 
-1. Open your browser and go to `https://[the-host-you-configured]:8080/`
+1. Open your browser and go to `http://[the-host-you-configured]:81/` or `https://[the-host-you-configured]:8080/`
 2. You should see the login screen. Log in using Administrator username and the default password.
 
 ###### [Back to Top](#api-control-plane-deployment-with-docker-compose)
