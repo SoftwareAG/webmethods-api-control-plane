@@ -27,6 +27,24 @@ API Control Plane exposes public APIs to interact with it. API docs as well as p
 
 We also host various articles related to API Control Plane deployment, use, administration etc. [here](articles).
 
+## Useful links   
+
+📘 Explore the Knowledge Base    
+Dive into a wealth of webMethods tutorials and articles in our [Tech Community Knowledge Base](https://tech.forums.softwareag.com/tags/c/knowledge-base/6/webmethods).  
+
+💡 Get Expert Answers    
+Stuck or just curious? Ask the webMethods experts directly on our [Forum](https://tech.forums.softwareag.com/tags/c/forum/1/webMethods).  
+
+🚀 Try webMethods    
+See webMethods in action with a [Free Trial](https://techcommunity.softwareag.com/en_en/downloads.html).    
+
+✍️ Share Your Feedback    
+Your input drives our innovation. If you find a bug, please create an issue in the repository. If you’d like to share your ideas or feedback, please post them [here](https://tech.forums.softwareag.com/c/feedback/2).   
+
+More to discover 
+* [Not your grandpa’s API Management | IUG 2023](https://tech.forums.softwareag.com/t/not-your-grandpa-s-api-management-iug-2023/283800)  
+* [What is Develop Anywhere, Deploy Anywhere?](https://tech.forums.softwareag.com/t/what-is-develop-anywhere-deploy-anywhere/284756)
+   
 ***
 
 These tools are provided as-is and without warranty or support. They do not constitute part of the Software AG product suite. Users are free to use, fork and modify them, subject to the license agreement. While Software AG welcomes contributions, we cannot guarantee to include every contribution in the master project.
