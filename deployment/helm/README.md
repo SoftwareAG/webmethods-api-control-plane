@@ -51,7 +51,7 @@ The machine needs following to install the control plane through helm.
     If everything goes well the output should be similar to
 
     ```bash
-    [user@somehost]$ kubectl create namespace control-plane
+    [user@somehost helm]$ kubectl create namespace control-plane
     namespace/control-plane created
     ```
 
@@ -66,7 +66,7 @@ The machine needs following to install the control plane through helm.
     If everything goes well the output should be similar to
 
     ```bash
-    [user@somehost]$ kubectl create secret docker-registry regcred -n control-plane --docker-server=sagcr.azurecr.io --docker-username=przemekuliok --docker-password=*secret*
+    [user@somehost helm]$ kubectl create secret docker-registry regcred -n control-plane --docker-server=sagcr.azurecr.io --docker-username=przemekuliok --docker-password=*secret*
     secret/regcred created created
     ```
 
@@ -97,7 +97,7 @@ The machine needs following to install the control plane through helm.
     If everything goes well, the output should be similar to this
 
     ```bash
-    [user@somehost]$ helm upgrade --install --create-namespace --namespace control-plane --wait --timeout 5m0s control-plane .
+    [user@somehost helm]$ helm upgrade --install --create-namespace --namespace control-plane --wait --timeout 5m0s control-plane .
     Release "control-plane" does not exist. Installing it now.
     NAME: control-plane
     LAST DEPLOYED: Fri Apr  7 11:37:53 2023
@@ -112,7 +112,7 @@ The machine needs following to install the control plane through helm.
     It will take a couple of minutes to start. You can monitor that with solutions like Portainer or Docker\Kubernetes Dashboard etc. or simply user Docker\Kubernetes CLI like this
 
     ```bash
-    [user@somehost]$ kubectl get all -n control-plane
+    [user@somehost helm]$ kubectl get all -n control-plane
     NAME                               READY   STATUS    RESTARTS   AGE
     pod/assetcatalog-75d94cff5-7bmkk   1/1     Running   0          5m43s
     pod/assetcatalog-75d94cff5-vrsxm   1/1     Running   0          5m43s
@@ -179,7 +179,7 @@ To stop and remove the API Control Plane default configuration:
 If everything goes well, the output should be similar to this
 
 ```bash
-[user@somehost]$ sudo /usr/local/bin/helm uninstall control-plane -n control-plane
+[user@somehost helm]$ sudo /usr/local/bin/helm uninstall control-plane -n control-plane
 release "control-plane" uninstalled
 ```
 

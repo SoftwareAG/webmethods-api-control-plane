@@ -64,7 +64,7 @@ Table of contents
     If everything goes well, the output should be similar to this
 
     ```bash
-    [przemek@somehost docker]$ docker-compose -f control-plane.yaml up -d
+    [user@somehost docker]$ docker-compose -f control-plane.yaml up -d
     [+] Running 8/8
     ⠿ Network softwareag-api-management      Created                         0.2s
     ⠿ Container elasticsearch                Healthy                        22.6s
@@ -118,7 +118,7 @@ To stop and remove the API Control Plane default configuration:
 If everything goes well, the output should be similar to this
 
 ```bash
-[przemek@somehost docker]$ docker-compose -f control-plane.yaml down
+[user@somehost docker]$ docker-compose -f control-plane.yaml down
 [+] Running 8/8
 ⠿ Container nginx_setup                  Removed                         0.0s
 ⠿ Container nginx                        Removed                         0.3s
