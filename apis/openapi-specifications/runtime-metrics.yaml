@@ -1,0 +1,187 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Runtime metrics API
+  description: This API is is used for storing runtime metrics and heartbeat. 
+servers:
+  - url: "{protocol}://{hostname}:{port}"
+    description: This is the endpoint where the Engine API is accessible from the server.
+    variables:
+      protocol:
+        default: https
+        enum:
+          - http
+          - https
+        description: The protocol supported by the server - HTTP or HTTPS. Default is HTTPS.
+      hostname:
+        default: localhost
+        description: The domain name of the server where the API is hosted. The hostname must be resolvable by the DNS lookup.
+      port:
+        default: "443"
+        description: The port number where the REST API is running on the server. The default port for HTTPS is 443 and HTTP is 80 but it can also be any valid port.
+paths:
+  /api/engine/v1/runtimes/{runtime_id}/metrics:
+    summary: Store metrics in controlplane
+    description: This resource stores the metrics in the controlplane.
+    post:
+      description: This resource stores the metrics in the controlplane.
+      parameters:
+        - in: path
+          name: runtime_id
+          description: Received metrics will be stored for the runtime accordingly based on the runtimeID.
+          required: true
+          schema:
+            type: string
+          example: de61415f-f943-414a-8737-9786757ff890
+      requestBody:
+        description: Metrics for the runtime and api will be getting as string, further the metrics will parse and store accordingly.
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/MetricsString'
+            example: sag_apigw_tx_error_count{code="4xx",env="default",error="policy"} 3 1666787050986
+                    sag_apigw_tx_error_count{code="4xx",env="default",error="internal"} 4 1666787050986
+                    sag_apigw_tx_error_count{code="4xx",env="default",error="backend"} 5 1666787050986
+                    sag_apigw_exec_error_count{env="default"} 20 1666787050986
+                    sag_apigw_component_error_count{component="elasticsearch",env="default"} 44 1666787050993
+                    sag_apigw_avg_response_time{code="2xx",env="default"} 4288 1666787050986
+                    sag_apigw_avg_response_time{code="4xx",env="default"} 29 1666787050986
+                    sag_apigw_avg_latency{code="2xx",env="default"} 66 1666787050986
+                    sag_apigw_avg_latency{code="4xx",env="default"} 235 1666787050986
+                    sag_apigw_apicalls_total{code="404",env="default"} 3 1666787050986
+                    sag_apigw_apicalls_total{code="300",env="default"} 5 1666787050986
+                    sag_apigw_apicalls_total{code="200",env="default"} 63 1666787050986
+                    sag_apigw_backend_error_count{code="4xx",env="default",error="internal"} 4 1666787050986
+                    sag_apigw_api_backend_error_count{api_name="Api1",api_version="1.0",code="4xx",env="default",error="internal"} 4 1666787050986
+                    sag_apigw_api_backend_error_count{api_name="Api1",api_version="1.0",code="3xx",env="default",error="internal"} 6 1666787050986
+                    sag_apigw_api_exec_error_count{api_name="Api1",api_version="1.0",env="default"} 0 1666787050986
+                    sag_apigw_api_tx_error_count{code="4xx",api_name="Api1",api_version="1.0",env="default",error="policy"} 3 1666787050986
+                    sag_apigw_api_tx_error_count{code="3xx",api_name="Api1",api_version="1.0",env="default",error="policy"} 3 1666787050986
+                    sag_apigw_api_tx_error_count{code="4xx",api_name="Api1",api_version="1.0",env="default",error="internal"} 3 1666787050986
+                    sag_apigw_api_avg_response_time{code="2xx",api_name="Api1",api_version="1.0",env="default"} 4288 1666787050986
+                    sag_apigw_api_avg_response_time{code="4xx",api_name="Api1",api_version="1.0",env="default"} 29 1666787050986
+                    sag_apigw_api_avg_latency{code="2xx",api_name="Api1",api_version="1.0",env="default"} 66 1666787050986
+                    sag_apigw_api_avg_latency{code="4xx",api_name="Api1",api_version="1.0",env="default"} 29 1666787050986
+                    sag_apigw_api_avg_latency{code="3xx",api_name="Api1",api_version="1.0",env="default"} 39 1666787050986
+                    sag_apigw_api_avg_backend_response_time{code="2xx",api_name="Api1",api_version="1.0",env="default"} 39 1666787050986
+                    sag_apigw_api_avg_backend_response_time{code="3xx",api_name="Api1",api_version="1.0",env="default"} 49 1666787050986
+                    sag_apigw_api_exec_error_count{api_name="Api2",api_version="2.0",env="default"} 0 1666787050986
+                    sag_apigw_api_avg_latency{code="3xx",api_name="Api2",api_version="2.0",env="default"} 39 1666787050986
+                    sag_apigw_api_avg_latency{code="3xx",api_name="Api2",api_version="2.0",env="default"} 39 1666787050986
+                    sag_apigw_api_tx_count{code="2xx",api_name="JSONFormat",api_version="1.0",env="default"} 20 1666787050986
+                    sag_apigw_api_tx_count{code="3xx",api_name="JSONFormat",api_version="1.0",env="default"} 10 1666787050986
+      responses:
+        '202':
+          description: This status code indicates that metrics data stored successfully.
+        '401':
+          description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to retrieve the status of persona.
+        '500':
+          $ref: '#/components/responses/internal_server_error'
+  /api/engine/v1/runtimes/heartbeats:
+    summary: Store runtime9me heartbeats in controlplane.
+    description: These resource will stores the runtime heartbeats in controlplane via agent.
+    post:
+      description: These resource will stores the runtime heartbeats in controlplane via agent.
+      requestBody:
+        description: Runtime heartbeats.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RuntimeHeartbeatData'
+            example:
+              created: 2022-07-14 14:25:17:116
+              active: 1
+              docType: heartBeat
+              id: ea488aed-2588-4988-990d-8342d0bca78
+              runtimeId: du988aed-2588-4988-990d-8342d0bcw45
+      responses:
+        '200':
+          description: This status code indicates that the heartbeat information stored successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuntimeHeartbeatData'
+              example:
+                created: 2022-07-14 14:25:17:116
+                active: 1
+                docType: heartBeat
+                id: ea488aed-2588-4988-990d-8342d0bca78
+                runtimeId: du988aed-2588-4988-990d-8342d0bcw45
+        '401':
+          description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to retrieve the status of persona.
+        '500':
+          $ref: '#/components/responses/internal_server_error'
+components:
+  schemas:
+    MetricsString:
+      type: string
+      description: Metrics for the runtime and apis will be as string.
+      example: sag_apigw_tx_error_count{code="4xx",env="default",error="policy"} 3 1666787050986
+                sag_apigw_tx_error_count{code="4xx",env="default",error="internal"} 4 1666787050986
+                sag_apigw_tx_error_count{code="4xx",env="default",error="backend"} 5 1666787050986
+                sag_apigw_exec_error_count{env="default"} 20 1666787050986
+                sag_apigw_component_error_count{component="elasticsearch",env="default"} 44 1666787050993
+                sag_apigw_avg_response_time{code="2xx",env="default"} 4288 1666787050986
+                sag_apigw_avg_response_time{code="4xx",env="default"} 29 1666787050986
+                sag_apigw_avg_latency{code="2xx",env="default"} 66 1666787050986
+                sag_apigw_avg_latency{code="4xx",env="default"} 235 1666787050986
+                sag_apigw_apicalls_total{code="404",env="default"} 3 1666787050986
+                sag_apigw_apicalls_total{code="300",env="default"} 5 1666787050986
+                sag_apigw_apicalls_total{code="200",env="default"} 63 1666787050986
+                sag_apigw_backend_error_count{code="4xx",env="default",error="internal"} 4 1666787050986
+                sag_apigw_api_backend_error_count{api_name="Api1",api_version="1.0",code="4xx",env="default",error="internal"} 4 1666787050986
+                sag_apigw_api_backend_error_count{api_name="Api1",api_version="1.0",code="3xx",env="default",error="internal"} 6 1666787050986
+                sag_apigw_api_exec_error_count{api_name="Api1",api_version="1.0",env="default"} 0 1666787050986
+                sag_apigw_api_tx_error_count{code="4xx",api_name="Api1",api_version="1.0",env="default",error="policy"} 3 1666787050986
+                sag_apigw_api_tx_error_count{code="3xx",api_name="Api1",api_version="1.0",env="default",error="policy"} 3 1666787050986
+                sag_apigw_api_tx_error_count{code="4xx",api_name="Api1",api_version="1.0",env="default",error="internal"} 3 1666787050986
+                sag_apigw_api_avg_response_time{code="2xx",api_name="Api1",api_version="1.0",env="default"} 4288 1666787050986
+                sag_apigw_api_avg_response_time{code="4xx",api_name="Api1",api_version="1.0",env="default"} 29 1666787050986
+                sag_apigw_api_avg_latency{code="2xx",api_name="Api1",api_version="1.0",env="default"} 66 1666787050986
+                sag_apigw_api_avg_latency{code="4xx",api_name="Api1",api_version="1.0",env="default"} 29 1666787050986
+                sag_apigw_api_avg_latency{code="3xx",api_name="Api1",api_version="1.0",env="default"} 39 1666787050986
+                sag_apigw_api_avg_backend_response_time{code="2xx",api_name="Api1",api_version="1.0",env="default"} 39 1666787050986
+                sag_apigw_api_avg_backend_response_time{code="3xx",api_name="Api1",api_version="1.0",env="default"} 49 1666787050986
+                sag_apigw_api_exec_error_count{api_name="Api2",api_version="2.0",env="default"} 0 1666787050986
+                sag_apigw_api_avg_latency{code="3xx",api_name="Api2",api_version="2.0",env="default"} 39 1666787050986
+                sag_apigw_api_avg_latency{code="3xx",api_name="Api2",api_version="2.0",env="default"} 39 1666787050986
+                sag_apigw_api_tx_count{code="2xx",api_name="JSONFormat",api_version="1.0",env="default"} 20 1666787050986
+                sag_apigw_api_tx_count{code="3xx",api_name="JSONFormat",api_version="1.0",env="default"} 10 1666787050986
+    RuntimeHeartbeatData:
+      type: object
+      properties:
+        created:
+          type: object
+          description: Runtime created date.
+          example: 2022-07-14 14:25:17:116
+        active:
+          type: number
+          description: This shows the runtime active i9nactive status, 1 is active, 0 is inactive.
+          example: 1
+        docType:
+          type: string
+          description: This the document type that we used to store/fetch data from elasticsearch.
+          example: heartBeat
+        id:
+          type: string
+          description: UUID of for each runtime.
+          example: ea488aed-2588-4988-990d-8342d0bca78
+        runtimeId:
+          type: string
+          description: UUID of the Runtime.
+          example: du988aed-2588-4988-990d-8342d0bcw45
+  responses:
+    internal_server_error:
+      description: Internal server error
+      content:
+        application/json:
+          example:
+            errorDetails:
+              - This response indicates that the server encountered an error.
+  securitySchemes:
+    basic_authentication:
+      type: http
+      description: This is the Basic Authentication mechanism where the credentials are sent in a Base64 encoded format of the form <username>:<password> in the Authorization header.
+      scheme: basic
+security:
+  - basic_authentication: []
