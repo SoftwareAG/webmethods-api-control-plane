@@ -146,5 +146,5 @@ applications:
       plan: "Free"
       stage: "Staging"
       key: "AP-BCBBKBNAYWW6-2-2"
-domainName: localhost
+domainName: my-control-plane
 imagePullSecretName: regcred

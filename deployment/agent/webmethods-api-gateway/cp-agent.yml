@@ -7,6 +7,5 @@ agentConfig:
     metricsSynchIntervalInSeconds: 60
     assetSynchIntervalInSeconds: 60
   controlPlaneConfig:
-    controlPlaneURL: "http://agent.stable.deployment"
+    controlPlaneURL: "https://my-control-plane"
     username: "administrator"
-    password: "manage"

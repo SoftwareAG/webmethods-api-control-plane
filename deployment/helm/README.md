@@ -36,11 +36,11 @@ The machine needs following to install the control plane through helm.
 ## How to deploy webMethods API Control Plane using helm?
 
 1. Clone this repository
-2. Get a Personal Access Token (PAT)
+2. Login to https://containers.softwareag.com/
+3. Get a Personal Access Token (PAT)
 
-    We published docker images for all API Control Plane microservice to this GitHub repository. To be able to pull them or have docker compose pull them for you, you'll need a Personal Access token (PAT). Go to 'settings' in your GitHub profile, then to 'Developer settings' on the bottom of left side navigation bar and finally to 'Personal access tokens' to generate one. Please use classic token type and make sure to select read privilege for 'packages'.
-
-3. Create a kubernetes namespace for your deployment
+    We published docker images for all API Control Plane microservice to https://containers.softwareag.com/ repository. To be able to pull them, you'll need a Personal Access token (PAT). To get a PAT, go to Userprofile > Settings > Generate password. Store Token Password securely.
+4. Create a kubernetes namespace for your deployment
 
     Execute the following command
 
@@ -55,7 +55,7 @@ The machine needs following to install the control plane through helm.
     namespace/control-plane created
     ```
 
-4. Create a kubernetes secret to be able to pull docker images
+5. Create a kubernetes secret to be able to pull docker images
 
     Execute the following command
 
@@ -70,7 +70,7 @@ The machine needs following to install the control plane through helm.
     secret/regcred created created
     ```
 
-5. Configure your deployment
+6. Configure your deployment
 
     The [values.yaml](values.yaml) file allows to configure different aspects of API Control Plane deployment. To be able to access API Control Plane after it's deployed, you need to edit this file and provide a value for `domainName` that matches the hostname of the machine you're deploying API Control plane on. Make sure this hostname is accessible to whoever will be connecting to API Control Plane.
 
@@ -78,7 +78,7 @@ The machine needs following to install the control plane through helm.
 
     Default configuration is set up to deploy 2 replicas of API Control Plane containers and 1 replica for others. Edit the values.yaml file to change that as needed.
 
-6. Execute the deployment script
+7. Execute the deployment script
 
     To deploy the API Control Plane with default configuration:
 
@@ -107,7 +107,7 @@ The machine needs following to install the control plane through helm.
     TEST SUITE: None
     ```
   
-7. Verify it's started
+8. Verify it's started
 
     It will take a couple of minutes to start. You can monitor that with solutions like Portainer or Docker\Kubernetes Dashboard etc. or simply user Docker\Kubernetes CLI like this
 
@@ -153,7 +153,7 @@ The machine needs following to install the control plane through helm.
 
 ## How to access the newly deployed webMethods API Control Plane?
 
-1. Open your browser and go to `https://[the-host-you-configured]:444/` or `http://[the-host-you-configured]:81/`
+1. Open your browser and go to `https://[the-host-you-configured]/` or `http://[the-host-you-configured]/` (Unsecured)
 2. You should see the login screen. Log in using Administrator username and the default password.
 
 ###### [Back to Top](#api-control-plane-deployment-with-helm)

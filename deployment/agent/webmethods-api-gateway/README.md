@@ -163,4 +163,6 @@ agentConfig:
     password: "MyAdminP@$$w0rd"
 ```
 
-> **Note:** The password provided in the YAML file will be read by the API Gateway on application startup and it will be removed thereafter and placed in the password store for future reference. As the file will be updated to remove the password, ensure that the file has write permissions.
+> **Note:** 
+> 1. The password provided in the YAML file will be read by the API Gateway on application startup, and it will be removed thereafter and placed in the password store for future reference. As the file will be updated to remove the password, ensure that the file has write permissions.
+> 2. ```controlPlaneURL``` in the ```cp-agent.yml``` file or ```CP_URL``` in the ```.env``` file should be updated properly to connect to the Control Plane application.
