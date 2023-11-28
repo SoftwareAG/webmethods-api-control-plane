@@ -7,5 +7,5 @@ agentConfig:
     metricsSynchIntervalInSeconds: 60
     assetSynchIntervalInSeconds: 60
   controlPlaneConfig:
-    controlPlaneURL: "https://my-control-plane"
+    controlPlaneURL: "http://my-control-plane"
     username: "administrator"
