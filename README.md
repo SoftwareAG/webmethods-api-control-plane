@@ -1,4 +1,4 @@
-## ⚠️ Please note that API Control Plane is compatible with API Gateway version 10.15 fix 8 and above.</span>
+## ⚠️ Please note that API Control Plane is compatible with API Gateway version 10.15.0.8 and above.</span>
 
 # webMethods API Control Plane
 

@@ -4,6 +4,7 @@ metadata:
   name: {{ .Values.applications.ui.name }}
   namespace: {{ default "control-plane" .Release.Namespace }}
 spec:
+  revisionHistoryLimit: 0
   replicas: {{ .Values.applications.ui.replicas }}
   selector:
     matchLabels:

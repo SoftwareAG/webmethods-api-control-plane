@@ -1,6 +1,6 @@
 # Connecting API Gateway to API control plane
 
-> **Note:** To configure webMethods API Gateway to connect to API Control Plane, API Gateway must be in version **10.15 Fix 8 or higher**. 
+> **Note:** To configure webMethods API Gateway to connect to API Control Plane, API Gateway must be in version **10.15.0.8 or higher**. 
 
 In API Control Plane, each API Gateway deployment is referred as runtime. The runtimes get auto populated in API Control Plane when the connectivity is established between API Gateway and API Control Plane.
 The connectivity is established by externalizing the control plane agent configuration through a set of properties.
@@ -163,4 +163,6 @@ agentConfig:
     password: "MyAdminP@$$w0rd"
 ```
 
-> **Note:** The password provided in the YAML file will be read by the API Gateway on application startup and it will be removed thereafter and placed in the password store for future reference. As the file will be updated to remove the password, ensure that the file has write permissions.
+> **Note:** 
+> 1. The password provided in the YAML file will be read by the API Gateway on application startup, and it will be removed thereafter and placed in the password store for future reference. As the file will be updated to remove the password, ensure that the file has write permissions.
+> 2. ```controlPlaneURL``` in the ```cp-agent.yml``` file or ```CP_URL``` in the ```.env``` file should be updated properly to connect to the Control Plane application.

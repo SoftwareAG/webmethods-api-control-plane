@@ -31,6 +31,7 @@ services:
       - 9072:9072
     volumes:
       - ./cp-agent.yml:/opt/softwareag/IntegrationServer/instances/default/packages/WmAPIGateway/resources/configuration/cp-agent.yml
+      - ./APIGatewayAdvanced_1.xml:/opt/softwareag/IntegrationServer/instances/default/config/licenseKey.xml
     networks:
       - cp-gateway-spectre
    
