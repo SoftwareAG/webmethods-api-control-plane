@@ -32,19 +32,29 @@ services:
       retries: 5
     networks:
     - softwareag-api-management
+    volumes:
+      - ./license.xml:/license/license.xml
+
   ingress-debug:
     <<: *ingress-service
     env_file:
     - ingress-config.env
     - ingress-config.debug.env
     - ../elasticsearch/es-config.env
+    volumes:
+    - ./license.xml:/license/license.xml
+
   ingress-gainsight:
     <<: *ingress-service
     env_file:
     - ingress-config.env
     - ingress-config.gainsight.env
     - ../elasticsearch/es-config.env
+    volumes:
+    - ./license.xml:/license/license.xml
+
   ingress-secure-es:
     <<: *ingress-service
     volumes:
     - es-certs:/usr/share/elasticsearch/config/certs
+    - ./license.xml:/license/license.xml

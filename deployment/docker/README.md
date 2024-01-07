@@ -15,11 +15,17 @@ The standard deployment of API Control plane contains the following 5 microservi
 ***
 
 Table of contents
+1. [Prerequisite](#Prerequisite)
+2. [How to deploy webMethods API Control Plane using docker compose?](#how-to-deploy-webmethods-api-control-plane-using-docker-compose)
+3. [How to stop webMethods API Control Plane using docker compose?](#how-to-stop-webmethods-api-control-plane-using-docker-compose)
+4. [How to access the newly deployed webMethods API Control Plane?](#how-to-access-the-newly-deployed-webmethods-api-control-plane)
+5. [Additional deployment flavors](#additional-deployment-flavors)
 
-1. [How to deploy webMethods API Control Plane using docker compose?](#how-to-deploy-webmethods-api-control-plane-using-docker-compose)
-2. [How to stop webMethods API Control Plane using docker compose?](#how-to-stop-webmethods-api-control-plane-using-docker-compose)
-3. [How to access the newly deployed webMethods API Control Plane?](#how-to-access-the-newly-deployed-webmethods-api-control-plane)
-4. [Additional deployment flavors](#additional-deployment-flavors)
+***
+## Prerequisite
+The machine needs following to install the control plane using docker.
+1. docker-compose version 2.19 or higher
+2. Docker Desktop / Rancher Desktop (version 1.9 or higher) if you are using the Windows / Mac Operating System.
 
 ***
 
