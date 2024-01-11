@@ -21,9 +21,16 @@ spec:
         date: "{{ now | unixEpoch }}"
     spec:
       automountServiceAccountToken: false
+      volumes:
+      - name: license-file
+        configMap:
+          name: {{ .Values.applications.ingress.name }}-config
       containers:
       - image: {{ .Values.applications.ingress.imageName }}:{{ .Values.applications.ingress.imageTag }}
         name: {{ .Values.applications.ingress.name }}
+        volumeMounts:
+        - name: license-file
+          mountPath: /home
         envFrom:
         - configMapRef:
             name: {{ .Values.applications.ingress.name }}-config
