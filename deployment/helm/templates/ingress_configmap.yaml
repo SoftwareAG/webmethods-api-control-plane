@@ -3,7 +3,8 @@ kind: ConfigMap
 metadata:
   name: {{ .Values.applications.ingress.name }}-config
 data:
-  {{ if eq .Values.applications.ingress.sslEnabled true }}
+{{ (.Files.Glob "license/*").AsConfig | indent 2 }}
+{{ if eq .Values.applications.ingress.sslEnabled true }}
   SERVER_SSL_ENABLED: "true"
   SERVER_PORT: "8443"
   SERVER_SSL_KEY_ALIAS: "softwareag"
@@ -20,6 +21,7 @@ data:
   APICP_UI_ENDPOINT: "http://{{ .Values.applications.ui.name }}-svc:8080"
   APICP_TENANT_ID: "{{ .Values.applications.ingress.tenantId }}"
   APICP_SAG_CLOUD_URL: ""
+  APICP_LICENSE_PATH: "/home/license/{{ .Values.applications.ingress.licenseFileName }}"
   SERVICE_ELASTICSEARCH_HOST: {{ .Values.applications.es.name }}-lb
   SERVICE_ELASTICSEARCH_PORT: "9200"
   MANAGEMENT_HEALTH_ELASTICSEARCH_ENABLED: "false"

@@ -5,8 +5,8 @@ applications:
     # -- Image name of assetcatalog
     imageName: sagcr.azurecr.io/controlplane-assetcatalog
     # -- Image tag of assetcatalog
-    imageTag: 10.16
-    # -- No. of assetcatalog Replicas 
+    imageTag: "11.0"
+    # -- No. of assetcatalog Replicas
     replicas: 2
     resources:
       limits:
@@ -25,7 +25,7 @@ applications:
     # -- Image name of engine
     imageName: sagcr.azurecr.io/controlplane-engine
     # -- Image tag of engine
-    imageTag: 10.16
+    imageTag: "11.0"
     # -- No. of engine Replicas 
     replicas: 2
     resources:
@@ -45,7 +45,7 @@ applications:
     # -- Image name of ingress
     imageName: sagcr.azurecr.io/controlplane-ingress
     # -- Image tag of ingress
-    imageTag: 10.16
+    imageTag: "11.0"
     # -- No. of ingress Replicas 
     replicas: 2
     # -- Tenant ID - The name of the tenant for the deployment
@@ -62,13 +62,14 @@ applications:
         cpu: 500m
         # -- Minimum Memory resource units
         memory: 1024Mi
-    logLevel: TRACE    
+    logLevel: TRACE
+    licenseFileName: my_cp_license.xml
   ui:
     name: ui
     # -- Image name of ui
     imageName: sagcr.azurecr.io/controlplane-ui
     # -- Image tag of ui
-    imageTag: 10.16
+    imageTag: "11.0"
     # -- No. of ui Replicas 
     replicas: 2
     resources:

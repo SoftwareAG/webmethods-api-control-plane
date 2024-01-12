@@ -23,6 +23,21 @@ We have two ways of deploying a self-hosted version of API Control Plane - using
 
 API Control Plane exposes public APIs to interact with it. API docs as well as postman collection with sample usage can be found [here](apis).
 
+## License for Control Plane Application
+### Loading license to Application
+- A valid license file is to be mounted.
+- The docker composes and/or helm charts file is to be modified to mount the license file.
+- The control plane will load the license file from the mounted path configured through the environment variable `APICP_LICENSE_PATH`. This will happen during application start-up.
+- The other way to load the license after startup is by using the rest endpoints. Please to the Open API spec for the details.
+- The license file may have either one of the two product codes specified below
+  - WCOS1: for on-prem instances
+  - WCOC1: for cloud instances
+- This license information is validated in the control plane for both the license types and added to the control plane.
+- But the application will work / block based on the corresponding license is added and the mode of the application.
+
+### Application Behaviour without a valid license
+- All the PUT, POST and DELETE API calls to the control plane application will be blocked, and 406 HTTP status code.
+
 ## Articles
 
 We also host various articles related to API Control Plane deployment, use, administration etc. [here](articles).
