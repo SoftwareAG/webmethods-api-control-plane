@@ -62,7 +62,8 @@ applications:
         cpu: 500m
         # -- Minimum Memory resource units
         memory: 1024Mi
-    logLevel: TRACE    
+    logLevel: TRACE
+    licenseFileName: my_cp_license.xml
   ui:
     name: ui
     # -- Image name of ui

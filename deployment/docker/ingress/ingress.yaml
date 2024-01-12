@@ -33,7 +33,7 @@ services:
     networks:
     - softwareag-api-management
     volumes:
-      - ./license.xml:/license/license.xml
+      - ./${LICENSE_FILE_NAME}:/home/license/${LICENSE_FILE_NAME}
 
   ingress-debug:
     <<: *ingress-service
@@ -42,7 +42,7 @@ services:
     - ingress-config.debug.env
     - ../elasticsearch/es-config.env
     volumes:
-    - ./license.xml:/license/license.xml
+    - ./${LICENSE_FILE_NAME}:/home/license/${LICENSE_FILE_NAME}
 
   ingress-gainsight:
     <<: *ingress-service
@@ -51,10 +51,10 @@ services:
     - ingress-config.gainsight.env
     - ../elasticsearch/es-config.env
     volumes:
-    - ./license.xml:/license/license.xml
+    - ./${LICENSE_FILE_NAME}:/home/license/${LICENSE_FILE_NAME}
 
   ingress-secure-es:
     <<: *ingress-service
     volumes:
     - es-certs:/usr/share/elasticsearch/config/certs
-    - ./license.xml:/license/license.xml
+    - ./${LICENSE_FILE_NAME}:/home/license/${LICENSE_FILE_NAME}

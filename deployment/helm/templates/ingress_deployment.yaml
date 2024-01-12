@@ -30,7 +30,7 @@ spec:
         name: {{ .Values.applications.ingress.name }}
         volumeMounts:
         - name: license-file
-          mountPath: /home
+          mountPath: /home/license
         envFrom:
         - configMapRef:
             name: {{ .Values.applications.ingress.name }}-config
