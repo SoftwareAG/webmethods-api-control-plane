@@ -1097,6 +1097,80 @@
 				}
 			],
 			"description": "This folder contains REST APIs used to retrieve build version of each microservice and API controlplane product version."
+		},
+		{
+			"name": "v2",
+			"item": [
+				{
+					"name": "Runtimes",
+					"item": [
+						{
+							"name": "Heartbeat",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"created\": 1657808717,\r\n    \"runtimeId\": \"du988aed-2588-4988-990d-8342d0bcw45\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{baseURL}}/api/engine/v2/runtimes/heartbeat",
+									"protocol": "http",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"engine",
+										"v2",
+										"runtimes",
+										"heartbeat"
+									]
+								},
+								"description": "This REST call is used to send a runtime heartbeat. Runtime Id and heartbeat timestamp need to be passed as input to this query."
+							},
+							"response": []
+						},
+						{
+							"name": "Bulk heartbeats",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n    {\r\n    \"created\": 1657808717,\r\n    \"runtimeId\": \"du988aed-2588-4988-990d-8342d0bcw45\"\r\n    }\r\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/engine/v2/runtimes/heartbeats/bulk",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"engine",
+										"v2",
+										"runtimes",
+										"heartbeats",
+										"bulk"
+									]
+								},
+								"description": "This REST call is used to send list of runtime heartbeat. A list of objects containing runtime Id and heartbeat timestamp need to be passed as input to this query."
+							},
+							"response": []
+						}
+					]
+				}
+			]
 		}
 	],
 	"auth": {

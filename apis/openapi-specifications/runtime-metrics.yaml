@@ -81,6 +81,7 @@ paths:
     summary: Store runtime9me heartbeats in controlplane.
     description: These resource will stores the runtime heartbeats in controlplane via agent.
     post:
+      deprecated: true
       description: These resource will stores the runtime heartbeats in controlplane via agent.
       requestBody:
         description: Runtime heartbeats.
@@ -107,6 +108,84 @@ paths:
                 docType: heartBeat
                 id: ea488aed-2588-4988-990d-8342d0bca78
                 runtimeId: du988aed-2588-4988-990d-8342d0bcw45
+        '401':
+          description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to retrieve the status of persona.
+        '500':
+          $ref: '#/components/responses/internal_server_error'
+  /api/engine/v2/runtimes/heartbeat:
+    summary: Store runtime heartbeats in controlplane version 2.
+    description: These resource will stores the runtime heartbeats in controlplane via agent.
+    post:
+      description: These resource will stores the runtime heartbeats in controlplane via agent.
+      requestBody:
+        description: Runtime heartbeats.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RuntimeHeartbeatData'
+            example:
+              created: 1657808717
+              active: 1
+              docType: heartBeat
+              id: ea488aed-2588-4988-990d-8342d0bca78
+              runtimeId: du988aed-2588-4988-990d-8342d0bcw45
+      responses:
+        '200':
+          description: This status code indicates that the heartbeat information stored successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuntimeHeartbeatDataV2'
+              example:
+                created: 2022-07-14 14:25:17:116
+                active: 1
+                docType: heartBeat
+                id: ea488aed-2588-4988-990d-8342d0bca78
+                runtimeId: du988aed-2588-4988-990d-8342d0bcw45
+        '401':
+          description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to retrieve the status of persona.
+        '500':
+          $ref: '#/components/responses/internal_server_error'
+  /api/engine/v2/runtimes/heartbeats/bulk:
+    summary: Store list of runtime heartbeats in control plane.
+    description: These resource will stores list of runtime heartbeats in control plane via agent.
+    post:
+      description: These resource will stores  list of runtime heartbeats in control plane via agent.
+      requestBody:
+        description: List of runtime heartbeats.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListOfRuntimeHeartbeatDataV2'
+            example:
+              [
+                {
+                  created: 1657808717,
+                  active: 1,
+                  docType: heartBeat,
+                  id: ea488aed-2588-4988-990d-8342d0bca78,
+                  runtimeId: du988aed-2588-4988-990d-8342d0bcw45
+                }
+              ]
+
+      responses:
+        '200':
+          description: This status code indicates that the list of heartbeats information stored successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListOfRuntimeHeartbeatDataV2'
+              example:
+                [
+                  {
+                    created: 2022-07-14 14:25:17:116,
+                    active: 1,
+                    docType: heartBeat,
+                    id: ea488aed-2588-4988-990d-8342d0bca78,
+                    runtimeId: du988aed-2588-4988-990d-8342d0bcw45
+                  }
+                ]
+
         '401':
           description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to retrieve the status of persona.
         '500':
@@ -170,6 +249,35 @@ components:
           type: string
           description: UUID of the Runtime.
           example: du988aed-2588-4988-990d-8342d0bcw45
+    RuntimeHeartbeatDataV2:
+      type: object
+      properties:
+        created:
+          type: number
+          description: Runtime created date in epoch time format.
+          example: 1657808717
+          required: true
+        active:
+          type: number
+          description: This shows the runtime active i9nactive status, 1 is active, 0 is inactive.
+          example: 1
+        docType:
+          type: string
+          description: This the document type that we used to store/fetch data from elasticsearch.
+          example: heartBeat
+        id:
+          type: string
+          description: UUID of for each runtime.
+          example: ea488aed-2588-4988-990d-8342d0bca78
+        runtimeId:
+          type: string
+          description: UUID of the Runtime.
+          example: du988aed-2588-4988-990d-8342d0bcw45
+          required: true
+    ListOfRuntimeHeartbeatDataV2:
+      type: array
+      items:
+        -$ref: "#/components/schemas/RuntimeHeartbeatDataV2"
   responses:
     internal_server_error:
       description: Internal server error
