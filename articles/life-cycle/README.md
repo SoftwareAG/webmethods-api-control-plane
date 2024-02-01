@@ -25,7 +25,7 @@ This section serves as a comprehensive guide for understanding the life cycle of
    webMethods.io API Control Plane is available only for enterprise customers. webMethods.io API Control Plane tenants are provisioned to enterprise customers upon request. <b>Contact Software AG support if you wish 
    to subscribe to API Control Plane.</b>
    <br><br>
-5. <b>What is the process for upgrading an API Control Plane tenant to a new version?</b>
+5. <b>What is the process for upgrading an API Control Plane cloud tenant to a new version?</b>
 
    API Control Plane tenants are automatically upgraded to the latest version by Software AG.
    <br><br>
@@ -52,23 +52,16 @@ This section serves as a comprehensive guide for understanding the life cycle of
     <br><br>
 11. <b>How are the users managed?</b>
 
-    **User Management in Software AG Cloud**
+     **User groups in API Control Plane**
 
-    You can manage user's information from the Administration page in Software AG Cloud.<br><br>
+     The following predefined user groups can access API Control Plane:
 
-    **Users**:<br>There are two user personas, *```Cloud-Tenant-Administrator```* and *```APIControlPlane-User```* depending on the roles assigned to the users. Based on the user groups assigned, user can access API Control Plane.
-
-    >    **Note**: Only the Cloud-Tenant-Administrators can create, modify, and delete users.
-
-        **User groups in API Control Plane**
-
-        The following predefined user groups can access API Control Plane:
-
-        *	API Control Plane administrators
-        *	API platform providers
-        *	API product managers
+     -	API Control Plane administrators
+     -	API platform providers
+     -	API product managers
     
-        For details on the privileges based on the user groups, see https://docs.webmethods.io/apicontrolplane/administration/chapter3wco#co-user_management
+     For details on the privileges based on the user groups, see https://docs.webmethods.io/apicontrolplane/administration/chapter3wco#co-user_management
+	 <br><br>	
 12. <b>What is the deployment model of API Control Plane?</b>
 
     API Control Plane can be deployed using High availability solution for protection against single point of failure within a single data center or HADR (High Availability and Disaster Recovery) solution for 
@@ -84,7 +77,7 @@ This section serves as a comprehensive guide for understanding the life cycle of
     <br><br>
 14. <b>How to connect API Gateway with API Control Plane?</b>
 
-    To connect API Control Plane using API Gateway UI, see *Configuring API Control Plane* section in *API Gateway Administration* guide.
+    To connect API Control Plane using API Gateway UI, see https://documentation.softwareag.com/webmethods/api_gateway/yai10-15/webhelp/yai-webhelp/#page/yai-webhelp%2Fgtw_configure_gateway.html%23
 
     To connect API Control Plane using properties or YAML file, see https://documentation.softwareag.com/wco/11.0.0/en/webhelp/wco-webhelp/#page/wco-webhelp%2Fco-connecting-apigw.html
     <br><br>
@@ -98,7 +91,9 @@ This section serves as a comprehensive guide for understanding the life cycle of
     <br><br>
 17. <b>Does API Control Plane provide REST endpoints to monitor the health and resource utilization of the microservices and Elastic search?</b>
 
-    Yes. For details, see https://documentation.softwareag.com/wco/11.0.0/en/webhelp/wco-webhelp/#page/wco-webhelp%2Fco-monitor_apicp.html
+    Yes. For details about how to monitor microservices health and resource utilization, see https://documentation.softwareag.com/wco/11.0.0/en/webhelp/wco-webhelp/#page/wco-webhelp%2Fco-microservices_application_level.html%23
+	
+	For details about how to monitor Elastic search health and resource utilization, see https://documentation.softwareag.com/wco/11.0.0/en/webhelp/wco-webhelp/#page/wco-webhelp%2Fco-elasticsearch_monitoring.html%23
     <br><br>
 18. <b>List the Prometheus metrics to analyze API Control Plane health.</b>
 
@@ -109,12 +104,7 @@ This section serves as a comprehensive guide for understanding the life cycle of
     Yes. To deploy API Control Plane enabling Open Telemetry using Jaeger UI with Docker, perform *step 5* mentioned in
     https://documentation.softwareag.com/wco/11.0.0/en/webhelp/wco-webhelp/#page/wco-webhelp%2Fta-deploy_standalone_apicp_docker.html
     <br><br>
-20. <b>Can Gainsight be integrated with API Control Plane?</b>
-
-    Yes. You can integrate Gainsight with API Control Plane Cloud for user engagements such as bots, articles, feature introduction, etc.. For details, see [https://github.com/Kirthi08/webmethods-api-control- 
-    plane/tree/main/deployment/docker#additional-deployment-flavors](https://github.com/SoftwareAG/webmethods-api-control-plane/tree/main/deployment/docker#additional-deployment-flavors)
-    <br><br>
-21. <b>How do I report an incident?</b>
+20. <b>How do I report an incident?</b>
 
     You can report an incident through our Service Portal, [JSM](https://getsupport.softwareag.com/)
     
