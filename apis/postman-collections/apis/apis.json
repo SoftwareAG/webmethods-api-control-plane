@@ -1167,6 +1167,37 @@
 								"description": "This REST call is used to send list of runtime heartbeat. A list of objects containing runtime Id and heartbeat timestamp need to be passed as input to this query."
 							},
 							"response": []
+						},
+						{
+							"name": "Agent SDK metrics",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"apiTransactionMetricsList\": [\r\n    {\r\n      \"apiId\": \"93e24761-b84e-4363-a199-687405a9b3e1\",\r\n      \"apiName\": \"Bunny_API\",\r\n      \"apiVersion\": \"1.0.6\",\r\n      \"apiMetrics\": {\r\n        \"transactionCount\": 20,\r\n        \"averageLatency\": 10.5,\r\n        \"averageBackendResponseTime\": 15.9,\r\n        \"averageResponseTime\": 58.9\r\n      },\r\n      \"metricsByStatusCode\": {\r\n        \"2xx\": {\r\n          \"transactionCount\": 20,\r\n            \"averageLatency\": 10.5,\r\n            \"averageBackendResponseTime\": 15.9,\r\n            \"averageResponseTime\": 58.9\r\n        },\r\n        \"3xx\": {\r\n          \"transactionCount\": 20,\r\n            \"averageLatency\": 10.5,\r\n            \"averageBackendResponseTime\": 15.9,\r\n            \"averageResponseTime\": 58.9\r\n        },\r\n        \"4xx\": {\r\n          \"transactionCount\": 20,\r\n            \"averageLatency\": 10.5,\r\n            \"averageBackendResponseTime\": 15.9,\r\n            \"averageResponseTime\": 58.9\r\n        },\r\n        \"5xx\": {\r\n          \"transactionCount\": 20,\r\n            \"averageLatency\": 10.5,\r\n            \"averageBackendResponseTime\": 15.9,\r\n            \"averageResponseTime\": 58.9\r\n        }\r\n      }\r\n    }\r\n  ],\r\n  \"runtimeTransactionMetrics\": {\r\n    \"apiMetrics\": {\r\n      \"transactionCount\": 20,\r\n      \"averageLatency\": 10.5,\r\n      \"averageBackendResponseTime\": 15.9,\r\n      \"averageResponseTime\": 58.9\r\n    },\r\n    \"metricsByStatusCode\": {\r\n      \"2xx\": {\r\n          \"transactionCount\": 20,\r\n            \"averageLatency\": 10.5,\r\n            \"averageBackendResponseTime\": 15.9,\r\n            \"averageResponseTime\": 58.9\r\n        },\r\n        \"3xx\": {\r\n          \"transactionCount\": 20,\r\n            \"averageLatency\": 10.5,\r\n            \"averageBackendResponseTime\": 15.9,\r\n            \"averageResponseTime\": 58.9\r\n        },\r\n        \"4xx\": {\r\n          \"transactionCount\": 20,\r\n            \"averageLatency\": 10.5,\r\n            \"averageBackendResponseTime\": 15.9,\r\n            \"averageResponseTime\": 58.9\r\n        },\r\n        \"5xx\": {\r\n          \"transactionCount\": 20,\r\n            \"averageLatency\": 10.5,\r\n            \"averageBackendResponseTime\": 15.9,\r\n            \"averageResponseTime\": 58.9\r\n        }\r\n    }\r\n  },\r\n  \"timestamp\": 1707134016000\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/engine/v2/runtimes/{{runtimeId}}/metrics",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"engine",
+										"v2",
+										"runtimes",
+										"{{runtimeId}}",
+										"metrics"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				}

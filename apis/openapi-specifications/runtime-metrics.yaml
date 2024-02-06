@@ -112,6 +112,93 @@ paths:
           description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to retrieve the status of persona.
         '500':
           $ref: '#/components/responses/internal_server_error'
+  /api/engine/v2/runtimes/{runtime_id}/metrics:
+    summary: Store version2 agent sdk metrics in controlplane
+    description: This resource stores the version2 agent sdk metrics in the controlplane.
+    post:
+      description: This resource stores the version2 agent sdk metrics in the controlplane.
+      parameters:
+        - in: path
+          name: runtime_id
+          description: Received metrics will be stored for the runtime accordingly based on the runtimeID.
+          required: true
+          schema:
+            type: string
+          example: de61415f-f943-414a-8737-9786757ff890
+      requestBody:
+        description: Metrics for the runtime and api will be getting as json object, further the metrics will map and store accordingly.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentMetricsModel'
+            example:
+              apiTransactionMetricsList:
+                - apiId: 93e24761-b84e-4363-a199-687405a9b3e1
+                  apiName: Bunny_API
+                  apiVersion: 1.0.6
+                  apiMetrics:
+                    transactionCount: 100
+                    averageLatency: 2.14
+                    averageBackendResponseTime: 1.25
+                    averageResponseTime: 1.08
+                  metricsByStatusCode:
+                    2xx:
+                      transactionCount: 25
+                      averageLatency: 2.14
+                      averageBackendResponseTime: 1.25
+                      averageResponseTime: 1.08
+                    3xx:
+                      transactionCount: 25
+                      averageLatency: 2.14
+                      averageBackendResponseTime: 1.25
+                      averageResponseTime: 1.08
+                    4xx:
+                      transactionCount: 25
+                      averageLatency: 2.14
+                      averageBackendResponseTime: 1.25
+                      averageResponseTime: 1.08
+                    5xx:
+                      transactionCount: 25
+                      averageLatency: 2.14
+                      averageBackendResponseTime: 1.25
+                      averageResponseTime: 1.08
+              runtimeTransactionMetrics:
+                apiMetrics:
+                  transactionCount: 100
+                  averageLatency: 2.14
+                  averageBackendResponseTime: 1.25
+                  averageResponseTime: 1.08
+                metricsByStatusCode:
+                  2xx:
+                    transactionCount: 25
+                    averageLatency: 2.14
+                    averageBackendResponseTime: 1.25
+                    averageResponseTime: 1.08
+                  3xx:
+                    transactionCount: 25
+                    averageLatency: 2.14
+                    averageBackendResponseTime: 1.25
+                    averageResponseTime: 1.08
+                  4xx:
+                    transactionCount: 25
+                    averageLatency: 2.14
+                    averageBackendResponseTime: 1.25
+                    averageResponseTime: 1.08
+                  5xx:
+                    transactionCount: 25
+                    averageLatency: 2.14
+                    averageBackendResponseTime: 1.25
+                    averageResponseTime: 1.08
+              timestamp: 1707114619000
+      responses:
+        '202':
+          description: This status code indicates that metrics data accepted successfully to store.
+        '400':
+          $ref: '#/components/responses/bad_request_error'
+        '401':
+          description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to retrieve the status of persona.
+        '500':
+          $ref: '#/components/responses/internal_server_error'
   /api/engine/v2/runtimes/heartbeat:
     summary: Store runtime heartbeats in controlplane version 2.
     description: These resource will stores the runtime heartbeats in controlplane via agent.
@@ -278,6 +365,66 @@ components:
       type: array
       items:
         -$ref: "#/components/schemas/RuntimeHeartbeatDataV2"
+    AgentMetricsModel:
+      type: object
+      properties:
+        apiTransactionMetricsList:
+          type: array
+          items:
+            $ref: "#/components/schemas/APITransactionMetrics"
+        runtimeTransactionMetrics:
+          type: object
+          properties:
+            apiMetrics:
+              $ref: "#/components/schemas/AgentApiMetrics"
+            metricsByStatusCode:
+              $ref: "#/components/schemas/MetricsByStatusCode"
+        timestamp:
+          type: number
+          description: Metrics collected time in the form of timestamp.
+          example: 1707114619000
+    APITransactionMetrics:
+      type: object
+      properties:
+        apiId:
+          type: string
+          description: UUID of API.
+          example: 93e24761-b84e-4363-a199-687405a9b3e1
+        apiName:
+          type: string
+          description: Name of the API.
+          example: Bunny_API
+        apiVersion:
+          type: string
+          description: Version of the API.
+          example: 1.0.6
+        apiMetrics:
+          $ref: "#/components/schemas/AgentApiMetrics"
+        metricsByStatusCode:
+          $ref: "#/components/schemas/MetricsByStatusCode"
+    MetricsByStatusCode:
+      type: object
+      additionalProperties:
+        $ref: "#/components/schemas/AgentApiMetrics"
+    AgentApiMetrics:
+      type: object
+      properties:
+        transactionCount:
+          type: number
+          description: Total transactions of the runtime/api.
+          example: 100
+        averageLatency:
+          type: number
+          description: Average latency of the runtime/api.
+          example: 1.04
+        averageBackendResponseTime:
+          type: number
+          description: Average backend response time of the runtime/api.
+          example: 0.687
+        averageResponseTime:
+          type: number
+          description: Average response time of the runtime/api.
+          example: 0.947
   responses:
     internal_server_error:
       description: Internal server error
@@ -286,6 +433,13 @@ components:
           example:
             errorDetails:
               - This response indicates that the server encountered an error.
+    bad_request_error:
+      description: This status code indicates that the user did not send the valid request body.
+      content:
+        application/json:
+          example:
+            errorDetails:
+              - "apiTransactionMetricsList[0].apiId : must not be null"
   securitySchemes:
     basic_authentication:
       type: http
