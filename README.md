@@ -36,7 +36,13 @@ API Control Plane exposes public APIs to interact with it. API docs as well as p
 - But the application will work / block based on the corresponding license is added and the mode of the application.
 
 ### Application Behaviour without a valid license
-- All the PUT, POST and DELETE API calls to the control plane application will be blocked, and 406 HTTP status code.
+- All the PUT, POST and DELETE API calls to the control plane application will be blocked, and 406 HTTP status code 
+  will be returned as a response code.
+
+## Agent SDK
+
+Agent SDK is a Java API, which can be used to develop Java application which can fetch runtime details and metrics 
+information from Runtime and send to Control Plane. A detailed document is available [here](https://documentation.softwareag.com/wco/11.0.0/en/webhelp/wco-webhelp/#page/wco-webhelp%2Fco-agent_sdk.html).
 
 ## Articles
 

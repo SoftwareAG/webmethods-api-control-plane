@@ -24,8 +24,9 @@ Table of contents
 ***
 ## Prerequisite
 The machine needs following to install the control plane using docker.
-1. docker-compose version 2.19 or higher
-2. Docker Desktop / Rancher Desktop (version 1.9 or higher) if you are using the Windows / Mac Operating System.
+1. docker-compose version should be 2.19.0 and 2.23.3. 
+2. Docker Desktop / Rancher Desktop (version between 1.9.0 and 1.12.0) if you are using the Windows / Mac Operating 
+      System.
 
 ***
 
