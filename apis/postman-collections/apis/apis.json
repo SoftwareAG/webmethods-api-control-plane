@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "7ae7574f-408b-499d-870f-dc7227718ea7",
+		"_postman_id": "346d0358-9099-4c22-9c2d-a362534cd507",
 		"name": "API Control Plane Postman Collections",
 		"description": "This postman collection includes all the REST APIs available in API Control Plane.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "20781985"
+		"_exporter_id": "25655912"
 	},
 	"item": [
 		{
@@ -127,7 +127,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"id\": \"ac379195-32cf-5198-8e7b-38fe21120309\",\r\n    \"name\": \"API Gateway Transaction data service\",\r\n    \"tags\": [],\r\n    \"displayVersion\": \"v1.0.1\",\r\n    \"systemVersion\": 1,\r\n    \"apiType\": \"SOAP\",\r\n    \"apiStatus\": \"INACTIVE\",\r\n    \"publishInfo\": [],\r\n    \"noOfPolicies\": 5\r\n}",
+									"raw": "{\r\n    \"id\": \"ac379195-32cf-5198-8e7b-38fe21120309\",\r\n    \"name\": \"API Gateway Transaction data service\",\r\n    \"tags\": [],\r\n    \"version\": \"v1.0.1\",\r\n    \"type\": \"SOAP\",\r\n    \"status\": \"INACTIVE\",\r\n    \"versionSetId\": \"versionSetId\",\r\n    \"attributes\":{},\r\n    \"policiesCount\": 5\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -159,7 +159,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"id\": \"ac379195-32cf-5198-8e7b-38fe21120309\",\r\n    \"name\": \"API Gateway Transaction data Service Updated\",\r\n    \"tags\": [],\r\n    \"displayVersion\": \"v1.0.1\",\r\n    \"systemVersion\": 1,\r\n    \"apiType\": \"SOAP\",\r\n    \"apiStatus\": \"INACTIVE\",\r\n    \"publishInfo\": [],\r\n    \"noOfPolicies\": 6\r\n}",
+									"raw": "{\r\n    \"id\": \"ac379195-32cf-5198-8e7b-38fe21120309\",\r\n    \"name\": \"API Gateway Transaction data Service Updated\",\r\n    \"tags\": [],\r\n    \"version\": \"v1.0.1\",\r\n    \"type\": \"SOAP\",\r\n    \"status\": \"INACTIVE\",\r\n    \"versionSetId\": \"versionSetId\",\r\n    \"attributes\":{},\r\n    \"policiesCount\": 6\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -587,7 +587,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n          \"type\": \"API\",\r\n          \"query\": {\r\n          \"conditions\": [\r\n             {\r\n                \"criterias\": [\r\n                    {\r\n                        \"field\": \"name\",\r\n                        \"value\": \"Petstore API\",\r\n                        \"operation\": \"equals\"\r\n                    },\r\n                    {\r\n                        \"field\": \"name\",\r\n                        \"value\": \"Uber API\",\r\n                        \"operation\": \"equals\"\r\n                    }\r\n                ],\r\n                \"logicalConnector\": \"OR\"\r\n            },\r\n            {\r\n                \"criterias\": [\r\n                    {\r\n                        \"field\": \"apiDeployments.runtimeId\",\r\n                        \"value\": \"0225711b-4dd3-49d4-b79f-cf15e83b75cf\",\r\n                        \"operation\": \"equals\"\r\n                    },\r\n                    {\r\n                        \"field\": \"apiDeployments.runtimeId\",\r\n                        \"value\": \"c357f56a-3303-41bd-83d2-61bea2dc15b3\",\r\n                        \"operation\": \"equals\"\r\n                    }\r\n                ],\r\n                \"logicalConnector\": \"OR\"\r\n            },\r\n            {\r\n                \"criterias\": [\r\n                    {\r\n                        \"field\": \"apiDeployments.apiStatus\",\r\n                        \"value\": \"ACTIVE\",\r\n                        \"operation\": \"equals\"\r\n                    },\r\n                     {\r\n                        \"field\": \"apiDeployments.apiStatus\",\r\n                        \"value\": \"INACTIVE\",\r\n                        \"operation\": \"equals\"\r\n                    }\r\n                ],\r\n                \"logicalConnector\": \"OR\"\r\n            }\r\n        ],\r\n        \"logicalConnector\": \"AND\"\r\n        },\r\n        \"responseFields\": [\r\n        \"name\",\r\n        \"id\",\r\n        \"apiDeployments.apiStatus\",\r\n        \"apiDeployments.runtimeId\"\r\n        ],\r\n        \"from\": 0,\r\n        \"size\": 100,\r\n        \"sortFields\": {\"name\": \"DESC\"}\r\n}",
+									"raw": "{\r\n          \"type\": \"API\",\r\n          \"query\": {\r\n          \"conditions\": [\r\n             {\r\n                \"criterias\": [\r\n                    {\r\n                        \"field\": \"name\",\r\n                        \"value\": \"Petstore API\",\r\n                        \"operation\": \"equals\"\r\n                    },\r\n                    {\r\n                        \"field\": \"name\",\r\n                        \"value\": \"Uber API\",\r\n                        \"operation\": \"equals\"\r\n                    }\r\n                ],\r\n                \"logicalConnector\": \"OR\"\r\n            },\r\n            {\r\n                \"criterias\": [\r\n                    {\r\n                        \"field\": \"apiDeployments.runtimeId\",\r\n                        \"value\": \"0225711b-4dd3-49d4-b79f-cf15e83b75cf\",\r\n                        \"operation\": \"equals\"\r\n                    },\r\n                    {\r\n                        \"field\": \"apiDeployments.runtimeId\",\r\n                        \"value\": \"c357f56a-3303-41bd-83d2-61bea2dc15b3\",\r\n                        \"operation\": \"equals\"\r\n                    }\r\n                ],\r\n                \"logicalConnector\": \"OR\"\r\n            },\r\n            {\r\n                \"criterias\": [\r\n                    {\r\n                        \"field\": \"apiDeployments.status\",\r\n                        \"value\": \"ACTIVE\",\r\n                        \"operation\": \"equals\"\r\n                    },\r\n                     {\r\n                        \"field\": \"apiDeployments.status\",\r\n                        \"value\": \"INACTIVE\",\r\n                        \"operation\": \"equals\"\r\n                    }\r\n                ],\r\n                \"logicalConnector\": \"OR\"\r\n            }\r\n        ],\r\n        \"logicalConnector\": \"AND\"\r\n        },\r\n        \"responseFields\": [\r\n        \"name\",\r\n        \"id\",\r\n        \"apiDeployments.status\",\r\n        \"apiDeployments.runtimeId\"\r\n        ],\r\n        \"from\": 0,\r\n        \"size\": 100,\r\n        \"sortFields\": {\"name\": \"DESC\"}\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1097,6 +1097,110 @@
 				}
 			],
 			"description": "This folder contains REST APIs used to retrieve build version of each microservice and API controlplane product version."
+		},
+		{
+			"name": "v2",
+			"item": [
+				{
+					"name": "Runtimes",
+					"item": [
+						{
+							"name": "Heartbeat",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"created\": 1657808717,\r\n    \"runtimeId\": \"du988aed-2588-4988-990d-8342d0bcw45\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{baseURL}}/api/engine/v2/runtimes/heartbeat",
+									"protocol": "http",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"engine",
+										"v2",
+										"runtimes",
+										"heartbeat"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Bulk heartbeats",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n    {\r\n    \"created\": 1657808717,\r\n    \"runtimeId\": \"du988aed-2588-4988-990d-8342d0bcw45\"\r\n    }\r\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/engine/v2/runtimes/heartbeats/bulk",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"engine",
+										"v2",
+										"runtimes",
+										"heartbeats",
+										"bulk"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Agent SDK metrics",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"apiTransactionMetricsList\": [\r\n    {\r\n      \"apiId\": \"93e24761-b84e-4363-a199-687405a9b3e1\",\r\n      \"apiName\": \"Bunny_API\",\r\n      \"apiVersion\": \"1.0.6\",\r\n      \"apiMetrics\": {\r\n        \"transactionCount\": 20,\r\n        \"averageLatency\": 10.5,\r\n        \"averageBackendResponseTime\": 15.9,\r\n        \"averageResponseTime\": 58.9\r\n      },\r\n      \"metricsByStatusCode\": {\r\n        \"2xx\": {\r\n          \"transactionCount\": 20,\r\n            \"averageLatency\": 10.5,\r\n            \"averageBackendResponseTime\": 15.9,\r\n            \"averageResponseTime\": 58.9\r\n        },\r\n        \"3xx\": {\r\n          \"transactionCount\": 20,\r\n            \"averageLatency\": 10.5,\r\n            \"averageBackendResponseTime\": 15.9,\r\n            \"averageResponseTime\": 58.9\r\n        },\r\n        \"4xx\": {\r\n          \"transactionCount\": 20,\r\n            \"averageLatency\": 10.5,\r\n            \"averageBackendResponseTime\": 15.9,\r\n            \"averageResponseTime\": 58.9\r\n        },\r\n        \"5xx\": {\r\n          \"transactionCount\": 20,\r\n            \"averageLatency\": 10.5,\r\n            \"averageBackendResponseTime\": 15.9,\r\n            \"averageResponseTime\": 58.9\r\n        }\r\n      }\r\n    }\r\n  ],\r\n  \"runtimeTransactionMetrics\": {\r\n    \"apiMetrics\": {\r\n      \"transactionCount\": 20,\r\n      \"averageLatency\": 10.5,\r\n      \"averageBackendResponseTime\": 15.9,\r\n      \"averageResponseTime\": 58.9\r\n    },\r\n    \"metricsByStatusCode\": {\r\n      \"2xx\": {\r\n          \"transactionCount\": 20,\r\n            \"averageLatency\": 10.5,\r\n            \"averageBackendResponseTime\": 15.9,\r\n            \"averageResponseTime\": 58.9\r\n        },\r\n        \"3xx\": {\r\n          \"transactionCount\": 20,\r\n            \"averageLatency\": 10.5,\r\n            \"averageBackendResponseTime\": 15.9,\r\n            \"averageResponseTime\": 58.9\r\n        },\r\n        \"4xx\": {\r\n          \"transactionCount\": 20,\r\n            \"averageLatency\": 10.5,\r\n            \"averageBackendResponseTime\": 15.9,\r\n            \"averageResponseTime\": 58.9\r\n        },\r\n        \"5xx\": {\r\n          \"transactionCount\": 20,\r\n            \"averageLatency\": 10.5,\r\n            \"averageBackendResponseTime\": 15.9,\r\n            \"averageResponseTime\": 58.9\r\n        }\r\n    }\r\n  },\r\n  \"timestamp\": 1707134016000\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/engine/v2/runtimes/{{runtimeId}}/metrics",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"engine",
+										"v2",
+										"runtimes",
+										"{{runtimeId}}",
+										"metrics"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "API Control Plane allows you to create and manage multiple runtimes (such as API Gateway, Developer Portal, and so on), running in different landscapes.\n\nThis folder contains all the available REST APIs pertaining to runtime."
+				}
+			]
 		}
 	],
 	"auth": {
