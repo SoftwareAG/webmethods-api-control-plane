@@ -14,7 +14,7 @@ info:
 
     - different geographies like US, EU, and APJ regions.
 
-    - hybrid environments such as SaaS, private cloud, and on-premises
+    - hybrid environments such as SaaS, private cloud, public cloud and on-premises
 
     - federated and heterogenous systems such as multivendor third-party gateways , Microgateways, Service Mesh.
 servers:
@@ -106,9 +106,9 @@ paths:
                     name: smith
                     id: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
                     type: USER
-                  type: WEBMETHODS_GATEWAY
+                  type: WEBMETHODS_API_GATEWAY
                   deploymentType: PRIVATE_CLOUD
-                  heartBeatSynchInterval: 6000
+                  heartbeatInterval: 6000
                 lastHeartbeatTime: 1654860039000
                 lastMetricsTime: 1654860039000
                 lastAssetSyncTime: 1654860039000
@@ -426,6 +426,7 @@ components:
             - ON_PREMISE
             - SAG_SAAS
             - PRIVATE_CLOUD
+            - PUBLIC_CLOUD
           example: ON_PREMISE
         region:
           type: string
@@ -575,7 +576,7 @@ components:
           schema:
               $ref: "#/components/schemas/ErrorMessage"
           example:
-            errorDetails: 
+            errorDetails:
               - This response indicates that the server encountered an error.
    4XX_bad_request_error:
        description: This status code indicates that the request body is bad.
