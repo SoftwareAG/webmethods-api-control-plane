@@ -989,6 +989,65 @@
 						}
 					],
 					"description": "This folder contains all the REST APIs pertaining to User Management."
+				},
+				{
+					"name": "LicenseManagement",
+					"item": [
+						{
+							"name": "Get all licenses",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/ingress/v1/license",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"ingress",
+										"v1",
+										"license"
+									]
+								},
+								"description": "This REST call retrieves a list of license."
+							},
+							"response": []
+						},
+						{
+							"name": "Add license",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": []
+										}
+									]
+
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/ingress/v1/license",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"ingress",
+										"v1",
+										"license"
+									]
+								},
+								"description": "This REST call adds a new license to control plane."
+							},
+							"response": []
+						}
+					],
+					"description": "This folder contains all the REST APIs pertaining to License Management."
 				}
 			]
 		},

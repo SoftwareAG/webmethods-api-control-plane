@@ -1,0 +1,264 @@
+openapi: 3.0.1
+info:
+  title: License Management API
+  description: |
+    ## Overview
+
+    License management API allows you to manage the following entities
+      - license
+
+    *A user with the **API Administrator** functional privilege can manage the
+    Licenses in Ingress and UMC.*
+
+
+    ## Supported functionalities
+
+    License Management API supports the following functionalities for:
+
+
+    ### License
+      1. List all the License in the system.
+      2. Add a new license.
+      3. Delete a license with a specific serial number.
+
+  version: '11.00'
+servers:
+  - url: "{protocol}://{hostname}:{port}/api/ingress/v1"
+    description: This is the endpoint where the Ingress API is accessible from the server.
+    variables:
+      protocol:
+        default: https
+        enum:
+          - http
+          - https
+        description: The protocol supported by the server - HTTP or HTTPS. Default is HTTPS.
+      hostname:
+        default: localhost
+        description: The domain name of the server where the API is hosted. The hostname must be resolvable by the DNS lookup.
+      port:
+        default: "443"
+        description: The port number where the REST API is running on the server. The default port for HTTPS is 443 and HTTP is 80 but it can also be any valid port.
+paths:
+  /license:
+    get:
+      summary: Listing all the licenses in the system.
+      description: |
+        This method lists all the available licenses in the system for that tenant.
+
+        **Restriction**: Restricted in control plane Cloud, Requires control plane administrator privilege.
+      tags:
+        - license
+      responses:
+        '200':
+          description: This status code indicates the successful retrieval of licenses available in the system.
+          content:
+            application/json:
+              schema:
+                description: Collection of licenses in the response
+                type: object
+                properties:
+                  result:
+                    description: Collection of licenses
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ALicense'
+              examples:
+                LicenseListing:
+                  description: License object to list the Licenses.
+                  value:
+                    - ALicense:
+                        name: cloud_license.xml
+                        licenseType: TEN
+                        serialNumber: 0000037081
+                        licenseKey: admin
+                        customerName: SoftwareAGInternal
+                        expirationDate: 2024-08-18T23:59:59.218+00:00
+                        licenseQuantity: 1000
+                        freeLicenseQuantity: 1000
+                        created: 2021-03-24 08:15:23.345 IST
+                        modified: 2021-03-24 09:15:23.345 IST
+                        productVersion: 10.16
+                        licenseXml: content of xml
+                        expiringUnlimited: false
+                        product: WCOC1
+                    - ALicense:
+                        name: license.xml
+                        licenseType: TEN
+                        serialNumber: 0000037345
+                        licenseKey: admin
+                        customerName: SoftwareAGInternal
+                        expirationDate: 2024-08-18T23:59:59.218+00:00
+                        licenseQuantity: 1000
+                        freeLicenseQuantity: 1000
+                        created: 2021-03-24 08:15:23.345 IST
+                        modified: 2021-03-24 09:15:23.345 IST
+                        productVersion: 10.16
+                        licenseXml: content of xml
+                        expiringUnlimited: false
+                        product: WCOC1
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/internal_server_error'
+    post:
+      summary: Add a new license
+      description: |-
+        This method allows you to add a new license in control plane.
+
+        **Restriction**: Access is restricted to **authorized** individuals with administrator privilege. Restricted in control plane Cloud.
+      tags:
+        - Licenses
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: license added. Response for the license added.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ALicense'
+              example:
+                  - name: cloud_license.xml
+                    licenseType: TEN
+                    serialNumber: 0000037081
+                    licenseKey: admin
+                    customerName: SoftwareAGInternal
+                    expirationDate: 2024-08-18T23:59:59.218+00:00
+                    licenseQuantity: 1000
+                    freeLicenseQuantity: 1000
+                    created: 2021-03-24 08:15:23.345 IST
+                    modified: 2021-03-24 09:15:23.345 IST
+                    productVersion: 10.16
+                    licenseXml: content of xml
+                    expiringUnlimited: false
+                    product: WCOC1
+        '400':
+          description: This status code indicates that the license file is not valid or already present.
+          content:
+            application/json:
+              examples:
+                License already used:
+                  description: This will be sent when the passed license is already being used.
+                  value:
+                    errorDetails:
+                      - 'The license is already being used for this tenant.'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/internal_server_error'
+
+components:
+  schemas:
+    ALicense:
+      description: The license definition for all the operations.
+      type: object
+      properties:
+        name:
+          description: License file name.
+          type: string
+          example: license.xml
+        serialNumber:
+          description: Serial number of license.
+          type: string
+          example: 0000037080
+        licenseType:
+          description: |
+            Type of the license.
+            - NUC - Named users.
+            - CUC - Concurrent users.
+            - ADU - Cross tenant, handled like NUC for multiple tenants.
+            - INV - instance volume.
+            - SCE - scenario
+            - ST - Tenant wide
+            - SER - Server wide
+            - TEN - Tenant wide
+            - VWR - named viewer
+            - VWC - concurrent viewer
+            - TXN - transaction based
+            - MTA - metric based
+            - INVALID - Invalid
+          type: string
+          enum:
+            - NUC
+            - CUC
+            - ADU
+            - INV
+            - SCE
+            - ST
+            - SER
+            - TEN
+            - VWR
+            - VWC
+            - TXN
+            - MTA
+            - INVALID
+          example: MTA
+        licenseKey:
+          description: License key of license.
+          type: string
+          example: 7080ATDC
+        customerName:
+          description: Name of the customer.
+          type: string
+          example: SoftwareAGInternal
+        expirationDate:
+          description: Date of expiry of license.
+          type: string
+          example: 2024-08-18T23:59:59.783+00:00
+        licenseQuantity:
+          description: The quantity of the license issued.
+          type: number
+          example: 150
+        freeLicenseQuantity:
+          description: The quantity of the free license issued.
+          type: number
+          example: 100
+        productVersion:
+          description: The version number of the product license is issued for.
+          type: string
+          example: 10.16
+        licenseXml:
+          description: String containing the content of license file.
+          type: string
+          example: content of licens.xml
+        expiringUnlimited:
+          description: flag for unlimited expiry license.
+          type: boolean
+          example: false
+        product:
+          description: Product code of the license.
+          type: string
+          example: WCOS1
+
+    ErrorMessage:
+      description: Common Error Response across all APIs
+      required: [ "errorDetails" ]
+      type: object
+      properties:
+        errorDetails:
+          type: array
+          items:
+            type: string
+          example: This response indicates that the server encountered an error.
+  responses:
+    Unauthorized:
+      description: This status code indicates that either the user did not provide valid user credentials or the user does not have privileges to perform the requested action.
+    internal_server_error:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorMessage"
+          examples:
+            Internal Server Error:
+              description: Internal Server Error occurred.
+              value:
+                errorDetails:
+                  - This response indicates that the server encountered an error.
