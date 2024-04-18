@@ -57,7 +57,8 @@ paths:
               example:
                 - id: ea488aed-2588-4988-990d-8342d0bca78
                   name: Ola for runtime3
-                  apiType: REST
+                  type: REST
+                  versionSetId: bc9486aed-5738-4988
                   owner:
                     name: John
                     id: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
@@ -71,15 +72,13 @@ paths:
                       runtimeId: d3841d21-ef31-4b95-a82a-ed08f10a20e5
                       runtimeName: ' runtime 1'
                       region: eu
-                      apiStatus: ACTIVE
-                      displayVersion: v2.0
-                      noOfPolicies : 3
+                      status: ACTIVE
+                      version: v2.0
+                      policiesCount : 3
                       owner:
                         name: John
                         id: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
                         type: USER
-                      publishInfo:
-                        - INTEGRATION_SERVER
         '401':
           description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to retrieve the API list.
         '500':
@@ -132,13 +131,11 @@ paths:
                   description: Description for PetStoreAPI
                   tags:
                     - Dev
-                  displayVersion: v2.0
-                  systemVersion: 1
-                  apiType: REST
-                  apiStatus: ACTIVE
-                  noOfPolicies : 3
-                  publishInfo:
-                    - INTEGRATION_SERVER
+                  version: v2.0
+                  versionSetId: bc9486aed-5738-4988
+                  type: REST
+                  status: ACTIVE
+                  policiesCount : 3
         '401':
           description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to retrieve the API list for the specified runtime.
         '500':
@@ -163,14 +160,13 @@ paths:
               name: PetStoreAPI
               description: Description for PetStoreAPI
               id: ea488aed-2588-4988-990d-8342d0bca78
-              apiType: REST
-              displayVersion: v2.0
-              apiStatus: ACTIVE
+              type: REST
+              version: v2.0
+              versionSetId: bc9486aed-5738-4988
+              status: ACTIVE
               tags:
                 - Dev
-              noOfPolicies : 3
-              publishInfo:
-                - INTEGRATION_SERVER
+              policiesCount : 3
       responses:
         '201':
           description: This status code indicates the successful creation of an API.
@@ -194,13 +190,11 @@ paths:
                   description: Description for PetStoreAPI
                   tags:
                     - Dev
-                  displayVersion: v2.0
-                  systemVersion: 1
-                  apiType: REST
-                  apiStatus: ACTIVE
-                  noOfPolicies : 3
-                  publishInfo:
-                    - INTEGRATION_SERVER
+                  version: v2.0
+                  versionSetId: bc9486aed-5738-4988
+                  type: REST
+                  status: ACTIVE
+                  policiesCount : 3
         '401':
           description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to create an API.
         '400':
@@ -220,7 +214,7 @@ paths:
           example: d3841d21-ef31-4b95-a82a-ed08f10a20e5
         - name: apiId
           in: path
-          description: API UUID.
+          description: Unique identifier for the API. 
           required: true
           schema:
             type: string
@@ -248,13 +242,11 @@ paths:
                   description: Description for PetStoreAPI
                   tags:
                     - Dev
-                  displayVersion: v2.0
-                  systemVersion: 1
-                  apiType: REST
-                  apiStatus: ACTIVE
-                  noOfPolicies : 3
-                  publishInfo:
-                    - INTEGRATION_SERVER
+                  version: v2.0
+                  versionSetId: bc9486aed-5738-4988
+                  type: REST
+                  status: ACTIVE
+                  policiesCount : 3
         '401':
           description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to view the API.
         '500':
@@ -271,7 +263,7 @@ paths:
           example: d3841d21-ef31-4b95-a82a-ed08f10a20e5
         - name: apiId
           in: path
-          description: API UUID.
+          description: Unique identifier for the API. 
           required: true
           schema:
             type: string
@@ -286,14 +278,13 @@ paths:
               name: PetStoreAPI
               description: Description for PetStoreAPI
               id: ea488aed-2588-4988-990d-8342d0bca78
-              apiType: REST
-              displayVersion: v2.0
-              apiStatus: ACTIVE
+              type: REST
+              version: v2.0
+              versionSetId: bc9486aed-5738-4988
+              status: ACTIVE
               tags:
                 - Dev
-              noOfPolicies : 3
-              publishInfo:
-                - INTEGRATION_SERVER
+              policiesCount : 3
       responses:
         '200':
           description: This status code indicates the successful updation of an API in the specified runtime.
@@ -317,14 +308,11 @@ paths:
                   description: Description for PetStoreAPI
                   tags:
                     - Dev
-                  displayVersion: v2.0
-                  systemVersion: 1
-                  apiType: REST
-                  apiStatus: ACTIVE
-                  noOfPolicies : 3
-                  publishInfo:
-                    - INTEGRATION_SERVER
-
+                  version: v2.0
+                  versionSetId: bc9486aed-5738-4988
+                  type: REST
+                  status: ACTIVE
+                  policiesCount : 3
         '401':
           description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to update an API.
         '400':
@@ -343,7 +331,7 @@ paths:
           example: d3841d21-ef31-4b95-a82a-ed08f10a20e5
         - name: apiId
           in: path
-          description: API UUID.
+          description: Unique identifier for the API. 
           required: true
           schema:
             type: string
@@ -362,7 +350,7 @@ components:
       properties:
         id:
           type: string
-          description: UUID of the object.
+          description: UUID of the object generated by the system.
           example: 5743beab-51c4-4b49-910f-282067db563d
         created:
           type: number
@@ -374,7 +362,7 @@ components:
           example: 1665653646000
         apiId:
           type: string
-          description: UUID of the API.
+          description: Unique identifier for the API. 
           example: ea488aed-2588-4988-990d-8342d0bca78
         runtimeId:
           type: string
@@ -388,11 +376,11 @@ components:
       type: object
       required:
         - name
-        - apiType
+        - type
       properties:
         id:
           type: string
-          description: UUID of the API.
+          description: Unique identifier for the API. 
           example: ea488aed-2588-4988-990d-8342d0bca78
         name:
           type: string
@@ -413,7 +401,7 @@ components:
             type: string
             maxLength: 8191
           example: ["Dev"]
-        apiType:
+        type:
           type: string
           description: Type of the API.
           enum:
@@ -423,45 +411,33 @@ components:
             - WEBSOCKET
             - GRAPHQL
           example: REST
-        apiStatus:
+        status:
           type: string
           description: API status in the runtime.
           enum:
             - ACTIVE
             - INACTIVE
           example: ACTIVE
-        displayVersion:
+        version:
           type: string
-          description: Display version of the API.
+          description: Version of the API.  
           example: v2.0
-        systemVersion :
-          type: integer
-          readOnly: true
-          nullable: true
-          description: System version of the API.
-          example: 1
-        previousVersion:
+        versionSetId:
           type: string
-          readOnly: true
-          nullable: true
-          description: Previous version of the API.
-          example: v1.0
-        nextVersion:
+          description: Version set ID to group all versions of the same API.
+          example: efd55335-2133-1231-ddw21w2112
+        runtimeAPIId:
           type: string
-          readOnly: true
-          nullable: true
-          description: Next version of the API.
-          example: v3.0
-        publishInfo:
-            type: array
-            items:
-              type: string
-              enum:
-                - WEBMETHODS_PORTAL
-                - SERVICE_REGISTRY
-                - INTEGRATION_SERVER
-            example: ["WEBMETHODS_PORTAL","SERVICE_REGISTRY","INTEGRATION_SERVER"]
-        noOfPolicies :
+          description: Reference ID of the API.
+          example: cbd88awd-2128-1282-923e-1f3231ddca78
+        attributes:
+          type: object
+          description: Attributes of the API.
+          example:
+            documentation_url: "https://example-api-docs.com"
+            description: "Example API"
+            supported_formats: "[\"JSON\"]"
+        policiesCount :
           type : integer
           example : 3
     Owner:
@@ -488,13 +464,13 @@ components:
       properties:
         id:
           type: string
-          description: UUID of the API.
+          description: Unique identifier for the API.
           example: ea488aed-2588-4988-990d-8342d0bca78
         name:
           type: string
           description: Name of the API.
           example: PetStoreAPI
-        apiType:
+        type:
           type: string
           description: Type of the API.
           example: REST
@@ -504,6 +480,10 @@ components:
             - ODATA
             - WEBSOCKET
             - GRAPHQL
+        versionSetId:
+          type: string
+          description: Version set Id to group all versions of the same API.
+          example: efd55335-2133-1231-ddw21w2112
         owner:
           $ref : '#/components/schemas/Owner'
         apiDeployments :
@@ -529,14 +509,18 @@ components:
             type: string
             description: Region of the runtime.
             example: eu
-          apiStatus:
+          status:
             type: string
             description: API status in the runtime.
             example: ACTIVE
-          displayVersion:
+          version:
             type: string
             description: Display version of the API in the runtime.
             example: v2.0
+          runtimeAPIId:
+            type: string
+            description: Reference ID of the API.
+            example: cbd88awd-2128-1282-923e-123231ddca78
           lastModified:
             type: number
             description: Last updated date of the API.
@@ -560,10 +544,23 @@ components:
             example: ["Dev"]
           publishInfo:
             type: array
+            description: Applicable only for WebMethods gateway.
             items:
               type: string
+              enum:
+                - WEBMETHODS_PORTAL
+                - SERVICE_REGISTRY
+                - INTEGRATION_SERVER
             example: ["WEBMETHODS_PORTAL","SERVICE_REGISTRY","INTEGRATION_SERVER"]
-          noOfPolicies :
+          apiPublishInfo:
+            type: object
+            description: Applicable only for WebMethods gateway.
+            example:
+              WEBMETHODS_GATEWAY: [{
+                "runtimeSubType":"WEBMETHODS_PORTAL",
+                "runtimeAssociationIDs":["b3af4f8d-a7e8-4f42-af2c-f59a59cdf614"]
+              }]
+          policiesCount :
             type : integer
             example : 3
     ErrorMessage:

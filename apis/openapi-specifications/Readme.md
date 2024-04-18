@@ -13,6 +13,5 @@ Below are the list of swagger files for each of the components available in API 
 * User Management
 * API Control Plane health
 * API Control Plane metrics
-* Runtime metrics
 
 ######

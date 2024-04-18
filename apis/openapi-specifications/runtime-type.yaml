@@ -1,0 +1,326 @@
+openapi: '3.0.2'
+info:
+  title: Runtime Type Management Service
+  version: '1.0.0'
+  "description" :  API Control Plane allows you to create, read, update, and delete (CRUD) runtime types and manage multiple runtime type like WEBMETHODS_DEVELOPER_PORTAL, WEBMETHODS_API_GATEWAY.
+servers:
+  - url: "{protocol}://{hostname}:{port}/api/assetcatalog/v1"
+    description: This is the endpoint where the Asset-catalog API is accessible from the server.
+    variables:
+      protocol:
+        default: https
+        enum:
+          - http
+          - https
+        description: The protocol supported by the server - HTTP or HTTPS. Default is HTTPS.
+      hostname:
+        default: localhost
+        description: The domain name of the server where the API is hosted. The hostname must be resolvable by the DNS lookup.
+      port:
+        default: "443"
+        description: The port number where the REST API is running on the server. The default port for HTTPS is 443 and HTTP is 80 but it can also be any valid port.
+paths:
+  /runtimes/types:
+    post:
+      description: This method creates a new runtime type in API Control Plane.
+      requestBody:
+        description: The runtime type resource model.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Type'
+            example:
+              name: PRIVATE_CLOUD_Azure_Op
+              attributes: {
+                key1: value1
+              }
+
+
+        required : true
+      responses:
+        '201':
+          description: This status code indicates the successful creation of a runtime type.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Type'
+              example:
+                id: e04348a7-7d94-4730-b2c6-e3ea605e5027
+                name: PRIVATE_CLOUD_Azure_Op
+                created: 1654860037000
+                lastModified: 1654860037000
+                owner:
+                  name: smith
+                  id: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
+                  type: USER
+                attributes: {
+                  key1: value1
+                }
+
+        '401':
+          description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to create runtimetype.
+        '400':
+          $ref: '#/components/responses/4XX_bad_request_error'
+        '500':
+          $ref: '#/components/responses/internal_server_error'
+    get:
+      description: This method retrieves the list of available runtimes types in API Control Plane.
+      parameters:
+        - name: page
+          in: query
+          description: The page number of the runtimes types list. A successful GET call returns the default page number, that is 1, and any invalid value, such as ["five," -345], is ignored.
+          schema:
+            type: integer
+        - name: size
+          in: query
+          description: Number of runtimes types in a page. If pagination value size is passed as 0, by default maximum number of objects returned is 20. This property can be customized with service.maximum.assets=20 in application,properties. A successful GET call returns the default page number, that is 20, and any invalid value, such as ["five," -345], is ignored.
+          schema:
+            type: integer
+        - name: sort
+          in: query
+          description: List of property and order to sort. Property and order are given in the format "property,order". Property is any property defined in the runtime type model like id, name so on. The supported values for order are "ASC", "asc", "DESC" and "desc". "ASC" or "asc" is used for ascending order and "DESC" or "desc" is used for descending order. For sorting using date fields, lastModified and created are used.
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: This status code indicates the successful retrieval of a list of available runtime types.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Type'
+              example:
+                - id: 88c93a79-4c6d-4c8c-9590-f4c896baaaf6
+                  name: PRIVATE_CLOUD_Azure_Op
+                  created: 1655354068000
+                  lastModified: 1655354068000
+                  owner:
+                    name: smith
+                    id: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
+                    type: USER
+                  attributes: {
+                    key1: value1
+                  }
+
+                - id: 5ceafc7d-7a85-4886-ae86-2e18212b52bf
+                  name: TEST_PRIVATE_CLOUD_AWS
+                  created: 1655354113000
+                  lastModified: 1655354113000
+                  owner:
+                    name: smith
+                    id: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
+                    type: USER
+                  attributes: {
+                    key1: value1
+                  }
+
+        '401':
+          description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to retrieve the runtime types list.
+        '500':
+          $ref: '#/components/responses/internal_server_error'
+  /runtimes/types/{id}:
+    get:
+      description: This method retrieves the details of the specified runtime type in API Control Plane.
+      parameters:
+        - name: id
+          in: path
+          description: Runtime type UUID
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 50
+          example: 512f725f-9e19-415d-99f8-b555a17a2744
+      responses:
+        '200':
+          description: This status code indicates the successful retrieval of the specified runtime type.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Type'
+              example:
+                id: e04348a7-7d94-4730-b2c6-e3ea605e5027
+                name: PRIVATE_CLOUD_Azure_Op
+                created: 1654860037000
+                lastModified: 1654860037000
+                owner:
+                  name: smith
+                  id: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
+                  type: USER
+                attributes: {
+                  key1: value1
+
+                }
+
+        '401':
+          description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to retrieve the specified runtime type.
+        '500':
+          $ref: '#/components/responses/internal_server_error'
+    put:
+      description: This method updates the specified runtime type in API Control Plane.
+      parameters:
+        - name: id
+          in: path
+          description: Runtime type UUID
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 50
+          example: 512f725f-9e19-415d-99f8-b555a17a2744
+      requestBody:
+        description: The runtime type model.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Type'
+            example:
+              name: PRIVATE_CLOUD_Azure_Op
+              attributes: {
+                key1: value1
+
+              }
+        required : true
+      responses:
+        '200':
+          description: This status code indicates the successful updation of the specified runtime type.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Type'
+              example:
+                id: e04348a7-7d94-4730-b2c6-e3ea605e5027
+                name: PRIVATE_CLOUD_Azure_Op
+                created: 1654860037000
+                lastModified: 1654860037000
+                owner:
+                  name: smith
+                  id: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
+                  type: USER
+                attributes: {
+                  key1: value1
+
+                }
+        '401':
+          description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to update the specified runtime type.
+        '400':
+          $ref: '#/components/responses/4XX_bad_request_error'
+        '500':
+          $ref: '#/components/responses/internal_server_error'
+    delete:
+      description: This method deletes the specified runtime type in API Control Plane.
+      parameters:
+        - name: id
+          in: path
+          description: Runtime type UUID
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 50
+          example: 512f725f-9e19-415d-99f8-b555a17a2744
+      responses:
+        '200':
+          description: This status code indicates the successful deletion of the specified runtime type.
+        '401':
+          description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to delete the specified runtime type.
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                errorDetails:
+                  - This response indicates that the server encountered an error.
+components:
+  schemas:
+    Type:
+      type: object
+      required:
+        - name
+      properties:
+        id:
+          type: string
+          description: UUID of the object.
+          example: 512f725f-9e19-415d-99f8-b555a17a2744
+        name:
+          type: string
+          description: Name of the runtime type.
+          minLength: 1
+          maxLength: 50
+          pattern: "[\\\\()_+@\\!\\#$%^&{}\\-\\=,.~'`\\p{L}\\p{M}{0-9}\\s]{0,1024}"
+          example: PRIVATE_CLOUD_Azure_Op
+        created:
+          type: number
+          description: The time the asset was created.
+          example: 1654860037000
+        lastModified:
+          type: number
+          description: The time the asset was last modified.
+          example: 1654860037000
+        attributes:
+          type: object
+          properties:
+            key1:
+              type: string
+        owner:
+          $ref: '#/components/schemas/Owner'
+
+
+    Owner:
+      type: object
+      readOnly: true
+      description: The user or team who creates the runtime type.
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the owner.
+          example: John
+        id:
+          type: string
+          description: Id of the owner.
+          example: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
+        type:
+          type: string
+          description: Type of the owner.
+          example: USER
+    ErrorMessage:
+      description: Common Error Response across all APIs
+      required: [ "errorDetails" ]
+      type: object
+      properties:
+        errorDetails:
+          type: array
+          items:
+            type: string
+          example: This response indicates that the server encountered an error.
+  responses:
+    internal_server_error:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorMessage"
+          example:
+            errorDetails:
+              - This response indicates that the server encountered an error.
+    4XX_bad_request_error:
+      description: This status code indicates that the request body is bad.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorMessage"
+          example:
+            errorDetails:
+              - 'name : Valid name should meet below conditions : 1. Name is mandatory. Cannot be empty or null 2. Maximum character allowed is 50 3. Name given isn''t a safe text '
+  securitySchemes:
+    basic_authentication:
+      type: http
+      description: This is the Basic Authentication mechanism where the credentials are sent in a Base64 encoded format of the form <username>:<password> in the Authorization header.
+      scheme: basic
+security:
+  - basic_authentication: []
