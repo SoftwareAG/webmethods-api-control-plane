@@ -14,8 +14,8 @@ This repository hosts assets documenting how to deploy and run webMethods API Co
 
 We have two ways of deploying a self-hosted version of API Control Plane - using docker compose and using helm.
 
-- For deployment instructions using docker compose go [here](deployment/docker/README.md).
-- For deployment instructions using helm on kubernetes go [here](deployment/helm/README.md).
+- For deployment instructions using Docker Compose, go [here](deployment/docker/README.md).
+- For deployment instructions using Helm Charts on Kubernetes, go [here](deployment/helm/README.md).
 
 ## Public APIs
 
@@ -39,7 +39,7 @@ API Control Plane exposes public REST APIs to interact with it. API docs as well
 ## Agent SDK
 
 The Java based agent SDK can be used to develop a Java application that can fetch runtime details and metrics 
-information from Runtime and send to the API Control Plane. A detailed document is available [here](https://documentation.softwareag.com/wco/11.0.0/en/webhelp/wco-webhelp/#page/wco-webhelp%2Fco-agent_sdk.html).
+information from any runtime and send to the API Control Plane. A detailed document is available [here](https://documentation.softwareag.com/wco/11.0.0/en/webhelp/wco-webhelp/#page/wco-webhelp%2Fco-agent_sdk.html).
 
 ## Articles
 
@@ -63,7 +63,7 @@ See webMethods in action with a [Free Trial](https://techcommunity.softwareag.co
 Your input drives our innovation. If you find a bug, please create an issue in the repository. If you’d like to share your ideas or feedback, please post them [here](https://tech.forums.softwareag.com/c/feedback/2).   
 
 📺 YouTube Playlist
-We upload introductory videos on how to use the API Control Plane on our [YouTube playlist] (https://www.youtube.com/watch?v=WAgRBN8rDVo&list=PL3HwmrSYjxiPGTgJZSR_B9faFGKEC2txA)
+We upload videos on how to use the API Control Plane on our [YouTube playlist] (https://www.youtube.com/watch?v=WAgRBN8rDVo&list=PL3HwmrSYjxiPGTgJZSR_B9faFGKEC2txA)
    
 ***
 
