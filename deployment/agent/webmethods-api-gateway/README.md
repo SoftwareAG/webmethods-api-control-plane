@@ -1,4 +1,4 @@
-# Connecting API Gateway to API control plane
+# Connecting API Gateway to API Control plane
 
 > **Note:** To configure webMethods API Gateway to connect to API Control Plane, API Gateway must be in version **10.15.0.8 or higher**. 
 
