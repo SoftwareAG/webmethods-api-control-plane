@@ -17,6 +17,10 @@ We have two ways of deploying a self-hosted version of API Control Plane - using
 - For deployment instructions using Docker Compose, go [here](deployment/docker/README.md).
 - For deployment instructions using Helm Charts on Kubernetes, go [here](deployment/helm/README.md).
 
+## Connecting runtimes to the API Control Plane
+
+API Control Plane provides native support for connecting with webMethods API Gateway and an agent SDK to connect with any runtime. We also provide some sample agents for third party API gateways. Please see [here](deployment/agent/) for detailed information about those.
+
 ## Public APIs
 
 API Control Plane exposes public REST APIs to interact with it. API docs as well as Postman collection with samples can be found [here](apis).
@@ -35,15 +39,6 @@ API Control Plane exposes public REST APIs to interact with it. API docs as well
 ### Behavior without a valid license
 - All the PUT, POST and DELETE API calls to the API Control Plane application will be blocked, and 406 HTTP status code 
   will be returned as a response code.
-
-## Agent SDK
-
-The Java based agent SDK can be used to develop a Java application that can fetch runtime details and metrics 
-information from any runtime and send to the API Control Plane. It can be downloaded from Download Components section on [Software AG Empower Portal](https://empower.softwareag.com/). A detailed document is available [here](https://documentation.softwareag.com/wco/11.0.0/en/webhelp/wco-webhelp/#page/wco-webhelp%2Fco-agent_sdk.html).
-
-We also provide the below sample agent implementations
-* [Azure API Gateway agent](https://github.com/SoftwareAG/webmethods-api-control-plane-agent-azure)
-* [AWS API Gateway agent](https://github.com/SoftwareAG/webmethods-api-control-plane-agent-aws)
 
 ## Articles
 
