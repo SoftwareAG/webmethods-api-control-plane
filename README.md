@@ -39,7 +39,11 @@ API Control Plane exposes public REST APIs to interact with it. API docs as well
 ## Agent SDK
 
 The Java based agent SDK can be used to develop a Java application that can fetch runtime details and metrics 
-information from any runtime and send to the API Control Plane. A detailed document is available [here](https://documentation.softwareag.com/wco/11.0.0/en/webhelp/wco-webhelp/#page/wco-webhelp%2Fco-agent_sdk.html).
+information from any runtime and send to the API Control Plane. It can be downloaded from Download Components section on [Software AG Empower Portal](https://empower.softwareag.com/). A detailed document is available [here](https://documentation.softwareag.com/wco/11.0.0/en/webhelp/wco-webhelp/#page/wco-webhelp%2Fco-agent_sdk.html).
+
+We also provide the below sample agent implementations
+* [Azure API Gateway agent](https://github.com/SoftwareAG/webmethods-api-control-plane-agent-azure)
+* [AWS API Gateway agent](https://github.com/SoftwareAG/webmethods-api-control-plane-agent-aws)
 
 ## Articles
 
