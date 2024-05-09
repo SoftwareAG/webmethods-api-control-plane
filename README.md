@@ -48,22 +48,28 @@ We also host various articles related to API Control Plane deployment, use, admi
 ## Useful links   
 
 📘 Official Documentation
+
 For the most up-to-date information about the product, see the official documentation for [cloud](https://docs.webmethods.io/apicontrolplane/welcome/home/#gsc.tab=0) or [self-hosted](https://documentation.softwareag.com/wco/11.0.0/en/webhelp/wco-webhelp/)
 
 💻 Explore the Knowledge Base    
+
 Dive into a wealth of webMethods tutorials and articles in our [Tech Community Knowledge Base](https://tech.forums.softwareag.com/tags/c/knowledge-base/6/webmethods).  
 
 💡 Get Expert Answers    
+
 Stuck or just curious? Ask the webMethods experts directly on our [Forum](https://tech.forums.softwareag.com/tags/c/forum/1/webMethods).  
 
 🚀 Try webMethods    
+
 See webMethods in action with a [Free Trial](https://techcommunity.softwareag.com/en_en/downloads.html).    
 
 ✍️ Share Your Feedback    
+
 Your input drives our innovation. If you find a bug, please create an issue in the repository. If you’d like to share your ideas or feedback, please post them [here](https://tech.forums.softwareag.com/c/feedback/2).   
 
 📺 YouTube Playlist
-We upload videos on how to use the API Control Plane on our [YouTube playlist] (https://www.youtube.com/watch?v=WAgRBN8rDVo&list=PL3HwmrSYjxiPGTgJZSR_B9faFGKEC2txA)
+
+We upload videos on how to use the API Control Plane on our [YouTube playlist](https://www.youtube.com/watch?v=WAgRBN8rDVo&list=PL3HwmrSYjxiPGTgJZSR_B9faFGKEC2txA)
    
 ***
 
