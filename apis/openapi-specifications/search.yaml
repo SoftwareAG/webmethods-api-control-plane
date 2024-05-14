@@ -144,7 +144,7 @@ paths:
           ```
         
          6. One condition must be maintained per field. For example, in the following request payload, name criterias must be given in one condition, apiDeployments.runtimeId criterias must be given in one condition,
-            and apiDeployments.apiStatus criterias must be given in one condition.
+            and apiDeployments.status criterias must be given in one condition.
         
         
         **Request payload:**
@@ -186,12 +186,12 @@ paths:
             {
                 "criterias": [
                     {
-                        "field": "apiDeployments.apiStatus",
+                        "field": "apiDeployments.status",
                         "value": "ACTIVE",
                         "operation": "equals"
                     },
                      {
-                        "field": "apiDeployments.apiStatus",
+                        "field": "apiDeployments.status",
                         "value": "INACTIVE",
                         "operation": "equals"
                     }
@@ -204,7 +204,7 @@ paths:
         "responseFields": [
         "name",
         "id",
-        "apiDeployments.apiStatus",
+        "apiDeployments.status",
         "apiDeployments.runtimeId"
         ],
         "from": 0,
@@ -275,7 +275,7 @@ paths:
                        "id": null,
                        "type": "USER"
                     },
-                   "type": "WEBMETHODS_GATEWAY",
+                   "type": "WEBMETHODS_API_GATEWAY",
                    "deploymentType": "SAG_SAAS"
                   },
                  {
@@ -293,7 +293,7 @@ paths:
                        "id": null,
                        "type": "USER"
                       },
-                  "type": "WEBMETHODS_GATEWAY",
+                  "type": "WEBMETHODS_API_GATEWAY",
                   "deploymentType": "SAG_SAAS"
                  },
                  {
@@ -312,7 +312,7 @@ paths:
                       "id": null,
                       "type": "USER"
                      },
-                  "type": "WEBMETHODS_GATEWAY",
+                  "type": "WEBMETHODS_API_GATEWAY",
                   "deploymentType": "SAG_SAAS"
                  }
         }
@@ -565,7 +565,7 @@ paths:
                 "id": "200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4",
                 "type": "USER"
             },
-            "apiType": "REST",
+            "type": "REST",
             "apiDeployments": [
                 {
                     "name": "API 4",
@@ -574,12 +574,12 @@ paths:
                     ],
                     "lastModified": "2023-04-24 08:39:16.905 GMT",
                     "runtimeId": "aa3332ea-c192-49aa-8174-eafb1af61f30",
-                    "apiStatus": "ACTIVE",
-                    "displayVersion": "2",
+                    "status": "ACTIVE",
+                    "version": "2",
                     "publishInfo": [
                         "SERVICE_REGISTRY"
                     ],
-                    "noOfPolicies": 0
+                    "policiesCount": 0
                 }
             ],
             "apiDifferencesCount": 0
@@ -683,35 +683,35 @@ paths:
            1. **Fields allowed to be given in the criteria field:** 
               1. id
               2. name
-              3. apiType
+              3. type
               4. apiDifferencesCount
               5. apiDeployments.runtimeId 
-              6. apiDeployments.apiStatus
-              7. apiDeployments.displayVersion
+              6. apiDeployments.status
+              7. apiDeployments.version
               8. apiDeployments.name,
               9. apiDeployments.description
              10. apiDeployments.tags
            2. **Fields allowed to be given in the sortFields:** 
               1. id
               2. name
-              3. apiType
+              3. type
               4. lastModified
               5. apiDifferencesCount
            3. **Fields allowed to be given in the responseFields:** 
               1. id
               2. name
-              3. apiType
+              3. type
               4. apiDeployments
               5. apiDifferencesCount
               6. apiDeployments.runtimeId
-              7. apiDeployments.apiStatus
-              8. apiDeployments.displayVersion
+              7. apiDeployments.status
+              8. apiDeployments.version
               9. apiDeployments.lastModified
               10. apiDeployments.name
               11. apiDeployments.description
               12. apiDeployments.tags
               13. apiDeployments.publishInfo
-              14. apiDeployments.noOfPolicies
+              14. apiDeployments.policiesCount
         4. type: AUDITEVENT
            
            1. **Fields allowed to be given in the criteria field:** 
@@ -793,7 +793,7 @@ paths:
                     owner: 
                       id: 486b23
                       type: USER
-                    type: WEBMETHODS_GATEWAY
+                    type: WEBMETHODS_API_GATEWAY
                     deploymentType: SAG_SAAS
                   - id: 486b8645-5851-4835-bbaf-4d3222fb60e9
                     name: runtime 2
@@ -807,7 +807,7 @@ paths:
                     owner: 
                       id: 486b23
                       type: USER
-                    type: WEBMETHODS_GATEWAY
+                    type: WEBMETHODS_API_GATEWAY
                     deploymentType: SAG_SAAS
         '401':
           description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to search.

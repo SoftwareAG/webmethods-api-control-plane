@@ -14,7 +14,7 @@ info:
 
     - different geographies like US, EU, and APJ regions.
 
-    - hybrid environments such as SaaS, private cloud, and on-premises
+    - hybrid environments such as SaaS, private cloud, public cloud and on-premises
 
     - federated and heterogenous systems such as multivendor third-party gateways , Microgateways, Service Mesh.
 servers:
@@ -52,9 +52,9 @@ paths:
               location: Denver
               host: 192.168.24.25
               icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABRCAIAAAARlBx9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPmSURBVHhe7dhNctswDEBhXqe7Lnvv3qK3iOP/uDdox4UEGqIeJQqWZTpVi/nWBt4oM5EdfvbmUnBRrvkY86GG51xwVpxTQdp2KXO3sSe1aBtjwNv2/Icmcy54pO1SEMNcbexJLfrQZBiTOt3aLmXPD5M5F8x4aNp2KXOHybAnVfmhTbc9Nex6+pZDmJj30CbaFg9DxpipMBnGpDSs1LZIGI7264WxjTEQ205DbbFqVhhOfMSDD22g7Z4qmSVjcveGCQvrtTkfF9Y/WyyKwxJIw2RiW6EKy+qLXVkJxLCu7RgGHxc+/eWQkcvDbm3Z/Pr+BZ/+coiBfpiMtg2NtH3CPIEkNRg20fZX5I2FTbd98rxCmKvt0+aVw0Te1rxeoE3h01+uHCasrffqhCqDT3+52JVVKWnrVSkkpfDpL4ee1N1tAp/+Wr9/fEWSmdMmsKAy6UkhyQy0yfdIlAzCvqdCDCBJHdEWvyD72gQuWBCuL0OVkLCmzXoat0FDAW6aDefeJa9qHLUtGwSU4Uon3PeIwbDj8RBiTX9wvQdOz+GgBfXC2io12HbG3U7VYgCPa7DtbHC0H7bWkVcpaeuSDC72w9Y6BsPEOtpYpf63uWFrHUgyXVv8EbeFi/2wtQ4kmdAlJYOL/bC1DiSpQ9M2NLjYD1vryKtae7TF31hwsR+21pFXHQ4NaYs9KVzsh6115FXracur1JJtWFkNksw/0xZ/zVxNm/VE7eBoJ6ysBkkmxJreHHG0E1ZWgySjbfE7ucHRTlhZDZL2jZ2QNoYJHO2EldXkVY39Wtq6pLZKraENSWYVbVmVim3dT0UtHO2EldUgyYTYEye+UONoJ6ysBkkmWE8KRzthZTVIMqts2+5aK2uLVWtq6yU1do01tCHJNG23L+RmL3C3B1ZWgyQTtMReyVI4fRJWVoMkE9ADuL4MK6tBkploEwgowMpqkHTzPt0m0DAGK6tBkti2ptvaL0WuPKysRnssybCt9/Uutd+hJIeV1SBpu40CG1T3n57Qk8LKapBkAk73QJLBymqQZOa0CVQprHweNIyZ2SavcAgTuGBBY391IzbK2bYdeB/N8nDQI2LM/T2pvK3JGCzpJP9PlmrrYu7oEewR7zeBd0OSMWZeWy9muZ5U0pYd7edpY4zg0WXsEYhpvHcCrpwtb2OJ4LmTGCMYo5Ik80hbfNPJX3Y6vHUSSxRLVBbT9+Zvm8pQvNWDJYoligHwlsrbuqfxnBLBDMMSxQDo9ZhN2+ZoELzvLmwwzDAMyDFGSZIJbBC8bAY2GDakeH2OJSrt6WykjWfNwIAUA1I8PccMwxKz6YTrWud6/QMDnAYz3wg70wAAAABJRU5ErkJggg==
-              type: WEBMETHODS_GATEWAY
+              type: WEBMETHODS_API_GATEWAY
               deploymentType: PRIVATE_CLOUD
-              heartBeatSynchInterval: 6000
+              heartbeatInterval: 6000
 
         required : true
       responses:
@@ -80,10 +80,39 @@ paths:
                   name: smith
                   id: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
                   type: USER
-                type: WEBMETHODS_GATEWAY
+                type: WEBMETHODS_API_GATEWAY
                 deploymentType: PRIVATE_CLOUD
-                heartBeatSynchInterval: 6000
-
+                heartbeatInterval: 6000
+        '200':
+          description: This status code indicates that the runtime has been successfully re-registered.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuntimeReregistrationResponse'
+              example:
+                runtime:
+                  id: e04348a7-7d94-4730-b2c6-e3ea605e5027
+                  name: PRIVATE_CLOUD_APIGW_Op
+                  description: This is a private cloud API Gateway runtime.
+                  tags:
+                    - Dev
+                  created: 1654860037000
+                  lastModified: 1654860037000
+                  region: us
+                  location: Denver
+                  host: 192.168.24.25
+                  icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABRCAIAAAARlBx9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPmSURBVHhe7dhNctswDEBhXqe7Lnvv3qK3iOP/uDdox4UEGqIeJQqWZTpVi/nWBt4oM5EdfvbmUnBRrvkY86GG51xwVpxTQdp2KXO3sSe1aBtjwNv2/Icmcy54pO1SEMNcbexJLfrQZBiTOt3aLmXPD5M5F8x4aNp2KXOHybAnVfmhTbc9Nex6+pZDmJj30CbaFg9DxpipMBnGpDSs1LZIGI7264WxjTEQ205DbbFqVhhOfMSDD22g7Z4qmSVjcveGCQvrtTkfF9Y/WyyKwxJIw2RiW6EKy+qLXVkJxLCu7RgGHxc+/eWQkcvDbm3Z/Pr+BZ/+coiBfpiMtg2NtH3CPIEkNRg20fZX5I2FTbd98rxCmKvt0+aVw0Te1rxeoE3h01+uHCasrffqhCqDT3+52JVVKWnrVSkkpfDpL4ee1N1tAp/+Wr9/fEWSmdMmsKAy6UkhyQy0yfdIlAzCvqdCDCBJHdEWvyD72gQuWBCuL0OVkLCmzXoat0FDAW6aDefeJa9qHLUtGwSU4Uon3PeIwbDj8RBiTX9wvQdOz+GgBfXC2io12HbG3U7VYgCPa7DtbHC0H7bWkVcpaeuSDC72w9Y6BsPEOtpYpf63uWFrHUgyXVv8EbeFi/2wtQ4kmdAlJYOL/bC1DiSpQ9M2NLjYD1vryKtae7TF31hwsR+21pFXHQ4NaYs9KVzsh6115FXracur1JJtWFkNksw/0xZ/zVxNm/VE7eBoJ6ysBkkmxJreHHG0E1ZWgySjbfE7ucHRTlhZDZL2jZ2QNoYJHO2EldXkVY39Wtq6pLZKraENSWYVbVmVim3dT0UtHO2EldUgyYTYEye+UONoJ6ysBkkmWE8KRzthZTVIMqts2+5aK2uLVWtq6yU1do01tCHJNG23L+RmL3C3B1ZWgyQTtMReyVI4fRJWVoMkE9ADuL4MK6tBkploEwgowMpqkHTzPt0m0DAGK6tBkti2ptvaL0WuPKysRnssybCt9/Uutd+hJIeV1SBpu40CG1T3n57Qk8LKapBkAk73QJLBymqQZOa0CVQprHweNIyZ2SavcAgTuGBBY391IzbK2bYdeB/N8nDQI2LM/T2pvK3JGCzpJP9PlmrrYu7oEewR7zeBd0OSMWZeWy9muZ5U0pYd7edpY4zg0WXsEYhpvHcCrpwtb2OJ4LmTGCMYo5Ik80hbfNPJX3Y6vHUSSxRLVBbT9+Zvm8pQvNWDJYoligHwlsrbuqfxnBLBDMMSxQDo9ZhN2+ZoELzvLmwwzDAMyDFGSZIJbBC8bAY2GDakeH2OJSrt6WykjWfNwIAUA1I8PccMwxKz6YTrWud6/QMDnAYz3wg70wAAAABJRU5ErkJggg==
+                  owner:
+                    name: smith
+                    id: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
+                    type: USER
+                  type: WEBMETHODS_API_GATEWAY
+                  deploymentType: PRIVATE_CLOUD
+                  heartbeatInterval: 6000
+                lastHeartbeatTime: 1654860039000
+                lastMetricsTime: 1654860039000
+                lastAssetSyncTime: 1654860039000
+                lastRegistrationTime: 1654860037000
         '401':
           description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to create runtime.
         '400':
@@ -135,9 +164,9 @@ paths:
                     name: smith
                     id: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
                     type: USER
-                  type: WEBMETHODS_GATEWAY
+                  type: WEBMETHODS_API_GATEWAY
                   deploymentType: PRIVATE_CLOUD
-                  heartBeatSynchInterval: 6000
+                  heartbeatInterval: 6000
                 - id: 5ceafc7d-7a85-4886-ae86-2e18212b52bf
                   name: TEST_PRIVATE_CLOUD_APIGW
                   description: This is a private cloud API Gateway runtime.
@@ -153,9 +182,9 @@ paths:
                     name: smith
                     id: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
                     type: USER
-                  type: WEBMETHODS_GATEWAY
+                  type: WEBMETHODS_API_GATEWAY
                   deploymentType: PRIVATE_CLOUD
-                  heartBeatSynchInterval: 6000
+                  heartbeatInterval: 6000
         '401':
           description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to retrieve the runtimes list.
         '500':
@@ -196,9 +225,9 @@ paths:
                   name: smith
                   id: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
                   type: USER
-                type: WEBMETHODS_GATEWAY
+                type: WEBMETHODS_API_GATEWAY
                 deploymentType: PRIVATE_CLOUD
-                heartBeatSynchInterval: 6000
+                heartbeatInterval: 6000
         '401':
           description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to retrieve the specified runtime.
         '500':
@@ -230,9 +259,9 @@ paths:
               location: Denver
               host: 192.168.24.25
               icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABRCAIAAAARlBx9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPmSURBVHhe7dhNctswDEBhXqe7Lnvv3qK3iOP/uDdox4UEGqIeJQqWZTpVi/nWBt4oM5EdfvbmUnBRrvkY86GG51xwVpxTQdp2KXO3sSe1aBtjwNv2/Icmcy54pO1SEMNcbexJLfrQZBiTOt3aLmXPD5M5F8x4aNp2KXOHybAnVfmhTbc9Nex6+pZDmJj30CbaFg9DxpipMBnGpDSs1LZIGI7264WxjTEQ205DbbFqVhhOfMSDD22g7Z4qmSVjcveGCQvrtTkfF9Y/WyyKwxJIw2RiW6EKy+qLXVkJxLCu7RgGHxc+/eWQkcvDbm3Z/Pr+BZ/+coiBfpiMtg2NtH3CPIEkNRg20fZX5I2FTbd98rxCmKvt0+aVw0Te1rxeoE3h01+uHCasrffqhCqDT3+52JVVKWnrVSkkpfDpL4ee1N1tAp/+Wr9/fEWSmdMmsKAy6UkhyQy0yfdIlAzCvqdCDCBJHdEWvyD72gQuWBCuL0OVkLCmzXoat0FDAW6aDefeJa9qHLUtGwSU4Uon3PeIwbDj8RBiTX9wvQdOz+GgBfXC2io12HbG3U7VYgCPa7DtbHC0H7bWkVcpaeuSDC72w9Y6BsPEOtpYpf63uWFrHUgyXVv8EbeFi/2wtQ4kmdAlJYOL/bC1DiSpQ9M2NLjYD1vryKtae7TF31hwsR+21pFXHQ4NaYs9KVzsh6115FXracur1JJtWFkNksw/0xZ/zVxNm/VE7eBoJ6ysBkkmxJreHHG0E1ZWgySjbfE7ucHRTlhZDZL2jZ2QNoYJHO2EldXkVY39Wtq6pLZKraENSWYVbVmVim3dT0UtHO2EldUgyYTYEye+UONoJ6ysBkkmWE8KRzthZTVIMqts2+5aK2uLVWtq6yU1do01tCHJNG23L+RmL3C3B1ZWgyQTtMReyVI4fRJWVoMkE9ADuL4MK6tBkploEwgowMpqkHTzPt0m0DAGK6tBkti2ptvaL0WuPKysRnssybCt9/Uutd+hJIeV1SBpu40CG1T3n57Qk8LKapBkAk73QJLBymqQZOa0CVQprHweNIyZ2SavcAgTuGBBY391IzbK2bYdeB/N8nDQI2LM/T2pvK3JGCzpJP9PlmrrYu7oEewR7zeBd0OSMWZeWy9muZ5U0pYd7edpY4zg0WXsEYhpvHcCrpwtb2OJ4LmTGCMYo5Ik80hbfNPJX3Y6vHUSSxRLVBbT9+Zvm8pQvNWDJYoligHwlsrbuqfxnBLBDMMSxQDo9ZhN2+ZoELzvLmwwzDAMyDFGSZIJbBC8bAY2GDakeH2OJSrt6WykjWfNwIAUA1I8PccMwxKz6YTrWud6/QMDnAYz3wg70wAAAABJRU5ErkJggg==
-              type: WEBMETHODS_GATEWAY
+              type: WEBMETHODS_API_GATEWAY
               deploymentType: PRIVATE_CLOUD
-              heartBeatSynchInterval: 6000
+              heartbeatInterval: 6000
         required : true
       responses:
         '200':
@@ -257,9 +286,9 @@ paths:
                   name: smith
                   id: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
                   type: USER
-                type: WEBMETHODS_GATEWAY
+                type: WEBMETHODS_API_GATEWAY
                 deploymentType: PRIVATE_CLOUD
-                heartBeatSynchInterval: 6000
+                heartbeatInterval: 6000
         '401':
           description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to update the specified runtime.
         '400':
@@ -290,6 +319,53 @@ paths:
               example:
                 errorDetails:
                   - This response indicates that the server encountered an error.
+  /runtimes/{id}/audit:
+    post:
+      description: This method creates audit events for the asset types created/updated from agent in API Control Plane.
+      parameters:
+        - name: id
+          in: path
+          description: Runtime UUID
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 50
+          example: 512f725f-9e19-415d-99f8-b555a17a2744
+      requestBody:
+        description: The agent audit event model.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentAuditEvent'
+            example:
+              types:
+                - API
+        required : true
+      responses:
+        '201':
+          description: This status code indicates the successful creation of agent audit events.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AuditEvent'
+              example:
+                - id: 88c93a79-4c6d-4c8c-9590-f4c896baaaf6
+                  created: 1655354068000
+                  actionType: RUNTIME_DATA_SYNC
+                  status: success
+                  objectType: API
+                  data:
+                  objectId: DevGateway
+                  message: Syncing Data from Runtime complete
+        '401':
+          description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to create runtime.
+        '400':
+          $ref: '#/components/responses/4XX_bad_request_error'
+        '500':
+          $ref: '#/components/responses/internal_server_error'
 components:
   schemas:
     Runtime:
@@ -338,9 +414,8 @@ components:
         type:
           type: string
           description: The type of the runtime.
-          enum:
-            - WEBMETHODS_GATEWAY
-        heartBeatSynchInterval:
+          example: WEBMETHODS_API_GATEWAY
+        heartbeatInterval:
            type: integer
            description: The heartbeat synch interval of the runtime.
            example: 6000
@@ -351,6 +426,7 @@ components:
             - ON_PREMISE
             - SAG_SAAS
             - PRIVATE_CLOUD
+            - PUBLIC_CLOUD
           example: ON_PREMISE
         region:
           type: string
@@ -378,7 +454,7 @@ components:
       description: The capacity of the runtime.
       properties:
         value:
-          type: string
+          type: integer
           description: The value of the runtime capacity.
         unit:
           type: string
@@ -411,6 +487,55 @@ components:
           type: string
           description: Type of the owner.
           example: USER
+    AgentAuditEvent:
+      type: object
+      readOnly: true
+      description: The audit event sent from agent.
+      required:
+        - types
+      properties:
+        types:
+          type: array
+          items:
+            type: string
+          example: API
+    AuditEvent:
+      type: object
+      readOnly: true
+      description: The audit event in Control Plane.
+      properties:
+        objectType:
+          type: string
+          description: The object type of hte audit event.
+          enum:
+            - RUNTIME
+            - DATAPLANE
+            - API
+          example: API
+        actionType:
+          type: string
+          description: The type of the operation for audit event.
+          enum:
+            - CREATE
+            - UPDATE
+            - DELETE
+            - RUNTIME_DATA_SYNC
+          example: RUNTIME_DATA_SYNC
+        data:
+          type: string
+          description: The data of the event such as the JSON payload of the asset.
+        objectId:
+          type: string
+          description: The id of the asset.
+          example: 200ceb26-807d-3bf9-9fd6-f4f0d1ca54d4
+        message:
+          type: string
+          description: Simple message about the event.
+          example: Syncing Data from Runtime complete
+        status:
+          type: string
+          description: Status about the event.
+          example: success
     ErrorMessage:
       description: Common Error Response across all APIs
       required: [ "errorDetails" ]
@@ -421,6 +546,28 @@ components:
           items:
             type: string
           example: This response indicates that the server encountered an error.
+    RuntimeReregistrationResponse:
+      description: Runtime Re-registration report with last sync timestamps of metrics, assets and heartbeat
+      type: object
+      properties:
+        runtime:
+          $ref: '#/components/schemas/Runtime'
+        lastHeartbeatTime:
+          type: number
+          description: Timestamp of last heart beat sync of the runtime
+          example: 1654860037000
+        lastMetricsTime:
+          type: number
+          description: Timestamp of last metric sync of the runtime
+          example: 1654860037000
+        lastAssetSyncTime:
+          type: number
+          description: Timestamp of last asset sync of the runtime
+          example: 1654860037000
+        lastRegistrationTime:
+          type: number
+          description: Timestamp of last registration of the runtime
+          example: 1654860037000
   responses:
    internal_server_error:
       description: Internal server error
@@ -429,7 +576,7 @@ components:
           schema:
               $ref: "#/components/schemas/ErrorMessage"
           example:
-            errorDetails: 
+            errorDetails:
               - This response indicates that the server encountered an error.
    4XX_bad_request_error:
        description: This status code indicates that the request body is bad.

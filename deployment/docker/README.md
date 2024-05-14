@@ -15,23 +15,32 @@ The standard deployment of API Control plane contains the following 5 microservi
 ***
 
 Table of contents
+1. [Prerequisite](#Prerequisite)
+2. [How to deploy webMethods API Control Plane using docker compose?](#how-to-deploy-webmethods-api-control-plane-using-docker-compose)
+3. [How to stop webMethods API Control Plane using docker compose?](#how-to-stop-webmethods-api-control-plane-using-docker-compose)
+4. [How to access the newly deployed webMethods API Control Plane?](#how-to-access-the-newly-deployed-webmethods-api-control-plane)
+5. [Additional deployment flavors](#additional-deployment-flavors)
 
-1. [How to deploy webMethods API Control Plane using docker compose?](#how-to-deploy-webmethods-api-control-plane-using-docker-compose)
-2. [How to stop webMethods API Control Plane using docker compose?](#how-to-stop-webmethods-api-control-plane-using-docker-compose)
-3. [How to access the newly deployed webMethods API Control Plane?](#how-to-access-the-newly-deployed-webmethods-api-control-plane)
-4. [Additional deployment flavors](#additional-deployment-flavors)
+***
+## Prerequisite
+The machine needs following to install the control plane using docker.
+1. docker-compose version should be 2.19.0 and 2.23.3. 
+2. Docker Desktop / Rancher Desktop (version between 1.9.0 and 1.12.0) if you are using the Windows / Mac Operating 
+      System.
 
 ***
 
 ## How to deploy webMethods API Control Plane using docker compose?
 
-1. Login to https://containers.softwareag.com/
+1. Clone this repository
 
-2. Get a Personal Access Token (PAT)
+2. Login to https://containers.softwareag.com/
 
-   We published docker images for all API Control Plane microservice to https://containers.softwareag.com/ repository. To be able to pull them or have docker compose pull them for you, you'll need a Personal Access token (PAT). Goto Userprofile > Settings > Generate password. Store Token Password securely.
+3. Get a Personal Access Token (PAT)
 
-3. Log in to sagcr.azurecr.io docker repository
+   We published docker images for all API Control Plane microservice to https://containers.softwareag.com/ repository. To pull them or have docker compose pull them for you, you need a Personal Access token (PAT). To get a PAT, go to Userprofile > Settings > Generate password. Store Token Password securely.
+
+4. Log in to sagcr.azurecr.io docker repository
 
     Run the following command in your docker environment:
 
@@ -39,11 +48,11 @@ Table of contents
     docker login -u [Your git username] -p [Your PAT] sagcr.azurecr.io 
     ```
 
-4. Configure your deployment
+5. Configure your deployment
 
     The `.env` file in [deployment/docker/.env](deployment/docker/.env) allows for configuring different aspects of API Control Plane deployment. To be able to access API Control Plane after it's deployed, you need to edit this file and provide a value for `NGINX_DOMAIN_NAME` that matches the hostname of the machine you're deploying API Control plane on. Make sure this hostname is accessible to whoever will be connecting to API Control Plane.
 
-5. Execute the deployment scripts
+6. Execute the deployment scripts
 
     To deploy the API Control Plane with default configuration:
 
@@ -62,7 +71,7 @@ Table of contents
     If everything goes well, the output should be similar to this
 
     ```bash
-    [przemek@somehost docker]$ docker-compose -f control-plane.yaml up -d
+    [user@somehost docker]$ docker-compose -f control-plane.yaml up -d
     [+] Running 8/8
     ⠿ Network softwareag-api-management      Created                         0.2s
     ⠿ Container elasticsearch                Healthy                        22.6s
@@ -74,7 +83,7 @@ Table of contents
     ⠿ Container nginx                        Started                       151.2s
     ```
 
-6. Verify it's started
+7. Verify it's started
 
     It will take a couple of minutes to start. You can monitor that with solutions like Portainer or Docker Dashboard etc. or simply user Docker CLI like this
 
@@ -116,7 +125,7 @@ To stop and remove the API Control Plane default configuration:
 If everything goes well, the output should be similar to this
 
 ```bash
-[przemek@somehost docker]$ docker-compose -f control-plane.yaml down
+[user@somehost docker]$ docker-compose -f control-plane.yaml down
 [+] Running 8/8
 ⠿ Container nginx_setup                  Removed                         0.0s
 ⠿ Container nginx                        Removed                         0.3s
@@ -133,7 +142,7 @@ If everything goes well, the output should be similar to this
 
 ## How to access the newly deployed webMethods API Control Plane?
 
-1. Open your browser and go to `https://[the-host-you-configured]:444/` or `http://[the-host-you-configured]:8080/`
+1. Open your browser and go to `https://[the-host-you-configured]:8080/`
 2. You should see the login screen. Log in using Administrator username and the default password.
 
 ###### [Back to Top](#api-control-plane-deployment-with-docker-compose)
@@ -156,7 +165,7 @@ To start API Control Plane in debug mode:
 - execute the deployment script
 
     ```bash
-    docker-compose -f control-plane.debug.yaml up -d
+    docker-compose -f control-plane.debug.yaml --profile observed up -d
     ```
 
 :wave: The Jaeger UI can be accessed via the `JAEGER_UI_PORT` port configured in the `.env` file.

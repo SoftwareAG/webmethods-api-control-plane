@@ -1,4 +1,4 @@
-This folder contains postman collection to create a new admin user, platform provider, and product manager. This folder also contains postman collection for some searchAPI related use-cases.
+This folder contains postman collection to create a new admin user, platform provider, and product manager. This folder also contains postman collection for some searchAPI related usecases.
 
 **How to use this postman collection?**
 
@@ -6,7 +6,7 @@ This folder contains postman collection to create a new admin user, platform pro
   administrator_creation.json collection can be used to create a new administrator.
   platform_provider_creation.json can be used to create a new Platform Provider.
   product_manager_creation.json can be used to create a new Product Manager.
-  search.json contains some searchAPI related use-cases.
+  search.json contains some searchAPI related usecases.
   
 * Update the collection variables as per your Requirement.
 

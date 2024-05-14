@@ -12,6 +12,8 @@
   │   ├── Runtimes (contains REST APIs to create, read, update, and delete the runtimes in API Control Plane)
   │   ├── Search (contains search and count query)
   │   └── UserManagement (contains REST APIs to create, read, update, and delete the users and user groups in API Control Plane)
+  ├── v2 (contains all the /v2 REST APIs)
+  │   └── Runtimes (contains REST APIs to update heartbeats of runtimes in API Control Plane)
   └── Get microservice build version and API controlplane product version(contains REST APIs to retrieve build version of each microservice and controlplane product version.)
   ```
   
