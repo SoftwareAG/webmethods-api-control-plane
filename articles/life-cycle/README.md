@@ -112,16 +112,3 @@ This section serves as a comprehensive guide for understanding the life cycle of
 
 * Official On-prem documentation link: https://documentation.softwareag.com/wco/11.0.0/en/webhelp/wco-webhelp/#page/wco-webhelp%2Fto-landing_page.html
 * Official Cloud documentation link: https://docs.webmethods.io/apicontrolplane/welcome/home/#gsc.tab=0
-
-    
-
-
-    
-
-    
-    
-
-
-    
-
-
