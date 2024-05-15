@@ -44,7 +44,7 @@ This section serves as a comprehensive guide for understanding the life cycle of
    <br><br>
 9. <b>Can the domain name of API Control Plane tenant be customized?</b>
 
-   Yes. Create a support ticket for a custom domain.
+   This is an upcoming feature. It will be supported from API Control Plane 11.0.5 onwards. Create a support ticket for a custom domain.
    <br><br>
 10. <b>How are the certificates managed?</b>
 
