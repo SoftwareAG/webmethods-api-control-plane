@@ -2,10 +2,28 @@
 agentConfig:
   enabled: true
   runtimeConfig:
-    runtimeName: "demo"
-    heartBeatIntervalInSeconds: 1
-    metricsSynchIntervalInSeconds: 60
-    assetSynchIntervalInSeconds: 60
+    runtimeName: "API_Gateway_Development"
+    deploymentType: "ON_PREMISE"
+    description: "A development environment of webMethods API Gateway"
+    heartBeatIntervalInSeconds: 60
+    metricsSynchIntervalInSeconds: 120
+    assetSynchIntervalInSeconds: 180
+    region: "APJ"
+    location: "New Delhi"
+    # Substitute with the URL to access the API Gateway UI. 
+    host: "https://apigateway-runtime:9072"
+    tags:
+    - on_premise_gateway
+    - dev_stage
+    capacity:
+      value: 1000
+      units: "per second"
   controlPlaneConfig:
-    controlPlaneURL: "http://my-control-plane"
-    username: "administrator"
+    # Substitute with the URL of the API Control Plane
+    controlPlaneURL: "https://control-plane-host:8443"
+    username: "my_admin_user"
+    # Once API Gateway reads this deployment, password will be removed from this file and placed in the password manager in API Gateway
+    password: "MyAdminP@$$w0rd"
+    retry:
+      maxAttempts: 60
+      retryTimeIntervalInSeconds: 60
