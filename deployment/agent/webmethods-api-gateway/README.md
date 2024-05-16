@@ -28,6 +28,8 @@ connectivity between the runtime and API Control Plane
 | apigw_cp_agentConfig_controlPlaneConfig_controlPlaneURL*|    |The valid URL that is used to access API Control Plane.|
 | apigw_cp_agentConfig_controlPlaneConfig_username |    | User name that is used to log in to API Control Plane. Please note that this user should belong to all three groups: API Control Plane administrators, API platform providers, API product managers.|
 | apigw_cp_agentConfig_controlPlaneConfig_password |    | Password of the corresponding user name that is used to log into API Control Plane.|
+| apigw_cp_​agentConfig_controlPlaneConfig​_retry_maxAttempts | 60 | The maximum number of retry attempts allowed for the API Gateway to establish a connection with API Control Plane if connection is lost. |
+| apigw_cp_agentConfig_​controlPlaneConfig​_retry_retryTimeIntervalInSeconds | 60 | The duration (in seconds) within which the API Gateway must attempt to re-establish the connection with API Control Plane if connection is lost. |
 
 ### Sample Docker file
 A sample docker compose file that is used to start API Gateway and Elasticsearch can have the following configuration to connect to API Control Plane:
@@ -57,6 +59,8 @@ services:
       - apigw_cp_agentConfig_controlPlaneConfig_controlPlaneURL=<protocol://host:port-of-your-api-control-plane-instance>
       - apigw_cp_agentConfig_controlPlaneConfig_username=<user-account-of-api-control-plane-in-all-three-groups>
       - apigw_cp_agentConfig_controlPlaneConfig_password=<user-password>
+      - apigw_cp_​agentConfig_controlPlaneConfig​_retry_maxAttempts=<maximum_number_of_attempts_for_connection_re-establishment>
+      - apigw_cp_agentConfig_​controlPlaneConfig​_retry_retryTimeIntervalInSeconds=<duration_in_seconds_for_every_retry_attempt>
     ports:
       - 5555:5555
       - 9072:9072
@@ -93,6 +97,8 @@ services:
       - apigw_cp_agentConfig_controlPlaneConfig_controlPlaneURL="https://control-plane-host:8443"
       - apigw_cp_agentConfig_controlPlaneConfig_username=my_admin_user
       - apigw_cp_agentConfig_controlPlaneConfig_password=MyAdminP@$$w0rd
+      - apigw_cp_​agentConfig_controlPlaneConfig​_retry_maxAttempts=10
+      - apigw_cp_agentConfig_​controlPlaneConfig​_retry_retryTimeIntervalInSeconds=30
     ports:
       - 5555:5555
       - 9072:9072
@@ -133,6 +139,9 @@ agentConfig:
     controlPlaneURL: "<protocol://host:port-of-your-api-control-plane-instance>"
     username: "<user-account-of-api-control-plane-in-all-three-groups>"
     password: "<user-password>"
+    retry:
+      maxAttempts: <maximum_number_of_attempts_for_connection_re-establishment>
+      retryTimeIntervalInSeconds: <duration_in_seconds_for_every_retry_attempt>
 ```
 
 A sample YAML file with configured values will look like below:
@@ -161,12 +170,15 @@ agentConfig:
     controlPlaneURL: "https://control-plane-host:8443"
     username: "my_admin_user"
     password: "MyAdminP@$$w0rd"
+    retry:
+      maxAttempts: 10
+      retryTimeIntervalInSeconds: 30
 ```
 
 > **Note:** 
 > 1. The password provided in the YAML file will be read by the API Gateway on application startup, and it will be removed thereafter and placed in the password store for future reference. As the file will be updated to remove the password, ensure that the file has write permissions.
 > 2. ```controlPlaneURL``` in the ```cp-agent.yml``` file or ```CP_URL``` in the ```.env``` file should be updated properly to connect to the Control Plane application.
-> 3. When the API Control Plane and Control Plane Agent are running using Docker in Linux Sub-System of Windows, we need to add the below entry in Control Plane Agent's docker-compose.yaml file.
+> 3. When the API Control Plane and API Gateway agent are running using Docker in the same machine and network in Linux Sub-System of Windows, we need to add the below entry in Control Plane Agent's docker-compose.yaml file to ensure that the API Control Plane is reachable for the API Gateway agent.
 ```yaml      
      extra_hosts:
        - "host.docker.internal:host-gateway"
