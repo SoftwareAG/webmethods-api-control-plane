@@ -1,6 +1,6 @@
 openapi: "3.0.2"
 info:
-  title: Data plane Management Service
+  title: API Control Plane Data Planes Management Service
   version: "1.0.0"
   description : Data plane in API Control Plane is a collection of runtimes like API Gateway, Developer Portal running in different landscapes.
 

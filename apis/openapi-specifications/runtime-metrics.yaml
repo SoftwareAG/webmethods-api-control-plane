@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   version: 1.0.0
-  title: Runtime metrics API
+  title: API Control Plane Runtime Metrics Management Service
   description: This API is is used for storing runtime metrics and heartbeat. 
 servers:
   - url: "{protocol}://{hostname}:{port}"

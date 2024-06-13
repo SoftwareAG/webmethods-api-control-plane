@@ -1,6 +1,6 @@
 openapi: '3.0.2'
 info:
-  title: API Control Plane metrics
+  title: API Control Plane Metrics Monitoring Service
   version: '1.0.0'
   description: API Control Plane is composed of different services like Asset Catalog, Engine, Ingress and UI. This spec defines
     the endpoints for the metrics of individual services. The metrics are exposed in Prometheus format and these endpoints are

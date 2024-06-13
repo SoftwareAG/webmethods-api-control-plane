@@ -1,24 +1,24 @@
 openapi: '3.0.2'
 info:
-  title: API Management Service
+  title: API Control Plane APIs Management Service
   version: '1.0.0'
   description : API Control Plane allows you to view the APIs, view multiple versions of an API as a separate API, and view the API specification file. API Control Plane exposes REST APIs to help you create, read, update, and delete (CRUD) APIs.
 servers:
- - url: "{protocol}://{hostname}:{port}/api/assetcatalog/v1"
-   description: This is the endpoint where the Asset-catalog API is accessible from the server.
-   variables:
-    protocol:
-      default: https
-      enum:
-      - http
-      - https
-      description: The protocol supported by the server - HTTP or HTTPS. Default is HTTPS.
-    hostname:
-      default: localhost
-      description: The domain name of the server where the API is hosted. The hostname must be resolvable by the DNS lookup.
-    port:
-      default: "443"
-      description: The port number where the REST API is running on the server. The default port for HTTPS is 443 and HTTP is 80 but it can also be any valid port.
+  - url: "{protocol}://{hostname}:{port}/api/assetcatalog/v1"
+    description: This is the endpoint where the Asset-catalog API is accessible from the server.
+    variables:
+      protocol:
+        default: https
+        enum:
+          - http
+          - https
+        description: The protocol supported by the server - HTTP or HTTPS. Default is HTTPS.
+      hostname:
+        default: localhost
+        description: The domain name of the server where the API is hosted. The hostname must be resolvable by the DNS lookup.
+      port:
+        default: "443"
+        description: The port number where the REST API is running on the server. The default port for HTTPS is 443 and HTTP is 80 but it can also be any valid port.
 paths:
   /apis:
     get:
@@ -199,6 +199,8 @@ paths:
           description: This status code indicates that either the user did not provide any user credentials or the user does not have access rights to create an API.
         '400':
           $ref: '#/components/responses/4XX_bad_request_error'
+        '409':
+          $ref: '#/components/responses/4X9_conflict_request_error'
         '500':
           $ref: '#/components/responses/internal_server_error'
   /runtimes/{runtimeId}/apis/{apiId}:
@@ -214,7 +216,7 @@ paths:
           example: d3841d21-ef31-4b95-a82a-ed08f10a20e5
         - name: apiId
           in: path
-          description: Unique identifier for the API. 
+          description: Unique identifier for the API.
           required: true
           schema:
             type: string
@@ -263,7 +265,7 @@ paths:
           example: d3841d21-ef31-4b95-a82a-ed08f10a20e5
         - name: apiId
           in: path
-          description: Unique identifier for the API. 
+          description: Unique identifier for the API.
           required: true
           schema:
             type: string
@@ -331,7 +333,7 @@ paths:
           example: d3841d21-ef31-4b95-a82a-ed08f10a20e5
         - name: apiId
           in: path
-          description: Unique identifier for the API. 
+          description: Unique identifier for the API.
           required: true
           schema:
             type: string
@@ -362,7 +364,7 @@ components:
           example: 1665653646000
         apiId:
           type: string
-          description: Unique identifier for the API. 
+          description: Unique identifier for the API.
           example: ea488aed-2588-4988-990d-8342d0bca78
         runtimeId:
           type: string
@@ -380,7 +382,7 @@ components:
       properties:
         id:
           type: string
-          description: Unique identifier for the API. 
+          description: Unique identifier for the API.
           example: ea488aed-2588-4988-990d-8342d0bca78
         name:
           type: string
@@ -420,7 +422,7 @@ components:
           example: ACTIVE
         version:
           type: string
-          description: Version of the API.  
+          description: Version of the API.
           example: v2.0
         versionSetId:
           type: string
@@ -574,28 +576,37 @@ components:
             type: string
           example: This response indicates that the server encountered an error.
   responses:
-   internal_server_error:
+    internal_server_error:
       description: Internal server error
       content:
         application/json:
           schema:
-              $ref: "#/components/schemas/ErrorMessage"
+            $ref: "#/components/schemas/ErrorMessage"
           example:
             errorDetails:
               - This response indicates that the server encountered an error.
-   4XX_bad_request_error:
-       description: This status code indicates that the request body is bad.
-       content:
-         application/json:
-           schema:
-              $ref: "#/components/schemas/ErrorMessage"
-           example:
-             errorDetails:
-                - "apiType: API Type is mandatory."
+    4XX_bad_request_error:
+      description: This status code indicates that the request body is bad.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorMessage"
+          example:
+            errorDetails:
+              - "apiType: API Type is mandatory."
+    4X9_conflict_request_error:
+      description: This status code indicates that the request cannot be executed as there is a conflict with the existing resource with the requested resource.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorMessage"
+          example:
+            errorDetails:
+              - "API with Id ac379195-32cf-5198-8e7b-38fe21120309 already exist for Runtime with Id 5c9cbee5-a52b-4c66-a6b3-bda915ededa8."
   securitySchemes:
     basic_authentication:
       type: http
       description: This is the Basic Authentication mechanism where the credentials are sent in a Base64 encoded format of the form <username>:<password> in the Authorization header.
       scheme: basic
 security:
-- basic_authentication: []
+  - basic_authentication: []

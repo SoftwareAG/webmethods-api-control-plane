@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: Search Service
+  title: API Control Plane Search Service
   version: "1.0.0"
   description: |
     The search API allows you to execute a search query or a count query in API Control Plane and return the search results that match the search query or return the count of objects matching the search query.

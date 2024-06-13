@@ -1,10 +1,11 @@
 {
 	"info": {
-		"_postman_id": "346d0358-9099-4c22-9c2d-a362534cd507",
+		"_postman_id": "0d0fc992-011d-4a81-b46b-713288e3519f",
 		"name": "API Control Plane Postman Collections",
 		"description": "This postman collection includes all the REST APIs available in API Control Plane.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "25655912"
+		"_exporter_id": "18166275",
+		"_collection_link": "https://dark-rocket-38724.postman.co/workspace/New-Team-Workspace~ff8c30d4-2a22-4128-a981-5be6a901f63a/collection/18166275-0d0fc992-011d-4a81-b46b-713288e3519f?action=share&source=collection_link&creator=18166275"
 	},
 	"item": [
 		{
@@ -498,7 +499,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": \"East EU region runtime Updated\",\n    \"description\": \"East EU region API Gateway\",\n    \"heartBeatSynchInterval\": 6000,\n    \"tags\": [\"east-eu\"],\n    \"type\": \"WEBMETHODS_GATEWAY\",\n    \"deploymentType\": \"ON_PREMISE\",\n    \"icon\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABRCAIAAAARlBx9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPmSURBVHhe7dhNctswDEBhXqe7Lnvv3qK3iOP/uDdox4UEGqIeJQqWZTpVi/nWBt4oM5EdfvbmUnBRrvkY86GG51xwVpxTQdp2KXO3sSe1aBtjwNv2/Icmcy54pO1SEMNcbexJLfrQZBiTOt3aLmXPD5M5F8x4aNp2KXOHybAnVfmhTbc9Nex6+pZDmJj30CbaFg9DxpipMBnGpDSs1LZIGI7264WxjTEQ205DbbFqVhhOfMSDD22g7Z4qmSVjcveGCQvrtTkfF9Y/WyyKwxJIw2RiW6EKy+qLXVkJxLCu7RgGHxc+/eWQkcvDbm3Z/Pr+BZ/+coiBfpiMtg2NtH3CPIEkNRg20fZX5I2FTbd98rxCmKvt0+aVw0Te1rxeoE3h01+uHCasrffqhCqDT3+52JVVKWnrVSkkpfDpL4ee1N1tAp/+Wr9/fEWSmdMmsKAy6UkhyQy0yfdIlAzCvqdCDCBJHdEWvyD72gQuWBCuL0OVkLCmzXoat0FDAW6aDefeJa9qHLUtGwSU4Uon3PeIwbDj8RBiTX9wvQdOz+GgBfXC2io12HbG3U7VYgCPa7DtbHC0H7bWkVcpaeuSDC72w9Y6BsPEOtpYpf63uWFrHUgyXVv8EbeFi/2wtQ4kmdAlJYOL/bC1DiSpQ9M2NLjYD1vryKtae7TF31hwsR+21pFXHQ4NaYs9KVzsh6115FXracur1JJtWFkNksw/0xZ/zVxNm/VE7eBoJ6ysBkkmxJreHHG0E1ZWgySjbfE7ucHRTlhZDZL2jZ2QNoYJHO2EldXkVY39Wtq6pLZKraENSWYVbVmVim3dT0UtHO2EldUgyYTYEye+UONoJ6ysBkkmWE8KRzthZTVIMqts2+5aK2uLVWtq6yU1do01tCHJNG23L+RmL3C3B1ZWgyQTtMReyVI4fRJWVoMkE9ADuL4MK6tBkploEwgowMpqkHTzPt0m0DAGK6tBkti2ptvaL0WuPKysRnssybCt9/Uutd+hJIeV1SBpu40CG1T3n57Qk8LKapBkAk73QJLBymqQZOa0CVQprHweNIyZ2SavcAgTuGBBY391IzbK2bYdeB/N8nDQI2LM/T2pvK3JGCzpJP9PlmrrYu7oEewR7zeBd0OSMWZeWy9muZ5U0pYd7edpY4zg0WXsEYhpvHcCrpwtb2OJ4LmTGCMYo5Ik80hbfNPJX3Y6vHUSSxRLVBbT9+Zvm8pQvNWDJYoligHwlsrbuqfxnBLBDMMSxQDo9ZhN2+ZoELzvLmwwzDAMyDFGSZIJbBC8bAY2GDakeH2OJSrt6WykjWfNwIAUA1I8PccMwxKz6YTrWud6/QMDnAYz3wg70wAAAABJRU5ErkJggg==\",\n    \"region\": \"east-eu\",\n    \"location\": \"EU\",\n    \"host\": \"API\",\n    \"capacity\" : {\n        \"value\" : \"50\",\n            \"unit\" : \"per minute\"\n    }   \n}",
+									"raw": "{\n    \"name\": \"East EU region runtime Updated\",\n    \"description\": \"East EU region API Gateway\",\n    \"heartbeatInterval\": 6000,\n    \"tags\": [\"east-eu\"],\n    \"type\": \"WEBMETHODS_API_GATEWAY\",\n    \"deploymentType\": \"ON_PREMISE\",\n    \"icon\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABRCAIAAAARlBx9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPmSURBVHhe7dhNctswDEBhXqe7Lnvv3qK3iOP/uDdox4UEGqIeJQqWZTpVi/nWBt4oM5EdfvbmUnBRrvkY86GG51xwVpxTQdp2KXO3sSe1aBtjwNv2/Icmcy54pO1SEMNcbexJLfrQZBiTOt3aLmXPD5M5F8x4aNp2KXOHybAnVfmhTbc9Nex6+pZDmJj30CbaFg9DxpipMBnGpDSs1LZIGI7264WxjTEQ205DbbFqVhhOfMSDD22g7Z4qmSVjcveGCQvrtTkfF9Y/WyyKwxJIw2RiW6EKy+qLXVkJxLCu7RgGHxc+/eWQkcvDbm3Z/Pr+BZ/+coiBfpiMtg2NtH3CPIEkNRg20fZX5I2FTbd98rxCmKvt0+aVw0Te1rxeoE3h01+uHCasrffqhCqDT3+52JVVKWnrVSkkpfDpL4ee1N1tAp/+Wr9/fEWSmdMmsKAy6UkhyQy0yfdIlAzCvqdCDCBJHdEWvyD72gQuWBCuL0OVkLCmzXoat0FDAW6aDefeJa9qHLUtGwSU4Uon3PeIwbDj8RBiTX9wvQdOz+GgBfXC2io12HbG3U7VYgCPa7DtbHC0H7bWkVcpaeuSDC72w9Y6BsPEOtpYpf63uWFrHUgyXVv8EbeFi/2wtQ4kmdAlJYOL/bC1DiSpQ9M2NLjYD1vryKtae7TF31hwsR+21pFXHQ4NaYs9KVzsh6115FXracur1JJtWFkNksw/0xZ/zVxNm/VE7eBoJ6ysBkkmxJreHHG0E1ZWgySjbfE7ucHRTlhZDZL2jZ2QNoYJHO2EldXkVY39Wtq6pLZKraENSWYVbVmVim3dT0UtHO2EldUgyYTYEye+UONoJ6ysBkkmWE8KRzthZTVIMqts2+5aK2uLVWtq6yU1do01tCHJNG23L+RmL3C3B1ZWgyQTtMReyVI4fRJWVoMkE9ADuL4MK6tBkploEwgowMpqkHTzPt0m0DAGK6tBkti2ptvaL0WuPKysRnssybCt9/Uutd+hJIeV1SBpu40CG1T3n57Qk8LKapBkAk73QJLBymqQZOa0CVQprHweNIyZ2SavcAgTuGBBY391IzbK2bYdeB/N8nDQI2LM/T2pvK3JGCzpJP9PlmrrYu7oEewR7zeBd0OSMWZeWy9muZ5U0pYd7edpY4zg0WXsEYhpvHcCrpwtb2OJ4LmTGCMYo5Ik80hbfNPJX3Y6vHUSSxRLVBbT9+Zvm8pQvNWDJYoligHwlsrbuqfxnBLBDMMSxQDo9ZhN2+ZoELzvLmwwzDAMyDFGSZIJbBC8bAY2GDakeH2OJSrt6WykjWfNwIAUA1I8PccMwxKz6YTrWud6/QMDnAYz3wg70wAAAABJRU5ErkJggg==\",\n    \"region\": \"east-eu\",\n    \"location\": \"EU\",\n    \"host\": \"API\",\n    \"capacity\" : {\n        \"value\" : 50,\n        \"unit\" : \"per minute\"\n    }   \n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -991,6 +992,177 @@
 					"description": "This folder contains all the REST APIs pertaining to User Management."
 				},
 				{
+					"name": "RuntimeType",
+					"item": [
+						{
+							"name": "Get all runtime types",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/assetcatalog/v1/runtimes/types",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"assetcatalog",
+										"v1",
+										"runtimes",
+										"types"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Runtime Type based on size, page and sort query parameters",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/assetcatalog/v1/runtimes/types?size=10&page=1&sort=name,asc&sort=created,desc",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"assetcatalog",
+										"v1",
+										"runtimes",
+										"types"
+									],
+									"query": [
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "sort",
+											"value": "name,asc"
+										},
+										{
+											"key": "sort",
+											"value": "created,desc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Runtime Type By ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/assetcatalog/v1/runtimes/types/{{runtimeTypeId}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"assetcatalog",
+										"v1",
+										"runtimes",
+										"types",
+										"{{runtimeTypeId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Runtime Type",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"Runtime_Type_Gateway\",\r\n    \"attributes\":{\r\n        \"key1\":\"value2\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/assetcatalog/v1/runtimes/types",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"assetcatalog",
+										"v1",
+										"runtimes",
+										"types"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Runtime Type by ID",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"Runtime_Type_Gateway Updated\",\r\n    \"attributes\":{\r\n        \"key1\":\"value2\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/assetcatalog/v1/runtimes/types/{{runtimeTypeId}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"assetcatalog",
+										"v1",
+										"runtimes",
+										"types",
+										"{{runtimeTypeId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Runtime Type by ID",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/assetcatalog/v1/runtimes/types/{{runtimeTypeId}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"assetcatalog",
+										"v1",
+										"runtimes",
+										"types",
+										"{{runtimeTypeId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "API Control Plane allows you to create and manage multiple runtime types(such as WEBMETHODS_API_GATEWAY, WEBMETHODS_DEVELOPER_PORTAL and so on).\n\nThis folder contains all the available REST APIs pertaining to runtime types."
+				},
+				{
 					"name": "LicenseManagement",
 					"item": [
 						{
@@ -1011,6 +1183,33 @@
 									]
 								},
 								"description": "This REST call retrieves a list of license."
+							},
+							"response": []
+						},
+						{
+							"name": "Delete license",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/ingress/v1/license/{{serialNumber}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"ingress",
+										"v1",
+										"license"
+									],
+									"query": [
+										{
+											"key": "serialNumber",
+											"value": "{{serialNumber}}"
+										}
+									]
+								},
+								"description": "This REST call deletes the license with the serial number provided."
 							},
 							"response": []
 						},
@@ -1195,6 +1394,36 @@
 							"response": []
 						},
 						{
+							"name": "Create runtime Version 2",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"East EU region runtime Updated\",\n    \"description\": \"East EU region API Gateway\",\n    \"heartBeatSynchInterval\": 6000,\n    \"tags\": [\"east-eu\"],\n    \"type\": \"WEBMETHODS_GATEWAY\",\n    \"deploymentType\": \"ON_PREMISE\",\n    \"icon\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABRCAIAAAARlBx9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPmSURBVHhe7dhNctswDEBhXqe7Lnvv3qK3iOP/uDdox4UEGqIeJQqWZTpVi/nWBt4oM5EdfvbmUnBRrvkY86GG51xwVpxTQdp2KXO3sSe1aBtjwNv2/Icmcy54pO1SEMNcbexJLfrQZBiTOt3aLmXPD5M5F8x4aNp2KXOHybAnVfmhTbc9Nex6+pZDmJj30CbaFg9DxpipMBnGpDSs1LZIGI7264WxjTEQ205DbbFqVhhOfMSDD22g7Z4qmSVjcveGCQvrtTkfF9Y/WyyKwxJIw2RiW6EKy+qLXVkJxLCu7RgGHxc+/eWQkcvDbm3Z/Pr+BZ/+coiBfpiMtg2NtH3CPIEkNRg20fZX5I2FTbd98rxCmKvt0+aVw0Te1rxeoE3h01+uHCasrffqhCqDT3+52JVVKWnrVSkkpfDpL4ee1N1tAp/+Wr9/fEWSmdMmsKAy6UkhyQy0yfdIlAzCvqdCDCBJHdEWvyD72gQuWBCuL0OVkLCmzXoat0FDAW6aDefeJa9qHLUtGwSU4Uon3PeIwbDj8RBiTX9wvQdOz+GgBfXC2io12HbG3U7VYgCPa7DtbHC0H7bWkVcpaeuSDC72w9Y6BsPEOtpYpf63uWFrHUgyXVv8EbeFi/2wtQ4kmdAlJYOL/bC1DiSpQ9M2NLjYD1vryKtae7TF31hwsR+21pFXHQ4NaYs9KVzsh6115FXracur1JJtWFkNksw/0xZ/zVxNm/VE7eBoJ6ysBkkmxJreHHG0E1ZWgySjbfE7ucHRTlhZDZL2jZ2QNoYJHO2EldXkVY39Wtq6pLZKraENSWYVbVmVim3dT0UtHO2EldUgyYTYEye+UONoJ6ysBkkmWE8KRzthZTVIMqts2+5aK2uLVWtq6yU1do01tCHJNG23L+RmL3C3B1ZWgyQTtMReyVI4fRJWVoMkE9ADuL4MK6tBkploEwgowMpqkHTzPt0m0DAGK6tBkti2ptvaL0WuPKysRnssybCt9/Uutd+hJIeV1SBpu40CG1T3n57Qk8LKapBkAk73QJLBymqQZOa0CVQprHweNIyZ2SavcAgTuGBBY391IzbK2bYdeB/N8nDQI2LM/T2pvK3JGCzpJP9PlmrrYu7oEewR7zeBd0OSMWZeWy9muZ5U0pYd7edpY4zg0WXsEYhpvHcCrpwtb2OJ4LmTGCMYo5Ik80hbfNPJX3Y6vHUSSxRLVBbT9+Zvm8pQvNWDJYoligHwlsrbuqfxnBLBDMMSxQDo9ZhN2+ZoELzvLmwwzDAMyDFGSZIJbBC8bAY2GDakeH2OJSrt6WykjWfNwIAUA1I8PccMwxKz6YTrWud6/QMDnAYz3wg70wAAAABJRU5ErkJggg==\",\n    \"region\": \"east-eu\",\n    \"location\": \"EU\",\n    \"host\": \"API\",\n    \"capacity\" : {\n        \"value\" : \"50\",\n            \"unit\" : \"per minute\"\n    },\n    \"publishAssets\":true,\n    \"syncAssets\":true,\n    \"sendMetrics\":true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/assetcatalog/v2/runtimes",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"assetcatalog",
+										"v2",
+										"runtimes"
+									]
+								},
+								"description": "This REST call is used to create a new runtime in API Control Plane."
+							},
+							"response": []
+						},
+						{
 							"name": "Bulk heartbeats",
 							"request": {
 								"method": "POST",
@@ -1255,6 +1484,80 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Get all runtimes",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/assetcatalog/v2/runtimes",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"assetcatalog",
+										"v2",
+										"runtimes"
+									]
+								},
+								"description": "This REST call retrieves a list of runtimes. If you don't specify the size query parameter, this call can retrieve up to 20 runtimes."
+							},
+							"response": []
+						},
+						{
+							"name": "Get runtime by ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/assetcatalog/v2/runtimes/{{runtimeId}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"assetcatalog",
+										"v2",
+										"runtimes",
+										"{{runtimeId}}"
+									]
+								},
+								"description": "This REST call is used to retrieve the specific runtime."
+							},
+							"response": []
+						},
+						{
+							"name": "Update runtime by ID",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"East EU region runtime Updated\",\n    \"description\": \"East EU region API Gateway\",\n    \"heartBeatSynchInterval\": 6000,\n    \"tags\": [\"east-eu\"],\n    \"type\": \"WEBMETHODS_GATEWAY\",\n    \"deploymentType\": \"ON_PREMISE\",\n    \"icon\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABRCAIAAAARlBx9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPmSURBVHhe7dhNctswDEBhXqe7Lnvv3qK3iOP/uDdox4UEGqIeJQqWZTpVi/nWBt4oM5EdfvbmUnBRrvkY86GG51xwVpxTQdp2KXO3sSe1aBtjwNv2/Icmcy54pO1SEMNcbexJLfrQZBiTOt3aLmXPD5M5F8x4aNp2KXOHybAnVfmhTbc9Nex6+pZDmJj30CbaFg9DxpipMBnGpDSs1LZIGI7264WxjTEQ205DbbFqVhhOfMSDD22g7Z4qmSVjcveGCQvrtTkfF9Y/WyyKwxJIw2RiW6EKy+qLXVkJxLCu7RgGHxc+/eWQkcvDbm3Z/Pr+BZ/+coiBfpiMtg2NtH3CPIEkNRg20fZX5I2FTbd98rxCmKvt0+aVw0Te1rxeoE3h01+uHCasrffqhCqDT3+52JVVKWnrVSkkpfDpL4ee1N1tAp/+Wr9/fEWSmdMmsKAy6UkhyQy0yfdIlAzCvqdCDCBJHdEWvyD72gQuWBCuL0OVkLCmzXoat0FDAW6aDefeJa9qHLUtGwSU4Uon3PeIwbDj8RBiTX9wvQdOz+GgBfXC2io12HbG3U7VYgCPa7DtbHC0H7bWkVcpaeuSDC72w9Y6BsPEOtpYpf63uWFrHUgyXVv8EbeFi/2wtQ4kmdAlJYOL/bC1DiSpQ9M2NLjYD1vryKtae7TF31hwsR+21pFXHQ4NaYs9KVzsh6115FXracur1JJtWFkNksw/0xZ/zVxNm/VE7eBoJ6ysBkkmxJreHHG0E1ZWgySjbfE7ucHRTlhZDZL2jZ2QNoYJHO2EldXkVY39Wtq6pLZKraENSWYVbVmVim3dT0UtHO2EldUgyYTYEye+UONoJ6ysBkkmWE8KRzthZTVIMqts2+5aK2uLVWtq6yU1do01tCHJNG23L+RmL3C3B1ZWgyQTtMReyVI4fRJWVoMkE9ADuL4MK6tBkploEwgowMpqkHTzPt0m0DAGK6tBkti2ptvaL0WuPKysRnssybCt9/Uutd+hJIeV1SBpu40CG1T3n57Qk8LKapBkAk73QJLBymqQZOa0CVQprHweNIyZ2SavcAgTuGBBY391IzbK2bYdeB/N8nDQI2LM/T2pvK3JGCzpJP9PlmrrYu7oEewR7zeBd0OSMWZeWy9muZ5U0pYd7edpY4zg0WXsEYhpvHcCrpwtb2OJ4LmTGCMYo5Ik80hbfNPJX3Y6vHUSSxRLVBbT9+Zvm8pQvNWDJYoligHwlsrbuqfxnBLBDMMSxQDo9ZhN2+ZoELzvLmwwzDAMyDFGSZIJbBC8bAY2GDakeH2OJSrt6WykjWfNwIAUA1I8PccMwxKz6YTrWud6/QMDnAYz3wg70wAAAABJRU5ErkJggg==\",\n    \"region\": \"east-eu\",\n    \"location\": \"EU\",\n    \"host\": \"API\",\n    \"capacity\" : {\n        \"value\" : \"50\",\n            \"unit\" : \"per minute\"\n    },\n    \"publishAssets\":true,\n    \"syncAssets\":true,\n    \"sendMetrics\":true   \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/assetcatalog/v2/runtimes/{{runtimeId}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"assetcatalog",
+										"v2",
+										"runtimes",
+										"{{runtimeId}}"
+									]
+								},
+								"description": "This REST call is used to update the specific runtime."
+							},
+							"response": []
 						}
 					],
 					"description": "API Control Plane allows you to create and manage multiple runtimes (such as API Gateway, Developer Portal, and so on), running in different landscapes.\n\nThis folder contains all the available REST APIs pertaining to runtime."
@@ -1305,12 +1608,12 @@
 		},
 		{
 			"key": "password",
-			"value": "*****",
+			"value": "MyPassword@123",
 			"type": "string"
 		},
 		{
 			"key": "baseURL",
-			"value": "http://localhost:8080",
+			"value": "https://localhost:8080",
 			"type": "string"
 		},
 		{
@@ -1335,6 +1638,11 @@
 		},
 		{
 			"key": "groupId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "serialNumber",
 			"value": "",
 			"type": "string"
 		}

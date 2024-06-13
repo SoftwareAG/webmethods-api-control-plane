@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: License Management API
+  title: API Control Plane License Management Service
   description: |
     ## Overview
 
@@ -149,6 +149,27 @@ paths:
                   value:
                     errorDetails:
                       - 'The license is already being used for this tenant.'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/internal_server_error'
+    delete:
+      summary: Delete a existing license
+      description: |-
+        This method allows you to delete a existing license in control plane.
+
+        **Restriction**: Access is restricted to **authorized** individuals with administrator privilege. Restricted in control plane Cloud.
+      tags:
+        - Licenses
+      parameters:
+        - name: serialNumber
+          in: query
+          description: The serial number of the license to be deleted.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: license Deleted Sucessfully.
         '401':
           $ref: '#/components/responses/Unauthorized'
         '500':
