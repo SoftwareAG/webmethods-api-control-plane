@@ -1,6 +1,6 @@
 openapi: '3.0.2'
 info:
-  title: Runtime Type Management Service
+  title: API Control Plane Runtime Types Management Service
   version: '1.0.0'
   "description" :  API Control Plane allows you to create, read, update, and delete (CRUD) runtime types and manage multiple runtime type like WEBMETHODS_DEVELOPER_PORTAL, WEBMETHODS_API_GATEWAY.
 servers:

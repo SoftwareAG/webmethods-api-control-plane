@@ -1,6 +1,6 @@
 openapi: '3.0.2'
 info:
-  title: API Control Plane health status
+  title: API Control Plane Health Monitoring Service
   version: '1.0.0'
   description: This specification contains a health resource for API Control Plane which returns the health status of overall
     API Control Plane and its individual services. This would be prodominantly used by Software AG CAS probe for querying the service
