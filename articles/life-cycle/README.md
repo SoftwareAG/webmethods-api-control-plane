@@ -45,7 +45,7 @@ This section serves as a comprehensive guide for understanding the life cycle of
 9. <b>Can the domain name of API Control Plane tenant be customized?</b>
 
    Custom domain support is now available in API Control plane. Create a support ticket for a custom domain. For more details on custom domain,
-   refer https://docs.webmethods.io/apicontrolplane/administration/chapter3wco/
+   refer [API Control plane documentation](https://docs.webmethods.io/apicontrolplane/administration/chapter3wco/)
    <br><br>
 11. <b>How are the certificates managed?</b>
 
