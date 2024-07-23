@@ -96,6 +96,8 @@ applications:
     cluster:
       initial_master_nodes: elasticsearch-0
     storage: 5Gi
+    # -- Optionally configure a storage class to use for the pvc, otherwise uses default storage class
+    # storageClassName: 
     resources:
       limits:
         # -- Maximum CPU resource units(1 CPU unit is equivalent to 1 physical CPU core, or 1 virtual core)
@@ -149,3 +151,5 @@ applications:
       key: "AP-BCBBKBNAYWW6-2-2"
 domainName: my-control-plane
 imagePullSecretName: regcred
+# -- Optionally configure a ingress class to use for the kubernetes ingress (default: nginx)
+# ingressClassName: nginx

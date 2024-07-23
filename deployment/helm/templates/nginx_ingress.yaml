@@ -10,7 +10,7 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     {{ end }}
 spec:
-  ingressClassName: nginx
+  ingressClassName: {{ .Values.ingressClassName | default "nginx" }}
   rules:
     - host: {{ .Values.domainName }}
       http:

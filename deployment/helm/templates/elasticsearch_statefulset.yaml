@@ -19,6 +19,9 @@ spec:
       spec:
         accessModes:
           - ReadWriteOnce
+        {{- if .Values.applications.es.storageClassName }}
+        storageClassName: {{ .Values.applications.es.storageClassName }}
+        {{- end }}
         resources:
           requests:
             storage: {{ .Values.applications.es.storage }}
