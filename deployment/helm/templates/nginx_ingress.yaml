@@ -21,4 +21,8 @@ spec:
               service: 
                 name: {{ .Values.applications.ingress.name }}-svc
                 port: 
-                  number: 8080            
+                  {{- if eq .Values.applications.ingress.sslEnabled true }}
+                  number: 8443
+                  {{- else }}
+                  number: 8080
+                  {{- end }}
