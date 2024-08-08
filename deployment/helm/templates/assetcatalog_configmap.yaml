@@ -9,6 +9,7 @@ data:
   OTEL_JAVAAGENT_ENABLED: "{{ .Values.applications.jaegertracing.enabled }}"
   {{- if .Values.applications.jaegertracing.enabled }}
   OTEL_METRICS_EXPORTER: "none"
+  APICP_ENGINE_ENDPOINT: "http://{{ .Values.applications.engine.name }}-svc:8080"
   JAVA_OPTS: "-Dotel.exporter.otlp.endpoint=http://{{ .Values.applications.jaegertracing.name }}-svc:{{ .Values.applications.jaegertracing.port }} -Dotel.resource.attributes=service.name={{ .Values.applications.assetcatalog.name }}"
   LOGGING_LEVEL_COM_SOFTWAREAG_CONTROLPLANE: "{{ .Values.applications.assetcatalog.logLevel }}"
   {{- end }}
