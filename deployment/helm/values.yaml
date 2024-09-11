@@ -3,9 +3,9 @@ applications:
     # -- Name of the application 
     name: assetcatalog
     # -- Image name of assetcatalog
-    imageName: sagcr.azurecr.io/controlplane-assetcatalog
+    imageName: cp.icr.io/cp/webmethods/api/api-catalog:11.1
     # -- Image tag of assetcatalog
-    imageTag: "11.0"
+    imageTag: "11.1"
     # -- No. of assetcatalog Replicas
     replicas: 2
     resources:
@@ -23,9 +23,9 @@ applications:
   engine:
     name: engine
     # -- Image name of engine
-    imageName: sagcr.azurecr.io/controlplane-engine
+    imageName: cp.icr.io/cp/webmethods/api/api-control-plane-engine
     # -- Image tag of engine
-    imageTag: "11.0"
+    imageTag: "11.1"
     # -- No. of engine Replicas 
     replicas: 2
     resources:
@@ -43,9 +43,9 @@ applications:
   ingress:
     name: ingress
     # -- Image name of ingress
-    imageName: sagcr.azurecr.io/controlplane-ingress
+    imageName: cp.icr.io/cp/webmethods/api/api-control-plane-ingress
     # -- Image tag of ingress
-    imageTag: "11.0"
+    imageTag: "11.1"
     # -- No. of ingress Replicas 
     replicas: 2
     # -- Tenant ID - The name of the tenant for the deployment
@@ -67,9 +67,9 @@ applications:
   ui:
     name: ui
     # -- Image name of ui
-    imageName: sagcr.azurecr.io/controlplane-ui
+    imageName: cp.icr.io/cp/webmethods/api/api-control-plane-ui
     # -- Image tag of ui
-    imageTag: "11.0"
+    imageTag: "11.1"
     # -- No. of ui Replicas 
     replicas: 2
     resources:
@@ -89,7 +89,7 @@ applications:
     # -- Elasticsearch image name
     imageName: docker.elastic.co/elasticsearch/elasticsearch
     # -- Elasticsearch image tag
-    imageTag: "8.1.1"
+    imageTag: "8.14.3"
     # -- Storage size for persistent volume
     replicas: 1
     # -- Cluster master nodes in the format "<name>-0, ..., <name>-(n-1)" where n is replicas. For a single node cluster it will be "<name>-0".
