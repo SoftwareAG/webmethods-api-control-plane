@@ -35,41 +35,7 @@ The machine needs following to install the control plane through helm.
 
 ## How to deploy webMethods API Control Plane using helm?
 
-1. Clone this repository
-2. Login to https://containers.softwareag.com/
-3. Get a Personal Access Token (PAT)
-
-    We published docker images for all API Control Plane microservice to https://containers.softwareag.com/ repository. To be able to pull them, you'll need a Personal Access token (PAT). To get a PAT, go to Userprofile > Settings > Generate password. Store Token Password securely.
-4. Create a kubernetes namespace for your deployment
-
-    Execute the following command
-
-    ```bash
-    kubectl create namespace control-plane
-    ```
-
-    If everything goes well the output should be similar to
-
-    ```bash
-    [user@somehost helm]$ kubectl create namespace control-plane
-    namespace/control-plane created
-    ```
-
-5. Create a kubernetes secret to be able to pull docker images
-
-    Execute the following command
-
-    ```bash
-    kubectl create secret docker-registry regcred -n control-plane --docker-server=sagcr.azurecr.io --docker-username=[Your git username] --docker-password=[Your PAT]
-    ```
-
-    If everything goes well the output should be similar to
-
-    ```bash
-    [user@somehost helm]$ kubectl create secret docker-registry regcred -n control-plane --docker-server=sagcr.azurecr.io --docker-username=przemekuliok --docker-password=*secret*
-    secret/regcred created created
-    ```
-
+<TBD>
 6. Configure your deployment
 
     The [values.yaml](values.yaml) file allows to configure different aspects of API Control Plane deployment. To be able to access API Control Plane after it's deployed, you need to edit this file and provide a value for `domainName` that matches the hostname of the machine you're deploying API Control plane on. Make sure this hostname is accessible to whoever will be connecting to API Control Plane.

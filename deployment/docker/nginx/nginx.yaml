@@ -21,7 +21,7 @@ services:
       - conf.d:/etc/nginx/conf.d
       - nginx-certs:/etc/nginx/certs
     networks:
-      - softwareag-api-management
+      - webmethods-api-management
 
 
   nginx_setup:
@@ -69,4 +69,4 @@ services:
       timeout: 5s
       retries: 120
     networks:
-      - softwareag-api-management
+      - webmethods-api-management
