@@ -18,8 +18,8 @@ services:
     environment:
     - xpack.security.enabled=false
     - discovery.type=single-node
-    - node.name=softwareag
-    - cluster.name=softwareag
+    - node.name=webmethods
+    - cluster.name=webmethods
     - bootstrap.memory_lock=true
     mem_limit: 1073741824
     ulimits:
@@ -34,4 +34,4 @@ services:
     volumes:
     - es-data:/usr/share/elasticsearch/data
     networks:
-    - softwareag-api-management
+    - webmethods-api-management

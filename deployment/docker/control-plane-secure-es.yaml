@@ -51,6 +51,6 @@ volumes:
 
 
 networks:
-  softwareag-api-management:
-    name: softwareag-api-management
+  webmethods-api-management:
+    name: webmethods-api-management
     driver: bridge
