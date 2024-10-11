@@ -71,7 +71,7 @@ paths:
                         licenseType: TEN
                         serialNumber: 0000037081
                         licenseKey: admin
-                        customerName: SoftwareAGInternal
+                        customerName: WebmethodsInternal
                         expirationDate: 2024-08-18T23:59:59.218+00:00
                         licenseQuantity: 1000
                         freeLicenseQuantity: 1000
@@ -86,7 +86,7 @@ paths:
                         licenseType: TEN
                         serialNumber: 0000037345
                         licenseKey: admin
-                        customerName: SoftwareAGInternal
+                        customerName: WebmethodsInternal
                         expirationDate: 2024-08-18T23:59:59.218+00:00
                         licenseQuantity: 1000
                         freeLicenseQuantity: 1000
@@ -129,7 +129,7 @@ paths:
                     licenseType: TEN
                     serialNumber: 0000037081
                     licenseKey: admin
-                    customerName: SoftwareAGInternal
+                    customerName: WebmethodsInternal
                     expirationDate: 2024-08-18T23:59:59.218+00:00
                     licenseQuantity: 1000
                     freeLicenseQuantity: 1000
@@ -228,7 +228,7 @@ components:
         customerName:
           description: Name of the customer.
           type: string
-          example: SoftwareAGInternal
+          example: WebmethodsInternal
         expirationDate:
           description: Date of expiry of license.
           type: string

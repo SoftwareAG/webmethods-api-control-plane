@@ -48,7 +48,7 @@ spec:
 #  should be enabled if the certificate from host system is being mounted
 #        volumeMounts:
 #          - name: hostpath-volume
-#            mountPath: /opt/softwareag/certs/softwareag_not_for_production.jks
+#            mountPath: /opt/softwareag/certs/webmethods_not_for_production.jks
         ports:
           - containerPort: 8080
             name: http
@@ -86,7 +86,7 @@ spec:
 #      volumes:
 #        - name: hostpath-volume
 #          hostPath:
-#            path: /mnt/path/in/your/host/softwareag_test.jks
+#            path: /mnt/path/in/your/host/webmethods_test.jks
 #            type: File
       terminationGracePeriodSeconds: 30
       imagePullSecrets:
