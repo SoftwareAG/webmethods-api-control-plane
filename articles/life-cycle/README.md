@@ -2,7 +2,7 @@
 
 This section serves as a comprehensive guide for understanding the life cycle of API Control Plane.
 
-1. <b>What is webMethods API Control Plane?</b>
+1. <b>What is IBM webMethods API Control Plane?</b>
 
    API Control Plane is a centralized control and monitoring system that oversees and manages multiple runtimes such as <b>API Gateway</b>, <b>Developer Portal</b>, <b>Microgateway</b>, and <b>other runtimes</b> deployed across multiple
    regions including cloud and on-premises environments. With API Control Plane, you can achieve comprehensive real-time monitoring, leveraging advanced analytics, and customizable dashboards to gain valuable

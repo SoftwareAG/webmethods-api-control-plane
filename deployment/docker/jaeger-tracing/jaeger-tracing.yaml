@@ -20,4 +20,4 @@ services:
       timeout: 10s
       retries: 10
     networks:
-    - webmethods-api-management
+    - ibm-webmethods-api-management

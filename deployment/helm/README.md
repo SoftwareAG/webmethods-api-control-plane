@@ -17,9 +17,9 @@ The standard deployment of API Control plane contains the following 5 microservi
 Table of contents
 
 1. [Prerequisite](#Prerequisite)
-2. [How to deploy webMethods API Control Plane using helm?](#how-to-deploy-webmethods-api-control-plane-using-helm)
-3. [How to stop webMethods API Control Plane using helm?](#how-to-stop-webmethods-api-control-plane-using-helm)
-4. [How to access the newly deployed webMethods API Control Plane?](#how-to-access-the-newly-deployed-webmethods-api-control-plane)
+2. [How to deploy IBM webMethods API Control Plane using helm?](#how-to-deploy-webmethods-api-control-plane-using-helm)
+3. [How to stop IBM webMethods API Control Plane using helm?](#how-to-stop-webmethods-api-control-plane-using-helm)
+4. [How to access the newly deployed IBM webMethods API Control Plane?](#how-to-access-the-newly-deployed-webmethods-api-control-plane)
 5. [Additional deployment flavors](#additional-deployment-flavors)
 
 ***
@@ -33,10 +33,11 @@ The machine needs following to install the control plane through helm.
 
 ***
 
-## How to deploy webMethods API Control Plane using helm?
+## How to deploy IBM webMethods API Control Plane using helm?
 
-<TBD>
-6. Configure your deployment
+4. Refer <DOC LINK> to pull control plane images from IBM container registry.
+
+5. Configure your deployment
 
     The [values.yaml](values.yaml) file allows to configure different aspects of API Control Plane deployment. To be able to access API Control Plane after it's deployed, you need to edit this file and provide a value for `domainName` that matches the hostname of the machine you're deploying API Control plane on. Make sure this hostname is accessible to whoever will be connecting to API Control Plane.
 
@@ -44,7 +45,7 @@ The machine needs following to install the control plane through helm.
 
     Default configuration is set up to deploy 2 replicas of API Control Plane containers and 1 replica for others. Edit the values.yaml file to change that as needed.
 
-7. Execute the deployment script
+6. Execute the deployment script
 
     To deploy the API Control Plane with default configuration:
 
@@ -73,7 +74,7 @@ The machine needs following to install the control plane through helm.
     TEST SUITE: None
     ```
   
-8. Verify it's started
+7. Verify it's started
 
     It will take a couple of minutes to start. You can monitor that with solutions like Portainer or Docker\Kubernetes Dashboard etc. or simply user Docker\Kubernetes CLI like this
 
@@ -117,7 +118,7 @@ The machine needs following to install the control plane through helm.
 ###### [Back to Top](#api-control-plane-deployment-with-helm)
 ***
 
-## How to access the newly deployed webMethods API Control Plane?
+## How to access the newly deployed IBM webMethods API Control Plane?
 
 1. Open your browser and go to `https://[the-host-you-configured]/` or `http://[the-host-you-configured]/` (Unsecured)
 2. You should see the login screen. Log in using Administrator username and the default password.
@@ -126,7 +127,7 @@ The machine needs following to install the control plane through helm.
 
 ***
 
-## How to stop webMethods API Control Plane using helm?
+## How to stop IBM webMethods API Control Plane using helm?
 
 To stop and remove the API Control Plane default configuration:
 

@@ -44,6 +44,6 @@ volumes:
     driver: local
 
 networks:
-  webmethods-api-management:
-    name: webmethods-api-management
+  ibm-webmethods-api-management:
+    name: ibm-webmethods-api-management
     driver: bridge

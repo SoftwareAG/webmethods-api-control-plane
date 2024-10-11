@@ -21,7 +21,7 @@ services:
       - conf.d:/etc/nginx/conf.d
       - nginx-certs:/etc/nginx/certs
     networks:
-      - webmethods-api-management
+      - ibm-webmethods-api-management
 
 
   nginx_setup:
@@ -69,4 +69,4 @@ services:
       timeout: 5s
       retries: 120
     networks:
-      - webmethods-api-management
+      - ibm-webmethods-api-management

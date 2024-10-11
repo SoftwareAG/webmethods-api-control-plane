@@ -47,7 +47,7 @@ services:
     - es-data:/usr/share/elasticsearch/data
     - es-certs:/usr/share/elasticsearch/config/certs
     networks:
-    - webmethods-api-management
+    - ibm-webmethods-api-management
 
   certificates_setup:
     container_name: elasticsearch-certs-generator
@@ -94,4 +94,4 @@ services:
       timeout: 5s
       retries: 120
     networks:
-      - webmethods-api-management
+      - ibm-webmethods-api-management

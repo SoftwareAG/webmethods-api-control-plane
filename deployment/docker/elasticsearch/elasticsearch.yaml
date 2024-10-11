@@ -34,4 +34,4 @@ services:
     volumes:
     - es-data:/usr/share/elasticsearch/data
     networks:
-    - webmethods-api-management
+    - ibm-webmethods-api-management

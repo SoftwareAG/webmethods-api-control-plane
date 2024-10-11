@@ -31,7 +31,7 @@ services:
       timeout: 10s
       retries: 5
     networks:
-    - webmethods-api-management
+    - ibm-webmethods-api-management
     volumes:
       - ../../license/${LICENSE_FILE_NAME}:/home/license/${LICENSE_FILE_NAME}
 
