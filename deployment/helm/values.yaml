@@ -91,7 +91,7 @@ applications:
     # -- Elasticsearch image tag
     imageTag: "8.1.1"
     # -- Storage size for persistent volume
-    replicas: 1
+    replicas: 3
     # -- Cluster master nodes in the format "<name>-0, ..., <name>-(n-1)" where n is replicas. For a single node cluster it will be "<name>-0".
     cluster:
       initial_master_nodes: elasticsearch-0
