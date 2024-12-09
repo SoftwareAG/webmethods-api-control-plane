@@ -8,7 +8,7 @@ APIs are everywhere. API Management is where APIs are. It’s all distributed an
 
 ![image](/attachments/apicp_dashboard_page.png)
 
-This repository hosts assets documenting how to deploy and run IBM webMethods API Control Plane as a container, articles and tutorials, public API docs and Postman collections. Please see the official documentation for [cloud](https://docs.webmethods.io/apicontrolplane/welcome/home/#gsc.tab=0) or [self-hosted](https://documentation.softwareag.com/wco/11.0.0/en/webhelp/wco-webhelp/) for how to use the product and system requirements. 
+This repository hosts assets documenting how to deploy and run IBM webMethods API Control Plane as a container, articles and tutorials, public API docs and Postman collections. Please see the official documentation for [cloud](https://docs.webmethods.io/apicontrolplane/welcome/home/#gsc.tab=0) or [self-hosted](https://docs.webmethods.io/on-premises/webmethods-api-control-plane) for how to use the product and system requirements. 
 
 ## Deploying API Control Plane
 
@@ -48,7 +48,7 @@ We also host various articles related to API Control Plane deployment, use, admi
 
 📘 Official Documentation
 
-For the most up-to-date information about the product, see the official documentation for [cloud](https://docs.webmethods.io/apicontrolplane/welcome/home/#gsc.tab=0) or [self-hosted](https://documentation.softwareag.com/wco/11.0.0/en/webhelp/wco-webhelp/)
+For the most up-to-date information about the product, see the official documentation for [cloud](https://docs.webmethods.io/saas/webmethods-api-control-plane#gsc.tab=0) or [self-hosted](https://docs.webmethods.io/on-premises/webmethods-api-control-plane/11.1.0/webhelp/index.html)
 
 💻 Explore the Knowledge Base    
 
