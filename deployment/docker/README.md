@@ -32,7 +32,7 @@ The machine needs following to install the control plane using docker.
 
 ## How to deploy IBM webMethods API Control Plane using docker compose?
 
-1. Refer <DOC LINK> to set up docker environment for IBM container registry.
+1. Refer https://docs.webmethods.io/on-premises/webmethods-api-control-plane/en/11.1.0/webhelp/index.html#page/wco-webhelp%2Fco-deploy_standalone_apicp.html to set up docker environment for IBM container registry.
 
 2. Configure your deployment
 

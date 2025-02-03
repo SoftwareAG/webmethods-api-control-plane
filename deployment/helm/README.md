@@ -35,7 +35,7 @@ The machine needs following to install the control plane through helm.
 
 ## How to deploy IBM webMethods API Control Plane using helm?
 
-4. Refer <DOC LINK> to pull control plane images from IBM container registry.
+4. Refer https://docs.webmethods.io/on-premises/webmethods-api-control-plane/en/11.1.0/webhelp/index.html#page/wco-webhelp%2Fco-deploy_standalone_apicp.html to pull control plane images from IBM container registry.
 
 5. Configure your deployment
 
