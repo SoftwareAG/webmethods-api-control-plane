@@ -3,7 +3,7 @@ applications:
     # -- Name of the application 
     name: assetcatalog
     # -- Image name of assetcatalog
-    imageName: cp.icr.io/cp/webmethods/api/api-control-plane-assetcatalog:11.1.2
+    imageName: cp.icr.io/cp/webmethods/api/api-control-plane-assetcatalog
     # -- Image tag of assetcatalog
     imageTag: "11.1.2"
     # -- No. of assetcatalog Replicas
