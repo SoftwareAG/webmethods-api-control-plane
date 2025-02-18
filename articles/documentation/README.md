@@ -1,3 +1,3 @@
 # Product documentation
 
-Please see the official documentation for [cloud](https://docs.webmethods.io/apicontrolplane/welcome/home/#gsc.tab=0) or [self-hosted](https://documentation.softwareag.com/wco/11.0.0/en/webhelp/wco-webhelp/) for how to use the product and system requirements.
+Please see the official documentation for [cloud](https://docs.webmethods.io/saas/webmethods-api-control-plane) or [self-hosted](https://docs.webmethods.io/on-premises/webmethods-api-control-plane) for how to use the product and system requirements.

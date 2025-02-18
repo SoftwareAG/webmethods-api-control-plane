@@ -25,7 +25,7 @@ services:
       timeout: 10s
       retries: 5
     networks:
-    - softwareag-api-management
+    - ibm-webmethods-api-management
   asset-catalog-debug:
     <<: *asset-catalog-service
     env_file:

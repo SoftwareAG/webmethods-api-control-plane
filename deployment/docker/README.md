@@ -16,9 +16,9 @@ The standard deployment of API Control plane contains the following 5 microservi
 
 Table of contents
 1. [Prerequisite](#Prerequisite)
-2. [How to deploy webMethods API Control Plane using docker compose?](#how-to-deploy-webmethods-api-control-plane-using-docker-compose)
-3. [How to stop webMethods API Control Plane using docker compose?](#how-to-stop-webmethods-api-control-plane-using-docker-compose)
-4. [How to access the newly deployed webMethods API Control Plane?](#how-to-access-the-newly-deployed-webmethods-api-control-plane)
+2. [How to deploy IBM webMethods API Control Plane using docker compose?](#how-to-deploy-webmethods-api-control-plane-using-docker-compose)
+3. [How to stop IBM webMethods API Control Plane using docker compose?](#how-to-stop-webmethods-api-control-plane-using-docker-compose)
+4. [How to access the newly deployed IBM webMethods API Control Plane?](#how-to-access-the-newly-deployed-webmethods-api-control-plane)
 5. [Additional deployment flavors](#additional-deployment-flavors)
 
 ***
@@ -30,29 +30,15 @@ The machine needs following to install the control plane using docker.
 
 ***
 
-## How to deploy webMethods API Control Plane using docker compose?
+## How to deploy IBM webMethods API Control Plane using docker compose?
 
-1. Clone this repository
+1. Refer https://docs.webmethods.io/on-premises/webmethods-api-control-plane/en/11.1.0/webhelp/index.html#page/wco-webhelp%2Fco-deploy_standalone_apicp.html to set up docker environment for IBM container registry.
 
-2. Login to https://containers.softwareag.com/
-
-3. Get a Personal Access Token (PAT)
-
-   We published docker images for all API Control Plane microservice to https://containers.softwareag.com/ repository. To pull them or have docker compose pull them for you, you need a Personal Access token (PAT). To get a PAT, go to Userprofile > Settings > Generate password. Store Token Password securely.
-
-4. Log in to sagcr.azurecr.io docker repository
-
-    Run the following command in your docker environment:
-
-    ```bash
-    docker login -u [Your git username] -p [Your PAT] sagcr.azurecr.io 
-    ```
-
-5. Configure your deployment
+2. Configure your deployment
 
     The `.env` file in [deployment/docker/.env](deployment/docker/.env) allows for configuring different aspects of API Control Plane deployment. To be able to access API Control Plane after it's deployed, you need to edit this file and provide a value for `NGINX_DOMAIN_NAME` that matches the hostname of the machine you're deploying API Control plane on. Make sure this hostname is accessible to whoever will be connecting to API Control Plane.
 
-6. Execute the deployment scripts
+3. Execute the deployment scripts
 
     To deploy the API Control Plane with default configuration:
 
@@ -73,7 +59,7 @@ The machine needs following to install the control plane using docker.
     ```bash
     [user@somehost docker]$ docker-compose -f control-plane.yaml up -d
     [+] Running 8/8
-    ⠿ Network softwareag-api-management      Created                         0.2s
+    ⠿ Network ibm-webmethods-api-management      Created                         0.2s
     ⠿ Container elasticsearch                Healthy                        22.6s
     ⠿ Container nginx_setup                  Started                         1.5s
     ⠿ Container control-plane-asset-catalog  Healthy                        88.6s
@@ -83,7 +69,7 @@ The machine needs following to install the control plane using docker.
     ⠿ Container nginx                        Started                       151.2s
     ```
 
-7. Verify it's started
+4. Verify it's started
 
     It will take a couple of minutes to start. You can monitor that with solutions like Portainer or Docker Dashboard etc. or simply user Docker CLI like this
 
@@ -102,11 +88,11 @@ The machine needs following to install the control plane using docker.
     nginx                         Up About a minute (healthy)   0.0.0.0:81->80/tcp, :::81->80/tcp, 0.0.0.0:444->443/tcp, :::444->443/tcp
     elasticsearch                 Up About a minute (healthy)   0.0.0.0:9200->9200/tcp, :::9200->9200/tcp, 9300/tcp
     ```
-
+>
 ###### [Back to Top](#api-control-plane-deployment-with-docker-compose)
 ***
 
-## How to stop webMethods API Control Plane using docker compose?
+## How to stop IBM webMethods API Control Plane using docker compose?
 
 To stop and remove the API Control Plane default configuration:
 
@@ -134,13 +120,13 @@ If everything goes well, the output should be similar to this
 ⠿ Container control-plane-engine         Removed                        10.3s
 ⠿ Container control-plane-asset-catalog  Removed                        10.3s
 ⠿ Container elasticsearch                Removed                         2.6s
-⠿ Network softwareag-api-management      Removed                         0.3s
+⠿ Network ibm-webmethods-api-management      Removed                         0.3s
 ```
 
 ###### [Back to Top](#api-control-plane-deployment-with-docker-compose)
 ***
 
-## How to access the newly deployed webMethods API Control Plane?
+## How to access the newly deployed IBM webMethods API Control Plane?
 
 1. Open your browser and go to `https://[the-host-you-configured]:8080/`
 2. You should see the login screen. Log in using Administrator username and the default password.

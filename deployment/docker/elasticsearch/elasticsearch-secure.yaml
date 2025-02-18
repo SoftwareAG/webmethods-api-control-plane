@@ -13,8 +13,8 @@ services:
     - ${ELASTICSEARCH_PUBLISH_PORT}:9200
     environment:
     - discovery.type=single-node
-    - node.name=softwareag
-    - cluster.name=softwareag
+    - node.name=webmethods
+    - cluster.name=webmethods
     - bootstrap.memory_lock=true
     - ELASTIC_PASSWORD=${ELASTICSEARCH_PASSWORD}
     - xpack.security.enabled=true
@@ -47,7 +47,7 @@ services:
     - es-data:/usr/share/elasticsearch/data
     - es-certs:/usr/share/elasticsearch/config/certs
     networks:
-    - softwareag-api-management
+    - ibm-webmethods-api-management
 
   certificates_setup:
     container_name: elasticsearch-certs-generator
@@ -94,4 +94,4 @@ services:
       timeout: 5s
       retries: 120
     networks:
-      - softwareag-api-management
+      - ibm-webmethods-api-management

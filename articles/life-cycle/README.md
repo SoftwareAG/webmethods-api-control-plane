@@ -2,7 +2,7 @@
 
 This section serves as a comprehensive guide for understanding the life cycle of API Control Plane.
 
-1. <b>What is webMethods API Control Plane?</b>
+1. <b>What is IBM webMethods API Control Plane?</b>
 
    API Control Plane is a centralized control and monitoring system that oversees and manages multiple runtimes such as <b>API Gateway</b>, <b>Developer Portal</b>, <b>Microgateway</b>, and <b>other runtimes</b> deployed across multiple
    regions including cloud and on-premises environments. With API Control Plane, you can achieve comprehensive real-time monitoring, leveraging advanced analytics, and customizable dashboards to gain valuable
@@ -72,38 +72,37 @@ This section serves as a comprehensive guide for understanding the life cycle of
 
     API Control Plane can be deployed using:
 
-    - Docker: For details, see https://documentation.softwareag.com/wco/11.0.0/en/webhelp/wco-webhelp/#page/wco-webhelp%2Fta-deploy_standalone_apicp_docker.html
+    - Docker: For details, see https://docs.webmethods.io/on-premises/webmethods-api-control-plane/11.1.0/webhelp/index.html
 
-    - Helm: For details, see https://documentation.softwareag.com/wco/11.0.0/en/webhelp/wco-webhelp/#page/wco-webhelp%2Fta-deploy_standalone_apicp_helm.html
+    - Helm: For details, see https://docs.webmethods.io/on-premises/webmethods-api-control-plane/11.1.0/webhelp/index.html#page/wco-webhelp%2Fta-deploy_standalone_apicp_docker.html
       <br><br>
 15. <b>How to connect API Gateway with API Control Plane?</b>
 
-    To connect API Control Plane using API Gateway UI, see https://documentation.softwareag.com/webmethods/api_gateway/yai10-15/webhelp/yai-webhelp/#page/yai-webhelp%2Fgtw_configure_gateway.html%23
+    To connect API Control Plane using API Gateway, see https://docs.webmethods.io/on-premises/webmethods-api-control-plane/11.1.0/webhelp/index.html#page/wco-webhelp%2Fco-connecting-apigw.html
 
-    To connect API Control Plane using properties or YAML file, see https://documentation.softwareag.com/wco/11.0.0/en/webhelp/wco-webhelp/#page/wco-webhelp%2Fco-connecting-apigw.html
     <br><br>
 16. <b>What are the hardware and product configuration guidelines that are required to deploy API Control Plane to run at an optimal scale?</b>
 
-    For details, see https://documentation.softwareag.com/wco/11.0.0/en/webhelp/wco-webhelp/#page/wco-webhelp%2Fre-resourcing_guidelines.html
+    For details, see https://docs.webmethods.io/on-premises/webmethods-api-control-plane/11.1.0/webhelp/index.html#page/wco-webhelp%2Fre-resourcing_guidelines.html
     <br><br>
 17. <b>How to manage data backups/snapshot to ensure data resiliency and disaster recovery?</b>
 
-    For details, see https://documentation.softwareag.com/wco/11.0.0/en/webhelp/wco-webhelp/#page/wco-webhelp%2Fco-snapshot_management.html
+    For details, see https://docs.webmethods.io/on-premises/webmethods-api-control-plane/11.1.0/webhelp/index.html#page/wco-webhelp%2Fco-snapshot_management.html
     <br><br>
 18. <b>Does API Control Plane provide REST endpoints to monitor the health and resource utilization of the microservices and Elastic search?</b>
 
-    Yes. For details about how to monitor microservices health and resource utilization, see https://documentation.softwareag.com/wco/11.0.0/en/webhelp/wco-webhelp/#page/wco-webhelp%2Fco-microservices_application_level.html%23
+    Yes. For details about how to monitor microservices health and resource utilization, see https://docs.webmethods.io/on-premises/webmethods-api-control-plane/11.1.0/webhelp/index.html#page/wco-webhelp%2Fco-microservices_application_level.html
 
-    For details about how to monitor Elastic search health and resource utilization, see https://documentation.softwareag.com/wco/11.0.0/en/webhelp/wco-webhelp/#page/wco-webhelp%2Fco-elasticsearch_monitoring.html%23
+    For details about how to monitor Elastic search health and resource utilization, see https://docs.webmethods.io/on-premises/webmethods-api-control-plane/11.1.0/webhelp/index.html#page/wco-webhelp%2Fco-elasticsearch_monitoring.html
     <br><br>
 19. <b>List the Prometheus metrics to analyze API Control Plane health.</b>
 
-    For details, see https://documentation.softwareag.com/wco/11.0.0/en/webhelp/wco-webhelp/#page/wco-webhelp%2Fco-collect_microservices_metrics.html
+    For details, see https://docs.webmethods.io/on-premises/webmethods-api-control-plane/11.1.0/webhelp/index.html#page/wco-webhelp%2Fco-collect_microservices_metrics.html
     <br><br>
 20. <b>Is Open telemetry supported for tracing?</b>
 
     Yes. To deploy API Control Plane enabling Open Telemetry using Jaeger UI with Docker, perform *step 5* mentioned in
-    https://documentation.softwareag.com/wco/11.0.0/en/webhelp/wco-webhelp/#page/wco-webhelp%2Fta-deploy_standalone_apicp_docker.html
+   https://docs.webmethods.io/on-premises/webmethods-api-control-plane/11.1.0/webhelp/index.html#page/wco-webhelp%2Fco-collect_microservices_metrics.html
     <br><br>
 21. <b>How do I report an incident?</b>
 
@@ -111,5 +110,5 @@ This section serves as a comprehensive guide for understanding the life cycle of
 
 ## References
 
-* Official On-prem documentation link: https://documentation.softwareag.com/wco/11.0.0/en/webhelp/wco-webhelp/#page/wco-webhelp%2Fto-landing_page.html
-* Official Cloud documentation link: https://docs.webmethods.io/apicontrolplane/welcome/home/#gsc.tab=0
+* Official On-prem documentation link: https://docs.webmethods.io/on-premises/webmethods-api-control-plane
+* Official Cloud documentation link: https://docs.webmethods.io/saas/webmethods-api-control-plane 
