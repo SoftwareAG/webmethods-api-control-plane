@@ -4,6 +4,9 @@ services:
     extends:
       file: nginx/nginx.yaml
       service: nginx
+    depends_on:
+      ingress:
+        condition: service_healthy
   nginx_setup:
     extends:
       file: nginx/nginx.yaml
@@ -12,20 +15,38 @@ services:
     extends:
       file: ingress/ingress.yaml
       service: ingress-gainsight
+    depends_on:
+      engine:
+        condition: service_healthy
+      asset-catalog:
+        condition: service_healthy
+      ui:
+        condition: service_healthy
     environment:
       - server.forward-headers-strategy=NATIVE
   ui:
     extends:
       file: ui/ui.yaml
       service: ui-gainsight
+    depends_on:
+      engine:
+        condition: service_healthy
+      asset-catalog:
+        condition: service_healthy
   engine:
     extends:
       file: engine/engine.yaml
       service: engine-debug
+    depends_on:
+      asset-catalog:
+        condition: service_healthy
   asset-catalog:
     extends:
       file: asset-catalog/asset-catalog.yaml
       service: asset-catalog-debug
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
   elasticsearch:
     extends:
       file: elasticsearch/elasticsearch.yaml

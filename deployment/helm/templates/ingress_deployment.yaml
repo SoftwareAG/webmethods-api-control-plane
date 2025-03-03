@@ -48,7 +48,7 @@ spec:
 #  should be enabled if the certificate from host system is being mounted
 #        volumeMounts:
 #          - name: hostpath-volume
-#            mountPath: /opt/softwareag/certs/webmethods_not_for_production.jks
+#            mountPath: /opt/softwareag/certs/softwareag_not_for_production.jks
         ports:
           - containerPort: 8080
             name: http

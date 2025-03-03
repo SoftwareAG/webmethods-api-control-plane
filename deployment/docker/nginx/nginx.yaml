@@ -3,9 +3,6 @@ services:
     image: nginx
     container_name: nginx
     hostname: nginx
-    depends_on:
-      ingress:
-        condition: service_healthy
     deploy:
       restart_policy:
         condition: "on-failure"

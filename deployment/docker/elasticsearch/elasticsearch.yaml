@@ -21,7 +21,6 @@ services:
     - node.name=webmethods
     - cluster.name=webmethods
     - bootstrap.memory_lock=true
-    mem_limit: 1073741824
     ulimits:
       memlock:
         soft: -1
