@@ -3,13 +3,6 @@ services:
     image: ${INGRESS_IMAGE}
     container_name: control-plane-ingress
     hostname: ingress
-    depends_on:
-      engine:
-        condition: service_healthy
-      asset-catalog:
-        condition: service_healthy
-      ui:
-        condition: service_healthy
     deploy:
       resources:
         limits:

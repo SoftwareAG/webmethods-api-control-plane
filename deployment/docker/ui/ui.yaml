@@ -3,11 +3,6 @@ services:
     image: ${UI_IMAGE}
     container_name: control-plane-ui
     hostname: ui
-    depends_on:
-      engine:
-        condition: service_healthy
-      asset-catalog:
-        condition: service_healthy
     deploy:
       resources:
         limits:
